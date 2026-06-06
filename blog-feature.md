@@ -149,6 +149,7 @@ Se i valori non sono configurati, `Comments.astro` mostra un **placeholder genti
 
 - **`src/components/Navbar.astro`**
   - Aggiungere la voce **"Blog"** (link a `/blog` o `/en/blog` secondo la lingua) nella nav desktop e nel menu mobile.
+  - **La voce "Blog" è mostrata solo dopo la pubblicazione del primo articolo**: la Navbar interroga la collection (`getCollection('blog')`, escludendo i `draft`) e renderizza il link solo se esiste almeno un articolo pubblicato nella lingua corrente. La condizione va propagata anche al `MobileMenu`.
   - Rendere i link di sezione **assoluti rispetto alla home** (`/#about`, `/#experience`, …) usando `localizePath`, così funzionano anche dalle pagine del blog (oggi sono `#about`, validi solo in homepage).
 - **`src/components/LanguageSwitcher.astro`**
   - Accettare una prop opzionale `altPath`. Sulle pagine articolo viene passato l'URL della **traduzione corrispondente** (lookup per `translationKey`); se manca la traduzione, fallback alla lista blog nell'altra lingua. Sulle altre pagine mantiene il comportamento attuale (`/` ↔ `/en/`).
@@ -204,6 +205,5 @@ Reveal on-scroll (`data-reveal`) sulle card, responsive (mobile/desktop), access
 - `astro build` senza errori (ricorda: non lanciare build mentre `npm run dev` è attivo → cache Vite).
 
 ## Note / decisioni aperte
-- **Voce nav "Blog"**: confermare se mostrarla sempre o solo dopo aver pubblicato il primo articolo.
 - **Categoria Giscus**: consiglio una categoria dedicata "Comments" di tipo *Announcement* (solo il maintainer apre thread).
 - **Moderazione**: con Giscus la moderazione avviene su GitHub Discussions (blocco/eliminazione commenti dal repo).
