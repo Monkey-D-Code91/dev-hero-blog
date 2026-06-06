@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
+import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
@@ -15,7 +16,7 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
-  integrations: [react(), icon(), sitemap()],
+  integrations: [react(), mdx(), icon(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },
