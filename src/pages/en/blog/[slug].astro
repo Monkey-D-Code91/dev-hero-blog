@@ -48,7 +48,7 @@ const hreflangIt = altPost
   hreflangIt={hreflangIt}
   hreflangEn={`/en/blog/${slug}/`}
 >
-  <Navbar />
+  <Navbar itHref={hreflangIt} enHref={`/en/blog/${slug}/`} />
   <main id="main">
     <BlogPostLayout
       title={post.data.title}

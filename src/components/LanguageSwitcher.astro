@@ -1,6 +1,14 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
+interface Props {
+  /** URL della versione italiana della pagina corrente (default: "/"). */
+  itHref?: string;
+  /** URL della versione inglese della pagina corrente (default: "/en/"). */
+  enHref?: string;
+}
+
+const { itHref = "/", enHref = "/en/" } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -12,7 +20,7 @@ const inactive = "text-muted hover:text-text";
 
 <nav class="flex items-center gap-1 text-sm" aria-label={t.langSwitch.label}>
   <a
-    href="/"
+    href={itHref}
     class:list={[base, lang === "it" ? active : inactive]}
     aria-current={lang === "it" ? "true" : undefined}
     hreflang="it"
@@ -20,7 +28,7 @@ const inactive = "text-muted hover:text-text";
   >
   <span class="text-border" aria-hidden="true">/</span>
   <a
-    href="/en/"
+    href={enHref}
     class:list={[base, lang === "en" ? active : inactive]}
     aria-current={lang === "en" ? "true" : undefined}
     hreflang="en"

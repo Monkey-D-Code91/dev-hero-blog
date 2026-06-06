@@ -53,7 +53,7 @@ const ogImage = post.data.cover
   hreflangIt={`/blog/${slug}/`}
   hreflangEn={hreflangEn}
 >
-  <Navbar />
+  <Navbar itHref={`/blog/${slug}/`} enHref={hreflangEn} />
   <main id="main">
     <BlogPostLayout
       title={post.data.title}
