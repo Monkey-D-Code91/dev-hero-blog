@@ -1,0 +1,152 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { SITE } from "../config";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section
+  id="top"
+  class="relative overflow-hidden"
+>
+  <!-- glow radiale decorativo -->
+  <div
+    class="pointer-events-none absolute inset-0 -z-10"
+    aria-hidden="true"
+  >
+    <div
+      class="absolute left-1/2 top-[-10%] h-[480px] w-[680px] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
+      style="background: radial-gradient(circle, #38bdf8 0%, transparent 60%);"
+    >
+    </div>
+  </div>
+
+  <div
+    class="mx-auto grid max-w-5xl items-center gap-12 px-6 py-20 md:grid-cols-[1.15fr_0.85fr] md:py-28 lg:py-32"
+  >
+    <!-- Testo -->
+    <div class="hero-enter">
+      <span
+        class="inline-flex items-center gap-2 rounded-full border border-border bg-surface-2 px-3 py-1 text-xs font-medium text-muted"
+      >
+        <span class="h-1.5 w-1.5 rounded-full bg-accent-2"></span>
+        {t.hero.badge}
+      </span>
+
+      <h1
+        class="mt-6 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
+      >
+        {SITE.name}
+      </h1>
+      <p class="mt-2 text-lg font-medium text-accent sm:text-xl">
+        {SITE.role}
+      </p>
+
+      <p
+        class="mt-6 max-w-xl text-balance text-xl leading-snug text-text sm:text-2xl"
+      >
+        {t.hero.headline}
+      </p>
+      <p class="mt-4 max-w-xl text-base leading-relaxed text-muted">
+        {t.hero.subline}
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a
+          href={SITE.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-90"
+        >
+          {t.hero.ctaPrimary}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+        <a
+          href="#about"
+          class="inline-flex items-center justify-center rounded-lg border border-border px-5 py-3 text-sm font-semibold text-text transition-colors hover:border-accent hover:text-accent"
+        >
+          {t.hero.ctaSecondary}
+        </a>
+      </div>
+    </div>
+
+    <!-- Grafica astratta: monogramma + onde di "segnale" (tema telecom) -->
+    <div class="hero-enter relative mx-auto hidden aspect-square w-full max-w-sm md:block">
+      <div
+        class="absolute inset-0 rounded-3xl border border-border bg-gradient-to-br from-surface-2 to-bg"
+      >
+      </div>
+      <!-- onde concentriche -->
+      <div class="signal-rings absolute inset-0" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- monogramma centrale -->
+      <div
+        class="absolute inset-0 flex items-center justify-center"
+        aria-hidden="true"
+      >
+        <div
+          class="flex h-28 w-28 items-center justify-center rounded-2xl border border-accent/40 bg-bg/70 text-5xl font-bold text-accent shadow-[0_0_40px_-8px_#38bdf8] backdrop-blur"
+        >
+          {SITE.monogram}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-enter {
+      animation: hero-fade-up 0.7s ease both;
+    }
+    @keyframes hero-fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .signal-rings span {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 8rem;
+      height: 8rem;
+      border: 1px solid var(--color-accent);
+      border-radius: 9999px;
+      opacity: 0;
+      animation: signal-pulse 3.6s ease-out infinite;
+    }
+    .signal-rings span:nth-child(2) {
+      animation-delay: 1.2s;
+    }
+    .signal-rings span:nth-child(3) {
+      animation-delay: 2.4s;
+    }
+    @keyframes signal-pulse {
+      0% {
+        opacity: 0.5;
+        transform: scale(0.6);
+      }
+      80% {
+        opacity: 0;
+        transform: scale(2.1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2.1);
+      }
+    }
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section
+  id="experience"
+  class="scroll-mt-20 border-t border-border bg-surface py-20 md:py-24"
+>
+  <div class="mx-auto max-w-5xl px-6">
+    <header data-reveal>
+      <p class="text-sm font-semibold uppercase tracking-widest text-accent">
+        {t.experience.heading}
+      </p>
+      <h2 class="mt-2 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
+        {t.experience.lead}
+      </h2>
+    </header>
+
+    <ol class="mt-12 ml-3 border-l border-border">
+      {
+        t.experience.items.map((item) => (
+          <li class="relative pb-10 pl-8 last:pb-0" data-reveal>
+            <span
+              class="absolute -left-[7.5px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-accent bg-bg"
+              aria-hidden="true"
+            />
+            <p class="text-sm font-medium text-accent-2">{item.period}</p>
+            <h3 class="mt-1 text-lg font-semibold text-text">{item.role}</h3>
+            <p class="text-sm text-muted">{item.company}</p>
+            <p class="mt-2 max-w-2xl leading-relaxed text-muted">
+              {item.description}
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

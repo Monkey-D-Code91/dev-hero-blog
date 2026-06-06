@@ -1,0 +1,29 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const base =
+  "px-1.5 py-0.5 rounded transition-colors focus-visible:outline-none";
+const active = "text-text font-semibold";
+const inactive = "text-muted hover:text-text";
+---
+
+<nav class="flex items-center gap-1 text-sm" aria-label={t.langSwitch.label}>
+  <a
+    href="/"
+    class:list={[base, lang === "it" ? active : inactive]}
+    aria-current={lang === "it" ? "true" : undefined}
+    hreflang="it"
+    lang="it">IT</a
+  >
+  <span class="text-border" aria-hidden="true">/</span>
+  <a
+    href="/en/"
+    class:list={[base, lang === "en" ? active : inactive]}
+    aria-current={lang === "en" ? "true" : undefined}
+    hreflang="en"
+    lang="en">EN</a
+  >
+</nav>

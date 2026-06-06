@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# astro / vite
+.astro/
+node_modules/.vite/
+
+# env & logs
+.env
+.env.*
+*.log
+npm-debug.log*
+
+# os
+.DS_Store
+
+# claude code local settings (personal, non condivise)
+.claude/settings.local.json

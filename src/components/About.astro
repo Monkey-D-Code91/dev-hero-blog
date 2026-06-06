@@ -1,0 +1,57 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { SITE } from "../config";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const stats = [
+  { value: SITE.stats.years, label: t.about.stats.years },
+  { value: SITE.stats.teamSize, label: t.about.stats.teamSize },
+  { value: SITE.stats.countries, label: t.about.stats.countries },
+];
+---
+
+<section id="about" class="scroll-mt-20 border-t border-border py-20 md:py-24">
+  <div class="mx-auto max-w-5xl px-6">
+    <header data-reveal>
+      <p class="text-sm font-semibold uppercase tracking-widest text-accent">
+        {t.about.heading}
+      </p>
+      <h2 class="mt-2 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
+        {t.about.lead}
+      </h2>
+    </header>
+
+    <div class="mt-10 grid gap-12 md:grid-cols-[1.4fr_1fr]">
+      <div data-reveal class="space-y-5">
+        {
+          t.about.paragraphs.map((p) => (
+            <p class="text-base leading-relaxed text-muted sm:text-lg">{p}</p>
+          ))
+        }
+      </div>
+
+      <dl data-reveal class="grid grid-cols-3 gap-4 md:grid-cols-1 md:gap-0">
+        {
+          stats.map((s, i) => (
+            <div
+              class:list={[
+                "py-4 md:py-5",
+                i > 0 && "md:border-t md:border-border",
+              ]}
+            >
+              <dt class="sr-only">{s.label}</dt>
+              <dd>
+                <span class="block text-3xl font-bold text-accent sm:text-4xl">
+                  {s.value}
+                </span>
+                <span class="mt-1 block text-sm text-muted">{s.label}</span>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>
