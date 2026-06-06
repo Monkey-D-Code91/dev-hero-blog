@@ -1,0 +1,61 @@
+---
+/**
+ * Sezione commenti — placeholder per Giscus (B5).
+ * Quando GISCUS sarà configurato in src/config.ts questo componente
+ * renderizzerà il widget di commenti. Per ora mostra un messaggio informativo.
+ */
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { GISCUS } from "../../config";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const isConfigured =
+  GISCUS.repo !== "" &&
+  GISCUS.repoId !== "" &&
+  GISCUS.categoryId !== "";
+---
+
+<section
+  class="mt-16 border-t border-border pt-12"
+  aria-labelledby="comments-heading"
+>
+  <h2 id="comments-heading" class="text-xl font-semibold text-text">
+    {t.blog.commentsHeading}
+  </h2>
+
+  {
+    isConfigured ? (
+      /* ── Giscus widget (attivo quando GISCUS è configurato) ── */
+      <div class="mt-6 giscus-container" id="giscus-container" />
+    ) : (
+      /* ── Placeholder ── */
+      <p class="mt-4 rounded-xl border border-border bg-surface-2 px-6 py-5 text-sm text-muted">
+        {t.blog.commentsPlaceholder}
+      </p>
+    )
+  }
+</section>
+
+{
+  isConfigured && (
+    <script
+      is:inline
+      src="https://giscus.app/client.js"
+      data-repo={GISCUS.repo}
+      data-repo-id={GISCUS.repoId}
+      data-category={GISCUS.category}
+      data-category-id={GISCUS.categoryId}
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="transparent_dark"
+      data-lang={lang}
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async
+    />
+  )
+}

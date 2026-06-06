@@ -55,6 +55,21 @@ export async function getPublishedPosts(lang: Lang) {
   );
 }
 
+/**
+ * Trova la versione nella lingua alternativa dello stesso articolo
+ * tramite il campo `translationKey` condiviso.
+ * Ritorna null se non esiste o non è pubblicata.
+ */
+export async function getAlternatePost(translationKey: string, targetLang: Lang) {
+  const posts = await getCollection("blog", (entry) => {
+    const isRightLang = getLangFromEntryId(entry.id) === targetLang;
+    const isMatch = entry.data.translationKey === translationKey;
+    const isVisible = import.meta.env.PROD ? !entry.data.draft : true;
+    return isRightLang && isMatch && isVisible;
+  });
+  return posts[0] ?? null;
+}
+
 // ──────────────────────────────────────────────
 // Formatting
 // ──────────────────────────────────────────────

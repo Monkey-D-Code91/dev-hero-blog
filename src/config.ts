@@ -18,3 +18,17 @@ export const SITE = {
     countries: "2", // paesi (Italia + Albania)
   },
 } as const;
+
+/**
+ * Configurazione Giscus per i commenti del blog.
+ * >>> COMPILA con i valori da https://giscus.app dopo aver:
+ *     1. Reso pubblico il repo GitHub e abilitato Discussions.
+ *     2. Installato l'app giscus sul repo.
+ *     3. Generato repo/repoId/category/categoryId su giscus.app. <<<
+ */
+export const GISCUS = {
+  repo: "", // TODO: es. "Monkey-D-Code91/dev-hero-blog"
+  repoId: "", // TODO: da giscus.app
+  category: "Comments", // TODO: nome della categoria Discussions
+  categoryId: "", // TODO: da giscus.app
+} as const;
