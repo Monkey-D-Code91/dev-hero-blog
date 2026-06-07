@@ -21,14 +21,11 @@ export const SITE = {
 
 /**
  * Configurazione Giscus per i commenti del blog.
- * >>> COMPILA con i valori da https://giscus.app dopo aver:
- *     1. Reso pubblico il repo GitHub e abilitato Discussions.
- *     2. Installato l'app giscus sul repo.
- *     3. Generato repo/repoId/category/categoryId su giscus.app. <<<
+ * Valori generati su https://giscus.app — non modificare manualmente.
  */
 export const GISCUS = {
-  repo: "", // TODO: es. "Monkey-D-Code91/dev-hero-blog"
-  repoId: "", // TODO: da giscus.app
-  category: "Comments", // TODO: nome della categoria Discussions
-  categoryId: "", // TODO: da giscus.app
+  repo: "Monkey-D-Code91/dev-hero-blog",
+  repoId: "R_kgDOSy0bHQ",
+  category: "Ideas",
+  categoryId: "DIC_kwDOSy0bHc4C-pHC",
 } as const;
