@@ -14,7 +14,7 @@ const t = useTranslations(lang);
 
 <section class="py-20 md:py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <!-- Header di sezione (stesso pattern del resto del sito) -->
+    <!-- Header di sezione -->
     <header data-reveal>
       <p class="text-sm font-semibold uppercase tracking-widest text-accent">
         {t.blog.heading}
@@ -30,9 +30,16 @@ const t = useTranslations(lang);
           {t.blog.noArticles}
         </p>
       ) : (
-        <div class="mt-12 grid gap-6 sm:grid-cols-2" data-reveal>
-          {posts.map((post) => (
-            <PostCard {...post} lang={lang} />
+        /* Ogni card ha il proprio data-reveal con delay crescente
+           così appaiono in sequenza anziché tutte insieme. */
+        <div class="mt-12 grid gap-6 sm:grid-cols-2">
+          {posts.map((post, i) => (
+            <div
+              data-reveal
+              data-reveal-delay={i > 0 ? String(Math.min(i, 3)) : undefined}
+            >
+              <PostCard {...post} lang={lang} />
+            </div>
           ))}
         </div>
       )

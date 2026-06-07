@@ -22,14 +22,19 @@ const { title, description, pubDate, slug, tags, lang, readingTime, cover, cover
 
 const url = getBlogPostUrl(lang, slug);
 const dateStr = formatDate(pubDate, lang);
+
+// ID univoco per aria-labelledby (collegamento articolo ↔ titolo)
+const titleId = `card-title-${slug}`;
 ---
 
 <!--
-  Card accessibile: il titolo è il link principale.
-  L'effetto hover sull'intero article (group) segnala che la card è interattiva.
+  Card accessibile: l'<article> è labellato dall'<h2> tramite aria-labelledby.
+  Il titolo è il link principale; i tag sono <span> non interattivi (evita
+  link annidati nel contesto lista).
 -->
 <article
-  class="group flex flex-col rounded-2xl border border-border bg-surface-2 overflow-hidden transition-colors hover:border-accent/40"
+  class="group flex h-full flex-col rounded-2xl border border-border bg-surface-2 overflow-hidden transition-colors hover:border-accent/40"
+  aria-labelledby={titleId}
 >
   <!-- Cover o striscia decorativa -->
   {
@@ -53,12 +58,12 @@ const dateStr = formatDate(pubDate, lang);
     <!-- Meta: data + tempo di lettura -->
     <p class="text-xs text-muted">
       <time datetime={pubDate.toISOString()}>{dateStr}</time>
-      {readingTime && <span class="mx-1.5 opacity-50">·</span>}
-      {readingTime && <span>{readingTime}</span>}
+      {readingTime && <span class="mx-1.5 opacity-50" aria-hidden="true">·</span>}
+      {readingTime && <span aria-label={lang === "it" ? `Tempo di lettura: ${readingTime}` : `Reading time: ${readingTime}`}>{readingTime}</span>}
     </p>
 
     <!-- Titolo — link principale della card -->
-    <h2 class="mt-3 text-lg font-semibold leading-snug">
+    <h2 id={titleId} class="mt-3 text-lg font-semibold leading-snug">
       <a
         href={url}
         class="text-text transition-colors group-hover:text-accent"
@@ -75,7 +80,7 @@ const dateStr = formatDate(pubDate, lang);
     <!-- Tag (non-link nelle card: evita link annidati nel contesto lista) -->
     {
       tags.length > 0 && (
-        <div class="mt-4 flex flex-wrap gap-1.5">
+        <div class="mt-4 flex flex-wrap gap-1.5" aria-label={lang === "it" ? "Tag" : "Tags"}>
           {tags.map((tag) => (
             <TagPill tag={tag} lang={lang} link={false} />
           ))}

@@ -16,6 +16,8 @@ const published = formatDate(pubDate, lang);
 const updated = updatedDate ? formatDate(updatedDate, lang) : null;
 const publishedLabel = lang === "it" ? "Pubblicato il" : "Published on";
 const updatedLabel = lang === "it" ? "Aggiornato il" : "Updated on";
+const readingTimeLabel = lang === "it" ? "Tempo di lettura:" : "Reading time:";
+const tagsLabel = lang === "it" ? "Tag:" : "Tags:";
 ---
 
 <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted">
@@ -87,6 +89,7 @@ const updatedLabel = lang === "it" ? "Aggiornato il" : "Updated on";
             <circle cx="12" cy="12" r="10" />
             <polyline points="12 6 12 12 16 14" />
           </svg>
+          <span class="sr-only">{readingTimeLabel}</span>
           {readingTime}
         </span>
       </>
@@ -98,7 +101,7 @@ const updatedLabel = lang === "it" ? "Aggiornato il" : "Updated on";
     tags.length > 0 && (
       <>
         <span class="opacity-40" aria-hidden="true">·</span>
-        <div class="flex flex-wrap gap-1.5">
+        <div class="flex flex-wrap gap-1.5" aria-label={tagsLabel}>
           {tags.map((tag) => (
             <TagPill tag={tag} lang={lang} link={true} />
           ))}
