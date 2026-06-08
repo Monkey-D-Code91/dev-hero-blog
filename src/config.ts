@@ -13,8 +13,8 @@ export const SITE = {
   // Numeri mostrati nella sezione "About".
   // TODO: aggiorna con i valori reali.
   stats: {
-    years: "8+", // anni di esperienza
-    teamSize: "10+", // persone nel team
+    years: "6+", // anni di esperienza
+    teamSize: "7", // persone nel team
     countries: "2", // paesi (Italia + Albania)
   },
 } as const;
