@@ -52,28 +52,34 @@ export const ui = {
     experience: {
       heading: "Esperienza",
       lead: "Il percorso che mi ha portato a guidare prodotti e team.",
-      // TODO: sostituisci con le tue esperienze reali (ruolo, azienda, periodo, descrizione).
       items: [
         {
-          period: "Oggi",
-          role: "Software Engineer & Tech Lead",
-          company: "Azienda / Prodotto",
+          period: "Ott 2024 – Oggi",
+          role: "Software Engineer & Tech Lead Frontend",
+          company: "TeamSystem",
           description:
-            "Guido lo sviluppo di una piattaforma di monitoraggio del traffico dati per le telecomunicazioni e coordino un team distribuito tra Italia e Albania, dall'architettura alla consegna.",
+            "A seguito dell'acquisizione di Habble, ho assunto la guida tecnica e formativa del team. Progetto nuovi moduli e feature, seguo la crescita delle persone e ottimizzo il workflow, mantenendo un ruolo attivo nello sviluppo quotidiano in React e TypeScript.",
         },
         {
-          period: "Periodo",
-          role: "Ruolo precedente",
-          company: "Azienda",
+          period: "Set 2022 – Set 2024",
+          role: "Software Engineer",
+          company: "Habble",
           description:
-            "Descrizione sintetica delle responsabilità e dei risultati raggiunti in questo ruolo.",
+            "Sviluppo della piattaforma SaaS per il monitoraggio del traffico dati in roaming, in Java e React. Crescita verso l'architettura software e l'ottimizzazione di sistemi che processano grandi volumi di dati.",
         },
         {
-          period: "Periodo",
-          role: "Ruolo iniziale",
-          company: "Azienda",
+          period: "Nov 2020 – Ago 2022",
+          role: "Fullstack Software Engineer",
+          company: "Reloc",
           description:
-            "Descrizione sintetica delle responsabilità e dei risultati raggiunti in questo ruolo.",
+            "PoC su architetture serverless AWS e Azure per clienti in settori diversi: software per macchine elettromedicali, integrazione di servizi IoT per la smart home. Prima esperienza full stack con React, Redux e Python.",
+        },
+        {
+          period: "Lug 2019 – Ott 2020",
+          role: "Software Analyst",
+          company: "Accenture Technology",
+          description:
+            "Sviluppo backend per un sistema di rilevamento e localizzazione in tempo reale delle perdite di gas sui gasdotti. Stack: Java, Apache Kafka, MongoDB. Contatto diretto con il cliente per la validazione delle soluzioni sviluppate.",
         },
       ],
     },
@@ -183,28 +189,34 @@ export const ui = {
     experience: {
       heading: "Experience",
       lead: "The path that led me to lead products and teams.",
-      // TODO: replace with your real experience (role, company, period, description).
       items: [
         {
-          period: "Now",
-          role: "Software Engineer & Tech Lead",
-          company: "Company / Product",
+          period: "Oct 2024 – Present",
+          role: "Software Engineer & Tech Lead Frontend",
+          company: "TeamSystem",
           description:
-            "I lead the development of a telecom data-traffic monitoring platform and coordinate a team across Italy and Albania, from architecture to delivery.",
+            "Following the acquisition of Habble, I took on technical and formative leadership of the team. I design new modules and features, support the growth of the people in the team and optimise the workflow, while remaining hands-on in daily development in React and TypeScript.",
         },
         {
-          period: "Period",
-          role: "Previous role",
-          company: "Company",
+          period: "Sep 2022 – Sep 2024",
+          role: "Software Engineer",
+          company: "Habble",
           description:
-            "A short summary of the responsibilities and results achieved in this role.",
+            "Development of the SaaS platform for roaming data traffic monitoring, in Java and React. Growth towards software architecture and optimisation of systems processing large data volumes.",
         },
         {
-          period: "Period",
-          role: "Early role",
-          company: "Company",
+          period: "Nov 2020 – Aug 2022",
+          role: "Fullstack Software Engineer",
+          company: "Reloc",
           description:
-            "A short summary of the responsibilities and results achieved in this role.",
+            "PoC on serverless AWS and Azure architectures for clients across different sectors: software for medical devices, IoT service integration for smart home. First full-stack experience with React, Redux and Python.",
+        },
+        {
+          period: "Jul 2019 – Oct 2020",
+          role: "Software Analyst",
+          company: "Accenture Technology",
+          description:
+            "Backend development for a real-time gas leak detection and localisation system on pipelines. Stack: Java, Apache Kafka, MongoDB. Direct client contact for solution validation.",
         },
       ],
     },
