@@ -1,0 +1,132 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import type { Lang } from "../../i18n/ui";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import PostMeta from "./PostMeta.astro";
+import Comments from "./Comments.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  tags: string[];
+  readingTime: string;
+  cover?: ImageMetadata;
+  coverAlt?: string;
+}
+
+const {
+  title,
+  description: _description,
+  pubDate,
+  updatedDate,
+  tags,
+  readingTime,
+  cover,
+  coverAlt,
+} = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const backUrl = lang === "it" ? "/blog/" : "/en/blog/";
+const backLabel = t.blog.backToBlog;
+---
+
+<div class="mx-auto max-w-3xl px-6 py-14 md:py-20">
+  <!-- Link "torna al blog" (sopra) -->
+  <a
+    href={backUrl}
+    class="mb-10 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
+  >
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    {backLabel}
+  </a>
+
+  <!-- Landmark article con titolo collegato via aria-labelledby -->
+  <article aria-labelledby="article-title">
+    <!-- Header articolo -->
+    <header class="mb-8">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
+        {t.blog.heading}
+      </p>
+      <h1
+        id="article-title"
+        class="text-3xl font-bold leading-tight tracking-tight sm:text-4xl text-text"
+      >
+        {title}
+      </h1>
+      <div class="mt-5">
+        <PostMeta
+          pubDate={pubDate}
+          updatedDate={updatedDate}
+          readingTime={readingTime}
+          tags={tags}
+          lang={lang}
+        />
+      </div>
+    </header>
+
+    <!-- Cover image -->
+    {
+      cover && (
+        <div class="mb-10 overflow-hidden rounded-2xl border border-border">
+          <Image
+            src={cover}
+            alt={coverAlt ?? ""}
+            width={896}
+            height={448}
+            class="w-full object-cover"
+          />
+        </div>
+      )
+    }
+
+    <!-- Contenuto Markdown/MDX in stile prose -->
+    <div class="prose prose-dark max-w-none">
+      <slot />
+    </div>
+  </article>
+
+  <!-- Link "torna al blog" (sotto) -->
+  <div class="mt-14 border-t border-border pt-8">
+    <a
+      href={backUrl}
+      class="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      {backLabel}
+    </a>
+  </div>
+
+  <!-- Commenti -->
+  <Comments />
+</div>

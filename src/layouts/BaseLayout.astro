@@ -1,23 +1,40 @@
 ---
 import "@fontsource-variable/inter";
 import "../styles/global.css";
+import { SITE } from "../config";
 
 interface Props {
   title: string;
   description: string;
   lang?: "it" | "en";
-  /** Percorso assoluto della pagina (es. "/", "/en/") per canonical/hreflang */
+  /** Percorso assoluto della pagina (es. "/", "/blog/") per canonical */
   path?: string;
+  /** URL assoluto dell'immagine OG (default: /og-image.png del sito). */
+  ogImage?: string;
+  /** og:type — "website" per le pagine normali, "article" per i post. */
+  ogType?: "website" | "article";
+  /** Path hreflang IT (default "/") — sovrascrivere per le pagine blog. */
+  hreflangIt?: string;
+  /** Path hreflang EN (default "/en/") — sovrascrivere per le pagine blog. */
+  hreflangEn?: string;
 }
 
-const { title, description, lang = "it", path = "/" } = Astro.props;
+const {
+  title,
+  description,
+  lang = "it",
+  path = "/",
+  ogImage: ogImageProp,
+  ogType = "website",
+  hreflangIt = "/",
+  hreflangEn = "/en/",
+} = Astro.props;
 
 const canonical = new URL(path, Astro.site).toString();
-const ogImage = new URL("/og-image.png", Astro.site).toString();
+const ogImage = ogImageProp ?? new URL("/og-image.png", Astro.site).toString();
 
-// Coppia di URL per i tag hreflang (IT su "/", EN su "/en/")
-const itHref = new URL("/", Astro.site).toString();
-const enHref = new URL("/en/", Astro.site).toString();
+const itHref = new URL(hreflangIt, Astro.site).toString();
+const enHref = new URL(hreflangEn, Astro.site).toString();
 ---
 
 <!doctype html>
@@ -37,7 +54,7 @@ const enHref = new URL("/en/", Astro.site).toString();
     <link rel="alternate" hreflang="x-default" href={itHref} />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -51,6 +68,20 @@ const enHref = new URL("/en/", Astro.site).toString();
     <meta name="twitter:image" content={ogImage} />
 
     <meta name="theme-color" content="#0b1120" />
+
+    <!-- RSS autodiscovery -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${SITE.name} Blog (IT)`}
+      href="/rss.xml"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${SITE.name} Blog (EN)`}
+      href="/en/rss.xml"
+    />
   </head>
   <body>
     <a

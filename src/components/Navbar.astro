@@ -1,17 +1,40 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { SITE } from "../config";
+import { getPublishedPosts } from "../utils/blog";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import MobileMenu from "./MobileMenu.tsx";
 
+interface Props {
+  /**
+   * URL IT della pagina corrente — passato a LanguageSwitcher.
+   * Default: "/" (homepage IT). Sovrascrivere su pagine blog/articoli.
+   */
+  itHref?: string;
+  /**
+   * URL EN della pagina corrente — passato a LanguageSwitcher.
+   * Default: "/en/" (homepage EN). Sovrascrivere su pagine blog/articoli.
+   */
+  enHref?: string;
+}
+
+const { itHref = "/", enHref = "/en/" } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+// Base delle sezioni homepage — i link funzionano da qualsiasi pagina.
+const homeBase = lang === "it" ? "/" : "/en/";
+
+// Link Blog: visibile solo se esiste almeno un articolo pubblicato.
+const posts = await getPublishedPosts(lang);
+const blogHref = lang === "it" ? "/blog/" : "/en/blog/";
+
 const links = [
-  { href: "#about", label: t.nav.about },
-  { href: "#experience", label: t.nav.experience },
-  { href: "#skills", label: t.nav.skills },
-  { href: "#contact", label: t.nav.contact },
+  { href: `${homeBase}#about`, label: t.nav.about },
+  { href: `${homeBase}#experience`, label: t.nav.experience },
+  { href: `${homeBase}#skills`, label: t.nav.skills },
+  { href: `${homeBase}#contact`, label: t.nav.contact },
+  ...(posts.length > 0 ? [{ href: blogHref, label: t.blog.nav }] : []),
 ];
 ---
 
@@ -19,8 +42,9 @@ const links = [
   class="sticky top-0 z-40 border-b border-border/60 bg-bg/80 backdrop-blur-md"
 >
   <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
+    <!-- Logo / monogramma: link alla homepage nella lingua corrente -->
     <a
-      href="#top"
+      href={homeBase}
       class="group flex items-center gap-2.5"
       aria-label={SITE.name}
     >
@@ -47,7 +71,7 @@ const links = [
     </nav>
 
     <div class="flex items-center gap-3 sm:gap-4">
-      <LanguageSwitcher />
+      <LanguageSwitcher itHref={itHref} enHref={enHref} />
       <MobileMenu
         client:load
         links={links}

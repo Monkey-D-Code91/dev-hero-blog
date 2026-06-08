@@ -1,0 +1,29 @@
+---
+import type { Lang } from "../../i18n/ui";
+
+interface Props {
+  tag: string;
+  lang: Lang;
+  /** Se true (default), il chip è un link all'archivio tag; altrimenti uno <span>. */
+  link?: boolean;
+}
+
+const { tag, lang, link = true } = Astro.props;
+const href = lang === "it" ? `/blog/tag/${tag}/` : `/en/blog/tag/${tag}/`;
+
+// Link: con hover interattivo. Span: solo stile decorativo (nessun hover).
+const linkCls =
+  "inline-flex items-center rounded-full border border-border bg-surface-2 px-2.5 py-0.5 text-xs font-medium text-muted transition-colors hover:border-accent/40 hover:text-accent";
+const spanCls =
+  "inline-flex items-center rounded-full border border-border bg-surface-2 px-2.5 py-0.5 text-xs font-medium text-muted";
+---
+
+{
+  link ? (
+    <a href={href} class={linkCls}>
+      #{tag}
+    </a>
+  ) : (
+    <span class={spanCls}>#{tag}</span>
+  )
+}

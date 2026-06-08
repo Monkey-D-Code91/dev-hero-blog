@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import BlogList from "../../components/blog/BlogList.astro";
+import Footer from "../../components/Footer.astro";
+import { getPublishedPosts, getSlugFromEntryId } from "../../utils/blog";
+import { getReadingTime } from "../../utils/readingTime";
+import { useTranslations } from "../../i18n/utils";
+
+const lang = "it" as const;
+const t = useTranslations(lang);
+
+const posts = await getPublishedPosts(lang);
+const processedPosts = posts.map((p) => ({
+  title: p.data.title,
+  description: p.data.description,
+  pubDate: p.data.pubDate,
+  slug: getSlugFromEntryId(p.id),
+  tags: p.data.tags,
+  readingTime: getReadingTime(p.body, lang),
+  cover: p.data.cover,
+  coverAlt: p.data.coverAlt,
+}));
+---
+
+<BaseLayout
+  title={`Blog — Marco Mariotti`}
+  description={t.blog.lead}
+  lang="it"
+  path="/blog/"
+  hreflangIt="/blog/"
+  hreflangEn="/en/blog/"
+>
+  <Navbar itHref="/blog/" enHref="/en/blog/" />
+  <main id="main">
+    <BlogList posts={processedPosts} />
+  </main>
+  <Footer />
+</BaseLayout>

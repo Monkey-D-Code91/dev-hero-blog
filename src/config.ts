@@ -18,3 +18,14 @@ export const SITE = {
     countries: "2", // paesi (Italia + Albania)
   },
 } as const;
+
+/**
+ * Configurazione Giscus per i commenti del blog.
+ * Valori generati su https://giscus.app — non modificare manualmente.
+ */
+export const GISCUS = {
+  repo: "Monkey-D-Code91/dev-hero-blog",
+  repoId: "R_kgDOSy0bHQ",
+  category: "Ideas",
+  categoryId: "DIC_kwDOSy0bHc4C-pHC",
+} as const;
