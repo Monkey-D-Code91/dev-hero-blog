@@ -40,7 +40,7 @@ export const ui = {
       heading: "Chi sono",
       lead: "Tecnica e leadership, nello stesso ruolo.",
       paragraphs: [
-        "Sono un ingegnere del software specializzato nella progettazione e nello sviluppo di sistemi complessi nel settore delle telecomunicazioni. Ogni giorno guido un team distribuito tra Italia e Albania nella costruzione di una piattaforma per il monitoraggio del traffico dati, pensata per individuare e prevenire i costi elevati legati al roaming.",
+        "Sono un ingegnere del software specializzato nella progettazione e nello sviluppo di sistemi complessi per le telecomunicazioni aziendali. Guido un team distribuito tra Italia e Albania nello sviluppo di una piattaforma SaaS usata da aziende e operatori telecom per monitorare il traffico dati in roaming delle proprie sim, prevenire extracosti con alert automatici e blocchi di navigazione in tempo reale.",
         "Unisco competenza tecnica e gestione delle persone: traduco requisiti complessi in architetture solide, faccio crescere il team con mentoring e code review, e mantengo allineati persone, processi e obiettivi attraverso lingue e culture diverse.",
       ],
       stats: {
@@ -171,7 +171,7 @@ export const ui = {
       heading: "About",
       lead: "Engineering and leadership, in the same role.",
       paragraphs: [
-        "I'm a software engineer specialised in designing and building complex systems for the telecommunications industry. Every day I lead a team spread across Italy and Albania, building a data-traffic monitoring platform designed to detect and prevent high roaming costs.",
+        "I'm a software engineer specialised in designing and building complex systems for enterprise telecommunications. I lead a team across Italy and Albania developing a SaaS platform used by companies and telecom operators to monitor roaming data usage across their SIM cards, prevent extra costs through automated alerts and real-time traffic blocks.",
         "I combine technical depth with people management: I turn complex requirements into solid architectures, grow the team through mentoring and code reviews, and keep people, processes and goals aligned across languages and cultures.",
       ],
       stats: {
