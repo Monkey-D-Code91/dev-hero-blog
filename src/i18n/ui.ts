@@ -29,10 +29,10 @@ export const ui = {
       close: "Chiudi",
     },
     hero: {
-      badge: "Tech Lead • Telecomunicazioni",
-      headline: "Costruisco sistemi software complessi e guido i team che li rendono possibili.",
+      badge: "Tech Lead • Frontend & Telecomunicazioni",
+      headline: "Ingegnere frontend e Tech Lead. Trasformo requisiti complessi in prodotti che funzionano.",
       subline:
-        "Sono Marco Mariotti, ingegnere del software e Tech Lead. Ogni giorno coordino un team tra Italia e Albania nello sviluppo di una piattaforma per il monitoraggio del traffico dati che aiuta a tenere sotto controllo i costi del roaming.",
+        "Sono Marco Mariotti, Software Engineer & Tech Lead in TeamSystem. Guido un team distribuito tra Italia e Albania nello sviluppo di una piattaforma SaaS per il monitoraggio del traffico dati in roaming — prevenzione extracosti, alert automatici, blocchi in tempo reale. Mi occupo dell'architettura frontend in React e TypeScript e del percorso di crescita delle persone nel team.",
       ctaPrimary: "Contattami",
       ctaSecondary: "Scopri di più",
     },
@@ -160,10 +160,10 @@ export const ui = {
       close: "Close",
     },
     hero: {
-      badge: "Tech Lead • Telecommunications",
-      headline: "I build complex software systems and lead the teams that make them happen.",
+      badge: "Tech Lead • Frontend & Telecommunications",
+      headline: "Frontend engineer and Tech Lead. I turn complex requirements into products that work.",
       subline:
-        "I'm Marco Mariotti, a software engineer and Tech Lead. Every day I coordinate a team across Italy and Albania building a data-traffic monitoring platform that helps keep roaming costs under control.",
+        "I'm Marco Mariotti, Software Engineer & Tech Lead at TeamSystem. I lead a team across Italy and Albania building a SaaS platform for roaming data traffic monitoring — cost prevention, automated alerts, real-time traffic blocks. I handle frontend architecture in React and TypeScript and the growth of the people in the team.",
       ctaPrimary: "Get in touch",
       ctaSecondary: "Learn more",
     },
