@@ -41,7 +41,7 @@ export const ui = {
       lead: "Tecnica e leadership, nello stesso ruolo.",
       paragraphs: [
         "Sono un ingegnere del software specializzato nella progettazione e nello sviluppo di sistemi complessi nel settore delle telecomunicazioni. Ogni giorno guido un team distribuito tra Italia e Albania nella costruzione di una piattaforma per il monitoraggio del traffico dati, pensata per individuare e prevenire i costi elevati legati al roaming.",
-        "Unisco competenza tecnica e gestione delle persone: traduco requisiti complessi in architetture solide, faccio crescere il team con mentoring e code review, e mantengo allineati persone, processi e obiettivi attraverso lingue, culture e fusi orari diversi.",
+        "Unisco competenza tecnica e gestione delle persone: traduco requisiti complessi in architetture solide, faccio crescere il team con mentoring e code review, e mantengo allineati persone, processi e obiettivi attraverso lingue e culture diverse.",
       ],
       stats: {
         years: "Anni di esperienza",
@@ -172,7 +172,7 @@ export const ui = {
       lead: "Engineering and leadership, in the same role.",
       paragraphs: [
         "I'm a software engineer specialised in designing and building complex systems for the telecommunications industry. Every day I lead a team spread across Italy and Albania, building a data-traffic monitoring platform designed to detect and prevent high roaming costs.",
-        "I combine technical depth with people management: I turn complex requirements into solid architectures, grow the team through mentoring and code reviews, and keep people, processes and goals aligned across languages, cultures and time zones.",
+        "I combine technical depth with people management: I turn complex requirements into solid architectures, grow the team through mentoring and code reviews, and keep people, processes and goals aligned across languages and cultures.",
       ],
       stats: {
         years: "Years of experience",
