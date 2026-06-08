@@ -8,7 +8,7 @@ export const SITE = {
   role: "Software Engineer & Tech Lead",
 
   // TODO: sostituisci con l'URL reale del tuo profilo LinkedIn.
-  linkedin: "https://www.linkedin.com/in/marco-mariotti/",
+  linkedin: "https://www.linkedin.com/in/marco-mariotti-627074187/",
 
   // Numeri mostrati nella sezione "About".
   // TODO: aggiorna con i valori reali.
