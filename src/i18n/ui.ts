@@ -86,16 +86,15 @@ export const ui = {
     skills: {
       heading: "Competenze",
       lead: "Ciò che porto in ogni progetto.",
-      // TODO: adatta gli elenchi alle tue competenze effettive.
       categories: [
         {
           title: "Tecnologie & Architettura",
           items: [
-            "Architetture distribuite & microservizi",
-            "API e sistemi real-time",
-            "Cloud & containerizzazione",
-            "Database SQL / NoSQL",
-            "CI/CD e qualità del codice",
+            "React, TypeScript",
+            "Java",
+            "Architetture serverless (AWS, Azure)",
+            "SQL / NoSQL (MongoDB)",
+            "Apache Kafka",
           ],
         },
         {
@@ -103,19 +102,19 @@ export const ui = {
           items: [
             "Gestione di team distribuiti",
             "Mentoring e crescita delle persone",
-            "Pianificazione Agile",
-            "Comunicazione cross-culturale",
-            "Allineamento tra stakeholder",
+            "Technical leadership",
+            "Scrum / Pianificazione Agile",
+            "Code review",
           ],
         },
         {
           title: "Dominio — Telecom",
           items: [
-            "Monitoraggio delle telecomunicazioni",
-            "Analisi del traffico dati in roaming",
-            "Ottimizzazione e controllo dei costi",
-            "Data pipeline su larga scala",
-            "Affidabilità dei sistemi",
+            "Monitoraggio traffico dati in roaming",
+            "Sistemi di alerting e automazione",
+            "Prevenzione extracosti su sim aziendali",
+            "Piattaforme SaaS B2B",
+            "Elaborazione di grandi volumi di dati",
           ],
         },
       ],
@@ -223,36 +222,35 @@ export const ui = {
     skills: {
       heading: "Skills",
       lead: "What I bring to every project.",
-      // TODO: tailor the lists to your actual skills.
       categories: [
         {
           title: "Technology & Architecture",
           items: [
-            "Distributed architectures & microservices",
-            "APIs and real-time systems",
-            "Cloud & containerisation",
-            "SQL / NoSQL databases",
-            "CI/CD and code quality",
+            "React, TypeScript",
+            "Java",
+            "Serverless architectures (AWS, Azure)",
+            "SQL / NoSQL (MongoDB)",
+            "Apache Kafka",
           ],
         },
         {
           title: "Leadership & Team",
           items: [
-            "Leading distributed teams",
+            "Distributed team management",
             "Mentoring and growing people",
-            "Agile planning",
-            "Cross-cultural communication",
-            "Stakeholder alignment",
+            "Technical leadership",
+            "Scrum / Agile planning",
+            "Code review",
           ],
         },
         {
           title: "Domain — Telecom",
           items: [
-            "Telecommunications monitoring",
-            "Roaming data-traffic analysis",
-            "Cost optimisation & control",
-            "Large-scale data pipelines",
-            "System reliability",
+            "Roaming data traffic monitoring",
+            "Alerting systems and automation",
+            "SIM cost overrun prevention",
+            "B2B SaaS platforms",
+            "Large-scale data processing",
           ],
         },
       ],
