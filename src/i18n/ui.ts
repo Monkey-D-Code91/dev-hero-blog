@@ -18,7 +18,7 @@ export const ui = {
     meta: {
       title: "Marco Mariotti — Software Engineer & Tech Lead",
       description:
-        "Ingegnere del software e Tech Lead specializzato in sistemi di monitoraggio per le telecomunicazioni. Guido un team distribuito tra Italia e Albania nello sviluppo di prodotti complessi.",
+        "Software Engineer & Tech Lead Frontend in TeamSystem. Architettura frontend in React e TypeScript, team distribuito tra Italia e Albania, piattaforma SaaS per il monitoraggio del roaming.",
     },
     nav: {
       about: "Chi sono",
@@ -154,7 +154,7 @@ export const ui = {
     meta: {
       title: "Marco Mariotti — Software Engineer & Tech Lead",
       description:
-        "Software engineer and Tech Lead specialised in telecom monitoring systems. I lead a team across Italy and Albania building complex products.",
+        "Software Engineer & Tech Lead Frontend at TeamSystem. Frontend architecture in React and TypeScript, distributed team across Italy and Albania, SaaS platform for roaming data monitoring.",
     },
     nav: {
       about: "About",
