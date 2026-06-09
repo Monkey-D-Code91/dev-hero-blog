@@ -5,10 +5,9 @@ import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
 
-// NOTE: aggiorna `site` con il dominio reale quando sarà disponibile.
-// Serve per sitemap, canonical e tag Open Graph.
+// `site` — usato per sitemap, canonical e tag Open Graph.
 export default defineConfig({
-  site: 'https://www.marcomariotti.dev',
+  site: 'https://thefirstdraft.dev',
   i18n: {
     locales: ['it', 'en'],
     defaultLocale: 'it',

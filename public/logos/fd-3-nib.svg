@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Opzione 3 — Pennino stilizzato (scrittura / bozza) -->
+  <rect width="64" height="64" rx="14" fill="#0b1120" />
+  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" fill="none" stroke="#38bdf8" stroke-opacity="0.5" stroke-width="2" />
+  <!-- corpo del pennino -->
+  <path d="M24 20 L40 20 L34 42 L30 42 Z" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linejoin="round" />
+  <!-- fenditura centrale -->
+  <line x1="32" y1="26" x2="32" y2="38" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" />
+  <!-- punta -->
+  <circle cx="32" cy="46" r="2.4" fill="#2dd4bf" />
+</svg>
