@@ -27,9 +27,14 @@ interface Props {
    * Se omesso il pulsante non viene mostrato.
    */
   ctaHref?: string;
+  /**
+   * Mostra i link alle sezioni del profilo (#about, #experience…).
+   * Default: true. Impostare a false sulla landing e sulle pagine blog.
+   */
+  showSections?: boolean;
 }
 
-const { itHref = "/", enHref = "/en/", sectionBase, ctaHref } = Astro.props;
+const { itHref = "/", enHref = "/en/", sectionBase, ctaHref, showSections = true } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -42,10 +47,14 @@ const posts = await getPublishedPosts(lang);
 const blogHref = lang === "it" ? "/blog/" : "/en/blog/";
 
 const links = [
-  { href: `${anchorBase}#about`, label: t.nav.about },
-  { href: `${anchorBase}#experience`, label: t.nav.experience },
-  { href: `${anchorBase}#skills`, label: t.nav.skills },
-  { href: `${anchorBase}#contact`, label: t.nav.contact },
+  ...(showSections
+    ? [
+        { href: `${anchorBase}#about`, label: t.nav.about },
+        { href: `${anchorBase}#experience`, label: t.nav.experience },
+        { href: `${anchorBase}#skills`, label: t.nav.skills },
+        { href: `${anchorBase}#contact`, label: t.nav.contact },
+      ]
+    : []),
   ...(posts.length > 0 ? [{ href: blogHref, label: t.blog.nav }] : []),
 ];
 ---

@@ -133,6 +133,29 @@ export const ui = {
       toEn: "English",
       toIt: "Italiano",
     },
+    landing: {
+      meta: {
+        title: "First Draft — Blog tech & AI",
+        description:
+          "Articoli su tecnologia, AI e crescita professionale — scritti da chi lavora nel settore.",
+      },
+      hero: {
+        badge: "Blog tech & AI",
+        headline: "Le idee al loro stato grezzo.",
+        lead: "Articoli su tecnologia, AI e crescita delle persone — scritti da chi lavora nel settore. Visioni diverse su un mondo che cambia veloce.",
+        ctaRead: "Inizia a leggere",
+        ctaAuthors: "Gli autori",
+      },
+      recentPosts: {
+        heading: "Ultimi articoli",
+        cta: "Tutti gli articoli",
+        empty: "Nessun articolo ancora pubblicato.",
+      },
+      authors: {
+        heading: "Gli autori",
+        viewProfile: "Vedi profilo",
+      },
+    },
     blog: {
       nav: "Blog",
       heading: "Blog",
@@ -268,6 +291,29 @@ export const ui = {
       label: "Switch language",
       toEn: "English",
       toIt: "Italiano",
+    },
+    landing: {
+      meta: {
+        title: "First Draft — Tech & AI Blog",
+        description:
+          "Articles on technology, AI and professional growth — written by people who work in the field.",
+      },
+      hero: {
+        badge: "Tech & AI Blog",
+        headline: "Ideas in their raw state.",
+        lead: "Articles on technology, AI and human growth — written by people in the field. Different perspectives on a fast-changing world.",
+        ctaRead: "Start reading",
+        ctaAuthors: "The authors",
+      },
+      recentPosts: {
+        heading: "Recent articles",
+        cta: "All articles",
+        empty: "No articles published yet.",
+      },
+      authors: {
+        heading: "Authors",
+        viewProfile: "View profile",
+      },
     },
     blog: {
       nav: "Blog",

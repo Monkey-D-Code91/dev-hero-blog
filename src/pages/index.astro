@@ -1,27 +1,46 @@
 ---
-/**
- * Homepage IT — temporaneamente mostra il profilo di Marco Mariotti.
- * Sarà sostituita dalla landing del blog in Fase C2.
- */
-import { getCollection, render } from "astro:content";
-import AuthorLayout from "../layouts/AuthorLayout.astro";
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import LandingHero from "../components/landing/LandingHero.astro";
+import RecentPosts from "../components/landing/RecentPosts.astro";
+import AuthorsShowcase from "../components/landing/AuthorsShowcase.astro";
+import { useTranslations } from "../i18n/utils";
+import { getPublishedPosts, getSlugFromEntryId } from "../utils/blog";
+import { getReadingTime } from "../utils/readingTime";
 
-// Carica il profilo IT di Marco dalla collection authors.
+const t = useTranslations("it");
+
+// Ultimi 3 articoli IT
+const allPosts = await getPublishedPosts("it");
+const recentPosts = allPosts.slice(0, 3).map((p) => ({
+  title: p.data.title,
+  description: p.data.description,
+  pubDate: p.data.pubDate,
+  slug: getSlugFromEntryId(p.id),
+  tags: p.data.tags,
+  readingTime: getReadingTime(p.body, "it"),
+  cover: p.data.cover,
+  coverAlt: p.data.coverAlt,
+}));
+
+// Autori IT per la showcase
 const allAuthors = await getCollection("authors");
-const entry = allAuthors.find((a) => a.id === "it/marco-mariotti");
-if (!entry) throw new Error("Author it/marco-mariotti not found in collection");
-
-const { Content } = await render(entry);
-const author = entry.data;
+const itAuthors = allAuthors.filter((a) => a.id.startsWith("it/"));
 ---
 
-<AuthorLayout
-  author={author}
+<BaseLayout
+  title={t.landing.meta.title}
+  description={t.landing.meta.description}
   lang="it"
-  itHref="/"
-  enHref="/en/"
-  title="Marco Mariotti — Software Engineer & Tech Lead"
-  description={author.subline}
+  path="/"
 >
-  <Content />
-</AuthorLayout>
+  <Navbar showSections={false} />
+  <main id="main">
+    <LandingHero lang="it" />
+    <RecentPosts posts={recentPosts} lang="it" />
+    <AuthorsShowcase authors={itAuthors} lang="it" />
+  </main>
+  <Footer />
+</BaseLayout>
