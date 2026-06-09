@@ -1,7 +1,7 @@
 ---
 import "@fontsource-variable/inter";
 import "../styles/global.css";
-import { SITE } from "../config";
+import { BLOG } from "../config";
 
 interface Props {
   title: string;
@@ -73,13 +73,13 @@ const enHref = new URL(hreflangEn, Astro.site).toString();
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={`${SITE.name} Blog (IT)`}
+      title={`${BLOG.name} Blog (IT)`}
       href="/rss.xml"
     />
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={`${SITE.name} Blog (EN)`}
+      title={`${BLOG.name} Blog (EN)`}
       href="/en/rss.xml"
     />
   </head>

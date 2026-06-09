@@ -1,6 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import { SITE } from "../config";
+import { BLOG } from "../config";
 import { getPublishedPosts } from "../utils/blog";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import MobileMenu from "./MobileMenu.tsx";
@@ -16,24 +16,36 @@ interface Props {
    * Default: "/en/" (homepage EN). Sovrascrivere su pagine blog/articoli.
    */
   enHref?: string;
+  /**
+   * Base per i link alle sezioni (#about, #experience…).
+   * Default: homepage della lingua corrente ("/", "/en/").
+   * Sovrascrivere nelle pagine profilo autore con il path del profilo.
+   */
+  sectionBase?: string;
+  /**
+   * URL del pulsante CTA nel menu mobile (es. LinkedIn dell'autore).
+   * Se omesso il pulsante non viene mostrato.
+   */
+  ctaHref?: string;
 }
 
-const { itHref = "/", enHref = "/en/" } = Astro.props;
+const { itHref = "/", enHref = "/en/", sectionBase, ctaHref } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Base delle sezioni homepage — i link funzionano da qualsiasi pagina.
+// Base delle sezioni: usa il sectionBase esplicito, altrimenti homepage della lingua.
 const homeBase = lang === "it" ? "/" : "/en/";
+const anchorBase = sectionBase ?? homeBase;
 
 // Link Blog: visibile solo se esiste almeno un articolo pubblicato.
 const posts = await getPublishedPosts(lang);
 const blogHref = lang === "it" ? "/blog/" : "/en/blog/";
 
 const links = [
-  { href: `${homeBase}#about`, label: t.nav.about },
-  { href: `${homeBase}#experience`, label: t.nav.experience },
-  { href: `${homeBase}#skills`, label: t.nav.skills },
-  { href: `${homeBase}#contact`, label: t.nav.contact },
+  { href: `${anchorBase}#about`, label: t.nav.about },
+  { href: `${anchorBase}#experience`, label: t.nav.experience },
+  { href: `${anchorBase}#skills`, label: t.nav.skills },
+  { href: `${anchorBase}#contact`, label: t.nav.contact },
   ...(posts.length > 0 ? [{ href: blogHref, label: t.blog.nav }] : []),
 ];
 ---
@@ -42,18 +54,18 @@ const links = [
   class="sticky top-0 z-40 border-b border-border/60 bg-bg/80 backdrop-blur-md"
 >
   <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
-    <!-- Logo / monogramma: link alla homepage nella lingua corrente -->
+    <!-- Logo / brand: link alla homepage nella lingua corrente -->
     <a
       href={homeBase}
       class="group flex items-center gap-2.5"
-      aria-label={SITE.name}
+      aria-label={BLOG.name}
     >
       <span
         class="flex h-9 w-9 items-center justify-center rounded-lg border border-accent/40 bg-surface-2 text-sm font-bold text-accent transition-colors group-hover:border-accent"
-        aria-hidden="true">{SITE.monogram}</span
+        aria-hidden="true">{BLOG.monogram}</span
       >
       <span class="hidden font-semibold tracking-tight sm:inline"
-        >{SITE.name}</span
+        >{BLOG.name}</span
       >
     </a>
 
@@ -75,7 +87,8 @@ const links = [
       <MobileMenu
         client:load
         links={links}
-        ctaHref={SITE.linkedin}
+        brandName={BLOG.name}
+        ctaHref={ctaHref}
         ctaLabel={t.hero.ctaPrimary}
         labels={{ menu: t.nav.menu, close: t.nav.close }}
       />

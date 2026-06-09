@@ -8,8 +8,10 @@ interface NavLink {
 
 interface Props {
   links: NavLink[];
-  ctaHref: string;
-  ctaLabel: string;
+  brandName: string;
+  /** URL CTA (es. LinkedIn) — se omesso il pulsante non viene mostrato. */
+  ctaHref?: string;
+  ctaLabel?: string;
   labels: { menu: string; close: string };
 }
 
@@ -18,7 +20,7 @@ interface Props {
  * Pulsante hamburger che apre un overlay a tutto schermo.
  * Visibile solo sotto il breakpoint md (gestito dal contenitore in Navbar).
  */
-export default function MobileMenu({ links, ctaHref, ctaLabel, labels }: Props) {
+export default function MobileMenu({ links, brandName, ctaHref, ctaLabel, labels }: Props) {
   const [open, setOpen] = useState(false);
 
   // Blocca lo scroll del body quando il menu è aperto e chiudi con ESC.
@@ -62,7 +64,7 @@ export default function MobileMenu({ links, ctaHref, ctaLabel, labels }: Props) 
           aria-modal="true"
         >
           <div className="flex items-center justify-between border-b border-border px-6 py-4">
-            <span className="font-semibold tracking-tight">Marco Mariotti</span>
+            <span className="font-semibold tracking-tight">{brandName}</span>
             <button
               type="button"
               aria-label={labels.close}
@@ -87,15 +89,17 @@ export default function MobileMenu({ links, ctaHref, ctaLabel, labels }: Props) 
                 {link.label}
               </a>
             ))}
-            <a
-              href={ctaHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
-              className="mt-4 inline-flex items-center justify-center rounded-lg bg-accent px-5 py-3 text-base font-semibold text-bg transition-opacity hover:opacity-90"
-            >
-              {ctaLabel}
-            </a>
+            {ctaHref && ctaLabel && (
+              <a
+                href={ctaHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="mt-4 inline-flex items-center justify-center rounded-lg bg-accent px-5 py-3 text-base font-semibold text-bg transition-opacity hover:opacity-90"
+              >
+                {ctaLabel}
+              </a>
+            )}
           </nav>
           </div>,
           document.body

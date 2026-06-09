@@ -1,0 +1,62 @@
+---
+/**
+ * AuthorLayout — layout completo per le pagine profilo autore.
+ * Usato sia dalla homepage temporanea (index.astro) sia dalle route
+ * /autori/[slug]/ e /en/authors/[slug]/.
+ *
+ * Il corpo markdown dell'autore va passato via slot default — verrà
+ * renderizzato nella sezione About.
+ */
+import BaseLayout from "./BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Experience from "../components/Experience.astro";
+import Skills from "../components/Skills.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  author: CollectionEntry<"authors">["data"];
+  lang: "it" | "en";
+  /** URL IT di questa pagina profilo — usato per hreflang e canonical. */
+  itHref: string;
+  /** URL EN di questa pagina profilo — usato per hreflang. */
+  enHref: string;
+  title: string;
+  description: string;
+}
+
+const { author, lang, itHref, enHref, title, description } = Astro.props;
+
+// URL canonico: quello della lingua corrente.
+const canonicalPath = lang === "it" ? itHref : enHref;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  lang={lang}
+  path={canonicalPath}
+  hreflangIt={itHref}
+  hreflangEn={enHref}
+>
+  <Navbar
+    itHref={itHref}
+    enHref={enHref}
+    sectionBase={canonicalPath}
+    ctaHref={author.links.linkedin}
+  />
+  <main id="main">
+    <Hero author={author} />
+    <About author={author}>
+      <!-- Il corpo markdown viene inserito qui dallo slot del layout -->
+      <slot />
+    </About>
+    <Experience experience={author.experience} />
+    <Skills skills={author.skills} />
+    <Contact author={author} />
+  </main>
+  <Footer linkedin={author.links.linkedin} />
+</BaseLayout>

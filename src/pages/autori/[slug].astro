@@ -1,0 +1,44 @@
+---
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import AuthorLayout from "../../layouts/AuthorLayout.astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allAuthors = await getCollection("authors");
+  // Solo le entry italiane generano le rotte IT.
+  const itAuthors = allAuthors.filter((a) => a.id.startsWith("it/"));
+
+  return itAuthors.map((entry) => {
+    // Lo slug è il nome file senza il prefisso "it/".
+    const slug = entry.id.slice(3);
+    // Cerca la versione EN tramite authorKey condiviso.
+    const enEntry = allAuthors.find(
+      (a) => a.id.startsWith("en/") && a.data.authorKey === entry.data.authorKey
+    );
+    const enSlug = enEntry ? enEntry.id.slice(3) : slug;
+    return { params: { slug }, props: { entry, enSlug } };
+  });
+};
+
+const { entry, enSlug } = Astro.props;
+const { Content } = await render(entry);
+const author = entry.data;
+const slug = Astro.params.slug;
+
+const itHref = `/autori/${slug}/`;
+const enHref = `/en/authors/${enSlug}/`;
+
+const title = `${author.name} — ${author.role}`;
+const description = author.subline;
+---
+
+<AuthorLayout
+  author={author}
+  lang="it"
+  itHref={itHref}
+  enHref={enHref}
+  title={title}
+  description={description}
+>
+  <Content />
+</AuthorLayout>
