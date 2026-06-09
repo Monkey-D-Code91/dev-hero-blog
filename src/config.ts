@@ -7,7 +7,7 @@ export const BLOG = {
   monogram: "FD",
   domain: "thefirstdraft.dev",
   // Path del logo scelto (in /public/logos). Da finalizzare in C0 dopo la scelta.
-  logo: "/logos/fd-1-monogram.svg",
+  logo: "/logos/fd-2-caret.svg",
 } as const;
 
 /**
