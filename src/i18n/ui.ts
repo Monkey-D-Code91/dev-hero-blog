@@ -21,6 +21,7 @@ export const ui = {
         "Software Engineer & Tech Lead Frontend in TeamSystem. Architettura frontend in React e TypeScript, team distribuito tra Italia e Albania, piattaforma SaaS per il monitoraggio del roaming.",
     },
     nav: {
+      home: "Home",
       about: "Chi sono",
       experience: "Esperienza",
       skills: "Competenze",
@@ -184,6 +185,7 @@ export const ui = {
         "Software Engineer & Tech Lead Frontend at TeamSystem. Frontend architecture in React and TypeScript, distributed team across Italy and Albania, SaaS platform for roaming data monitoring.",
     },
     nav: {
+      home: "Home",
       about: "About",
       experience: "Experience",
       skills: "Skills",

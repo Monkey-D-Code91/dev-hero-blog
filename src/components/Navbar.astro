@@ -1,62 +1,32 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { BLOG } from "../config";
-import { getPublishedPosts } from "../utils/blog";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import MobileMenu from "./MobileMenu.tsx";
 
 interface Props {
-  /**
-   * URL IT della pagina corrente — passato a LanguageSwitcher.
-   * Default: "/" (homepage IT). Sovrascrivere su pagine blog/articoli.
-   */
   itHref?: string;
-  /**
-   * URL EN della pagina corrente — passato a LanguageSwitcher.
-   * Default: "/en/" (homepage EN). Sovrascrivere su pagine blog/articoli.
-   */
   enHref?: string;
-  /**
-   * Base per i link alle sezioni (#about, #experience…).
-   * Default: homepage della lingua corrente ("/", "/en/").
-   * Sovrascrivere nelle pagine profilo autore con il path del profilo.
-   */
-  sectionBase?: string;
-  /**
-   * URL del pulsante CTA nel menu mobile (es. LinkedIn dell'autore).
-   * Se omesso il pulsante non viene mostrato.
-   */
-  ctaHref?: string;
-  /**
-   * Mostra i link alle sezioni del profilo (#about, #experience…).
-   * Default: true. Impostare a false sulla landing e sulle pagine blog.
-   */
-  showSections?: boolean;
 }
 
-const { itHref = "/", enHref = "/en/", sectionBase, ctaHref, showSections = true } = Astro.props;
+const { itHref = "/", enHref = "/en/" } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Base delle sezioni: usa il sectionBase esplicito, altrimenti homepage della lingua.
-const homeBase = lang === "it" ? "/" : "/en/";
-const anchorBase = sectionBase ?? homeBase;
-
-// Link Blog: visibile solo se esiste almeno un articolo pubblicato.
-const posts = await getPublishedPosts(lang);
+const homeHref = lang === "it" ? "/" : "/en/";
 const blogHref = lang === "it" ? "/blog/" : "/en/blog/";
 const authorsHref = lang === "it" ? "/autori/" : "/en/authors/";
 
+const pathname = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === "/" || href === "/en/") return pathname === href;
+  return pathname.startsWith(href);
+}
+
 const links = [
-  ...(showSections
-    ? [
-        { href: `${anchorBase}#about`, label: t.nav.about },
-        { href: `${anchorBase}#experience`, label: t.nav.experience },
-        { href: `${anchorBase}#skills`, label: t.nav.skills },
-        { href: `${anchorBase}#contact`, label: t.nav.contact },
-      ]
-    : []),
-  ...(posts.length > 0 ? [{ href: blogHref, label: t.blog.nav }] : []),
+  { href: homeHref, label: t.nav.home },
+  { href: blogHref, label: t.blog.nav },
   { href: authorsHref, label: t.nav.authors },
 ];
 ---
@@ -65,9 +35,8 @@ const links = [
   class="sticky top-0 z-40 border-b border-border/60 bg-bg/80 backdrop-blur-md"
 >
   <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
-    <!-- Logo / brand: link alla homepage nella lingua corrente -->
     <a
-      href={homeBase}
+      href={homeHref}
       class="group flex items-center gap-2.5"
       aria-label={BLOG.name}
     >
@@ -87,7 +56,12 @@ const links = [
         links.map((link) => (
           <a
             href={link.href}
-            class="text-sm text-muted transition-colors hover:text-text"
+            class:list={[
+              "text-sm transition-colors",
+              isActive(link.href)
+                ? "border-b border-accent pb-px font-medium text-text"
+                : "text-muted hover:text-text",
+            ]}
           >
             {link.label}
           </a>
@@ -101,8 +75,7 @@ const links = [
         client:load
         links={links}
         brandName={BLOG.name}
-        ctaHref={ctaHref}
-        ctaLabel={t.hero.ctaPrimary}
+        activePath={pathname}
         labels={{ menu: t.nav.menu, close: t.nav.close }}
       />
     </div>

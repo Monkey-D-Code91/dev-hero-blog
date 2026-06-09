@@ -43,12 +43,7 @@ const canonicalPath = lang === "it" ? itHref : enHref;
   hreflangIt={itHref}
   hreflangEn={enHref}
 >
-  <Navbar
-    itHref={itHref}
-    enHref={enHref}
-    sectionBase={canonicalPath}
-    ctaHref={author.links.linkedin}
-  />
+  <Navbar itHref={itHref} enHref={enHref} />
   <main id="main">
     <Hero author={author} />
     <About author={author}>

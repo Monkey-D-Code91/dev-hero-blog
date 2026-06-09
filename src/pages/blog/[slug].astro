@@ -54,7 +54,7 @@ const authorName = authorMap.get(authorKey) ?? authorKey;
   hreflangIt={`/blog/${slug}/`}
   hreflangEn={hreflangEn}
 >
-  <Navbar itHref={`/blog/${slug}/`} enHref={hreflangEn} showSections={false} />
+  <Navbar itHref={`/blog/${slug}/`} enHref={hreflangEn} />
   <main id="main">
     <BlogPostLayout
       title={post.data.title}
