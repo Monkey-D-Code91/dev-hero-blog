@@ -1,14 +1,24 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import { SITE } from "../config";
+import type { CollectionEntry } from "astro:content";
 
+interface Props {
+  author: CollectionEntry<"authors">["data"];
+}
+
+const { author } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+// Costruisce l'array delle stats, saltando i campi opzionali non presenti.
 const stats = [
-  { value: SITE.stats.years, label: t.about.stats.years },
-  { value: SITE.stats.teamSize, label: t.about.stats.teamSize },
-  { value: SITE.stats.countries, label: t.about.stats.countries },
+  { value: author.stats.years, label: t.about.stats.years },
+  ...(author.stats.teamSize
+    ? [{ value: author.stats.teamSize, label: t.about.stats.teamSize }]
+    : []),
+  ...(author.stats.countries
+    ? [{ value: author.stats.countries, label: t.about.stats.countries }]
+    : []),
 ];
 ---
 
@@ -19,17 +29,14 @@ const stats = [
         {t.about.heading}
       </p>
       <h2 class="mt-2 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
-        {t.about.lead}
+        {author.aboutLead}
       </h2>
     </header>
 
     <div class="mt-10 grid gap-12 md:grid-cols-[1.4fr_1fr]">
-      <div data-reveal class="space-y-5">
-        {
-          t.about.paragraphs.map((p) => (
-            <p class="text-base leading-relaxed text-muted sm:text-lg">{p}</p>
-          ))
-        }
+      <!-- Bio (corpo markdown dell'autore) -->
+      <div data-reveal class="author-body space-y-5">
+        <slot />
       </div>
 
       <dl data-reveal class="grid grid-cols-3 gap-4 md:grid-cols-1 md:gap-0">
@@ -55,3 +62,17 @@ const stats = [
     </div>
   </div>
 </section>
+
+<style>
+  /* Stile per i paragrafi del corpo markdown dell'autore. */
+  .author-body :global(p) {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+  }
+  @media (min-width: 640px) {
+    .author-body :global(p) {
+      font-size: 1.125rem;
+    }
+  }
+</style>

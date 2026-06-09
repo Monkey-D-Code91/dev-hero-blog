@@ -1,30 +1,27 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Navbar from "../components/Navbar.astro";
-import Hero from "../components/Hero.astro";
-import About from "../components/About.astro";
-import Experience from "../components/Experience.astro";
-import Skills from "../components/Skills.astro";
-import Contact from "../components/Contact.astro";
-import Footer from "../components/Footer.astro";
-import { useTranslations } from "../i18n/utils";
+/**
+ * Homepage IT — temporaneamente mostra il profilo di Marco Mariotti.
+ * Sarà sostituita dalla landing del blog in Fase C2.
+ */
+import { getCollection, render } from "astro:content";
+import AuthorLayout from "../layouts/AuthorLayout.astro";
 
-const t = useTranslations("it");
+// Carica il profilo IT di Marco dalla collection authors.
+const allAuthors = await getCollection("authors");
+const entry = allAuthors.find((a) => a.id === "it/marco-mariotti");
+if (!entry) throw new Error("Author it/marco-mariotti not found in collection");
+
+const { Content } = await render(entry);
+const author = entry.data;
 ---
 
-<BaseLayout
-  title={t.meta.title}
-  description={t.meta.description}
+<AuthorLayout
+  author={author}
   lang="it"
-  path="/"
+  itHref="/"
+  enHref="/en/"
+  title="Marco Mariotti — Software Engineer & Tech Lead"
+  description={author.subline}
 >
-  <Navbar />
-  <main id="main">
-    <Hero />
-    <About />
-    <Experience />
-    <Skills />
-    <Contact />
-  </main>
-  <Footer />
-</BaseLayout>
+  <Content />
+</AuthorLayout>

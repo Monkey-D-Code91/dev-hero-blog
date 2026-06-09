@@ -1,13 +1,13 @@
 import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
 import { getPublishedPosts, getSlugFromEntryId, getBlogPostUrl } from "../../utils/blog";
-import { SITE } from "../../config";
+import { BLOG } from "../../config";
 
 export async function GET(context: APIContext) {
   const posts = await getPublishedPosts("en");
 
   return rss({
-    title: `${SITE.name} — Blog`,
+    title: `${BLOG.name} — Blog`,
     description:
       "Thoughts on software engineering, leadership and telecommunications.",
     site: context.site!,

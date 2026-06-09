@@ -9,7 +9,7 @@ import BaseLayout from "../../../../layouts/BaseLayout.astro";
 import Navbar from "../../../../components/Navbar.astro";
 import Footer from "../../../../components/Footer.astro";
 import PostCard from "../../../../components/blog/PostCard.astro";
-import { SITE } from "../../../../config";
+import { BLOG } from "../../../../config";
 
 export async function getStaticPaths() {
   const lang = "en" as const;
@@ -50,8 +50,8 @@ interface Props {
 const { tag, posts } = Astro.props;
 const lang = "en" as const;
 
-const pageTitle = `#${tag} — Blog — ${SITE.name}`;
-const pageDescription = `All articles by ${SITE.name} tagged with "${tag}".`;
+const pageTitle = `#${tag} — Blog — ${BLOG.name}`;
+const pageDescription = `All ${BLOG.name} articles tagged with "${tag}".`;
 const articleCount =
   posts.length === 1 ? "1 article" : `${posts.length} articles`;
 ---
