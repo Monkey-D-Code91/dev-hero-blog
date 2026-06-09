@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Opzione 5 — "F" con sottolineatura "draft" (tratto a mano, in revisione) -->
+  <rect width="64" height="64" rx="14" fill="#0b1120" />
+  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" fill="none" stroke="#38bdf8" stroke-opacity="0.5" stroke-width="2" />
+  <text x="32" y="30" text-anchor="middle" dominant-baseline="central"
+        font-family="Inter, Helvetica, Arial, sans-serif" font-size="30" font-weight="800"
+        letter-spacing="-1" fill="#e6edf3">F</text>
+  <!-- sottolineatura ondulata, come una correzione di bozza -->
+  <path d="M18 46 q 4 -5 8 0 t 8 0 t 8 0" fill="none" stroke="#2dd4bf" stroke-width="2.5" stroke-linecap="round" />
+</svg>

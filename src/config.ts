@@ -1,6 +1,20 @@
 /**
- * Dati di profilo indipendenti dalla lingua.
- * >>> COMPILA QUI i valori reali (cerca i commenti "TODO"). <<<
+ * Brand del blog — identità del prodotto, indipendente dai singoli autori.
+ * Usato da navbar, footer, meta/OG e favicon.
+ */
+export const BLOG = {
+  name: "First Draft",
+  monogram: "FD",
+  domain: "thefirstdraft.dev",
+  // Path del logo scelto (in /public/logos). Da finalizzare in C0 dopo la scelta.
+  logo: "/logos/fd-2-caret.svg",
+} as const;
+
+/**
+ * NOTA (C0→C1): i dati di Marco qui sotto verranno migrati nella collection
+ * `authors` (src/content/authors/) e questa costante sarà rimossa quando le
+ * pagine profilo saranno data-driven. Mantenuta ora per non rompere la build
+ * della homepage one-page esistente.
  */
 export const SITE = {
   name: "Marco Mariotti",

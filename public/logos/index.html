@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>First Draft — opzioni logo</title>
+    <style>
+      :root { --bg:#0b1120; --surface:#111827; --border:#1e293b; --text:#e6edf3; --muted:#94a3b8; --accent:#38bdf8; }
+      * { box-sizing: border-box; }
+      body { margin:0; background:var(--bg); color:var(--text);
+             font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif; padding:48px; }
+      h1 { font-weight:700; letter-spacing:-.5px; }
+      p.sub { color:var(--muted); margin-top:-8px; }
+      .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px; margin-top:32px; }
+      .card { border:1px solid var(--border); background:var(--surface); border-radius:18px; padding:24px; }
+      .mark { display:flex; align-items:center; justify-content:center; height:120px; }
+      .mark img { width:88px; height:88px; }
+      .navbar { display:flex; align-items:center; gap:12px; margin-top:20px;
+                padding:12px 14px; border:1px solid var(--border); border-radius:12px; background:var(--bg); }
+      .navbar img { width:36px; height:36px; }
+      .navbar span { font-weight:600; letter-spacing:-.3px; }
+      .label { margin-top:16px; font-size:13px; color:var(--muted); text-align:center; }
+      .num { color:var(--accent); font-weight:700; }
+    </style>
+  </head>
+  <body>
+    <h1>First Draft — opzioni logo</h1>
+    <p class="sub">Ogni card mostra il marchio in grande e in versione navbar (badge 36px + wordmark).</p>
+    <div class="grid">
+      <div class="card">
+        <div class="mark"><img src="/logos/fd-1-monogram.svg" alt="Opzione 1" /></div>
+        <div class="navbar"><img src="/logos/fd-1-monogram.svg" alt="" /><span>First Draft</span></div>
+        <div class="label"><span class="num">1</span> · Monogramma FD</div>
+      </div>
+      <div class="card">
+        <div class="mark"><img src="/logos/fd-2-caret.svg" alt="Opzione 2" /></div>
+        <div class="navbar"><img src="/logos/fd-2-caret.svg" alt="" /><span>First Draft</span></div>
+        <div class="label"><span class="num">2</span> · Fd + caret di testo</div>
+      </div>
+      <div class="card">
+        <div class="mark"><img src="/logos/fd-3-nib.svg" alt="Opzione 3" /></div>
+        <div class="navbar"><img src="/logos/fd-3-nib.svg" alt="" /><span>First Draft</span></div>
+        <div class="label"><span class="num">3</span> · Pennino</div>
+      </div>
+      <div class="card">
+        <div class="mark"><img src="/logos/fd-4-pilcrow.svg" alt="Opzione 4" /></div>
+        <div class="navbar"><img src="/logos/fd-4-pilcrow.svg" alt="" /><span>First Draft</span></div>
+        <div class="label"><span class="num">4</span> · Segno di paragrafo ¶</div>
+      </div>
+      <div class="card">
+        <div class="mark"><img src="/logos/fd-5-wordmark.svg" alt="Opzione 5" /></div>
+        <div class="navbar"><img src="/logos/fd-5-wordmark.svg" alt="" /><span>First Draft</span></div>
+        <div class="label"><span class="num">5</span> · F con sottolineatura bozza</div>
+      </div>
+    </div>
+  </body>
+</html>
