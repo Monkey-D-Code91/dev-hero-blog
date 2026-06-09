@@ -77,21 +77,21 @@
    per il tema scuro (sfondo navy, accento azzurro).
    Usa la variante `prose-dark` definita qui.
    ============================================================ */
-@layer base {
+@layer utilities {
   .prose-dark {
-    --tw-prose-body: var(--color-muted);
-    --tw-prose-headings: var(--color-text);
-    --tw-prose-lead: var(--color-muted);
+    --tw-prose-body: #c8d6e4;
+    --tw-prose-headings: #f0f6fc;
+    --tw-prose-lead: #a8bdd0;
     --tw-prose-links: var(--color-accent);
-    --tw-prose-bold: var(--color-text);
-    --tw-prose-counters: var(--color-muted);
-    --tw-prose-bullets: var(--color-border);
+    --tw-prose-bold: #e6edf3;
+    --tw-prose-counters: #7090a8;
+    --tw-prose-bullets: #5a7a94;
     --tw-prose-hr: var(--color-border);
-    --tw-prose-quotes: var(--color-text);
+    --tw-prose-quotes: #e6edf3;
     --tw-prose-quote-borders: var(--color-accent);
-    --tw-prose-captions: var(--color-muted);
+    --tw-prose-captions: #7090a8;
     --tw-prose-code: var(--color-accent-2);
-    --tw-prose-pre-code: var(--color-text);
+    --tw-prose-pre-code: #c8d6e4;
     --tw-prose-pre-bg: var(--color-surface-2);
     --tw-prose-th-borders: var(--color-border);
     --tw-prose-td-borders: var(--color-border);
