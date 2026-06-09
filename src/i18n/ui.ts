@@ -141,9 +141,9 @@ export const ui = {
           "Articoli su tecnologia, AI e crescita professionale — scritti da chi lavora nel settore.",
       },
       hero: {
-        badge: "Blog tech & AI",
+        badge: "Tech, Humans & AI",
         headline: "Le idee al loro stato grezzo.",
-        lead: "Articoli su tecnologia, AI e crescita delle persone — scritti da chi lavora nel settore. Visioni diverse su un mondo che cambia veloce.",
+        lead: "Articoli su tecnologia, AI e crescita delle persone, scritti da chi lavora nel settore. Visioni diverse su un mondo che cambia veloce.",
         ctaRead: "Inizia a leggere",
         ctaAuthors: "Gli autori",
       },
@@ -304,9 +304,9 @@ export const ui = {
           "Articles on technology, AI and professional growth — written by people who work in the field.",
       },
       hero: {
-        badge: "Tech & AI Blog",
+        badge: "Tech, Humans & AI",
         headline: "Ideas in their raw state.",
-        lead: "Articles on technology, AI and human growth — written by people in the field. Different perspectives on a fast-changing world.",
+        lead: "Articles on technology, AI and human growth, written by people in the field. Different perspectives on a fast-changing world.",
         ctaRead: "Start reading",
         ctaAuthors: "The authors",
       },

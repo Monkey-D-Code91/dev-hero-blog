@@ -23,18 +23,14 @@ const blogHref = lang === "it" ? "/blog/" : "/en/blog/";
   </div>
 
   <div class="mx-auto max-w-5xl px-6 py-24 text-center md:py-36">
-    <!-- Marchio: monogramma "Fd" + caret -->
+    <!-- Marchio: logo SVG -->
     <div class="landing-enter mb-10 flex justify-center">
-      <div
-        class="relative flex h-24 w-24 items-center justify-center rounded-2xl border border-accent/40 bg-bg/70 text-5xl font-bold text-accent shadow-[0_0_48px_-8px_#38bdf8] backdrop-blur"
+      <img
+        src={BLOG.logo}
+        alt=""
         aria-hidden="true"
-      >
-        <!-- "Fd" text + caret bar -->
-        <span class="relative pr-3 tracking-tighter">Fd</span>
-        <span
-          class="absolute right-[22px] top-[20px] h-[34px] w-[4px] rounded-sm bg-accent"
-        ></span>
-      </div>
+        class="h-24 w-24 rounded-2xl shadow-[0_0_48px_-8px_#38bdf8]"
+      />
     </div>
 
     <!-- Badge + headline + lead -->

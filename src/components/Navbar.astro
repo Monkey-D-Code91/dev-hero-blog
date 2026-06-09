@@ -71,10 +71,12 @@ const links = [
       class="group flex items-center gap-2.5"
       aria-label={BLOG.name}
     >
-      <span
-        class="flex h-9 w-9 items-center justify-center rounded-lg border border-accent/40 bg-surface-2 text-sm font-bold text-accent transition-colors group-hover:border-accent"
-        aria-hidden="true">{BLOG.monogram}</span
-      >
+      <img
+        src={BLOG.logo}
+        alt=""
+        aria-hidden="true"
+        class="h-9 w-9 rounded-lg"
+      />
       <span class="hidden font-semibold tracking-tight sm:inline"
         >{BLOG.name}</span
       >
