@@ -18,10 +18,12 @@ const year = new Date().getFullYear();
     class="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 py-10 sm:flex-row sm:justify-between"
   >
     <div class="flex items-center gap-2.5">
-      <span
-        class="flex h-8 w-8 items-center justify-center rounded-md border border-accent/40 bg-surface-2 text-xs font-bold text-accent"
-        aria-hidden="true">{BLOG.monogram}</span
-      >
+      <img
+        src={BLOG.logo}
+        alt=""
+        aria-hidden="true"
+        class="h-8 w-8 rounded-md"
+      />
       <span class="text-sm text-muted">
         © {year} {BLOG.name}. {t.footer.rights}
       </span>
