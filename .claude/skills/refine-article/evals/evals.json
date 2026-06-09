@@ -1,0 +1,23 @@
+{
+  "skill_name": "refine-article",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Ho questa bozza di articolo e voglio raffinare il tono. Il file è in evals/input-articles/colloquio-tecnico.md nel progetto First Draft. Voglio un tono professionale.",
+      "expected_output": "La skill legge l'articolo, fa un'analisi iniziale, poi propone una versione con tono professionale mantenendo tutti i fatti e le argomentazioni originali. Il linguaggio colloquiale ('fa schifo', 'tant'è', 'googleresti') viene sostituito con registro più formale. Il contenuto rimane invariato.",
+      "files": [".claude/skills/refine-article/evals/input-articles/colloquio-tecnico.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "Puoi rifinire questo articolo sulla produttività? Lo trovi in evals/input-articles/produttivita-sviluppatori.md nel progetto First Draft. Voglio che sia più informale e vicino al lettore, tipo come se parlassi con un collega.",
+      "expected_output": "La skill legge l'articolo accademico/secco, propone una versione informale/conversazionale. Il gergo burocratico ('vettori di incremento', 'overhead cognitivo', 'parimenti') viene sostituito con linguaggio diretto. La struttura e i concetti restano gli stessi.",
+      "files": [".claude/skills/refine-article/evals/input-articles/produttivita-sviluppatori.md"]
+    },
+    {
+      "id": 3,
+      "prompt": "Rifinisci questo articolo sulla code review (.claude/skills/refine-article/evals/input-articles/code-review.md nel progetto First Draft) con tono professionale ma diretto. Quando sono soddisfatto voglio pubblicarlo — author key: marco-mariotti.",
+      "expected_output": "La skill esegue il flow completo: analisi, raffinamento tono, iterazione (l'autore approva), poi raccolta metadati (tags suggeriti, data), generazione slug IT e EN, traduzione in inglese, salvataggio di entrambi i file .md nelle folder corrette del blog con frontmatter completo.",
+      "files": [".claude/skills/refine-article/evals/input-articles/code-review.md"]
+    }
+  ]
+}
