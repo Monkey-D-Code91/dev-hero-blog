@@ -1,0 +1,48 @@
+{
+  "skill_name": "add-author",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "aggiungi un nuovo autore al blog. Si chiama Giulia Russo, è una UX Designer con 4 anni di esperienza. Vuole inserire i dati in italiano.",
+      "expected_output": "La skill raccoglie i dati in italiano interattivamente, auto-traduce in inglese, mostra un'anteprima, genera entrambi i file IT e EN con schema valido, esegue astro build.",
+      "files": [],
+      "assertions": [
+        {"text": "La skill chiede di scegliere tra IT e EN come lingua di input"},
+        {"text": "Viene generato src/content/authors/it/giulia-russo.md con authorKey: giulia-russo"},
+        {"text": "Viene generato src/content/authors/en/giulia-russo.md con authorKey: giulia-russo"},
+        {"text": "I campi fissi (name, role, monogram, authorKey, stats) sono identici in entrambi i file"},
+        {"text": "Il file IT ha i campi localizzati (badge, headline, subline, aboutLead) in italiano"},
+        {"text": "Il file EN ha i campi localizzati tradotti in inglese"},
+        {"text": "Viene mostrata un'anteprima della traduzione prima di scrivere i file"},
+        {"text": "astro build viene eseguito e riporta successo"}
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "I want to add a new author to the First Draft blog. His name is Luca Ferretti, he's a Backend Engineer with 8 years of experience. He wants to provide data in English.",
+      "expected_output": "La skill raccoglie i dati in inglese, traduce i campi localizzati in italiano, mostra anteprima, genera entrambi i file.",
+      "files": [],
+      "assertions": [
+        {"text": "La skill supporta inglese come lingua di input"},
+        {"text": "Viene generato it/luca-ferretti.md con campi in italiano"},
+        {"text": "Viene generato en/luca-ferretti.md con campi in inglese"},
+        {"text": "I campi invarianti sono identici in entrambi i file"},
+        {"text": "Viene mostrata un'anteprima della traduzione italiana prima di scrivere"},
+        {"text": "Il summary finale include il comando git e gli URL del profilo"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "voglio aggiungere il profilo di Sara Conti, copywriter freelance. Niente esperienza lavorativa pregressa da inserire e nessuna foto, solo il monogramma.",
+      "expected_output": "La skill gestisce correttamente liste vuote (experience: [], skills: []), genera file validi, astro build passa.",
+      "files": [],
+      "assertions": [
+        {"text": "Vengono generati entrambi i file per sara-conti"},
+        {"text": "I file contengono experience: [] e skills: [] (array vuoti YAML validi)"},
+        {"text": "Nessun campo avatar nei file — solo monogram SC"},
+        {"text": "Il YAML è sintatticamente valido e astro build passa"},
+        {"text": "Il monogramma SC viene suggerito automaticamente dal nome Sara Conti"}
+      ]
+    }
+  ]
+}
