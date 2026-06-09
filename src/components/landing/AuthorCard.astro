@@ -1,0 +1,74 @@
+---
+import { useTranslations } from "../../i18n/utils";
+import type { Lang } from "../../i18n/ui";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  name: string;
+  role: string;
+  badge: string;
+  monogram: string;
+  avatar?: ImageMetadata;
+  avatarAlt?: string;
+  profileHref: string;
+  lang: Lang;
+}
+
+const { name, role, badge, monogram, avatar, avatarAlt, profileHref, lang } =
+  Astro.props;
+const t = useTranslations(lang);
+---
+
+<a
+  href={profileHref}
+  class="group flex flex-col items-center rounded-2xl border border-border bg-surface-2 p-8 text-center transition-colors hover:border-accent/40"
+  aria-label={`${name} — ${t.landing.authors.viewProfile}`}
+>
+  <!-- Avatar o monogramma -->
+  <div
+    class="flex h-20 w-20 items-center justify-center rounded-xl border border-accent/30 bg-bg text-3xl font-bold text-accent shadow-[0_0_24px_-6px_#38bdf8] transition-shadow group-hover:shadow-[0_0_32px_-4px_#38bdf8]"
+    aria-hidden="true"
+  >
+    {
+      avatar ? (
+        <Image
+          src={avatar}
+          alt={avatarAlt ?? name}
+          width={80}
+          height={80}
+          class="h-full w-full rounded-xl object-cover"
+        />
+      ) : (
+        monogram
+      )
+    }
+  </div>
+
+  <!-- Badge/ruolo secondario -->
+  <span class="mt-4 text-xs font-medium uppercase tracking-wider text-accent-2">
+    {badge}
+  </span>
+
+  <!-- Nome -->
+  <h3
+    class="mt-1.5 text-lg font-semibold text-text transition-colors group-hover:text-accent"
+  >
+    {name}
+  </h3>
+
+  <!-- Ruolo -->
+  <p class="mt-1 text-sm text-muted">{role}</p>
+
+  <!-- CTA visuale -->
+  <span
+    class="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-muted transition-colors group-hover:text-accent"
+    aria-hidden="true"
+  >
+    {t.landing.authors.viewProfile}
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12" />
+      <polyline points="12 5 19 12 12 19" />
+    </svg>
+  </span>
+</a>

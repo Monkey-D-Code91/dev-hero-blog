@@ -1,0 +1,56 @@
+---
+import { useTranslations } from "../../i18n/utils";
+import type { Lang } from "../../i18n/ui";
+import type { CollectionEntry } from "astro:content";
+import AuthorCard from "./AuthorCard.astro";
+
+interface Props {
+  /** Entry IT o EN degli autori (già filtrate per lingua). */
+  authors: CollectionEntry<"authors">[];
+  lang: Lang;
+}
+
+const { authors, lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Costruisce lo slug e il path del profilo per ciascun autore.
+// L'ID entry è "it/marco-mariotti" o "en/marco-mariotti".
+const authorItems = authors.map((entry) => {
+  const slug = entry.id.split("/").slice(1).join("/");
+  const profileHref =
+    lang === "it" ? `/autori/${slug}/` : `/en/authors/${slug}/`;
+  return { data: entry.data, profileHref };
+});
+---
+
+<section id="authors" class="scroll-mt-20 border-t border-border bg-surface py-20 md:py-24">
+  <div class="mx-auto max-w-5xl px-6">
+    <header data-reveal>
+      <p class="text-sm font-semibold uppercase tracking-widest text-accent">
+        {t.landing.authors.heading}
+      </p>
+    </header>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {
+        authorItems.map((item, i) => (
+          <div
+            data-reveal
+            data-reveal-delay={i > 0 ? String(Math.min(i, 3)) : undefined}
+          >
+            <AuthorCard
+              name={item.data.name}
+              role={item.data.role}
+              badge={item.data.badge}
+              monogram={item.data.monogram}
+              avatar={item.data.avatar}
+              avatarAlt={item.data.avatarAlt}
+              profileHref={item.profileHref}
+              lang={lang}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

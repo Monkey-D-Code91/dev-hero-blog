@@ -1,27 +1,48 @@
 ---
-/**
- * Homepage EN — temporaneamente mostra il profilo di Marco Mariotti.
- * Sarà sostituita dalla landing del blog in Fase C2.
- */
-import { getCollection, render } from "astro:content";
-import AuthorLayout from "../../layouts/AuthorLayout.astro";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import LandingHero from "../../components/landing/LandingHero.astro";
+import RecentPosts from "../../components/landing/RecentPosts.astro";
+import AuthorsShowcase from "../../components/landing/AuthorsShowcase.astro";
+import { useTranslations } from "../../i18n/utils";
+import { getPublishedPosts, getSlugFromEntryId } from "../../utils/blog";
+import { getReadingTime } from "../../utils/readingTime";
 
-// Carica il profilo EN di Marco dalla collection authors.
+const t = useTranslations("en");
+
+// Latest 3 EN articles
+const allPosts = await getPublishedPosts("en");
+const recentPosts = allPosts.slice(0, 3).map((p) => ({
+  title: p.data.title,
+  description: p.data.description,
+  pubDate: p.data.pubDate,
+  slug: getSlugFromEntryId(p.id),
+  tags: p.data.tags,
+  readingTime: getReadingTime(p.body, "en"),
+  cover: p.data.cover,
+  coverAlt: p.data.coverAlt,
+}));
+
+// EN authors for showcase
 const allAuthors = await getCollection("authors");
-const entry = allAuthors.find((a) => a.id === "en/marco-mariotti");
-if (!entry) throw new Error("Author en/marco-mariotti not found in collection");
-
-const { Content } = await render(entry);
-const author = entry.data;
+const enAuthors = allAuthors.filter((a) => a.id.startsWith("en/"));
 ---
 
-<AuthorLayout
-  author={author}
+<BaseLayout
+  title={t.landing.meta.title}
+  description={t.landing.meta.description}
   lang="en"
-  itHref="/"
-  enHref="/en/"
-  title="Marco Mariotti — Software Engineer & Tech Lead"
-  description={author.subline}
+  path="/en/"
+  hreflangIt="/"
+  hreflangEn="/en/"
 >
-  <Content />
-</AuthorLayout>
+  <Navbar showSections={false} />
+  <main id="main">
+    <LandingHero lang="en" />
+    <RecentPosts posts={recentPosts} lang="en" />
+    <AuthorsShowcase authors={enAuthors} lang="en" />
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,57 @@
+---
+import { useTranslations } from "../../i18n/utils";
+import type { Lang } from "../../i18n/ui";
+import type { ProcessedPost } from "../../utils/blog";
+import PostCard from "../blog/PostCard.astro";
+
+interface Props {
+  posts: ProcessedPost[];
+  lang: Lang;
+}
+
+const { posts, lang } = Astro.props;
+const t = useTranslations(lang);
+
+const blogHref = lang === "it" ? "/blog/" : "/en/blog/";
+---
+
+<section class="border-t border-border py-20 md:py-24">
+  <div class="mx-auto max-w-5xl px-6">
+    <header data-reveal class="flex items-end justify-between gap-4">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-widest text-accent">
+          {t.landing.recentPosts.heading}
+        </p>
+      </div>
+      {
+        posts.length > 0 && (
+          <a
+            href={blogHref}
+            class="shrink-0 text-sm text-muted transition-colors hover:text-accent"
+          >
+            {t.landing.recentPosts.cta} →
+          </a>
+        )
+      }
+    </header>
+
+    {
+      posts.length === 0 ? (
+        <p data-reveal class="mt-10 text-muted">
+          {t.landing.recentPosts.empty}
+        </p>
+      ) : (
+        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post, i) => (
+            <div
+              data-reveal
+              data-reveal-delay={i > 0 ? String(Math.min(i, 3)) : undefined}
+            >
+              <PostCard {...post} lang={lang} />
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>

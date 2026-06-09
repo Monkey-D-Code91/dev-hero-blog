@@ -1,0 +1,109 @@
+---
+import { useTranslations } from "../../i18n/utils";
+import type { Lang } from "../../i18n/ui";
+import { BLOG } from "../../config";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const blogHref = lang === "it" ? "/blog/" : "/en/blog/";
+---
+
+<section class="relative overflow-hidden">
+  <!-- Glow radiale — stessa logica del profilo hero -->
+  <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+    <div
+      class="absolute left-1/2 top-[-8%] h-[520px] w-[720px] -translate-x-1/2 rounded-full opacity-35 blur-3xl"
+      style="background: radial-gradient(circle, #38bdf8 0%, transparent 58%);"
+    ></div>
+  </div>
+
+  <div class="mx-auto max-w-5xl px-6 py-24 text-center md:py-36">
+    <!-- Marchio: monogramma "Fd" + caret -->
+    <div class="landing-enter mb-10 flex justify-center">
+      <div
+        class="relative flex h-24 w-24 items-center justify-center rounded-2xl border border-accent/40 bg-bg/70 text-5xl font-bold text-accent shadow-[0_0_48px_-8px_#38bdf8] backdrop-blur"
+        aria-hidden="true"
+      >
+        <!-- "Fd" text + caret bar -->
+        <span class="relative pr-3 tracking-tighter">Fd</span>
+        <span
+          class="absolute right-[22px] top-[20px] h-[34px] w-[4px] rounded-sm bg-accent"
+        ></span>
+      </div>
+    </div>
+
+    <!-- Badge + headline + lead -->
+    <div class="landing-enter" style="animation-delay: 0.1s;">
+      <span
+        class="inline-flex items-center gap-2 rounded-full border border-border bg-surface-2 px-3 py-1 text-xs font-medium text-muted"
+      >
+        <span class="h-1.5 w-1.5 rounded-full bg-accent-2"></span>
+        {t.landing.hero.badge}
+      </span>
+
+      <h1
+        class="mt-6 text-5xl font-bold tracking-tight text-text sm:text-6xl lg:text-7xl"
+      >
+        {BLOG.name}
+      </h1>
+
+      <p
+        class="mx-auto mt-4 text-xl font-medium text-accent sm:text-2xl"
+      >
+        {t.landing.hero.headline}
+      </p>
+
+      <p
+        class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg"
+      >
+        {t.landing.hero.lead}
+      </p>
+    </div>
+
+    <!-- CTAs -->
+    <div
+      class="landing-enter mt-10 flex flex-wrap items-center justify-center gap-3"
+      style="animation-delay: 0.2s;"
+    >
+      <a
+        href={blogHref}
+        class="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-bg transition-opacity hover:opacity-90"
+      >
+        {t.landing.hero.ctaRead}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
+      </a>
+      <a
+        href="#authors"
+        class="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-semibold text-text transition-colors hover:border-accent hover:text-accent"
+      >
+        {t.landing.hero.ctaAuthors}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .landing-enter {
+      animation: landing-fade-up 0.7s ease both;
+    }
+    @keyframes landing-fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+</style>
