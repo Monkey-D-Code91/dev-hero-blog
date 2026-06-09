@@ -35,7 +35,7 @@ const processedPosts = posts.map((p) => ({
   hreflangIt="/blog/"
   hreflangEn="/en/blog/"
 >
-  <Navbar itHref="/blog/" enHref="/en/blog/" />
+  <Navbar itHref="/blog/" enHref="/en/blog/" showSections={false} />
   <main id="main">
     <BlogList posts={processedPosts} />
   </main>

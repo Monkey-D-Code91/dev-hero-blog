@@ -45,6 +45,7 @@ const anchorBase = sectionBase ?? homeBase;
 // Link Blog: visibile solo se esiste almeno un articolo pubblicato.
 const posts = await getPublishedPosts(lang);
 const blogHref = lang === "it" ? "/blog/" : "/en/blog/";
+const authorsHref = lang === "it" ? "/autori/" : "/en/authors/";
 
 const links = [
   ...(showSections
@@ -56,6 +57,7 @@ const links = [
       ]
     : []),
   ...(posts.length > 0 ? [{ href: blogHref, label: t.blog.nav }] : []),
+  { href: authorsHref, label: t.nav.authors },
 ];
 ---
 

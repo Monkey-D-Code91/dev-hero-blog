@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import AuthorsShowcase from "../../components/landing/AuthorsShowcase.astro";
+import { BLOG } from "../../config";
+
+const allAuthors = await getCollection("authors");
+const itAuthors = allAuthors.filter((a) => a.id.startsWith("it/"));
+
+const title = `Autori — ${BLOG.name}`;
+const description = `Tutti gli autori di ${BLOG.name}.`;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  lang="it"
+  path="/autori/"
+  hreflangIt="/autori/"
+  hreflangEn="/en/authors/"
+>
+  <Navbar itHref="/autori/" enHref="/en/authors/" showSections={false} />
+  <main id="main">
+    <AuthorsShowcase authors={itAuthors} lang="it" />
+  </main>
+  <Footer />
+</BaseLayout>
