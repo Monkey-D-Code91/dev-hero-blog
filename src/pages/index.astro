@@ -7,13 +7,14 @@ import LandingHero from "../components/landing/LandingHero.astro";
 import RecentPosts from "../components/landing/RecentPosts.astro";
 import AuthorsShowcase from "../components/landing/AuthorsShowcase.astro";
 import { useTranslations } from "../i18n/utils";
-import { getPublishedPosts, getSlugFromEntryId } from "../utils/blog";
+import { getPublishedPosts, getSlugFromEntryId, buildAuthorNameMap } from "../utils/blog";
 import { getReadingTime } from "../utils/readingTime";
 
 const t = useTranslations("it");
 
 // Ultimi 3 articoli IT
 const allPosts = await getPublishedPosts("it");
+const authorMap = await buildAuthorNameMap("it");
 const recentPosts = allPosts.slice(0, 3).map((p) => ({
   title: p.data.title,
   description: p.data.description,
@@ -23,6 +24,8 @@ const recentPosts = allPosts.slice(0, 3).map((p) => ({
   readingTime: getReadingTime(p.body, "it"),
   cover: p.data.cover,
   coverAlt: p.data.coverAlt,
+  authorKey: p.data.author,
+  authorName: authorMap.get(p.data.author) ?? p.data.author,
 }));
 
 // Autori IT per la showcase

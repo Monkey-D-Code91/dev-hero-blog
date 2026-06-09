@@ -170,6 +170,9 @@ export const ui = {
       commentsHeading: "Commenti",
       commentsPlaceholder: "I commenti saranno disponibili dopo la configurazione di Giscus.",
       tagHeading: (tag: string) => `Articoli con tag: ${tag}`,
+      byAuthor: "di",
+      authorPostsHeading: (name: string) => `Articoli di ${name}`,
+      authorPostsEmpty: "Nessun articolo ancora pubblicato.",
     },
   },
 
@@ -329,6 +332,9 @@ export const ui = {
       commentsHeading: "Comments",
       commentsPlaceholder: "Comments will be available once Giscus is configured.",
       tagHeading: (tag: string) => `Articles tagged: ${tag}`,
+      byAuthor: "by",
+      authorPostsHeading: (name: string) => `Articles by ${name}`,
+      authorPostsEmpty: "No articles published yet.",
     },
   },
 } as const;

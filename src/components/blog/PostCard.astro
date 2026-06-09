@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import type { Lang } from "../../i18n/ui";
 import TagPill from "./TagPill.astro";
-import { formatDate, getBlogPostUrl } from "../../utils/blog";
+import { formatDate, getBlogPostUrl, getAuthorUrl } from "../../utils/blog";
 
 interface Props {
   title: string;
@@ -15,10 +15,14 @@ interface Props {
   readingTime: string;
   cover?: ImageMetadata;
   coverAlt?: string;
+  authorKey: string;
+  authorName: string;
 }
 
-const { title, description, pubDate, slug, tags, lang, readingTime, cover, coverAlt } =
+const { title, description, pubDate, slug, tags, lang, readingTime, cover, coverAlt, authorKey, authorName } =
   Astro.props;
+
+const authorUrl = getAuthorUrl(authorKey, lang);
 
 const url = getBlogPostUrl(lang, slug);
 const dateStr = formatDate(pubDate, lang);
@@ -55,8 +59,12 @@ const titleId = `card-title-${slug}`;
   }
 
   <div class="flex flex-col flex-1 p-6">
-    <!-- Meta: data + tempo di lettura -->
+    <!-- Byline autore -->
     <p class="text-xs text-muted">
+      <a href={authorUrl} class="font-medium text-accent/80 hover:text-accent transition-colors">
+        {authorName}
+      </a>
+      <span class="mx-1.5 opacity-50" aria-hidden="true">·</span>
       <time datetime={pubDate.toISOString()}>{dateStr}</time>
       {readingTime && <span class="mx-1.5 opacity-50" aria-hidden="true">·</span>}
       {readingTime && <span aria-label={lang === "it" ? `Tempo di lettura: ${readingTime}` : `Reading time: ${readingTime}`}>{readingTime}</span>}

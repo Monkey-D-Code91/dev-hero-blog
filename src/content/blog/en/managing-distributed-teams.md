@@ -3,6 +3,7 @@ title: "How to manage a distributed team across different countries"
 description: "Practical reflections on the day-to-day management of a team spanning Italy and Albania: communication, trust, processes and tooling."
 pubDate: 2026-05-15
 translationKey: "managing-distributed-teams"
+author: "marco-mariotti"
 tags: ["leadership", "team", "management"]
 draft: false
 ---

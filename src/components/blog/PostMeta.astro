@@ -1,7 +1,7 @@
 ---
 import type { Lang } from "../../i18n/ui";
 import TagPill from "./TagPill.astro";
-import { formatDate } from "../../utils/blog";
+import { formatDate, getAuthorUrl } from "../../utils/blog";
 
 interface Props {
   pubDate: Date;
@@ -9,18 +9,46 @@ interface Props {
   readingTime: string;
   tags: string[];
   lang: Lang;
+  authorKey: string;
+  authorName: string;
 }
 
-const { pubDate, updatedDate, readingTime, tags, lang } = Astro.props;
+const { pubDate, updatedDate, readingTime, tags, lang, authorKey, authorName } = Astro.props;
 const published = formatDate(pubDate, lang);
 const updated = updatedDate ? formatDate(updatedDate, lang) : null;
 const publishedLabel = lang === "it" ? "Pubblicato il" : "Published on";
 const updatedLabel = lang === "it" ? "Aggiornato il" : "Updated on";
 const readingTimeLabel = lang === "it" ? "Tempo di lettura:" : "Reading time:";
 const tagsLabel = lang === "it" ? "Tag:" : "Tags:";
+const authorLabel = lang === "it" ? "Autore:" : "Author:";
+const authorUrl = getAuthorUrl(authorKey, lang);
 ---
 
 <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted">
+  <!-- Autore -->
+  <span class="flex items-center gap-1.5">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+    <span class="sr-only">{authorLabel}</span>
+    <a href={authorUrl} class="font-medium text-text hover:text-accent transition-colors">
+      {authorName}
+    </a>
+  </span>
+
+  <span class="opacity-40" aria-hidden="true">·</span>
+
   <!-- Data di pubblicazione -->
   <span class="flex items-center gap-1.5">
     <svg

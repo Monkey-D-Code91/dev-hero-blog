@@ -10,6 +10,7 @@ import {
   getAlternatePost,
   getSlugFromEntryId,
   getBlogPostUrl,
+  buildAuthorNameMap,
 } from "../../../utils/blog";
 import { getReadingTime } from "../../../utils/readingTime";
 
@@ -37,6 +38,11 @@ const altPost = await getAlternatePost(post.data.translationKey, "it");
 const hreflangIt = altPost
   ? getBlogPostUrl("it", getSlugFromEntryId(altPost.id))
   : "/blog/";
+
+// Autore
+const authorMap = await buildAuthorNameMap(lang);
+const authorKey = post.data.author;
+const authorName = authorMap.get(authorKey) ?? authorKey;
 ---
 
 <BaseLayout
@@ -59,6 +65,8 @@ const hreflangIt = altPost
       readingTime={readingTime}
       cover={post.data.cover}
       coverAlt={post.data.coverAlt}
+      authorKey={authorKey}
+      authorName={authorName}
     >
       <Content />
     </BlogPostLayout>

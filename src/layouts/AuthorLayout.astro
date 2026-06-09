@@ -15,6 +15,7 @@ import Experience from "../components/Experience.astro";
 import Skills from "../components/Skills.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
+import AuthorPosts from "../components/blog/AuthorPosts.astro";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -56,6 +57,7 @@ const canonicalPath = lang === "it" ? itHref : enHref;
     </About>
     <Experience experience={author.experience} />
     <Skills skills={author.skills} />
+    <AuthorPosts authorKey={author.authorKey} authorName={author.name} lang={lang} />
     <Contact author={author} />
   </main>
   <Footer linkedin={author.links.linkedin} />

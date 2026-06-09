@@ -15,6 +15,8 @@ interface Props {
   readingTime: string;
   cover?: ImageMetadata;
   coverAlt?: string;
+  authorKey: string;
+  authorName: string;
 }
 
 const {
@@ -26,6 +28,8 @@ const {
   readingTime,
   cover,
   coverAlt,
+  authorKey,
+  authorName,
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -78,6 +82,8 @@ const backLabel = t.blog.backToBlog;
           readingTime={readingTime}
           tags={tags}
           lang={lang}
+          authorKey={authorKey}
+          authorName={authorName}
         />
       </div>
     </header>

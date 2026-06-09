@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navbar from "../../components/Navbar.astro";
 import BlogList from "../../components/blog/BlogList.astro";
 import Footer from "../../components/Footer.astro";
-import { getPublishedPosts, getSlugFromEntryId } from "../../utils/blog";
+import { getPublishedPosts, getSlugFromEntryId, buildAuthorNameMap } from "../../utils/blog";
 import { getReadingTime } from "../../utils/readingTime";
 import { useTranslations } from "../../i18n/utils";
 
@@ -11,6 +11,8 @@ const lang = "it" as const;
 const t = useTranslations(lang);
 
 const posts = await getPublishedPosts(lang);
+const authorMap = await buildAuthorNameMap(lang);
+
 const processedPosts = posts.map((p) => ({
   title: p.data.title,
   description: p.data.description,
@@ -20,6 +22,8 @@ const processedPosts = posts.map((p) => ({
   readingTime: getReadingTime(p.body, lang),
   cover: p.data.cover,
   coverAlt: p.data.coverAlt,
+  authorKey: p.data.author,
+  authorName: authorMap.get(p.data.author) ?? p.data.author,
 }));
 ---
 

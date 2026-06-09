@@ -16,6 +16,8 @@ const blog = defineCollection({
       coverAlt: z.string().optional(),
       /** I draft sono esclusi dalla build di produzione. */
       draft: z.boolean().default(false),
+      /** authorKey dell'autore — chiave condivisa con la collection `authors`. */
+      author: z.string(),
     }),
 });
 

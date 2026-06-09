@@ -3,6 +3,7 @@ title: "Come gestire un team distribuito tra paesi diversi"
 description: "Riflessioni pratiche sulla gestione quotidiana di un team tra Italia e Albania: comunicazione, fiducia, processi e strumenti."
 pubDate: 2026-05-15
 translationKey: "managing-distributed-teams"
+author: "marco-mariotti"
 tags: ["leadership", "team", "gestione"]
 draft: false
 ---

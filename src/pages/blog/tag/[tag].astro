@@ -3,6 +3,7 @@ import type { ProcessedPost } from "../../../utils/blog";
 import {
   getPublishedPosts,
   getSlugFromEntryId,
+  buildAuthorNameMap,
 } from "../../../utils/blog";
 import { getReadingTime } from "../../../utils/readingTime";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
@@ -14,6 +15,7 @@ import { BLOG } from "../../../config";
 export async function getStaticPaths() {
   const lang = "it" as const;
   const allPosts = await getPublishedPosts(lang);
+  const authorMap = await buildAuthorNameMap(lang);
 
   // Costruisce la mappa tag → articoli
   const tagMap = new Map<string, typeof allPosts>();
@@ -37,6 +39,8 @@ export async function getStaticPaths() {
         readingTime: getReadingTime(p.body, lang),
         cover: p.data.cover,
         coverAlt: p.data.coverAlt,
+        authorKey: p.data.author,
+        authorName: authorMap.get(p.data.author) ?? p.data.author,
       })) as ProcessedPost[],
     },
   }));

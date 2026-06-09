@@ -10,6 +10,7 @@ import {
   getAlternatePost,
   getSlugFromEntryId,
   getBlogPostUrl,
+  buildAuthorNameMap,
 } from "../../utils/blog";
 import { getReadingTime } from "../../utils/readingTime";
 
@@ -38,10 +39,10 @@ const hreflangEn = altPost
   ? getBlogPostUrl("en", getSlugFromEntryId(altPost.id))
   : "/en/blog/";
 
-// OG image: usa la cover dell'articolo se disponibile, altrimenti quella di default
-const ogImage = post.data.cover
-  ? undefined // verrà usato il default (non abbiamo ancora un URL assoluto per la cover)
-  : undefined;
+// Autore
+const authorMap = await buildAuthorNameMap(lang);
+const authorKey = post.data.author;
+const authorName = authorMap.get(authorKey) ?? authorKey;
 ---
 
 <BaseLayout
@@ -64,6 +65,8 @@ const ogImage = post.data.cover
       readingTime={readingTime}
       cover={post.data.cover}
       coverAlt={post.data.coverAlt}
+      authorKey={authorKey}
+      authorName={authorName}
     >
       <Content />
     </BlogPostLayout>

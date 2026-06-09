@@ -14,6 +14,8 @@ export interface ProcessedPost {
   readingTime: string;
   cover?: ImageMetadata;
   coverAlt?: string;
+  authorKey: string;
+  authorName: string;
 }
 
 // ──────────────────────────────────────────────
@@ -36,9 +38,29 @@ export function getBlogPostUrl(lang: Lang, slug: string): string {
   return lang === "it" ? `/blog/${slug}/` : `/en/blog/${slug}/`;
 }
 
+/** Costruisce l'URL del profilo autore data la lingua e l'authorKey. */
+export function getAuthorUrl(authorKey: string, lang: Lang): string {
+  return lang === "it" ? `/autori/${authorKey}/` : `/en/authors/${authorKey}/`;
+}
+
 // ──────────────────────────────────────────────
 // Query collection
 // ──────────────────────────────────────────────
+
+/**
+ * Restituisce una mappa authorKey → name per tutti gli autori della lingua data.
+ * Usata nei template per risolvere il nome dell'autore di un post senza N query.
+ */
+export async function buildAuthorNameMap(lang: Lang): Promise<Map<string, string>> {
+  const authors = await getCollection("authors", (entry) =>
+    entry.id.startsWith(`${lang}/`)
+  );
+  const map = new Map<string, string>();
+  for (const a of authors) {
+    map.set(a.data.authorKey, a.data.name);
+  }
+  return map;
+}
 
 /**
  * Recupera gli articoli pubblicati per una lingua, ordinati per pubDate decrescente.
