@@ -18,6 +18,7 @@ import Footer from "../components/Footer.astro";
 import AuthorPosts from "../components/blog/AuthorPosts.astro";
 import type { CollectionEntry } from "astro:content";
 import { buildPersonSchema } from "../utils/structuredData";
+import { BLOG } from "../config";
 
 interface Props {
   author: CollectionEntry<"authors">["data"];
@@ -34,6 +35,15 @@ const { author, lang, itHref, enHref, title, description } = Astro.props;
 
 // URL canonico: quello della lingua corrente.
 const canonicalPath = lang === "it" ? itHref : enHref;
+
+const rssHref =
+  lang === "it"
+    ? `/autori/${author.authorKey}/rss.xml`
+    : `/en/authors/${author.authorKey}/rss.xml`;
+const authorFeed = {
+  title: `${BLOG.name} — ${author.name}`,
+  href: rssHref,
+};
 
 // JSON-LD Person
 const personSchema = buildPersonSchema({
@@ -58,6 +68,7 @@ const personSchema = buildPersonSchema({
   hreflangIt={itHref}
   hreflangEn={enHref}
   jsonLd={personSchema}
+  extraFeeds={[authorFeed]}
 >
   <Navbar itHref={itHref} enHref={enHref} />
   <main id="main">

@@ -19,6 +19,8 @@ interface Props {
   hreflangEn?: string;
   /** Oggetto/i JSON-LD (schema.org) da serializzare nel <head>. */
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** Feed RSS aggiuntivi per l'autodiscovery (es. feed per-autore). */
+  extraFeeds?: { title: string; href: string }[];
 }
 
 const {
@@ -31,6 +33,7 @@ const {
   hreflangIt = "/",
   hreflangEn = "/en/",
   jsonLd,
+  extraFeeds = [],
 } = Astro.props;
 
 const canonical = new URL(path, Astro.site).toString();
@@ -96,6 +99,14 @@ const jsonLdString = jsonLd
       title={`${BLOG.name} Blog (EN)`}
       href="/en/rss.xml"
     />
+    {extraFeeds.map((feed) => (
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title={feed.title}
+        href={feed.href}
+      />
+    ))}
   </head>
   <body>
     <a

@@ -1,0 +1,51 @@
+import rss from "@astrojs/rss";
+import type { APIContext } from "astro";
+import { getCollection } from "astro:content";
+import {
+  getPublishedPosts,
+  getSlugFromEntryId,
+  getBlogPostUrl,
+  buildAuthorNameMap,
+} from "../../../utils/blog";
+import { BLOG } from "../../../config";
+
+export async function getStaticPaths() {
+  const authors = await getCollection("authors", (entry) =>
+    entry.id.startsWith("it/")
+  );
+  return authors.map((entry) => ({
+    params: { slug: entry.data.authorKey },
+  }));
+}
+
+export async function GET(context: APIContext) {
+  const slug = context.params.slug as string;
+
+  const allAuthors = await getCollection("authors", (entry) =>
+    entry.id.startsWith("it/")
+  );
+  const authorEntry = allAuthors.find((a) => a.data.authorKey === slug);
+  const authorName = authorEntry?.data.name ?? slug;
+
+  const allPosts = await getPublishedPosts("it");
+  const posts = allPosts.filter((p) => p.data.authors.includes(slug));
+  const authorMap = await buildAuthorNameMap("it");
+
+  return rss({
+    title: `${BLOG.name} — ${authorName}`,
+    description: `Articoli pubblicati da ${authorName} su ${BLOG.name}.`,
+    site: context.site!,
+    xmlns: { dc: "http://purl.org/dc/elements/1.1/" },
+    items: posts.map((post) => ({
+      title: post.data.title,
+      description: post.data.description,
+      pubDate: post.data.pubDate,
+      link: getBlogPostUrl("it", getSlugFromEntryId(post.id)),
+      categories: post.data.tags,
+      customData: post.data.authors
+        .map((key) => `<dc:creator>${authorMap.get(key) ?? key}</dc:creator>`)
+        .join(""),
+    })),
+    customData: "<language>it-IT</language>",
+  });
+}
