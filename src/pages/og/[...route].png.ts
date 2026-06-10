@@ -6,7 +6,12 @@ import { renderOgImage } from "../../utils/og";
 /**
  * Route immagine OG per ogni articolo: /og/<id>.png (es. /og/it/slug.png).
  * Genera i PNG a build-time (sito statico), uno per post in ogni lingua.
+ * prerender=true è necessario quando l'adapter Cloudflare è attivo (iniettato
+ * da Cloudflare Pages CI) per evitare che Rollup provi a bundlare il binario
+ * nativo @resvg/resvg-js nel runtime Workers.
  */
+export const prerender = true;
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getCollection("blog", (entry) =>
     import.meta.env.PROD ? !entry.data.draft : true

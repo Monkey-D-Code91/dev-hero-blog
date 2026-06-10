@@ -18,5 +18,10 @@ export default defineConfig({
   integrations: [react(), mdx(), icon(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
+    ssr: {
+      // @resvg/resvg-js usa un binario nativo .node; va esternalizzato per
+      // evitare che Rollup tenti di bundlarlo (rompe la build Cloudflare Pages).
+      external: ['@resvg/resvg-js'],
+    },
   },
 });
