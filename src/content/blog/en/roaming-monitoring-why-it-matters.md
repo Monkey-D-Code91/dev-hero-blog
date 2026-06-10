@@ -3,7 +3,7 @@ title: "Roaming monitoring: why a software engineer should care"
 description: "Roaming data traffic can generate enormous costs in very little time. I explain why this problem is more technical than it looks and what makes it interesting to solve."
 pubDate: 2026-04-22
 translationKey: "roaming-monitoring-why-it-matters"
-author: "marco-mariotti"
+authors: ["marco-mariotti"]
 tags: ["telecommunications", "architecture", "product"]
 draft: false
 ---

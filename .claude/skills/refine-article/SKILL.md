@@ -123,7 +123,7 @@ title: "[titolo italiano]"
 description: "[descrizione italiana]"
 pubDate: YYYY-MM-DD
 translationKey: "[slug-en]"
-author: "[author-key]"
+authors: ["[author-key]"]
 tags: ["tag1", "tag2", "tag3"]
 draft: false
 ---
@@ -138,7 +138,7 @@ title: "[titolo inglese]"
 description: "[descrizione inglese]"
 pubDate: YYYY-MM-DD
 translationKey: "[slug-en]"
-author: "[author-key]"
+authors: ["[author-key]"]
 tags: ["tag1", "tag2", "tag3"]
 draft: false
 ---

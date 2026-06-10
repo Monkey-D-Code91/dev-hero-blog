@@ -1,10 +1,19 @@
 import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import type { ImageMetadata } from "astro";
 import type { Lang } from "../i18n/ui";
+import { getReadingTime } from "./readingTime";
 
 // ──────────────────────────────────────────────
-// Tipo condiviso tra BlogList e PostCard
+// Tipi condivisi tra BlogList e PostCard
 // ──────────────────────────────────────────────
+
+/** Autore risolto di un post: chiave + nome visualizzato. */
+export interface PostAuthor {
+  key: string;
+  name: string;
+}
+
 export interface ProcessedPost {
   title: string;
   description: string;
@@ -14,8 +23,8 @@ export interface ProcessedPost {
   readingTime: string;
   cover?: ImageMetadata;
   coverAlt?: string;
-  authorKey: string;
-  authorName: string;
+  /** Uno o più autori (co-autori inclusi), nell'ordine del frontmatter. */
+  authors: PostAuthor[];
 }
 
 // ──────────────────────────────────────────────
@@ -74,6 +83,46 @@ export async function findAuthor(authorKey: string, lang: Lang) {
 }
 
 /**
+ * Risolve in ordine le entry autore per una lista di authorKey (lingua data).
+ * Le chiavi senza profilo corrispondente vengono saltate.
+ */
+export async function findAuthors(authorKeys: string[], lang: Lang) {
+  const authors = await getCollection("authors", (entry) =>
+    entry.id.startsWith(`${lang}/`)
+  );
+  const byKey = new Map(authors.map((a) => [a.data.authorKey, a]));
+  return authorKeys
+    .map((key) => byKey.get(key))
+    .filter((a): a is NonNullable<typeof a> => Boolean(a));
+}
+
+/**
+ * Trasforma le entry blog in ProcessedPost pronti per le card, risolvendo
+ * autori (nome) e reading time in un solo passaggio. Centralizza la logica
+ * prima duplicata in ogni pagina lista/tag/home.
+ */
+export async function processPosts(
+  entries: CollectionEntry<"blog">[],
+  lang: Lang
+): Promise<ProcessedPost[]> {
+  const nameMap = await buildAuthorNameMap(lang);
+  return entries.map((p) => ({
+    title: p.data.title,
+    description: p.data.description,
+    pubDate: p.data.pubDate,
+    slug: getSlugFromEntryId(p.id),
+    tags: p.data.tags,
+    readingTime: getReadingTime(p.body, lang),
+    cover: p.data.cover,
+    coverAlt: p.data.coverAlt,
+    authors: p.data.authors.map((key) => ({
+      key,
+      name: nameMap.get(key) ?? key,
+    })),
+  }));
+}
+
+/**
  * Recupera gli articoli pubblicati per una lingua, ordinati per pubDate decrescente.
  * In produzione i draft sono esclusi; in dev sono visibili per anteprima.
  */
@@ -114,4 +163,16 @@ export function formatDate(date: Date, lang: Lang): string {
     month: "long",
     day: "numeric",
   }).format(date);
+}
+
+/**
+ * Unisce una lista di nomi in testo localizzato:
+ * "A", "A e B", "A, B e C" (it) / "A and B", "A, B and C" (en).
+ * Per contesti testuali (OG image, RSS). In HTML si usano link separati.
+ */
+export function formatAuthorList(names: string[], lang: Lang): string {
+  if (names.length <= 1) return names[0] ?? "";
+  const conj = lang === "it" ? "e" : "and";
+  if (names.length === 2) return `${names[0]} ${conj} ${names[1]}`;
+  return `${names.slice(0, -1).join(", ")} ${conj} ${names[names.length - 1]}`;
 }

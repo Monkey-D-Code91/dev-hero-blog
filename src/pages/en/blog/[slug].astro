@@ -11,7 +11,7 @@ import {
   getSlugFromEntryId,
   getBlogPostUrl,
   getAuthorUrl,
-  findAuthor,
+  findAuthors,
 } from "../../../utils/blog";
 import { getReadingTime } from "../../../utils/readingTime";
 import { buildArticleSchema } from "../../../utils/structuredData";
@@ -41,15 +41,14 @@ const hreflangIt = altPost
   ? getBlogPostUrl("it", getSlugFromEntryId(altPost.id))
   : "/blog/";
 
-// Autore
-const authorKey = post.data.author;
-const author = await findAuthor(authorKey, lang);
-const authorName = author?.data.name ?? authorKey;
-const authorSameAs = author
-  ? (Object.values(author.data.links).filter(Boolean) as string[])
-  : [];
+// Autori (uno o più). Risolve nome + link dai profili.
+const authorEntries = await findAuthors(post.data.authors, lang);
+const authors = post.data.authors.map((key) => {
+  const entry = authorEntries.find((a) => a.data.authorKey === key);
+  return { key, name: entry?.data.name ?? key };
+});
 
-// OG image generata per-articolo (titolo + autore).
+// OG image generata per-articolo (titolo + autore/i).
 const ogImage = new URL(`/og/${post.id}.png`, Astro.site).toString();
 
 // JSON-LD BlogPosting — usa la cover se presente, altrimenti l'OG generata.
@@ -66,9 +65,16 @@ const articleSchema = buildArticleSchema({
   updatedDate: post.data.updatedDate,
   tags: post.data.tags,
   imageUrl,
-  authorName,
-  authorPath: getAuthorUrl(authorKey, lang),
-  authorSameAs,
+  authors: post.data.authors.map((key) => {
+    const entry = authorEntries.find((a) => a.data.authorKey === key);
+    return {
+      name: entry?.data.name ?? key,
+      path: getAuthorUrl(key, lang),
+      sameAs: entry
+        ? (Object.values(entry.data.links).filter(Boolean) as string[])
+        : [],
+    };
+  }),
 });
 ---
 
@@ -94,8 +100,7 @@ const articleSchema = buildArticleSchema({
       readingTime={readingTime}
       cover={post.data.cover}
       coverAlt={post.data.coverAlt}
-      authorKey={authorKey}
-      authorName={authorName}
+      authors={authors}
     >
       <Content />
     </BlogPostLayout>

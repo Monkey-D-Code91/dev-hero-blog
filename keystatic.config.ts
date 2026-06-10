@@ -62,12 +62,19 @@ const blogCollection = (locale: Locale) =>
         description: "Stessa stringa nella versione IT ed EN di questo articolo.",
         validation: { isRequired: true },
       }),
-      // Tendina sugli autori della stessa lingua. Salva lo slug (= authorKey).
-      author: fields.relationship({
-        label: "Autore",
-        collection: locale === "it" ? "authorsIt" : "authorsEn",
-        validation: { isRequired: true },
-      }),
+      // Uno o più autori (co-autori). Tendina sugli autori della stessa
+      // lingua; ogni voce salva lo slug (= authorKey).
+      authors: fields.array(
+        fields.relationship({
+          label: "Autore",
+          collection: locale === "it" ? "authorsIt" : "authorsEn",
+        }),
+        {
+          label: "Autori",
+          itemLabel: (props) => props.value ?? "",
+          validation: { length: { min: 1 } },
+        }
+      ),
       tags: fields.array(fields.text({ label: "Tag" }), {
         label: "Tag",
         itemLabel: (props) => props.value,

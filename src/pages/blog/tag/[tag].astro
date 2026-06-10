@@ -1,11 +1,6 @@
 ---
 import type { ProcessedPost } from "../../../utils/blog";
-import {
-  getPublishedPosts,
-  getSlugFromEntryId,
-  buildAuthorNameMap,
-} from "../../../utils/blog";
-import { getReadingTime } from "../../../utils/readingTime";
+import { getPublishedPosts, processPosts } from "../../../utils/blog";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Navbar from "../../../components/Navbar.astro";
 import Footer from "../../../components/Footer.astro";
@@ -15,7 +10,6 @@ import { BLOG } from "../../../config";
 export async function getStaticPaths() {
   const lang = "it" as const;
   const allPosts = await getPublishedPosts(lang);
-  const authorMap = await buildAuthorNameMap(lang);
 
   // Costruisce la mappa tag → articoli
   const tagMap = new Map<string, typeof allPosts>();
@@ -26,24 +20,12 @@ export async function getStaticPaths() {
     }
   }
 
-  return [...tagMap.entries()].map(([tag, tagPosts]) => ({
-    params: { tag },
-    props: {
-      tag,
-      posts: tagPosts.map((p) => ({
-        title: p.data.title,
-        description: p.data.description,
-        pubDate: p.data.pubDate,
-        slug: getSlugFromEntryId(p.id),
-        tags: p.data.tags,
-        readingTime: getReadingTime(p.body, lang),
-        cover: p.data.cover,
-        coverAlt: p.data.coverAlt,
-        authorKey: p.data.author,
-        authorName: authorMap.get(p.data.author) ?? p.data.author,
-      })) as ProcessedPost[],
-    },
-  }));
+  return Promise.all(
+    [...tagMap.entries()].map(async ([tag, tagPosts]) => ({
+      params: { tag },
+      props: { tag, posts: await processPosts(tagPosts, lang) },
+    }))
+  );
 }
 
 interface Props {

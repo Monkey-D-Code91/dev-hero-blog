@@ -3,28 +3,13 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Navbar from "../../../components/Navbar.astro";
 import BlogList from "../../../components/blog/BlogList.astro";
 import Footer from "../../../components/Footer.astro";
-import { getPublishedPosts, getSlugFromEntryId, buildAuthorNameMap } from "../../../utils/blog";
-import { getReadingTime } from "../../../utils/readingTime";
+import { getPublishedPosts, processPosts } from "../../../utils/blog";
 import { useTranslations } from "../../../i18n/utils";
 
 const lang = "en" as const;
 const t = useTranslations(lang);
 
-const posts = await getPublishedPosts(lang);
-const authorMap = await buildAuthorNameMap(lang);
-
-const processedPosts = posts.map((p) => ({
-  title: p.data.title,
-  description: p.data.description,
-  pubDate: p.data.pubDate,
-  slug: getSlugFromEntryId(p.id),
-  tags: p.data.tags,
-  readingTime: getReadingTime(p.body, lang),
-  cover: p.data.cover,
-  coverAlt: p.data.coverAlt,
-  authorKey: p.data.author,
-  authorName: authorMap.get(p.data.author) ?? p.data.author,
-}));
+const processedPosts = await processPosts(await getPublishedPosts(lang), lang);
 ---
 
 <BaseLayout

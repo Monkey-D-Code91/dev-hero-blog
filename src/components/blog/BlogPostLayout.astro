@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import type { Lang } from "../../i18n/ui";
+import type { PostAuthor } from "../../utils/blog";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import PostMeta from "./PostMeta.astro";
 import AuthorCard from "./AuthorCard.astro";
@@ -16,8 +17,7 @@ interface Props {
   readingTime: string;
   cover?: ImageMetadata;
   coverAlt?: string;
-  authorKey: string;
-  authorName: string;
+  authors: PostAuthor[];
 }
 
 const {
@@ -29,8 +29,7 @@ const {
   readingTime,
   cover,
   coverAlt,
-  authorKey,
-  authorName,
+  authors,
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -83,8 +82,7 @@ const backLabel = t.blog.backToBlog;
           readingTime={readingTime}
           tags={tags}
           lang={lang}
-          authorKey={authorKey}
-          authorName={authorName}
+          authors={authors}
         />
       </div>
     </header>
@@ -134,8 +132,21 @@ const backLabel = t.blog.backToBlog;
     </a>
   </div>
 
-  <!-- Card autore (visibilità di chi ha scritto il pezzo) -->
-  <AuthorCard authorKey={authorKey} lang={lang} />
+  <!-- Card autore/i (visibilità di chi ha scritto il pezzo) -->
+  <section
+    class="mt-16 border-t border-border pt-12"
+    aria-labelledby="author-card-heading"
+  >
+    <p
+      id="author-card-heading"
+      class="text-sm font-semibold uppercase tracking-widest text-accent"
+    >
+      {authors.length > 1 ? t.blog.authorsCardHeading : t.blog.authorCardHeading}
+    </p>
+    <div class="mt-6 flex flex-col gap-5">
+      {authors.map((author) => <AuthorCard authorKey={author.key} lang={lang} />)}
+    </div>
+  </section>
 
   <!-- Commenti -->
   <Comments />

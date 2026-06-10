@@ -13,17 +13,16 @@ export async function GET(context: APIContext) {
       "Thoughts on software engineering, leadership and telecommunications.",
     site: context.site!,
     xmlns: { dc: "http://purl.org/dc/elements/1.1/" },
-    items: posts.map((post) => {
-      const authorName = authorMap.get(post.data.author) ?? post.data.author;
-      return {
-        title: post.data.title,
-        description: post.data.description,
-        pubDate: post.data.pubDate,
-        link: getBlogPostUrl("en", getSlugFromEntryId(post.id)),
-        categories: post.data.tags,
-        customData: `<dc:creator>${authorName}</dc:creator>`,
-      };
-    }),
+    items: posts.map((post) => ({
+      title: post.data.title,
+      description: post.data.description,
+      pubDate: post.data.pubDate,
+      link: getBlogPostUrl("en", getSlugFromEntryId(post.id)),
+      categories: post.data.tags,
+      customData: post.data.authors
+        .map((key) => `<dc:creator>${authorMap.get(key) ?? key}</dc:creator>`)
+        .join(""),
+    })),
     customData: "<language>en-GB</language>",
   });
 }

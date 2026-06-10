@@ -3,7 +3,7 @@ title: "Why Most Teams Do Code Review the Wrong Way"
 description: "How engineering teams get code review wrong, and three concrete practices to do it right."
 pubDate: 2026-06-09
 translationKey: "code-review-the-wrong-way"
-author: "marco-mariotti"
+authors: ["marco-mariotti"]
 tags: ["code-review", "engineering", "team", "code quality", "collaboration"]
 draft: false
 ---

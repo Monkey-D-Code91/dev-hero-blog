@@ -3,7 +3,7 @@ title: "Perché la maggior parte dei team fa la code review nel modo sbagliato"
 description: "Come i team tecnici sbagliano l'approccio alla code review e tre pratiche concrete per farlo nel modo giusto."
 pubDate: 2026-06-09
 translationKey: "code-review-the-wrong-way"
-author: "marco-mariotti"
+authors: ["marco-mariotti"]
 tags: ["code-review", "engineering", "team", "qualità del codice", "collaborazione"]
 draft: false
 ---

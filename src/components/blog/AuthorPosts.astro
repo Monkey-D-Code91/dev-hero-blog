@@ -1,11 +1,7 @@
 ---
 import type { Lang } from "../../i18n/ui";
 import { useTranslations } from "../../i18n/utils";
-import {
-  getPublishedPosts,
-  getSlugFromEntryId,
-} from "../../utils/blog";
-import { getReadingTime } from "../../utils/readingTime";
+import { getPublishedPosts, processPosts } from "../../utils/blog";
 import PostCard from "./PostCard.astro";
 
 interface Props {
@@ -18,20 +14,8 @@ const { authorKey, authorName, lang } = Astro.props;
 const t = useTranslations(lang);
 
 const allPosts = await getPublishedPosts(lang);
-const posts = allPosts.filter((p) => p.data.author === authorKey);
-
-const processedPosts = posts.map((p) => ({
-  title: p.data.title,
-  description: p.data.description,
-  pubDate: p.data.pubDate,
-  slug: getSlugFromEntryId(p.id),
-  tags: p.data.tags,
-  readingTime: getReadingTime(p.body, lang),
-  cover: p.data.cover,
-  coverAlt: p.data.coverAlt,
-  authorKey,
-  authorName,
-}));
+const posts = allPosts.filter((p) => p.data.authors.includes(authorKey));
+const processedPosts = await processPosts(posts, lang);
 ---
 
 {

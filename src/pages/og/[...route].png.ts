@@ -22,7 +22,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
       params: { route: post.id },
       props: {
         title: post.data.title,
-        authorName: names[lang].get(post.data.author) ?? post.data.author,
+        authorNames: post.data.authors.map(
+          (key) => names[lang].get(key) ?? key
+        ),
         lang,
       },
     };
@@ -31,7 +33,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const GET: APIRoute = async ({ props }) => {
   const png = await renderOgImage(
-    props as { title: string; authorName: string; lang: "it" | "en" }
+    props as { title: string; authorNames: string[]; lang: "it" | "en" }
   );
   return new Response(new Uint8Array(png), {
     headers: {

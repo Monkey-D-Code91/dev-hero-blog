@@ -1,5 +1,6 @@
 ---
 import type { Lang } from "../../i18n/ui";
+import type { PostAuthor } from "../../utils/blog";
 import TagPill from "./TagPill.astro";
 import { formatDate, getAuthorUrl } from "../../utils/blog";
 
@@ -9,19 +10,21 @@ interface Props {
   readingTime: string;
   tags: string[];
   lang: Lang;
-  authorKey: string;
-  authorName: string;
+  authors: PostAuthor[];
 }
 
-const { pubDate, updatedDate, readingTime, tags, lang, authorKey, authorName } = Astro.props;
+const { pubDate, updatedDate, readingTime, tags, lang, authors } = Astro.props;
 const published = formatDate(pubDate, lang);
 const updated = updatedDate ? formatDate(updatedDate, lang) : null;
 const publishedLabel = lang === "it" ? "Pubblicato il" : "Published on";
 const updatedLabel = lang === "it" ? "Aggiornato il" : "Updated on";
 const readingTimeLabel = lang === "it" ? "Tempo di lettura:" : "Reading time:";
 const tagsLabel = lang === "it" ? "Tag:" : "Tags:";
-const authorLabel = lang === "it" ? "Autore:" : "Author:";
-const authorUrl = getAuthorUrl(authorKey, lang);
+const authorLabel =
+  authors.length > 1
+    ? lang === "it" ? "Autori:" : "Authors:"
+    : lang === "it" ? "Autore:" : "Author:";
+const conj = lang === "it" ? "e" : "and";
 ---
 
 <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted">
@@ -42,9 +45,25 @@ const authorUrl = getAuthorUrl(authorKey, lang);
       <circle cx="12" cy="7" r="4" />
     </svg>
     <span class="sr-only">{authorLabel}</span>
-    <a href={authorUrl} class="font-medium text-text hover:text-accent transition-colors">
-      {authorName}
-    </a>
+    <span>
+      {
+        authors.map((author, i) => (
+          <>
+            {i > 0 && (
+              <span class="text-muted">
+                {i === authors.length - 1 ? ` ${conj} ` : ", "}
+              </span>
+            )}
+            <a
+              href={getAuthorUrl(author.key, lang)}
+              class="font-medium text-text hover:text-accent transition-colors"
+            >
+              {author.name}
+            </a>
+          </>
+        ))
+      }
+    </span>
   </span>
 
   <span class="opacity-40" aria-hidden="true">·</span>

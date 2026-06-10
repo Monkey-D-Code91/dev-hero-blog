@@ -31,11 +31,14 @@ interface ArticleInput {
   tags: string[];
   /** URL assoluto immagine (cover o OG di fallback). */
   imageUrl: string;
-  authorName: string;
-  /** Path del profilo autore, es. "/autori/key/". */
-  authorPath: string;
-  /** Link esterni dell'autore (LinkedIn/GitHub/sito). */
-  authorSameAs: string[];
+  /** Uno o più autori dell'articolo. */
+  authors: {
+    name: string;
+    /** Path del profilo autore, es. "/autori/key/". */
+    path: string;
+    /** Link esterni dell'autore (LinkedIn/GitHub/sito). */
+    sameAs: string[];
+  }[];
 }
 
 export function buildArticleSchema(i: ArticleInput) {
@@ -52,12 +55,12 @@ export function buildArticleSchema(i: ArticleInput) {
     mainEntityOfPage: url,
     image: i.imageUrl,
     ...(i.tags.length ? { keywords: i.tags.join(", ") } : {}),
-    author: {
+    author: i.authors.map((a) => ({
       "@type": "Person",
-      name: i.authorName,
-      url: abs(i.site, i.authorPath),
-      ...(i.authorSameAs.length ? { sameAs: i.authorSameAs } : {}),
-    },
+      name: a.name,
+      url: abs(i.site, a.path),
+      ...(a.sameAs.length ? { sameAs: a.sameAs } : {}),
+    })),
     publisher: publisher(i.site),
   };
 }

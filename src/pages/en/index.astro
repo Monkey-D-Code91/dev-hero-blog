@@ -7,26 +7,13 @@ import LandingHero from "../../components/landing/LandingHero.astro";
 import RecentPosts from "../../components/landing/RecentPosts.astro";
 import AuthorsShowcase from "../../components/landing/AuthorsShowcase.astro";
 import { useTranslations } from "../../i18n/utils";
-import { getPublishedPosts, getSlugFromEntryId, buildAuthorNameMap } from "../../utils/blog";
-import { getReadingTime } from "../../utils/readingTime";
+import { getPublishedPosts, processPosts } from "../../utils/blog";
 
 const t = useTranslations("en");
 
 // Latest 3 EN articles
 const allPosts = await getPublishedPosts("en");
-const authorMap = await buildAuthorNameMap("en");
-const recentPosts = allPosts.slice(0, 3).map((p) => ({
-  title: p.data.title,
-  description: p.data.description,
-  pubDate: p.data.pubDate,
-  slug: getSlugFromEntryId(p.id),
-  tags: p.data.tags,
-  readingTime: getReadingTime(p.body, "en"),
-  cover: p.data.cover,
-  coverAlt: p.data.coverAlt,
-  authorKey: p.data.author,
-  authorName: authorMap.get(p.data.author) ?? p.data.author,
-}));
+const recentPosts = await processPosts(allPosts.slice(0, 3), "en");
 
 // EN authors for showcase
 const allAuthors = await getCollection("authors");

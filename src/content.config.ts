@@ -16,8 +16,29 @@ const blog = defineCollection({
       coverAlt: z.string().optional(),
       /** I draft sono esclusi dalla build di produzione. */
       draft: z.boolean().default(false),
-      /** authorKey dell'autore — chiave condivisa con la collection `authors`. */
-      author: z.string(),
+      /**
+       * Autori dell'articolo — uno o più authorKey condivisi con la
+       * collection `authors`. Si accetta sia `authors: [..]` (forma canonica,
+       * anche per co-autori) sia il legacy `author: ".."` (singolo);
+       * il transform normalizza sempre a `authors` (array non vuoto).
+       */
+      author: z.string().optional(),
+      authors: z.array(z.string()).optional(),
+    })
+    .transform((data, ctx) => {
+      const authors = data.authors?.length
+        ? data.authors
+        : data.author
+          ? [data.author]
+          : [];
+      if (authors.length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Specificare almeno un autore nel campo 'authors'.",
+        });
+        return z.NEVER;
+      }
+      return { ...data, authors };
     }),
 });
 

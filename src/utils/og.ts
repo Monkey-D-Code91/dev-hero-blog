@@ -56,14 +56,25 @@ function initials(name: string): string {
 
 interface OgInput {
   title: string;
-  authorName: string;
+  authorNames: string[];
   lang: Lang;
 }
 
-export async function renderOgImage({ title, authorName, lang }: OgInput): Promise<Buffer> {
+/** Unisce i nomi: "A", "A e B", "A, B e C" (it) / "... and ..." (en). */
+function joinNames(names: string[], lang: Lang): string {
+  if (names.length <= 1) return names[0] ?? "";
+  const conj = lang === "it" ? "e" : "and";
+  if (names.length === 2) return `${names[0]} ${conj} ${names[1]}`;
+  return `${names.slice(0, -1).join(", ")} ${conj} ${names[names.length - 1]}`;
+}
+
+export async function renderOgImage({ title, authorNames, lang }: OgInput): Promise<Buffer> {
   // Riduce il corpo del titolo per testi molto lunghi, così resta in pagina.
   const titleSize = title.length > 70 ? 52 : title.length > 48 ? 60 : 68;
   const byLabel = lang === "it" ? "di" : "by";
+  const authorLabel = joinNames(authorNames, lang);
+  // Il monogramma ha senso solo con un autore singolo.
+  const showMonogram = authorNames.length === 1;
 
   const tree = h(
     "div",
@@ -139,34 +150,35 @@ export async function renderOgImage({ title, authorName, lang }: OgInput): Promi
             "div",
             { display: "flex", alignItems: "center", gap: 18 },
             [
-              h(
-                "div",
-                {
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: 56,
-                  height: 56,
-                  borderRadius: 9999,
-                  backgroundColor: C.surface,
-                  borderWidth: 2,
-                  borderStyle: "solid",
-                  borderColor: C.border,
-                  color: C.accent,
-                  fontSize: 22,
-                  fontWeight: 700,
-                },
-                initials(authorName)
-              ),
+              showMonogram &&
+                h(
+                  "div",
+                  {
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: 56,
+                    height: 56,
+                    borderRadius: 9999,
+                    backgroundColor: C.surface,
+                    borderWidth: 2,
+                    borderStyle: "solid",
+                    borderColor: C.border,
+                    color: C.accent,
+                    fontSize: 22,
+                    fontWeight: 700,
+                  },
+                  initials(authorNames[0])
+                ),
               h(
                 "div",
                 { display: "flex", flexDirection: "column" },
                 [
                   h("div", { fontSize: 16, color: C.muted }, byLabel),
-                  h("div", { fontSize: 28, fontWeight: 600, color: C.text }, authorName),
+                  h("div", { fontSize: 28, fontWeight: 600, color: C.text }, authorLabel),
                 ]
               ),
-            ]
+            ].filter(Boolean)
           ),
           h("div", { fontSize: 22, color: C.muted }, "thefirstdraft.dev"),
         ]

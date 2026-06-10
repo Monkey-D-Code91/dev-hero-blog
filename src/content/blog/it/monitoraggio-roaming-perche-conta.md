@@ -3,7 +3,7 @@ title: "Monitoraggio del roaming: perché un ingegnere del software dovrebbe int
 description: "Il traffico dati in roaming può generare costi enormi in tempi brevissimi. Spiego perché questo problema è più tecnico di quanto sembri e cosa lo rende interessante da risolvere."
 pubDate: 2026-04-22
 translationKey: "roaming-monitoring-why-it-matters"
-author: "marco-mariotti"
+authors: ["marco-mariotti"]
 tags: ["telecomunicazioni", "architettura", "prodotto"]
 draft: false
 ---
