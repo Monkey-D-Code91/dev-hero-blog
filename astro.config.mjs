@@ -5,9 +5,12 @@ import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
 
+import cloudflare from "@astrojs/cloudflare";
+
 // `site` — usato per sitemap, canonical e tag Open Graph.
 export default defineConfig({
   site: 'https://thefirstdraft.dev',
+
   i18n: {
     locales: ['it', 'en'],
     defaultLocale: 'it',
@@ -15,7 +18,9 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+
   integrations: [react(), mdx(), icon(), sitemap()],
+
   vite: {
     plugins: [tailwindcss()],
     ssr: {
@@ -24,4 +29,6 @@ export default defineConfig({
       external: ['@resvg/resvg-js'],
     },
   },
+
+  adapter: cloudflare()
 });
