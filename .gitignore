@@ -17,5 +17,8 @@ npm-debug.log*
 # os
 .DS_Store
 
+# bake-off audio TTS (throwaway, vedi scripts/audio-bakeoff.mjs)
+bakeoff/
+
 # claude code local settings (personal, non condivise)
 .claude/settings.local.json
