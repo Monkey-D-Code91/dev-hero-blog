@@ -17,6 +17,8 @@ interface Props {
   hreflangIt?: string;
   /** Path hreflang EN (default "/en/") — sovrascrivere per le pagine blog. */
   hreflangEn?: string;
+  /** Oggetto/i JSON-LD (schema.org) da serializzare nel <head>. */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -28,6 +30,7 @@ const {
   ogType = "website",
   hreflangIt = "/",
   hreflangEn = "/en/",
+  jsonLd,
 } = Astro.props;
 
 const canonical = new URL(path, Astro.site).toString();
@@ -35,6 +38,11 @@ const ogImage = ogImageProp ?? new URL("/og-image.png", Astro.site).toString();
 
 const itHref = new URL(hreflangIt, Astro.site).toString();
 const enHref = new URL(hreflangEn, Astro.site).toString();
+
+// Serializza il JSON-LD evitando che un "<" chiuda lo <script> in modo prematuro.
+const jsonLdString = jsonLd
+  ? JSON.stringify(jsonLd).replace(/</g, "\\u003c")
+  : null;
 ---
 
 <!doctype html>
@@ -68,6 +76,12 @@ const enHref = new URL(hreflangEn, Astro.site).toString();
     <meta name="twitter:image" content={ogImage} />
 
     <meta name="theme-color" content="#0b1120" />
+
+    {
+      jsonLdString && (
+        <script type="application/ld+json" set:html={jsonLdString} />
+      )
+    }
 
     <!-- RSS autodiscovery -->
     <link

@@ -17,6 +17,7 @@ import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
 import AuthorPosts from "../components/blog/AuthorPosts.astro";
 import type { CollectionEntry } from "astro:content";
+import { buildPersonSchema } from "../utils/structuredData";
 
 interface Props {
   author: CollectionEntry<"authors">["data"];
@@ -33,6 +34,20 @@ const { author, lang, itHref, enHref, title, description } = Astro.props;
 
 // URL canonico: quello della lingua corrente.
 const canonicalPath = lang === "it" ? itHref : enHref;
+
+// JSON-LD Person
+const personSchema = buildPersonSchema({
+  site: Astro.site,
+  name: author.name,
+  role: author.role,
+  description: author.subline,
+  canonicalPath,
+  imageUrl: author.avatar
+    ? new URL(author.avatar.src, Astro.site).toString()
+    : undefined,
+  sameAs: Object.values(author.links).filter(Boolean) as string[],
+  knowsAbout: author.skills.flatMap((s) => s.items),
+});
 ---
 
 <BaseLayout
@@ -42,6 +57,7 @@ const canonicalPath = lang === "it" ? itHref : enHref;
   path={canonicalPath}
   hreflangIt={itHref}
   hreflangEn={enHref}
+  jsonLd={personSchema}
 >
   <Navbar itHref={itHref} enHref={enHref} />
   <main id="main">

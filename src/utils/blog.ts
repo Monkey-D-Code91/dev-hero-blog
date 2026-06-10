@@ -63,6 +63,17 @@ export async function buildAuthorNameMap(lang: Lang): Promise<Map<string, string
 }
 
 /**
+ * Trova l'entry autore per authorKey nella lingua data (null se assente).
+ * Utile quando servono i dati completi (link, ruolo) e non solo il nome.
+ */
+export async function findAuthor(authorKey: string, lang: Lang) {
+  const authors = await getCollection("authors", (entry) =>
+    entry.id.startsWith(`${lang}/`)
+  );
+  return authors.find((a) => a.data.authorKey === authorKey) ?? null;
+}
+
+/**
  * Recupera gli articoli pubblicati per una lingua, ordinati per pubDate decrescente.
  * In produzione i draft sono esclusi; in dev sono visibili per anteprima.
  */

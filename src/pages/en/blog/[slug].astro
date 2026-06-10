@@ -10,9 +10,11 @@ import {
   getAlternatePost,
   getSlugFromEntryId,
   getBlogPostUrl,
-  buildAuthorNameMap,
+  getAuthorUrl,
+  findAuthor,
 } from "../../../utils/blog";
 import { getReadingTime } from "../../../utils/readingTime";
+import { buildArticleSchema } from "../../../utils/structuredData";
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts("en");
@@ -40,9 +42,31 @@ const hreflangIt = altPost
   : "/blog/";
 
 // Autore
-const authorMap = await buildAuthorNameMap(lang);
 const authorKey = post.data.author;
-const authorName = authorMap.get(authorKey) ?? authorKey;
+const author = await findAuthor(authorKey, lang);
+const authorName = author?.data.name ?? authorKey;
+const authorSameAs = author
+  ? (Object.values(author.data.links).filter(Boolean) as string[])
+  : [];
+
+// JSON-LD BlogPosting
+const imageUrl = post.data.cover
+  ? new URL(post.data.cover.src, Astro.site).toString()
+  : new URL("/og-image.png", Astro.site).toString();
+const articleSchema = buildArticleSchema({
+  site: Astro.site,
+  lang,
+  title: post.data.title,
+  description: post.data.description,
+  canonicalPath: `/en/blog/${slug}/`,
+  pubDate: post.data.pubDate,
+  updatedDate: post.data.updatedDate,
+  tags: post.data.tags,
+  imageUrl,
+  authorName,
+  authorPath: getAuthorUrl(authorKey, lang),
+  authorSameAs,
+});
 ---
 
 <BaseLayout
@@ -53,6 +77,7 @@ const authorName = authorMap.get(authorKey) ?? authorKey;
   ogType="article"
   hreflangIt={hreflangIt}
   hreflangEn={`/en/blog/${slug}/`}
+  jsonLd={articleSchema}
 >
   <Navbar itHref={hreflangIt} enHref={`/en/blog/${slug}/`} />
   <main id="main">
