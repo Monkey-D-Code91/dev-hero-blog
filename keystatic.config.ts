@@ -91,6 +91,11 @@ const blogCollection = (locale: Locale) =>
         description: "Le bozze sono escluse dalla build di produzione.",
         defaultValue: false,
       }),
+      canonicalUrl: fields.url({
+        label: "Canonical URL (se pubblicato prima altrove)",
+        description:
+          "Se questo articolo è apparso originariamente su un'altra piattaforma (Medium, dev.to, blog personale), inserisci l'URL originale. Il sito punterà a quell'URL come canonical, consolidando il valore SEO sulla fonte originale.",
+      }),
       content: fields.markdoc({ label: "Contenuto", extension: "md" }),
     },
   });

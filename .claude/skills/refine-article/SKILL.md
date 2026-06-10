@@ -126,6 +126,7 @@ translationKey: "[slug-en]"
 authors: ["[author-key]"]
 tags: ["tag1", "tag2", "tag3"]
 draft: false
+# canonicalUrl: "https://..." # opzionale — solo se l'articolo è stato pubblicato prima altrove
 ---
 
 [corpo articolo in italiano]
@@ -141,6 +142,7 @@ translationKey: "[slug-en]"
 authors: ["[author-key]"]
 tags: ["tag1", "tag2", "tag3"]
 draft: false
+# canonicalUrl: "https://..." # opzionale — solo se l'articolo è stato pubblicato prima altrove
 ---
 
 [corpo articolo in inglese]

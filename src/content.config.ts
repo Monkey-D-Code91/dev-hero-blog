@@ -17,6 +17,12 @@ const blog = defineCollection({
       /** I draft sono esclusi dalla build di produzione. */
       draft: z.boolean().default(false),
       /**
+       * Se l'articolo è stato pubblicato originariamente altrove (Medium, dev.to,
+       * blog personale), dichiara l'URL canonico esterno per consolidare il valore
+       * SEO sulla fonte originale.
+       */
+      canonicalUrl: z.string().url().optional(),
+      /**
        * Autori dell'articolo — uno o più authorKey condivisi con la
        * collection `authors`. Si accetta sia `authors: [..]` (forma canonica,
        * anche per co-autori) sia il legacy `author: ".."` (singolo);

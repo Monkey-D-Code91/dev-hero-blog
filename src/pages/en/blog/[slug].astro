@@ -65,12 +65,14 @@ const ogImage = new URL(`/og/${post.id}.png`, Astro.site).toString();
 const imageUrl = post.data.cover
   ? new URL(post.data.cover.src, Astro.site).toString()
   : ogImage;
+// Se c'è un canonicalUrl esterno, il JSON-LD punta a quello come url/mainEntityOfPage.
+const effectiveCanonical = post.data.canonicalUrl ?? `/en/blog/${slug}/`;
 const articleSchema = buildArticleSchema({
   site: Astro.site,
   lang,
   title: post.data.title,
   description: post.data.description,
-  canonicalPath: `/en/blog/${slug}/`,
+  canonicalPath: effectiveCanonical,
   pubDate: post.data.pubDate,
   updatedDate: post.data.updatedDate,
   tags: post.data.tags,
@@ -98,6 +100,7 @@ const articleSchema = buildArticleSchema({
   hreflangIt={hreflangIt}
   hreflangEn={`/en/blog/${slug}/`}
   jsonLd={articleSchema}
+  canonicalUrl={post.data.canonicalUrl}
 >
   <Navbar itHref={hreflangIt} enHref={`/en/blog/${slug}/`} />
   <main id="main">

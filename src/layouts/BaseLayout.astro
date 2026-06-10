@@ -21,6 +21,11 @@ interface Props {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   /** Feed RSS aggiuntivi per l'autodiscovery (es. feed per-autore). */
   extraFeeds?: { title: string; href: string }[];
+  /**
+   * URL canonico esterno (cross-posting). Se presente sovrascrive il canonical
+   * calcolato da `path` e viene usato anche in og:url. Gli hreflang non cambiano.
+   */
+  canonicalUrl?: string;
 }
 
 const {
@@ -34,9 +39,10 @@ const {
   hreflangEn = "/en/",
   jsonLd,
   extraFeeds = [],
+  canonicalUrl,
 } = Astro.props;
 
-const canonical = new URL(path, Astro.site).toString();
+const canonical = canonicalUrl ?? new URL(path, Astro.site).toString();
 const ogImage = ogImageProp ?? new URL("/og-image.png", Astro.site).toString();
 
 const itHref = new URL(hreflangIt, Astro.site).toString();
