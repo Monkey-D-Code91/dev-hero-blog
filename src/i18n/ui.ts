@@ -175,6 +175,8 @@ export const ui = {
       byAuthor: "di",
       authorPostsHeading: (name: string) => `Articoli di ${name}`,
       authorPostsEmpty: "Nessun articolo ancora pubblicato.",
+      authorCardHeading: "L'autore",
+      authorCardProfile: "Vedi profilo completo",
     },
   },
 
@@ -339,6 +341,8 @@ export const ui = {
       byAuthor: "by",
       authorPostsHeading: (name: string) => `Articles by ${name}`,
       authorPostsEmpty: "No articles published yet.",
+      authorCardHeading: "The author",
+      authorCardProfile: "View full profile",
     },
   },
 } as const;

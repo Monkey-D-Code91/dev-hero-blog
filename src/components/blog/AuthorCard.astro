@@ -1,0 +1,149 @@
+---
+/**
+ * AuthorCard — box "About the author" a fine articolo.
+ * Pesca i dati dalla collection `authors` tramite authorKey + lingua e mostra
+ * avatar/monogramma, nome (link al profilo), ruolo, bio breve e link social.
+ * Obiettivo: dare visibilità a chi ha scritto il pezzo, con CTA verso profilo
+ * e canali esterni (LinkedIn/GitHub/sito).
+ */
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import type { Lang } from "../../i18n/ui";
+import { useTranslations } from "../../i18n/utils";
+import { getAuthorUrl } from "../../utils/blog";
+
+interface Props {
+  authorKey: string;
+  lang: Lang;
+}
+
+const { authorKey, lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Risolve l'autore della lingua corrente (robusto rispetto al filename).
+const authors = await getCollection("authors", (entry) =>
+  entry.id.startsWith(`${lang}/`)
+);
+const author = authors.find((a) => a.data.authorKey === authorKey)?.data;
+
+const profileUrl = getAuthorUrl(authorKey, lang);
+
+// Link social presenti (ordine fisso: LinkedIn, GitHub, sito).
+const socials = author
+  ? ([
+      ["linkedin", author.links.linkedin],
+      ["github", author.links.github],
+      ["website", author.links.website],
+    ].filter(([, url]) => Boolean(url)) as [string, string][])
+  : [];
+---
+
+{
+  author && (
+    <section
+      class="mt-16 border-t border-border pt-12"
+      aria-labelledby="author-card-heading"
+    >
+      <p
+        id="author-card-heading"
+        class="text-sm font-semibold uppercase tracking-widest text-accent"
+      >
+        {t.blog.authorCardHeading}
+      </p>
+
+      <div class="mt-6 flex flex-col gap-5 rounded-2xl border border-border bg-surface-2 p-6 sm:flex-row sm:items-start sm:gap-6">
+        {/* Avatar oppure monogramma */}
+        <a
+          href={profileUrl}
+          class="shrink-0"
+          aria-label={author.name}
+        >
+          {author.avatar ? (
+            <Image
+              src={author.avatar}
+              alt={author.avatarAlt ?? author.name}
+              width={80}
+              height={80}
+              class="h-20 w-20 rounded-2xl border border-border object-cover"
+            />
+          ) : (
+            <div
+              class="flex h-20 w-20 items-center justify-center rounded-2xl border border-accent/40 bg-bg/70 text-2xl font-bold text-accent"
+              aria-hidden="true"
+            >
+              {author.monogram}
+            </div>
+          )}
+        </a>
+
+        {/* Testo */}
+        <div class="min-w-0 flex-1">
+          <h3 class="text-lg font-semibold text-text">
+            <a href={profileUrl} class="transition-colors hover:text-accent">
+              {author.name}
+            </a>
+          </h3>
+          <p class="mt-0.5 text-sm font-medium text-accent">{author.role}</p>
+          <p class="mt-3 text-sm leading-relaxed text-muted line-clamp-3">
+            {author.subline}
+          </p>
+
+          <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3">
+            <a
+              href={profileUrl}
+              class="inline-flex items-center gap-1.5 text-sm font-semibold text-text transition-colors hover:text-accent"
+            >
+              {t.blog.authorCardProfile}
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+
+            {socials.length > 0 && (
+              <div class="flex items-center gap-2">
+                {socials.map(([kind, url]) => (
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={kind}
+                    class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border text-muted transition-colors hover:border-accent hover:text-accent"
+                  >
+                    {kind === "linkedin" && (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17V9.99H6V17h2.34zM7.17 8.96a1.36 1.36 0 1 0 0-2.72 1.36 1.36 0 0 0 0 2.72zM18 17v-3.84c0-2.05-1.1-3-2.56-3-1.18 0-1.71.65-2 1.11V9.99H11.1c.03.66 0 7.01 0 7.01h2.34v-3.91c0-.21.02-.42.08-.57.16-.42.55-.86 1.19-.86.84 0 1.18.64 1.18 1.58V17H18z" />
+                      </svg>
+                    )}
+                    {kind === "github" && (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.36 9.36 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z" />
+                      </svg>
+                    )}
+                    {kind === "website" && (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                      </svg>
+                    )}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

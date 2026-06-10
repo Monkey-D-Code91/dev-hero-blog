@@ -4,6 +4,7 @@ import type { ImageMetadata } from "astro";
 import type { Lang } from "../../i18n/ui";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import PostMeta from "./PostMeta.astro";
+import AuthorCard from "./AuthorCard.astro";
 import Comments from "./Comments.astro";
 
 interface Props {
@@ -132,6 +133,9 @@ const backLabel = t.blog.backToBlog;
       {backLabel}
     </a>
   </div>
+
+  <!-- Card autore (visibilità di chi ha scritto il pezzo) -->
+  <AuthorCard authorKey={authorKey} lang={lang} />
 
   <!-- Commenti -->
   <Comments />
