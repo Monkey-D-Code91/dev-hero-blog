@@ -179,6 +179,9 @@ export const ui = {
       authorsCardHeading: "Gli autori",
       authorCardProfile: "Vedi profilo completo",
       relatedHeading: "Articoli correlati",
+      shareHeading: "Condividi",
+      shareCopy: "Copia link",
+      shareCopied: "Copiato!",
     },
   },
 
@@ -347,6 +350,9 @@ export const ui = {
       authorsCardHeading: "The authors",
       authorCardProfile: "View full profile",
       relatedHeading: "Related articles",
+      shareHeading: "Share",
+      shareCopy: "Copy link",
+      shareCopied: "Copied!",
     },
   },
 } as const;

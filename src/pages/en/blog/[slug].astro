@@ -42,11 +42,17 @@ const hreflangIt = altPost
   ? getBlogPostUrl("it", getSlugFromEntryId(altPost.id))
   : "/blog/";
 
-// Autori (uno o più). Risolve nome + link dai profili.
+// Autori (uno o più). Risolve nome, monogramma e avatar dai profili.
 const authorEntries = await findAuthors(post.data.authors, lang);
 const authors = post.data.authors.map((key) => {
   const entry = authorEntries.find((a) => a.data.authorKey === key);
-  return { key, name: entry?.data.name ?? key };
+  return {
+    key,
+    name: entry?.data.name ?? key,
+    monogram: entry?.data.monogram ?? key.slice(0, 2).toUpperCase(),
+    avatar: entry?.data.avatar,
+    avatarAlt: entry?.data.avatarAlt,
+  };
 });
 
 // Articoli correlati (per tag + autori comuni).
@@ -106,6 +112,7 @@ const articleSchema = buildArticleSchema({
       coverAlt={post.data.coverAlt}
       authors={authors}
       related={related}
+      url={new URL(`/en/blog/${slug}/`, Astro.site).toString()}
     >
       <Content />
     </BlogPostLayout>

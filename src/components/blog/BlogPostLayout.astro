@@ -7,6 +7,7 @@ import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import PostMeta from "./PostMeta.astro";
 import AuthorCard from "./AuthorCard.astro";
 import RelatedPosts from "./RelatedPosts.astro";
+import ShareButtons from "./ShareButtons.astro";
 import Comments from "./Comments.astro";
 import type { ProcessedPost } from "../../utils/blog";
 
@@ -21,6 +22,7 @@ interface Props {
   coverAlt?: string;
   authors: PostAuthor[];
   related?: ProcessedPost[];
+  url: string;
 }
 
 const {
@@ -34,6 +36,7 @@ const {
   coverAlt,
   authors,
   related = [],
+  url,
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -112,8 +115,8 @@ const backLabel = t.blog.backToBlog;
     </div>
   </article>
 
-  <!-- Link "torna al blog" (sotto) -->
-  <div class="mt-14 border-t border-border pt-8">
+  <!-- Link "torna al blog" + bottoni di condivisione (sotto) -->
+  <div class="mt-14 border-t border-border pt-8 flex flex-wrap items-center justify-between gap-4">
     <a
       href={backUrl}
       class="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
@@ -134,6 +137,7 @@ const backLabel = t.blog.backToBlog;
       </svg>
       {backLabel}
     </a>
+    <ShareButtons url={url} title={title} lang={lang} />
   </div>
 
   <!-- Articoli correlati -->

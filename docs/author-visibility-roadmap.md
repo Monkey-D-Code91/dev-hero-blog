@@ -15,8 +15,9 @@
 - **Tier 1 #3 — OG image per-post** generate a build-time → `src/utils/og.ts` (satori + resvg), endpoint `src/pages/og/[...route].png.ts`, font in `src/assets/og-fonts/`. Usa il logo `public/logos/fd-3-nib.svg` rasterizzato.
 - **Tier 2 #4 — Co-autori** → schema `authors: string[]` (con legacy `author` normalizzato via transform Zod), helper `processPosts`/`findAuthors`/`formatAuthorList`, byline/card/JSON-LD/OG/RSS/Keystatic tutti multi-autore.
 - **Tier 2 #5 — Related posts** → `src/utils/blog.ts` (`getRelatedPosts`), `src/components/blog/RelatedPosts.astro`, integrato in `BlogPostLayout.astro` e nelle pagine post IT/EN. Score per tag + autori comuni; fallback ai più recenti.
+- **Tier 2 #6 — Avatar byline + share buttons** → `PostAuthor` esteso con `monogram/avatar/avatarAlt`; `processPosts` risolve i dati completi autore; `PostMeta.astro` e `PostCard.astro` mostrano avatar/monogramma 24px (20px nelle card); `src/components/blog/ShareButtons.astro` (LinkedIn, X, copia link con feedback 2s); `BlogPostLayout.astro` accetta `url` e renderizza `ShareButtons`.
 
-**Rimanenti** (oggetto di questo piano): **#6** (Tier 2) e **#7, #8, #9** (Tier 3).
+**Rimanenti** (oggetto di questo piano): **#7, #8, #9** (Tier 3).
 
 ---
 

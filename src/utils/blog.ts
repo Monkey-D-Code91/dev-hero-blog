@@ -8,10 +8,13 @@ import { getReadingTime } from "./readingTime";
 // Tipi condivisi tra BlogList e PostCard
 // ──────────────────────────────────────────────
 
-/** Autore risolto di un post: chiave + nome visualizzato. */
+/** Autore risolto di un post: chiave, nome visualizzato e dati visivi (avatar/monogramma). */
 export interface PostAuthor {
   key: string;
   name: string;
+  monogram: string;
+  avatar?: ImageMetadata;
+  avatarAlt?: string;
 }
 
 export interface ProcessedPost {
@@ -105,7 +108,10 @@ export async function processPosts(
   entries: CollectionEntry<"blog">[],
   lang: Lang
 ): Promise<ProcessedPost[]> {
-  const nameMap = await buildAuthorNameMap(lang);
+  const authorEntries = await getCollection("authors", (entry) =>
+    entry.id.startsWith(`${lang}/`)
+  );
+  const authorMap = new Map(authorEntries.map((a) => [a.data.authorKey, a.data]));
   return entries.map((p) => ({
     title: p.data.title,
     description: p.data.description,
@@ -115,10 +121,16 @@ export async function processPosts(
     readingTime: getReadingTime(p.body, lang),
     cover: p.data.cover,
     coverAlt: p.data.coverAlt,
-    authors: p.data.authors.map((key) => ({
-      key,
-      name: nameMap.get(key) ?? key,
-    })),
+    authors: p.data.authors.map((key) => {
+      const data = authorMap.get(key);
+      return {
+        key,
+        name: data?.name ?? key,
+        monogram: data?.monogram ?? key.slice(0, 2).toUpperCase(),
+        avatar: data?.avatar,
+        avatarAlt: data?.avatarAlt,
+      };
+    }),
   }));
 }
 
