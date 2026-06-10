@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import AuthorLayout from "../../layouts/AuthorLayout.astro";
+import { getPublishedPosts } from "../../utils/blog";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const allAuthors = await getCollection("authors");
@@ -30,6 +31,11 @@ const enHref = `/en/authors/${enSlug}/`;
 
 const title = `${author.name} — ${author.role}`;
 const description = author.subline;
+
+const allPosts = await getPublishedPosts("it");
+const articleCount = allPosts.filter((p) =>
+  p.data.authors.includes(author.authorKey)
+).length;
 ---
 
 <AuthorLayout
@@ -39,6 +45,7 @@ const description = author.subline;
   enHref={enHref}
   title={title}
   description={description}
+  articleCount={articleCount}
 >
   <Content />
 </AuthorLayout>

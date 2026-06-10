@@ -4,9 +4,10 @@ import type { CollectionEntry } from "astro:content";
 
 interface Props {
   author: CollectionEntry<"authors">["data"];
+  articleCount?: number;
 }
 
-const { author } = Astro.props;
+const { author, articleCount } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -18,6 +19,9 @@ const stats = [
     : []),
   ...(author.stats.countries
     ? [{ value: author.stats.countries, label: t.about.stats.countries }]
+    : []),
+  ...(articleCount !== undefined && articleCount > 0
+    ? [{ value: String(articleCount), label: t.about.stats.articles }]
     : []),
 ];
 ---

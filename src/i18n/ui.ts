@@ -49,6 +49,7 @@ export const ui = {
         years: "Anni di esperienza",
         teamSize: "Persone nel team",
         countries: "Paesi coordinati",
+        articles: "Articoli pubblicati",
       },
     },
     experience: {
@@ -220,6 +221,7 @@ export const ui = {
         years: "Years of experience",
         teamSize: "People in the team",
         countries: "Countries coordinated",
+        articles: "Published articles",
       },
     },
     experience: {

@@ -29,9 +29,10 @@ interface Props {
   enHref: string;
   title: string;
   description: string;
+  articleCount?: number;
 }
 
-const { author, lang, itHref, enHref, title, description } = Astro.props;
+const { author, lang, itHref, enHref, title, description, articleCount } = Astro.props;
 
 // URL canonico: quello della lingua corrente.
 const canonicalPath = lang === "it" ? itHref : enHref;
@@ -73,7 +74,7 @@ const personSchema = buildPersonSchema({
   <Navbar itHref={itHref} enHref={enHref} />
   <main id="main">
     <Hero author={author} />
-    <About author={author}>
+    <About author={author} articleCount={articleCount}>
       <!-- Il corpo markdown viene inserito qui dallo slot del layout -->
       <slot />
     </About>
