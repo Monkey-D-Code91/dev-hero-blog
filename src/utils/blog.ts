@@ -138,6 +138,44 @@ export async function getPublishedPosts(lang: Lang) {
 }
 
 /**
+ * Restituisce fino a `limit` articoli correlati al post corrente.
+ * Score = tag in comune + 1 se condividono un autore.
+ * Fallback ai più recenti se nessun post ha tag in comune.
+ */
+export async function getRelatedPosts(
+  current: CollectionEntry<"blog">,
+  lang: Lang,
+  limit = 3
+): Promise<ProcessedPost[]> {
+  const allPosts = await getPublishedPosts(lang);
+  const others = allPosts.filter((p) => p.id !== current.id);
+
+  const currentTags = new Set(current.data.tags);
+  const currentAuthors = new Set(current.data.authors);
+
+  const scored = others.map((p) => {
+    const tagOverlap = p.data.tags.filter((t) => currentTags.has(t)).length;
+    const authorBonus = p.data.authors.some((a) => currentAuthors.has(a)) ? 1 : 0;
+    return { entry: p, score: tagOverlap + authorBonus };
+  });
+
+  const hasSomeRelevance = scored.some((s) => s.score > 0);
+  if (!hasSomeRelevance) {
+    return processPosts(others.slice(0, limit), lang);
+  }
+
+  scored.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return b.entry.data.pubDate.getTime() - a.entry.data.pubDate.getTime();
+  });
+
+  return processPosts(
+    scored.slice(0, limit).map((s) => s.entry),
+    lang
+  );
+}
+
+/**
  * Trova la versione nella lingua alternativa dello stesso articolo
  * tramite il campo `translationKey` condiviso.
  * Ritorna null se non esiste o non è pubblicata.

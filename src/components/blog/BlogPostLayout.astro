@@ -6,7 +6,9 @@ import type { PostAuthor } from "../../utils/blog";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import PostMeta from "./PostMeta.astro";
 import AuthorCard from "./AuthorCard.astro";
+import RelatedPosts from "./RelatedPosts.astro";
 import Comments from "./Comments.astro";
+import type { ProcessedPost } from "../../utils/blog";
 
 interface Props {
   title: string;
@@ -18,6 +20,7 @@ interface Props {
   cover?: ImageMetadata;
   coverAlt?: string;
   authors: PostAuthor[];
+  related?: ProcessedPost[];
 }
 
 const {
@@ -30,6 +33,7 @@ const {
   cover,
   coverAlt,
   authors,
+  related = [],
 } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -131,6 +135,9 @@ const backLabel = t.blog.backToBlog;
       {backLabel}
     </a>
   </div>
+
+  <!-- Articoli correlati -->
+  <RelatedPosts posts={related} lang={lang} />
 
   <!-- Card autore/i (visibilità di chi ha scritto il pezzo) -->
   <section

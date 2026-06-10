@@ -12,6 +12,7 @@ import {
   getBlogPostUrl,
   getAuthorUrl,
   findAuthors,
+  getRelatedPosts,
 } from "../../../utils/blog";
 import { getReadingTime } from "../../../utils/readingTime";
 import { buildArticleSchema } from "../../../utils/structuredData";
@@ -47,6 +48,9 @@ const authors = post.data.authors.map((key) => {
   const entry = authorEntries.find((a) => a.data.authorKey === key);
   return { key, name: entry?.data.name ?? key };
 });
+
+// Articoli correlati (per tag + autori comuni).
+const related = await getRelatedPosts(post, lang);
 
 // OG image generata per-articolo (titolo + autore/i).
 const ogImage = new URL(`/og/${post.id}.png`, Astro.site).toString();
@@ -101,6 +105,7 @@ const articleSchema = buildArticleSchema({
       cover={post.data.cover}
       coverAlt={post.data.coverAlt}
       authors={authors}
+      related={related}
     >
       <Content />
     </BlogPostLayout>

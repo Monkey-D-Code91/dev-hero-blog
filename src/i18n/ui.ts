@@ -178,6 +178,7 @@ export const ui = {
       authorCardHeading: "L'autore",
       authorsCardHeading: "Gli autori",
       authorCardProfile: "Vedi profilo completo",
+      relatedHeading: "Articoli correlati",
     },
   },
 
@@ -345,6 +346,7 @@ export const ui = {
       authorCardHeading: "The author",
       authorsCardHeading: "The authors",
       authorCardProfile: "View full profile",
+      relatedHeading: "Related articles",
     },
   },
 } as const;

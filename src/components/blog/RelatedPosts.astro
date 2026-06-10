@@ -1,0 +1,40 @@
+---
+import type { Lang } from "../../i18n/ui";
+import type { ProcessedPost } from "../../utils/blog";
+import { useTranslations } from "../../i18n/utils";
+import PostCard from "./PostCard.astro";
+
+interface Props {
+  posts: ProcessedPost[];
+  lang: Lang;
+}
+
+const { posts, lang } = Astro.props;
+
+if (posts.length === 0) return;
+
+const t = useTranslations(lang);
+---
+
+<section
+  class="mt-16 border-t border-border pt-12"
+  aria-labelledby="related-posts-heading"
+  data-reveal
+>
+  <p
+    id="related-posts-heading"
+    class="text-sm font-semibold uppercase tracking-widest text-accent"
+  >
+    {t.blog.relatedHeading}
+  </p>
+
+  <div class="mt-6 grid gap-6 sm:grid-cols-2">
+    {
+      posts.map((post, i) => (
+        <div data-reveal data-reveal-delay={i * 100}>
+          <PostCard {...post} lang={lang} />
+        </div>
+      ))
+    }
+  </div>
+</section>
