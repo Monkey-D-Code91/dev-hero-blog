@@ -17,6 +17,17 @@ const fontRegular = readFileSync(join(fontDir, "Inter-Regular.ttf"));
 const fontSemiBold = readFileSync(join(fontDir, "Inter-SemiBold.ttf"));
 const fontBold = readFileSync(join(fontDir, "Inter-Bold.ttf"));
 
+// Logo del blog (pennino) rasterizzato in PNG e incorporato come data URI:
+// satori riceve un'immagine bitmap, evitando incertezze sul rendering SVG.
+const logoSvg = readFileSync(
+  join(process.cwd(), "public/logos/fd-3-nib.svg"),
+  "utf-8"
+);
+const logoPng = new Resvg(logoSvg, { fitTo: { mode: "width", value: 128 } })
+  .render()
+  .asPng();
+const logoDataUri = `data:image/png;base64,${logoPng.toString("base64")}`;
+
 // Palette allineata a src/styles/global.css.
 const C = {
   bg: "#0b1120",
@@ -84,25 +95,15 @@ export async function renderOgImage({ title, authorName, lang }: OgInput): Promi
         "div",
         { display: "flex", alignItems: "center", gap: 18 },
         [
-          h(
-            "div",
-            {
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+          {
+            type: "img",
+            props: {
+              src: logoDataUri,
               width: 56,
               height: 56,
-              borderRadius: 14,
-              borderWidth: 2,
-              borderStyle: "solid",
-              borderColor: C.accentSoft,
-              backgroundColor: "rgba(17,24,39,0.7)",
-              color: C.accent,
-              fontSize: 26,
-              fontWeight: 700,
+              style: { width: 56, height: 56 },
             },
-            "FD"
-          ),
+          },
           h(
             "div",
             { display: "flex", flexDirection: "column" },
