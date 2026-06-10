@@ -11,8 +11,8 @@ fruizione (ascolto in mobilità) → più visibilità per gli autori.
 > - **Storage: `public/audio/` in repo** ora; path astratto per migrare a R2 dopo.
 > - **Feed podcast pubblico (Spotify/Apple): NO al lancio** — prima player on-page, poi si valuta.
 > - **Flag frontmatter `audio: false`** per articolo: incluso, per escludere i pezzi troppo code-heavy.
-> - **Provider TTS: DA DECIDERE dopo bake-off** OpenAI vs ElevenLabs.
->   Script pronto: `scripts/audio-bakeoff.mjs` (richiede le tue API key, output in `bakeoff/`).
+> - **Provider TTS: ElevenLabs** (`eleven_multilingual_v2`) — scelto dopo bake-off per la
+>   qualità/naturalezza della voce, in particolare in italiano.
 
 ## Vincolo di partenza
 Sito **statico su Cloudflare Pages**. Tre problemi distinti da risolvere, non uno:
@@ -50,25 +50,41 @@ con cataloghi enormi e contenuti che cambiano in continuazione — non è questo
 
 ---
 
-## Decisione 2 — Quale servizio TTS
+## Decisione 2 — Quale servizio TTS → **ElevenLabs** ✅
 
-Requisiti: **qualità alta** (voce robotica = danno di credibilità, peggio che niente),
-**IT ed EN nativi**, costo sostenibile, API batch-friendly.
+Scelto dopo il bake-off: vince sulla **naturalezza della voce**, soprattutto in
+italiano, che è il fattore n.1 di credibilità per questa feature. Modello
+`eleven_multilingual_v2`. La voce è il driver, il costo superiore è accettato.
 
-| Servizio | Qualità | IT | Prezzo orientativo | Note |
+### Implicazioni operative della scelta ElevenLabs
+- **Voce fissa per il brand**: scegliere UNA voce IT e UNA voce EN (o una voce
+  multilingue che regga entrambe) dalla dashboard e bloccarne gli `voice_id` in config.
+  Coerenza > varietà: il "podcast" deve avere sempre la stessa voce.
+- **Costo a crediti/caratteri**: più alto di OpenAI ma **una-tantum per articolo**
+  (scelta A, build-time). Verificare il piano: il free/starter ha un tetto di caratteri
+  mensile che a regime può non bastare per articoli lunghi ×2 lingue → mettere in conto
+  un piano a pagamento. Stimare i caratteri/mese (somma articoli × ~1.05 per la pulizia testo).
+- **Uso commerciale**: consentito sui piani a pagamento — confermare i ToS per la
+  pubblicazione pubblica dell'audio (vedi Rischi).
+- **API key come secret**: vive solo in `.env` / CI, mai nel client (vale per build-time).
+
+Requisiti che hanno guidato la scelta: **qualità alta** (voce robotica = danno di
+credibilità, peggio che niente), **IT ed EN nativi**, API batch-friendly.
+
+### Alternative valutate (per memoria, scartate)
+| Servizio | Qualità | IT | Prezzo orientativo | Esito |
 |---|---|---|---|---|
-| **OpenAI TTS** (`gpt-4o-mini-tts`) | Alta | ✅ buono | ~$0.015/1k char | API semplicissima, ottimo rapporto qualità/prezzo. **Default consigliato.** |
-| **ElevenLabs** | Top di gamma | ✅ ottimo | più caro, a credito | Voce più naturale in assoluto; valuta se la qualità è il driver principale |
-| Google Cloud TTS (Neural2/Studio) | Alta | ✅ | a carattere | Affidabile, voci IT buone, setup GCP più verboso |
-| Azure Speech | Alta | ✅ | a carattere | Voci IT molto naturali (es. Diego/Elsa), SSML ricco |
-| Cartesia / PlayHT | Alta | parziale | variabile | Veloci, ma verificare resa IT |
+| **ElevenLabs** (`eleven_multilingual_v2`) | Top di gamma | ✅ ottimo | più caro, a credito | **SCELTO** — voce più naturale, IT convincente |
+| OpenAI TTS (`gpt-4o-mini-tts`) | Alta | ✅ buono | ~$0.015/1k char | Scartato: più economico/semplice ma resa meno naturale |
+| Google Cloud TTS (Neural2/Studio) | Alta | ✅ | a carattere | Non valutato a fondo; setup GCP più verboso |
+| Azure Speech | Alta | ✅ | a carattere | Non valutato a fondo; buone voci IT, SSML ricco |
+| Cartesia / PlayHT | Alta | parziale | variabile | Non valutato a fondo |
 
-**Raccomandazione: OpenAI TTS per partire** (qualità/prezzo/semplicità). Se in review
-la voce IT non convince → ElevenLabs per la qualità o Azure per le voci italiane.
-Tenere il servizio **dietro un'astrazione** (`src/utils/tts.ts`) così è sostituibile
-senza toccare il resto.
+**Astrazione comunque consigliata**: tenere ElevenLabs **dietro `src/utils/tts.ts`** così,
+se in futuro il costo o i ToS cambiano, il provider è sostituibile senza toccare il resto.
 
-> Nota: budget caratteri/voce vanno verificati ai prezzi correnti prima di scegliere — la tabella è indicativa.
+> Nota: budget caratteri/voce vanno verificati ai prezzi correnti di ElevenLabs prima di
+> dimensionare il piano — i valori in tabella sono indicativi.
 
 ---
 
@@ -141,7 +157,7 @@ misurare la qualità reale, e solo dopo decidere se aprire il feed podcast pubbl
 
 ---
 
-## Effort stimato (scelta A, OpenAI TTS, storage in repo)
+## Effort stimato (scelta A, ElevenLabs, storage in repo)
 | Blocco | Stima |
 |---|---|
 | `tts.ts` + integrazione provider + .env/secret | 0.5 g |
@@ -162,12 +178,20 @@ misurare la qualità reale, e solo dopo decidere se aprire il feed podcast pubbl
 - **Drift testo/audio**: se editi un articolo già pubblicato, l'audio diventa stale.
   Mitigato dall'hash (rigenera solo ciò che cambia) ma va lanciato lo script.
 - **Peso repo** se l'audio resta in git → piano di migrazione a R2 pronto.
-- **Licenza voce/uso commerciale**: verificare i ToS del provider per uso pubblico
-  delle voci sintetiche (di norma OK, ma da confermare).
+- **Licenza voce/uso commerciale (ElevenLabs)**: l'uso pubblico/commerciale dell'audio
+  richiede un piano a pagamento e attribuzione su alcuni piani — confermare i ToS
+  ElevenLabs prima del go-live, specie se poi si apre il feed podcast pubblico.
+- **Tetto caratteri del piano**: ElevenLabs fattura a caratteri/mese; articoli lunghi ×2
+  lingue consumano in fretta. Dimensionare il piano sui volumi reali per non bloccare le build.
 
-## Domande aperte per te
-1. Provider TTS: **OpenAI** per partire, o punti diretto a **ElevenLabs** per la qualità?
-2. Code block nell'audio: **omessi** o sostituiti da un segnaposto parlato?
-3. Storage: **in repo** ora (semplice) o **R2** subito (pulito)?
-4. Vuoi il **feed podcast pubblico** (Spotify/Apple) o per ora solo player on-page?
-5. Flag `audio: false` per articolo per escludere i pezzi troppo "code-heavy"?
+## Stato domande
+1. ~~Provider TTS~~ → **ElevenLabs** ✅
+2. ~~Code block nell'audio~~ → **segnaposto parlato** ✅
+3. ~~Storage~~ → **in repo** (`public/audio/`), R2 dopo ✅
+4. ~~Feed podcast pubblico~~ → **no al lancio**, solo player on-page ✅
+5. ~~Flag `audio: false`~~ → **incluso** ✅
+
+### Unico punto ancora da chiudere prima di sviluppare
+- **Scelta delle voci ElevenLabs**: quale `voice_id` per IT e quale per EN (o una voce
+  multilingue unica). Usa `scripts/audio-bakeoff.mjs` con `ELEVEN_VOICE_ID` per provarne
+  alcune e bloccare quelle definitive in config.
