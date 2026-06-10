@@ -13,6 +13,12 @@ fruizione (ascolto in mobilità) → più visibilità per gli autori.
 > - **Flag frontmatter `audio: false`** per articolo: incluso, per escludere i pezzi troppo code-heavy.
 > - **Provider TTS: ElevenLabs** (`eleven_multilingual_v2`) — scelto dopo bake-off per la
 >   qualità/naturalezza della voce, in particolare in italiano.
+> - **Voci scelte** (M/F per lingua) — vedi Decisione 6 per la mappatura voce→autore:
+>   - EN maschile: `c6SfcYrb2t09NHXiT80T`
+>   - EN femminile: `gJx1vCzNCD1EQHT212Ls`
+>   - IT maschile: `tkjyl8Joo8r3RALgNJDV`
+>   - IT femminile: `QITiGyM4owEZrBEf0QV8`
+> - **Mappatura: voce per autore in base al genere vocale** (Marco → maschile), coerente IT/EN.
 
 ## Vincolo di partenza
 Sito **statico su Cloudflare Pages**. Tre problemi distinti da risolvere, non uno:
@@ -157,6 +163,44 @@ misurare la qualità reale, e solo dopo decidere se aprire il feed podcast pubbl
 
 ---
 
+## Decisione 6 — Mappatura voce → articolo (multi-autore)
+
+Abbiamo 4 voci: maschile/femminile × IT/EN. Su un blog multi-autore la scelta giusta è
+**legare la voce all'autore**, non all'articolo: l'audio di un pezzo usa la voce che
+rappresenta chi l'ha scritto, identica in IT e in EN. Rinforza l'identità di ogni firma
+(obiettivo del blog) ed è deterministica.
+
+### Voci configurate
+```ts
+// src/config.ts
+export const TTS_VOICES = {
+  en: { male: "c6SfcYrb2t09NHXiT80T", female: "gJx1vCzNCD1EQHT212Ls" },
+  it: { male: "tkjyl8Joo8r3RALgNJDV", female: "QITiGyM4owEZrBEf0QV8" },
+} as const;
+```
+
+### Come si sceglie la voce di un autore
+Aggiungere un campo opzionale al profilo autore in `src/content.config.ts`:
+```ts
+// nella collection authors:
+voice: z.enum(["male", "female"]).default("male"),
+```
+Il generatore risolve `TTS_VOICES[lang][author.voice]`. Marco → `male`.
+
+- ✅ Una sola fonte di verità (il profilo autore), coerenza IT/EN automatica.
+- ✅ Nuovo autore = si imposta `voice` una volta, fine.
+- ⚠️ **Co-autori** (lo schema supporta `authors: [..]`): l'audio è un flusso unico, non
+  può avere due voci a metà. Regola semplice: **usa la voce del primo autore** dell'array.
+  Documentarlo; va benissimo per il caso reale (quasi tutti i pezzi sono mono-autore).
+- ⚠️ "Genere vocale" ≠ identità di genere della persona: il campo sceglie *quale voce
+  sintetica* usare, non etichetta l'autore. Tenerlo neutro nei commenti/UI.
+
+> Alternativa scartata: voce per-articolo via frontmatter. Più flessibile ma più
+> rumorosa (va settata ad ogni pezzo) e slegata dall'identità dell'autore. Il campo
+> sull'autore resta comunque sovrascrivibile in futuro se servisse.
+
+---
+
 ## Effort stimato (scelta A, ElevenLabs, storage in repo)
 | Blocco | Stima |
 |---|---|
@@ -191,7 +235,6 @@ misurare la qualità reale, e solo dopo decidere se aprire il feed podcast pubbl
 4. ~~Feed podcast pubblico~~ → **no al lancio**, solo player on-page ✅
 5. ~~Flag `audio: false`~~ → **incluso** ✅
 
-### Unico punto ancora da chiudere prima di sviluppare
-- **Scelta delle voci ElevenLabs**: quale `voice_id` per IT e quale per EN (o una voce
-  multilingue unica). Usa `scripts/audio-bakeoff.mjs` con `ELEVEN_VOICE_ID` per provarne
-  alcune e bloccare quelle definitive in config.
+6. ~~Voci ElevenLabs + mappatura~~ → **4 voci scelte, mappatura per autore** (Decisione 6) ✅
+
+Tutte le decisioni di design sono chiuse. **Pronto per l'implementazione** quando vuoi.
