@@ -49,10 +49,13 @@ const authorSameAs = author
   ? (Object.values(author.data.links).filter(Boolean) as string[])
   : [];
 
-// JSON-LD BlogPosting
+// OG image generata per-articolo (titolo + autore).
+const ogImage = new URL(`/og/${post.id}.png`, Astro.site).toString();
+
+// JSON-LD BlogPosting — usa la cover se presente, altrimenti l'OG generata.
 const imageUrl = post.data.cover
   ? new URL(post.data.cover.src, Astro.site).toString()
-  : new URL("/og-image.png", Astro.site).toString();
+  : ogImage;
 const articleSchema = buildArticleSchema({
   site: Astro.site,
   lang,
@@ -75,6 +78,7 @@ const articleSchema = buildArticleSchema({
   lang="it"
   path={`/blog/${slug}/`}
   ogType="article"
+  ogImage={ogImage}
   hreflangIt={`/blog/${slug}/`}
   hreflangEn={hreflangEn}
   jsonLd={articleSchema}
