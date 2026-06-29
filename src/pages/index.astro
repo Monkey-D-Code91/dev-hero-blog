@@ -27,7 +27,7 @@ const itAuthors = allAuthors.filter((a) => a.id.startsWith("it/"));
   path="/"
 >
   <Navbar />
-  <main id="main">
+  <main id="main" tabindex="-1">
     <LandingHero lang="it" />
     <RecentPosts posts={recentPosts} lang="it" />
     <AuthorsShowcase authors={itAuthors} lang="it" />

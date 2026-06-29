@@ -21,7 +21,7 @@ const processedPosts = await processPosts(await getPublishedPosts(lang), lang);
   hreflangEn="/en/blog/"
 >
   <Navbar itHref="/blog/" enHref="/en/blog/" />
-  <main id="main">
+  <main id="main" tabindex="-1">
     <BlogList posts={processedPosts} />
   </main>
   <Footer />

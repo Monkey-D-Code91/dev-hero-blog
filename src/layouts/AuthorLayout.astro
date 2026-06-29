@@ -72,7 +72,7 @@ const personSchema = buildPersonSchema({
   extraFeeds={[authorFeed]}
 >
   <Navbar itHref={itHref} enHref={enHref} />
-  <main id="main">
+  <main id="main" tabindex="-1">
     <Hero author={author} />
     <About author={author} articleCount={articleCount}>
       <!-- Il corpo markdown viene inserito qui dallo slot del layout -->
