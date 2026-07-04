@@ -29,7 +29,7 @@ const enAuthors = allAuthors.filter((a) => a.id.startsWith("en/"));
   hreflangEn="/en/"
 >
   <Navbar />
-  <main id="main">
+  <main id="main" tabindex="-1">
     <LandingHero lang="en" />
     <RecentPosts posts={recentPosts} lang="en" />
     <AuthorsShowcase authors={enAuthors} lang="en" />

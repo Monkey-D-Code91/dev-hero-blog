@@ -103,7 +103,7 @@ const articleSchema = buildArticleSchema({
   canonicalUrl={post.data.canonicalUrl}
 >
   <Navbar itHref={`/blog/${slug}/`} enHref={hreflangEn} />
-  <main id="main">
+  <main id="main" tabindex="-1">
     <BlogPostLayout
       title={post.data.title}
       description={post.data.description}

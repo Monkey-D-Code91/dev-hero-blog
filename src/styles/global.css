@@ -10,7 +10,8 @@
   --color-bg: #0b1120; /* navy profondo, sfondo principale */
   --color-surface: #0f172a; /* sezioni alternate */
   --color-surface-2: #111827; /* card / elementi sopraelevati */
-  --color-border: #1e293b; /* bordi sottili */
+  --color-border: #1e293b; /* bordi sottili (decorativi) */
+  --color-border-strong: #64748b; /* bordi controlli interattivi — ≥3:1 vs bg (WCAG 1.4.11) */
   --color-text: #e6edf3; /* testo principale */
   --color-muted: #94a3b8; /* testo secondario */
   --color-accent: #38bdf8; /* accento azzurro (CTA, link) */
