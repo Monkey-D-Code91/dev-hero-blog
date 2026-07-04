@@ -5,6 +5,8 @@ pubDate: 2026-07-04
 translationKey: "in-praise-of-the-rough-idea"
 authors: ["marco-mariotti"]
 tags: ["manifesto", "ai", "scrittura", "pensiero-critico"]
+cover: "../../../assets/covers/elogio-dell-idea-grezza.png"
+coverAlt: "Copertina di The First Draft: tre cerchi sovrapposti — tech, human e AI — che si incontrano in un punto luminoso, con la scritta 'Elogio dell'idea grezza' sottolineata a mano come una correzione di bozza."
 draft: false
 ---
 

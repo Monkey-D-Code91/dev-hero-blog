@@ -58,13 +58,15 @@ const authors = post.data.authors.map((key) => {
 // Articoli correlati (per tag + autori comuni).
 const related = await getRelatedPosts(post, lang);
 
-// OG image generata per-articolo (titolo + autore/i).
-const ogImage = new URL(`/og/${post.id}.png`, Astro.site).toString();
-
-// JSON-LD BlogPosting — usa la cover se presente, altrimenti l'OG generata.
-const imageUrl = post.data.cover
+// OG image: preferisci la cover dell'articolo come anteprima social,
+// con fallback all'OG generata per-articolo (titolo + autore/i).
+const generatedOg = new URL(`/og/${post.id}.png`, Astro.site).toString();
+const ogImage = post.data.cover
   ? new URL(post.data.cover.src, Astro.site).toString()
-  : ogImage;
+  : generatedOg;
+
+// JSON-LD BlogPosting — stessa immagine usata per l'OG (cover se presente).
+const imageUrl = ogImage;
 // Se c'è un canonicalUrl esterno, il JSON-LD punta a quello come url/mainEntityOfPage.
 const effectiveCanonical = post.data.canonicalUrl ?? `/en/blog/${slug}/`;
 const articleSchema = buildArticleSchema({

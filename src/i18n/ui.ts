@@ -162,7 +162,7 @@ export const ui = {
     blog: {
       nav: "Blog",
       heading: "Blog",
-      lead: "Riflessioni su ingegneria del software, leadership e telecomunicazioni.",
+      lead: "Pensiero critico in un mare di contenuti generati. Tech, human & AI.",
       readingTime: "min di lettura",
       publishedOn: "Pubblicato il",
       updatedOn: "Aggiornato il",
@@ -334,7 +334,7 @@ export const ui = {
     blog: {
       nav: "Blog",
       heading: "Blog",
-      lead: "Thoughts on software engineering, leadership and telecommunications.",
+      lead: "Critical thinking in a sea of generated content. Tech, human & AI.",
       readingTime: "min read",
       publishedOn: "Published on",
       updatedOn: "Updated on",

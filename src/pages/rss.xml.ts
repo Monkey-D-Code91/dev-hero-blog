@@ -10,7 +10,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: `${BLOG.name} — Blog`,
     description:
-      "Riflessioni su ingegneria del software, leadership e telecomunicazioni.",
+      "Pensiero critico in un mare di contenuti generati. Tech, human & AI.",
     site: context.site!,
     xmlns: { dc: "http://purl.org/dc/elements/1.1/" },
     items: posts.map((post) => ({
