@@ -1,0 +1,18 @@
+{
+  // Schema per autocompletamento/validazione nell'editor.
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // DEVE combaciare col nome del Worker gia' esistente su Cloudflare,
+  // cosi' `wrangler deploy` aggiorna quello invece di fermarsi.
+  "name": "dev-hero-blog",
+
+  "compatibility_date": "2026-07-08",
+
+  // Sito statico: nessun `main` (Worker "assets-only").
+  // `directory` = output della build Astro.
+  "assets": {
+    "directory": "./dist",
+    // Astro genera 404.html: serviamolo per le rotte non trovate.
+    "not_found_handling": "404-page"
+  }
+}
