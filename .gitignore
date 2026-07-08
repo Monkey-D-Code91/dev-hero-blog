@@ -19,3 +19,7 @@ npm-debug.log*
 
 # claude code local settings (personal, non condivise)
 .claude/settings.local.json
+
+# note personali (non condivise)
+personas/
+HANDOFF.md
