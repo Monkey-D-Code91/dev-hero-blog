@@ -1,6 +1,6 @@
 ---
 title: "The Fine Line of Code"
-description: "A migrated module, all tests green, and at the end of the month the alerts stop renewing. Where the line runs between generated code under control and out of control, and how to keep your balance on it."
+description: "A migrated module, all tests green, and at the end of the month the notifications stop renewing. Where the line runs between generated code under control and out of control, and how to keep your balance on it."
 pubDate: 2026-07-14
 translationKey: "the-fine-line-of-code"
 authors: ["marco-mariotti"]
@@ -10,17 +10,17 @@ coverAlt: "The First Draft cover: three overlapping circles (tech, human and AI)
 draft: true
 ---
 
-We had built a new module to manage alerts. The near real time part we generated from scratch, starting from the Product Owner's specs, refined in brainstorming, turned into documentation and stories, implemented with the help of AI and covered by automated and QA tests. All green.
+We had built a new module: a system of notifications and automated actions triggered when certain thresholds are reached. The most complex part we generated from scratch, starting from the Product Owner's specs, refined in brainstorming, turned into documentation and stories, implemented with the help of AI and covered by automated and QA tests. All green.
 
-What was left seemed trivial: moving the real time alerts, which already existed in an old module, into the new one. We didn't want to move the existing tables, to avoid redoing the reporting and the automated actions tied to the thresholds. We just had to hook the old alerts to the new groups table instead of the old one.
+What was left seemed trivial: bringing into the new module a part that had already existed for years in an old module. We didn't want to move the existing tables, to avoid redoing the reporting and the automated actions tied to the thresholds. We just had to hook the old notifications to the new groups table instead of the old one.
 
 That code was very old and undocumented, so I asked the AI to analyze it, explained the result I wanted, and had it generate a plan to get there. I reviewed it: clear, direct, nothing suspicious. I implemented it, tested it locally, and BAM, it worked. Off to the test environment, free as the air, happy to have saved hours of work.
 
-Then the end of the month came. The alerts expired and did not renew.
+Then, during what was turning into a long testing phase, the first end-of-month expiry arrived. The notifications expired and did not renew. We had not seen it coming.
 
-The old module didn't just evaluate the alerts: it was also in charge of renewing them at expiry. That, during analysis, had slipped through. The renewal function kept looking for the expired alerts in the old groups table, the one we had stopped populating. It found nothing. It renewed nothing. And the AI had done exactly what I had asked: the gap wasn't in its answer, it was in my question.
+The old module didn't just evaluate the thresholds: it was also in charge of renewing the notifications at expiry. That, during analysis, had slipped through. The renewal function kept looking for the expired notifications in the old groups table, the one we had stopped populating. It found nothing. It renewed nothing. We caught it and fixed it right there, in testing, before the production release. And the AI had done exactly what I had asked: the gap wasn't in its answer, it was in my question.
 
-For a long time I believed that controlling generated code meant reading it. Opening the diff, scanning the lines, checking that they did what they claimed. But the alert code, I had read it. The plan, I had reviewed line by line. It was clear, it was correct, and it did exactly what it said. The problem is that it did exactly what it said, and nothing more.
+For a long time I believed that controlling generated code meant reading it. Opening the diff, scanning the lines, checking that they did what they claimed. But that code, I had read it. The plan, I had reviewed line by line. It was clear, it was correct, and it did exactly what it said. The problem is that it did exactly what it said, and nothing more.
 
 Reading code tells you what it does. It doesn't tell you what it is responsible for. And the difference between the two is the fine line.
 
@@ -40,13 +40,13 @@ Underneath all this there was a background condition that made the three signals
 
 The three signals share a common root: they all point away from the code and toward me. My expectations, my hurry, my enthusiasm. That is why they are hard to see: the source of the noise is me. And if the danger is me, the rules I drew from that day serve one purpose only: to put friction back where competence removes it. They are not a checklist, they are four ways of looking.
 
-The first. A feature is a mathematical object: it has a domain, and that domain has precise boundaries. My mistake was not reading the code badly, it was settling for a part of the domain. Real time alerts do not just evaluate thresholds: they are born, they get evaluated, they expire, they renew. Renewal was a point in that domain, and I had mapped everything except that point. It is there, in the discontinuity I had not explored, that I fell in with both feet. The countermeasure is not to read more, it is to ask first: what is the complete domain of this thing, all its states and all its events, not just the path I have in mind? It is the same difference as between checking the answer and checking the question. If I ask the AI for a plan for the path I imagine, I will get a perfect plan for an incomplete domain.
+The first. A feature is a mathematical object: it has a domain, and that domain has precise boundaries. My mistake was not reading the code badly, it was settling for a part of the domain. Notifications do not just fire when a threshold is crossed: they are born, they get evaluated, they expire, they renew. Renewal was a point in that domain, and I had mapped everything except that point. It is there, in the discontinuity I had not explored, that I fell in with both feet. The countermeasure is not to read more, it is to ask first: what is the complete domain of this thing, all its states and all its events, not just the path I have in mind? It is the same difference as between checking the answer and checking the question. If I ask the AI for a plan for the path I imagine, I will get a perfect plan for an incomplete domain.
 
 The second. Analyze the feature as if it were an unknown object, even when it looks familiar. It is the direct defense against the confidence trap. Generated code arrives dressed like mine, and precisely for that reason it has to be treated as a stranger until I have verified that it has truly become mine. Making strange again what looks obvious is an act of discipline, not of distrust: it is the way to put back the beginner's eye without giving up the senior's craft.
 
 The third. Undocumented code is no man's land, and in no man's land common sense is not enough. Where there is no longer any keeper, the conventions you take for granted may not hold: that old module renewed itself, an implicit rule no document stated and no one remembered. In no man's land you do not deduce, you verify.
 
-The fourth. When you change the domain, the tests have to change with it, or they will keep certifying the world from before. Renewal, I knew about. What I had not connected is that it leaned on the old groups table, the one I had stopped using. And the tests did not reveal it for an almost mocking reason: they themselves, during setup, still populated that old table. So renewal, under test, always found its data and passed. In production, where no one filled that table anymore, it found nothing. The illusion lasted until the end of the month only because that is when the first alert expires and renewal tries to fire. The green was not a confirmation: it was the echo of a world I had just switched off. If you change the domain and the tests stay identical, that green light should be looked at with suspicion, not relief.
+The fourth. When you change the domain, the tests have to change with it, or they will keep certifying the world from before. Renewal, I knew about. What I had not connected is that it leaned on the old groups table, the one I had stopped using. And the automated tests did not reveal it for an almost mocking reason: they themselves, during setup, still populated that old table. So renewal, under test, always found its data and passed. In the test environment, where no one filled that table anymore, the first end-of-month renewal found nothing. The illusion of the green tests lasted until that first expiry. The green was not a confirmation: it was the echo of a world I had just switched off. If you change the domain and the tests stay identical, that green light should be looked at with suspicion, not relief.
 
 Back to the uncomfortable question: the AI analyzed, documented, planned and generated, and it did all of it well. The failure is still mine. It is not a contradiction, it is the exact shape of our relationship. The machine and I answer for different things.
 
@@ -65,3 +65,7 @@ I have no illusion that the line will get easier. On the contrary: the more AI r
 Walking a fine line is not an emergency, it is the normal state. The point is not to never wobble. It is to develop, with every great change, an even greater awareness: it is the only thing that can grow as fast as the slipperiness. This time I crossed the line without noticing. Next time I will feel it under my feet.
 
 And one day, from crossing it over and over, we will be perfect tightrope walkers.
+
+---
+
+*The opinions and experiences shared in this article are my own and do not represent official positions of my employer. The cases described are intentionally generic and anonymized, for educational purposes.*

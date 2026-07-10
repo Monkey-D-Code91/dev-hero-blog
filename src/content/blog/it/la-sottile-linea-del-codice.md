@@ -1,6 +1,6 @@
 ---
 title: "La sottile linea del codice"
-description: "Un modulo migrato, tutti i test verdi, e a fine mese gli alert smettono di rinnovarsi. Dove passa la linea tra codice generato controllato e fuori controllo, e come restarci in equilibrio."
+description: "Un modulo migrato, tutti i test verdi, e a fine mese le notifiche smettono di rinnovarsi. Dove passa la linea tra codice generato controllato e fuori controllo, e come restarci in equilibrio."
 pubDate: 2026-07-14
 translationKey: "the-fine-line-of-code"
 authors: ["marco-mariotti"]
@@ -10,17 +10,17 @@ coverAlt: "Copertina di The First Draft: tre cerchi sovrapposti (tech, human e A
 draft: true
 ---
 
-Avevamo costruito un modulo nuovo per la gestione degli alert. La parte near real time l'abbiamo generata da zero, partendo dalle specifiche della PO, raffinate in brainstorming, tradotte in documentazione e stories, implementate con l'aiuto dell'AI e coperte da test automatici e QA. Tutto verde.
+Avevamo costruito un modulo nuovo: un sistema di notifiche e azioni automatiche che scattano al raggiungimento di certe soglie. La parte più complessa l'abbiamo generata da zero, partendo dalle specifiche della PO, raffinate in brainstorming, tradotte in documentazione e stories, implementate con l'aiuto dell'AI e coperte da test automatici e QA. Tutto verde.
 
-Restava un lavoro che sembrava banale: portare gli alert real time, che già esistevano su un vecchio modulo, dentro quello nuovo. Non volevamo spostare le tabelle esistenti, per non rifare reportistica e azioni automatiche legate alle soglie. Bastava agganciare i vecchi alert alla nuova tabella dei gruppi invece che alla vecchia.
+Restava un lavoro che sembrava banale: portare dentro il modulo nuovo una parte che già esisteva da anni in un vecchio modulo. Non volevamo spostare le tabelle esistenti, per non rifare reportistica e azioni automatiche legate alle soglie. Bastava agganciare le vecchie notifiche alla nuova tabella dei gruppi invece che alla vecchia.
 
 Quel codice era molto vecchio e senza documentazione, così ho chiesto all'AI di analizzarlo, le ho spiegato il risultato che volevo e mi sono fatto generare un piano per arrivarci. L'ho revisionato: chiaro, diretto, niente di sospetto. L'ho implementato, testato in locale e BAM, funzionava. Su in ambiente di test, liberi come l'aria, felici di aver risparmiato ore di lavoro.
 
-Poi è arrivata la fine del mese. Gli alert sono scaduti e non si sono rinnovati.
+Poi, durante quella che si stava rivelando una lunga fase di test, è arrivata la prima scadenza di fine mese. Le notifiche sono scadute e non si sono rinnovate. Non ce lo aspettavamo.
 
-Il vecchio modulo non si limitava a valutare gli alert: era anche incaricato di rinnovarli alla scadenza. Questo, in fase di analisi, era sfuggito. La funzione di rinnovo continuava a cercare gli alert scaduti nella vecchia tabella dei gruppi, quella che avevamo smesso di popolare. Non trovava niente. Non rinnovava niente. E l'AI aveva fatto esattamente quello che le avevo chiesto: il buco non era nella sua risposta, era nella mia domanda.
+Il vecchio modulo non si limitava a valutare le soglie: era anche incaricato di rinnovare le notifiche alla scadenza. Questo, in fase di analisi, era sfuggito. La funzione di rinnovo continuava a cercare le notifiche scadute nella vecchia tabella dei gruppi, quella che avevamo smesso di popolare. Non trovava niente. Non rinnovava niente. L'abbiamo scoperto e sistemato lì, in fase di test, prima del rilascio in produzione. E l'AI aveva fatto esattamente quello che le avevo chiesto: il buco non era nella sua risposta, era nella mia domanda.
 
-Per molto tempo ho creduto che controllare il codice generato volesse dire leggerlo. Aprire il diff, scorrere le righe, verificare che facessero quello che dicevano. Ma il codice degli alert io l'avevo letto. Il piano l'avevo revisionato riga per riga. Era chiaro, era corretto, e faceva esattamente quello che diceva. Il problema è che faceva esattamente quello che diceva, e niente di più.
+Per molto tempo ho creduto che controllare il codice generato volesse dire leggerlo. Aprire il diff, scorrere le righe, verificare che facessero quello che dicevano. Ma quel codice io l'avevo letto. Il piano l'avevo revisionato riga per riga. Era chiaro, era corretto, e faceva esattamente quello che diceva. Il problema è che faceva esattamente quello che diceva, e niente di più.
 
 Leggere il codice ti dice cosa fa. Non ti dice di cosa è responsabile. E la differenza tra le due cose è la linea sottile.
 
@@ -40,13 +40,13 @@ Sotto a tutto questo c'era una condizione di sfondo che rendeva i tre segnali pi
 
 I tre segnali hanno una radice comune: puntano tutti lontano dal codice e verso di me. Le mie aspettative, la mia fretta, il mio entusiasmo. Per questo sono difficili da vedere: la fonte del rumore sono io. E se il pericolo sono io, le regole che ho ricavato da quel giorno servono a una cosa sola: rimettere l'attrito dove la competenza me lo toglie. Non sono una checklist, sono quattro modi di guardare.
 
-Il primo. Una funzionalità è un oggetto matematico: ha un dominio, e quel dominio ha confini precisi. Il mio errore non è stato leggere male il codice, è stato accontentarmi di una parte del dominio. Gli alert real time non si limitano a valutare soglie: nascono, vengono valutati, scadono, si rinnovano. Il rinnovo era un punto di quel dominio, e io avevo mappato tutto tranne quel punto. È lì, nella discontinuità che non avevo esplorato, che sono cascato con tutte le scarpe. La contromossa non è leggere di più, è chiedersi prima: qual è il dominio completo di questa cosa, tutti i suoi stati e tutti i suoi eventi, non solo il percorso che ho in testa? È la stessa differenza tra controllare la risposta e controllare la domanda. Se chiedo all'AI un piano per il percorso che immagino, otterrò un piano perfetto per un dominio incompleto.
+Il primo. Una funzionalità è un oggetto matematico: ha un dominio, e quel dominio ha confini precisi. Il mio errore non è stato leggere male il codice, è stato accontentarmi di una parte del dominio. Le notifiche non si limitano a scattare al superamento di una soglia: nascono, vengono valutate, scadono, si rinnovano. Il rinnovo era un punto di quel dominio, e io avevo mappato tutto tranne quel punto. È lì, nella discontinuità che non avevo esplorato, che sono cascato con tutte le scarpe. La contromossa non è leggere di più, è chiedersi prima: qual è il dominio completo di questa cosa, tutti i suoi stati e tutti i suoi eventi, non solo il percorso che ho in testa? È la stessa differenza tra controllare la risposta e controllare la domanda. Se chiedo all'AI un piano per il percorso che immagino, otterrò un piano perfetto per un dominio incompleto.
 
 Il secondo. Analizzare la feature come se fosse un oggetto sconosciuto, anche quando sembra familiare. È la difesa diretta contro la trappola della confidenza. Il codice generato arriva vestito come il mio, e proprio per questo va trattato da estraneo finché non ho verificato che lo sia diventato davvero. Rendere di nuovo strano ciò che sembra ovvio è un atto di disciplina, non di sfiducia: è il modo di rimettere lo sguardo del principiante senza rinunciare al mestiere del senior.
 
 Il terzo. Il codice non documentato è terra di nessuno, e in terra di nessuno il buonsenso non basta. Dove non c'è più nessun custode, le convenzioni che dai per scontate possono non valere: quel vecchio modulo si rinnovava da solo, una regola implicita che nessun documento dichiarava e nessuno ricordava. In terra di nessuno non si deduce, si verifica.
 
-Il quarto. Quando cambi il dominio, i test devono cambiare con lui, o continueranno a certificare il mondo di prima. Il rinnovo io lo conoscevo. Quello che non avevo collegato è che si appoggiava alla vecchia tabella dei gruppi, quella che avevo smesso di usare. E i test non l'hanno svelato per un motivo quasi beffardo: erano loro, in fase di setup, a popolare ancora quella vecchia tabella. Così il rinnovo, sotto test, trovava sempre i suoi dati e passava. In produzione, dove quella tabella non la riempiva più nessuno, non trovava niente. L'illusione è durata fino a fine mese solo perché è lì che scade il primo alert e il rinnovo prova a partire. Il verde non era una conferma: era l'eco di un mondo che avevo appena spento. Se alteri il dominio e i test restano identici, quella luce verde va guardata con sospetto, non con sollievo.
+Il quarto. Quando cambi il dominio, i test devono cambiare con lui, o continueranno a certificare il mondo di prima. Il rinnovo io lo conoscevo. Quello che non avevo collegato è che si appoggiava alla vecchia tabella dei gruppi, quella che avevo smesso di usare. E i test automatici non l'hanno svelato per un motivo quasi beffardo: erano loro, in fase di setup, a popolare ancora quella vecchia tabella. Così il rinnovo, sotto test, trovava sempre i suoi dati e passava. Nell'ambiente di test, dove quella tabella non la riempiva più nessuno, al primo rinnovo di fine mese non trovava niente. L'illusione dei test verdi è durata fino a quella prima scadenza. Il verde non era una conferma: era l'eco di un mondo che avevo appena spento. Se alteri il dominio e i test restano identici, quella luce verde va guardata con sospetto, non con sollievo.
 
 Torniamo alla domanda scomoda: l'AI ha analizzato, documentato, pianificato e generato, e ha fatto tutto bene. Il guasto resta mio. Non è una contraddizione, è la forma esatta del nostro rapporto. La macchina e io rispondiamo di cose diverse.
 
@@ -65,3 +65,7 @@ Non mi illudo che quella linea diventerà più facile. Al contrario: più l'AI t
 Camminare in equilibrio su una linea sottile non è un'emergenza, è la normalità. Il punto non è non oscillare mai. È sviluppare, a ogni cambiamento grande, una consapevolezza ancora più grande: è l'unica cosa che può crescere alla stessa velocità della scivolosità. Questa volta la linea l'ho attraversata senza accorgermene. La prossima la sentirò sotto i piedi.
 
 E un giorno, a forza di attraversarla, saremo equilibristi perfetti.
+
+---
+
+*Le opinioni e le esperienze condivise in questo articolo sono personali e non rappresentano posizioni ufficiali del mio datore di lavoro. I casi descritti sono volutamente generici e anonimizzati, a scopo divulgativo.*
