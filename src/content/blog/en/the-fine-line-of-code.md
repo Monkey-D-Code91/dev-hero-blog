@@ -1,7 +1,7 @@
 ---
 title: "The Fine Line of Code"
 description: "A migrated module, all tests green, and at the end of the month the notifications stop renewing. Where the line runs between generated code under control and out of control, and how to keep your balance on it."
-pubDate: 2026-07-14
+pubDate: 2026-07-24
 translationKey: "the-fine-line-of-code"
 authors: ["marco-mariotti"]
 tags: ["ai", "generated-code", "software-engineering", "critical-thinking"]
@@ -20,7 +20,7 @@ Then, during what was turning into a long testing phase, the first end-of-month 
 
 The old module didn't just evaluate the thresholds: it was also in charge of renewing the notifications at expiry. That, during analysis, had slipped through. The renewal function kept looking for the expired notifications in the old groups table, the one we had stopped populating. It found nothing. It renewed nothing. We caught it and fixed it right there, in testing, before the production release. And the AI had done exactly what I had asked: the gap wasn't in its answer, it was in my question.
 
-For a long time I believed that controlling generated code meant reading it. Opening the diff, scanning the lines, checking that they did what they claimed. But that code, I had read it. The plan, I had reviewed line by line. It was clear, it was correct, and it did exactly what it said. The problem is that it did exactly what it said, and nothing more.
+For a long time I believed that controlling generated code meant reading it. Opening the diff, scanning the lines, checking that they did what they claimed. But that code, I had read it. The plan, I had reviewed line by line. It was clear, it was correct, and it did exactly what it said. The problem is that it did exactly what it said, and nothing more. If we now read more than we write, this is the other side of reading: the one where mistaking understanding a piece of code for controlling it costs you dearly.
 
 Reading code tells you what it does. It doesn't tell you what it is responsible for. And the difference between the two is the fine line.
 

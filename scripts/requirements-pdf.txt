@@ -1,0 +1,3 @@
+# Dipendenze per scripts/generate-feedback-pdf.py (solo tooling di dev, non fa parte del build del sito)
+# Installazione: pip install -r scripts/requirements-pdf.txt
+weasyprint>=69

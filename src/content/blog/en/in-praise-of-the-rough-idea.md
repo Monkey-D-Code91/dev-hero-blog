@@ -6,7 +6,7 @@ translationKey: "in-praise-of-the-rough-idea"
 authors: ["marco-mariotti"]
 tags: ["manifesto", "ai", "writing", "critical-thinking"]
 cover: "../../../assets/covers/in-praise-of-the-rough-idea.png"
-coverAlt: "The First Draft cover: three overlapping circles — tech, human and AI — meeting at a bright point, with the title 'In Praise of the Rough Idea' underlined by hand like a proofreading mark."
+coverAlt: "The First Draft cover: three overlapping circles (tech, human and AI) meeting at a bright point, with the title 'In Praise of the Rough Idea' underlined by hand like a proofreading mark."
 draft: false
 ---
 

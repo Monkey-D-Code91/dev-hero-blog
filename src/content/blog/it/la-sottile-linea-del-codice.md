@@ -20,7 +20,7 @@ Poi, durante quella che si stava rivelando una lunga fase di test, è arrivata l
 
 Il vecchio modulo non si limitava a valutare le soglie: era anche incaricato di rinnovare le notifiche alla scadenza. Questo, in fase di analisi, era sfuggito. La funzione di rinnovo continuava a cercare le notifiche scadute nella vecchia tabella dei gruppi, quella che avevamo smesso di popolare. Non trovava niente. Non rinnovava niente. L'abbiamo scoperto e sistemato lì, in fase di test, prima del rilascio in produzione. E l'AI aveva fatto esattamente quello che le avevo chiesto: il buco non era nella sua risposta, era nella mia domanda.
 
-Per molto tempo ho creduto che controllare il codice generato volesse dire leggerlo. Aprire il diff, scorrere le righe, verificare che facessero quello che dicevano. Ma quel codice io l'avevo letto. Il piano l'avevo revisionato riga per riga. Era chiaro, era corretto, e faceva esattamente quello che diceva. Il problema è che faceva esattamente quello che diceva, e niente di più.
+Per molto tempo ho creduto che controllare il codice generato volesse dire leggerlo. Aprire il diff, scorrere le righe, verificare che facessero quello che dicevano. Ma quel codice io l'avevo letto. Il piano l'avevo revisionato riga per riga. Era chiaro, era corretto, e faceva esattamente quello che diceva. Il problema è che faceva esattamente quello che diceva, e niente di più. Se ormai si legge più di quanto si scrive, questa è l'altra faccia della lettura: quella in cui scambiare il capire un codice per il controllarlo si paga caro.
 
 Leggere il codice ti dice cosa fa. Non ti dice di cosa è responsabile. E la differenza tra le due cose è la linea sottile.
 
@@ -65,6 +65,10 @@ Non mi illudo che quella linea diventerà più facile. Al contrario: più l'AI t
 Camminare in equilibrio su una linea sottile non è un'emergenza, è la normalità. Il punto non è non oscillare mai. È sviluppare, a ogni cambiamento grande, una consapevolezza ancora più grande: è l'unica cosa che può crescere alla stessa velocità della scivolosità. Questa volta la linea l'ho attraversata senza accorgermene. La prossima la sentirò sotto i piedi.
 
 E un giorno, a forza di attraversarla, saremo equilibristi perfetti.
+
+---
+
+*Le opinioni e le esperienze condivise in questo articolo sono personali e non rappresentano posizioni ufficiali del mio datore di lavoro. I casi descritti sono volutamente generici e anonimizzati, a scopo divulgativo.*
 
 ---
 
