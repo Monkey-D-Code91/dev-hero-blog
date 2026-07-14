@@ -21,6 +21,36 @@ node scripts/generate-cover.mjs src/content/blog/it/<slug>.md
 node scripts/generate-cover.mjs src/content/blog/en/<slug>.md
 ```
 
+## generate-carousel.mjs
+
+Genera un carousel LinkedIn in formato documento 1080x1350 (ratio 4:5) in stile brand (stesse triade, "+" luminoso, sottolineatura ondulata e font Inter della cover) a partire da un articolo e da una spec delle slide, e assembla il tutto in un PDF pronto per l'upload su LinkedIn (piu' le singole slide PNG). Toolchain gia' nel repo: `@resvg/resvg-js` per il rendering, `sharp` (dipendenza di Astro) per assemblare il PDF. Nessuna dipendenza nuova.
+
+Come per la cover, lo script rende lo *stile*; il *contenuto editoriale* di ogni slide sta nella spec, non viene inventato dallo script. Senza `--spec` genera uno scheletro onesto di 3 slide (cover dal `title`, hook dalla `description`, CTA) da rifinire.
+
+```
+node scripts/generate-carousel.mjs src/content/blog/it/<slug>.md
+node scripts/generate-carousel.mjs src/content/blog/it/<slug>.md --spec carousels/<slug>.json
+node scripts/generate-carousel.mjs src/content/blog/en/<slug>.md --out carousels/<slug>
+```
+
+Output di default in `carousels/<slug>/`: `slide-01.png ... slide-NN.png` + `<slug>.pdf`. La lingua (per le etichette di default della CTA) e' dedotta dal path (`/it/` o `/en/`) o dal campo `lang` della spec.
+
+### Formato della spec (JSON)
+
+```json
+{
+  "lang": "it",
+  "slides": [
+    { "kind": "cover", "title": "(opz., default = title articolo)", "kicker": "Nuovo articolo" },
+    { "kind": "point", "kicker": "01", "heading": "Titolo del punto", "body": "Testo breve." },
+    { "kind": "quote", "body": "Una frase forte.", "attribution": "The First Draft" },
+    { "kind": "cta", "heading": "Leggi l'articolo", "body": "Link nel primo commento.", "link": "thefirstdraft.blog" }
+  ]
+}
+```
+
+Tipi di slide: `cover`, `point`, `quote`, `cta`. Il testo va a capo in automatico. Consiglio: 6-10 slide, una idea per slide, testo corto, la tesi nelle prime due slide, sempre una `cta` finale. Valgono le linee guida editoriali (niente trattini lunghi, niente nomi).
+
 ## generate-feedback-pdf.py
 
 Genera il PDF "bozza per revisione" di un articolo per il gruppo di feedback (pill, titolo, sommario in corsivo, byline, capolettera, testo giustificato serif, numero pagina).
