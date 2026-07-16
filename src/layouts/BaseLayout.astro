@@ -48,7 +48,7 @@ const ogImage = ogImageProp ?? new URL("/og-image.png", Astro.site).toString();
 const itHref = new URL(hreflangIt, Astro.site).toString();
 const enHref = new URL(hreflangEn, Astro.site).toString();
 
-// Serializza il JSON-LD evitando che un "<" chiuda lo <script> in modo prematuro.
+// Serializza il JSON-LD con escape di "<" per evitare la chiusura prematura del tag script.
 const jsonLdString = jsonLd
   ? JSON.stringify(jsonLd).replace(/</g, "\\u003c")
   : null;
