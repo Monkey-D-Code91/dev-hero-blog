@@ -71,5 +71,5 @@ Quando The Human Constant parte (spec cover già pronte), dare a ogni episodio u
 
 - **Gate del case study #6**: solo il vincolo dell'ok del PO, nessuna soglia di pubblico. Newsletter e analytics restano valide per sé, ma non sono prerequisiti del #6.
 - **Gruppo di feedback**: si passa all'**URL di anteprima** come canale principale (PDF opzionale). Alza la priorità del punto 6 dei miglioramenti tecnici.
-- **Commenti**: si **attiva Giscus** (repo pubblico con Discussions già abilitate). LinkedIn resta il canale di lancio, non l'unico tavolo.
+- **Commenti**: si tiene **Giscus** (verificato poi: era già configurato e attivo sul sito). LinkedIn resta il canale di lancio, non l'unico tavolo.
 - **Pubblico EN**: **obiettivo reale 2026**. L'idea 6 (dev.to con canonical) entra nel runbook di pubblicazione.

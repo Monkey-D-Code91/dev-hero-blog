@@ -30,6 +30,9 @@ jobs:
       - name: Preflight editoriale (tutti gli articoli)
         run: node scripts/preflight-article.mjs --all
 
+      - name: Test (vitest)
+        run: npm test
+
       - name: Build Astro
         run: npm run build
 

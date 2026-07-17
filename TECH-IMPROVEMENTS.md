@@ -26,16 +26,18 @@ Estensione opzionale: un job che rigenera le cover e fallisce se differiscono da
 
 Il README descrive ancora il "sito professionale di personal branding, single-page con Hero/Chi sono/Esperienza": è il progetto di partenza, non The First Draft. Chi arriva dal repo (collaboratori inclusi: esiste una skill di onboarding, ma il README è la prima cosa che si legge) trova una descrizione fuorviante. Va riscritto attorno a: cos'è il blog, la struttura bilingue a `translationKey`, dove vivono contenuti e docs (`docs/brand.md`, `docs/editorial-guidelines.md`), i comandi degli script, il deploy Cloudflare. Mezz'ora di lavoro, alto ritorno.
 
-### 3. Decidere il destino dei componenti zombie
+### 3. Decidere il destino dei componenti zombie — RISOLTO (2026-07-17)
 
-Due pezzi dichiaratamente inerti che però chiedono manutenzione mentale:
+- **`keystatic.config.ts`**: eliminato. Era un doppio schema parallelo allo Zod per un CMS mai attivato; il metodo editoriale reale è la co-scrittura via skill. Recuperabile da git se mai servisse.
+- **`Comments.astro` (Giscus)**: falso allarme dell'analisi iniziale: Giscus è **già configurato e attivo** (`GISCUS` compilato in `src/config.ts`, widget presente sulle pagine articolo live, categoria Discussions "Ideas"). Nessuna azione necessaria.
 
-- **`keystatic.config.ts`**: è un doppio schema parallelo allo Zod ("se aggiungi un campo aggiornalo in ENTRAMBI") per un CMS mai attivato. Il metodo editoriale reale è la co-scrittura via skill, non un form: la probabilità di attivare Keystatic è bassa e il costo del drift è certo. **Raccomandazione: eliminarlo** (il commento nel file stesso dice come). Recuperabile da git se mai servisse.
-- **`Comments.astro` (Giscus)**: **deciso (2026-07-17): si attiva Giscus.** Il repo è già pubblico con Discussions abilitate; restano da fare: installare la app giscus sul repo, creare la categoria dedicata (es. "Commenti blog"), recuperare `repoId`/`categoryId` da giscus.app e compilarli in `src/config.ts`.
+### 4. Test sulle funzioni load-bearing — FATTO (2026-07-17)
 
-### 4. Test sulle funzioni load-bearing
+Implementato con Vitest (`vitest.config.ts` via `getViteConfig`, fixture e mock di
+`astro:content` in `tests/`): accoppiamento IT/EN, ereditarietà roadmap→blog, draft
+esclusi in produzione, related posts, formatting. `npm test` è un gate della CI.
 
-Zero test nel repo. Non serve una suite: servono test mirati sulle tre logiche che, se si rompono, degradano il sito in silenzio (nessun errore di build, solo output sbagliato):
+Contesto originale: zero test nel repo. Non serve una suite: servono test mirati sulle tre logiche che, se si rompono, degradano il sito in silenzio (nessun errore di build, solo output sbagliato):
 
 - accoppiamento IT/EN via `translationKey` (switch lingua, hreflang dei post);
 - ereditarietà roadmap→blog (`src/utils/roadmap.ts`: tappe che ereditano titolo/data/URL dal post);
