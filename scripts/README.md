@@ -4,7 +4,7 @@ Tooling per la pubblicazione degli articoli di The First Draft. Deterministico e
 
 ## preflight-article.mjs
 
-Controllo editoriale e strutturale di un articolo (e del suo gemello nell'altra lingua, incluso in automatico): campi obbligatori del frontmatter, niente trattini lunghi, slug kebab-case, coppia IT/EN allineata (`translationKey`, `pubDate`, `draft`), cover esistente con `coverAlt`, autori noti, euristica sui nomi di persona (regola privacy). Errori bloccanti (exit 1) e warning. Da eseguire prima di rifinire e sempre prima di pubblicare.
+Controllo editoriale e strutturale di un articolo (e del suo gemello nell'altra lingua, incluso in automatico): campi obbligatori del frontmatter, niente trattini lunghi, slug kebab-case, coppia IT/EN allineata (`translationKey`, `pubDate`, `draft`, numero di tag), cover esistente con `coverAlt`, autori noti, `focus` non vuoto, link interni al blog validi (bersaglio esistente e, per i pezzi pubblicati, non-draft), euristica sui nomi di persona (regola privacy). Errori bloccanti (exit 1) e warning. Da eseguire prima di rifinire e sempre prima di pubblicare.
 
 ```
 node scripts/preflight-article.mjs src/content/blog/it/<slug>.md

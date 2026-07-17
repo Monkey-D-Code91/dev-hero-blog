@@ -47,13 +47,15 @@ Contesto originale: zero test nel repo. Non serve una suite: servono test mirati
 
 ## Priorità media
 
-### 5. Preflight più ricco
+### 5. Preflight più ricco — FATTO (2026-07-17)
 
-Il preflight è ottimo; tre controlli che oggi mancano e che costano poco:
+Aggiunti quattro controlli a `scripts/preflight-article.mjs`:
 
-- **link interni**: gli articoli si citano a vicenda ("dittici", richiami tra #2 e #3); un link a uno slug rinominato o a un draft non pubblicato non viene rilevato da nulla;
-- **coerenza dei tag** tra le due lingue della coppia (i tag sono per lingua e possono divergere silenziosamente);
-- **lunghezza `description`** (target SEO/OG ~150-160 caratteri) e presenza di `focus` non vuoto.
+- **link interni** (E): un link a `/blog/<slug>/` o `/en/blog/<slug>/` verso un articolo inesistente, o verso un draft da un pezzo già pubblicato, è un errore bloccante;
+- **numero di tag allineato col gemello** (W): i valori dei tag sono tradotti di proposito (`writing`/`scrittura`), quindi si confronta il conteggio, non i valori: un numero diverso segnala un tag perso in una lingua;
+- **`focus` non vuoto** (W): senza pilastri tech/human/ai il glifo della triade sparisce.
+
+Nota di calibrazione: la banda "description ottimale 110-160" ipotizzata in analisi è stata **scartata** dopo la verifica: scattava su tutti gli 8 articoli reali (scritti volutamente più lunghi), quindi sarebbe stata rumore. Resta il solo range 50-250 che cattura le description davvero rotte.
 
 ### 6. Anteprima dei draft per il gruppo di feedback — FATTO (2026-07-17)
 
