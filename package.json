@@ -23,18 +23,22 @@
     "@tailwindcss/vite": "^4.0.0",
     "astro": "^5.5.0",
     "astro-icon": "^1.1.5",
+    "markdown-it": "^14.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "reading-time": "^1.5.0",
+    "sanitize-html": "^2.17.6",
     "satori": "^0.12.2",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.20",
+    "@types/markdown-it": "^14.1.2",
     "@types/node": "^26.1.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@types/sanitize-html": "^2.16.1",
     "vitest": "^4.1.10"
   }
 }
