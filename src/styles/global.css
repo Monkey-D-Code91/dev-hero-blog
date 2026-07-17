@@ -64,6 +64,17 @@
     opacity: 1;
     transform: none;
   }
+  /* Lieve sollevamento delle card all'hover (solo senza reduced-motion:
+     fuori da questo blocco resta il feedback via bordo). */
+  .card-lift {
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .card-lift:hover {
+    transform: translateY(-2px);
+  }
+
   /* ritardo progressivo opzionale per liste di figli */
   [data-reveal-delay="1"] {
     transition-delay: 0.08s;
@@ -128,6 +139,27 @@
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
   }
+}
+
+/* Barra di progresso lettura (pagina articolo): riga sottile fissa in alto,
+   riempita via JS (scaleX). Sotto reduced-motion la transizione è azzerata
+   dal blocco globale qui sotto: la barra segue comunque lo scroll. */
+.reading-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  z-index: 60;
+  pointer-events: none;
+}
+.reading-progress__fill {
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    var(--color-accent),
+    var(--color-accent-2)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
 }
 
 /* Rispetta le preferenze di riduzione del movimento */
