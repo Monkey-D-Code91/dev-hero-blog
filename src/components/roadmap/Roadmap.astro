@@ -36,6 +36,7 @@ const statusLabels: Record<RoadmapStatus, string> = {
       intro={tr.intro}
       stats={stats}
       labels={tr.stats}
+      firstArcSr={tr.progressCaption(stats.firstArcDone, stats.firstArcTotal)}
     />
 
     <div class="mt-8 divide-y divide-border">

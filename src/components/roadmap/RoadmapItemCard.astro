@@ -25,15 +25,15 @@ const statusColor =
 <article
   class:list={[
     "flex h-full flex-col rounded-2xl border p-4 transition-colors",
-    status === "planned"
-      ? "border-border bg-surface"
-      : "border-border bg-surface-2 hover:border-accent/40",
-    status === "in-progress" && "border-accent-2/40",
+    item.href && "relative",
+    status === "planned" && "border-border bg-surface",
+    status === "in-progress" && "border-accent-2/40 bg-surface-2",
+    status === "published" && "border-border bg-surface-2 hover:border-accent/40",
   ]}
 >
   <div class="flex items-center justify-between gap-3">
     <span class:list={["text-xs font-semibold", statusColor]}>
-      {status === "published" && "✓ "}{statusLabel}
+      {status === "published" && <span aria-hidden="true">✓ </span>}{statusLabel}
     </span>
     <span class="whitespace-nowrap text-xs text-muted">{item.dateLabel}</span>
   </div>
@@ -41,7 +41,10 @@ const statusColor =
   <h3 class="mt-2 text-sm font-semibold leading-snug">
     {
       item.href ? (
-        <a class="text-text transition-colors hover:text-accent" href={item.href}>
+        <a
+          class="text-text transition-colors hover:text-accent after:absolute after:inset-0"
+          href={item.href}
+        >
           {item.title}
         </a>
       ) : (

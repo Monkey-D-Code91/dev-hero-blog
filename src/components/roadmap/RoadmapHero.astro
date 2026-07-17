@@ -8,12 +8,19 @@ interface Props {
   intro: string;
   stats: RoadmapStats;
   labels: { firstArc: string; pipeline: string; signatures: string };
+  /** Etichetta accessibile per la stat "N/M" (es. "2 di 8 pubblicati"), che
+   *  altrimenti uno screen reader leggerebbe come "2 slash 8". */
+  firstArcSr?: string;
 }
 
-const { eyebrow, title, intro, stats, labels } = Astro.props;
+const { eyebrow, title, intro, stats, labels, firstArcSr } = Astro.props;
 
 const cards = [
-  { value: `${stats.firstArcDone}/${stats.firstArcTotal}`, label: labels.firstArc },
+  {
+    value: `${stats.firstArcDone}/${stats.firstArcTotal}`,
+    label: labels.firstArc,
+    srLabel: firstArcSr,
+  },
   { value: String(stats.pipelineCount), label: labels.pipeline },
   { value: String(stats.signatures), label: labels.signatures },
 ];
@@ -33,7 +40,9 @@ const cards = [
       cards.map((c) => (
         <div>
           <dt class="text-xs uppercase tracking-wide text-muted">{c.label}</dt>
-          <dd class="mt-0.5 text-2xl font-bold text-accent">{c.value}</dd>
+          <dd class="mt-0.5 text-2xl font-bold text-accent" aria-label={c.srLabel}>
+            {c.value}
+          </dd>
         </div>
       ))
     }
