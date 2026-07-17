@@ -1,0 +1,37 @@
+# CI di The First Draft: ogni PR (e ogni push su main) deve superare
+# il preflight editoriale e la build Astro. `status.mjs` è informativo
+# (non esce mai con codice ≠ 0): fotografa la pipeline nel log del job.
+#
+# Gira su ubuntu-latest anche per avere un ambiente Linux riproducibile:
+# npm installa da solo i binari nativi giusti (es. @resvg/resvg-js),
+# senza i workaround manuali documentati in HANDOFF per il sandbox.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Preflight & build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Installa le dipendenze
+        run: npm ci
+
+      - name: Preflight editoriale (tutti gli articoli)
+        run: node scripts/preflight-article.mjs --all
+
+      - name: Build Astro
+        run: npm run build
+
+      - name: Stato pipeline (informativo)
+        run: node scripts/status.mjs
