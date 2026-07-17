@@ -65,6 +65,41 @@ export function buildArticleSchema(i: ArticleInput) {
   };
 }
 
+interface RoadmapInput {
+  site: URL | undefined;
+  lang: Lang;
+  name: string;
+  description: string;
+  /** Path canonico della pagina, es. "/roadmap/". */
+  canonicalPath: string;
+  /** Tappe in ordine: titolo e, se pubblicata, path/URL. */
+  items: { title: string; path?: string }[];
+}
+
+/**
+ * JSON-LD della roadmap editoriale come ItemList ordinata: espone le tappe
+ * (pubblicate e in pipeline) ai motori, collegando quelle pubblicate al post.
+ */
+export function buildRoadmapSchema(i: RoadmapInput) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: i.name,
+    description: i.description,
+    inLanguage: i.lang,
+    url: abs(i.site, i.canonicalPath),
+    numberOfItems: i.items.length,
+    itemListOrder: "https://schema.org/ItemListOrderAscending",
+    itemListElement: i.items.map((item, idx) => ({
+      "@type": "ListItem",
+      position: idx + 1,
+      name: item.title,
+      ...(item.path ? { url: abs(i.site, item.path) } : {}),
+    })),
+    publisher: publisher(i.site),
+  };
+}
+
 interface PersonInput {
   site: URL | undefined;
   name: string;

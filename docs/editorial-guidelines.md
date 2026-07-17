@@ -25,3 +25,16 @@ Bonus: lo sguardo **tech / human / AI** emerge in modo naturale.
 - Bilingue: ogni articolo esce in italiano e inglese, collegati dallo stesso `translationKey`. La traduzione è idiomatica, non letterale.
 - **Ripetizioni: da ridurre in italiano, non in inglese.** In italiano la ripetizione ravvicinata della stessa parola appesantisce: se un termine torna più volte nello stesso paragrafo o in paragrafi contigui, varia con sinonimi, pronomi o riformulando la frase, per far scorrere il testo. In inglese la stessa ripetizione è naturale e spesso preferibile, perché ripetere il termine chiave dà coesione e chiarezza: non forzare sinonimi solo per evitarla. La traduzione idiomatica tiene conto di questa asimmetria (lo stesso concetto può restare ripetuto in EN e comparire con più varianti in IT).
 - **Eccezione: il termine-tesi.** Se una parola è il concetto portante del pezzo (es. "attrito" in un articolo che parla proprio di quello), tenerla dov'è il cuore dell'argomento e alleggerire solo le occorrenze di servizio. La ripetizione voluta come martellamento retorico è legittima; quella involontaria e ravvicinata no.
+
+## Pagina Roadmap (`/roadmap`)
+
+La pagina roadmap è la versione pubblica e reader-facing del piano editoriale: racconta la direzione del blog per **archi narrativi** (capitoli), non come calendario. La fonte strategica interna resta `content-roadmap.md`; la pagina ha la sua fonte dati curata.
+
+Come si aggiorna (senza toccare il codice):
+
+- I contenuti stanno nella collection `roadmap`: un file per arco per lingua in `src/content/roadmap/{it,en}/`. Modificabili a mano o via Keystatic.
+- **Ogni modifica va replicata in IT e in EN** (stesso `arcKey`), come per articoli e autori.
+- Una tappa ha due forme: **collegata a un post** (`postTranslationKey`) oppure **di pipeline** (`title` + `date` inline). Quando un articolo passa da bozza a pubblicato, sostituire nella tappa il `title` con il `postTranslationKey` del post e mettere `status: published`: titolo, data e link vengono ereditati dal post (nessuna duplicazione).
+- **Date**: la pagina mostra la data esatta solo per le tappe già pubblicate e per la prossima in uscita; tutte le altre sono degradate a "mese anno" per evitare di dover rincorrere le scadenze. Nei file la `date` resta comunque completa (YYYY-MM-DD).
+- **Firme dei collaboratori**: impostare `collaborator: true` sulla tappa per evidenziarne la firma. Vale la regola privacy: i collaboratori possono essere nominati solo se sono autori del blog; altrimenti usare il ruolo.
+- **Filoni non ancora definiti** (es. il track etica): non elencarli come tappe datate. Usare il blocco `upcomingTeaser` in coda all'arco, come invito, finché temi e numero di pezzi non sono confermati col collaboratore.

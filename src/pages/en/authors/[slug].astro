@@ -1,10 +1,10 @@
 ---
 import { getCollection, render } from "astro:content";
-import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
 import AuthorLayout from "../../../layouts/AuthorLayout.astro";
 import { getPublishedPosts } from "../../../utils/blog";
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
   const allAuthors = await getCollection("authors");
   // Solo le entry inglesi generano le rotte EN.
   const enAuthors = allAuthors.filter((a) => a.id.startsWith("en/"));
@@ -21,7 +21,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
 };
 
-const { entry, itSlug } = Astro.props;
+type Props = { entry: CollectionEntry<"authors">; itSlug: string };
+const { entry, itSlug } = Astro.props as Props;
 const { Content } = await render(entry);
 const author = entry.data;
 const slug = Astro.params.slug;

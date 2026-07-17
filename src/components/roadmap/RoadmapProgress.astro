@@ -1,0 +1,35 @@
+---
+/**
+ * Barra di avanzamento accessibile di un arco.
+ * Lo stato è veicolato anche dal testo ("2 di 6"), mai dal solo colore.
+ */
+interface Props {
+  done: number;
+  total: number;
+  /** Etichetta accessibile completa, es. "Arco I: 2 di 6 pubblicati". */
+  label: string;
+  /** Testo breve mostrato sotto la barra, es. "2 di 6 pubblicati". */
+  caption: string;
+}
+
+const { done, total, label, caption } = Astro.props;
+const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+---
+
+<div>
+  <div
+    class="h-1.5 max-w-xs overflow-hidden rounded-full bg-border"
+    role="progressbar"
+    aria-valuenow={done}
+    aria-valuemin={0}
+    aria-valuemax={total}
+    aria-label={label}
+  >
+    <div
+      class="h-full rounded-full bg-gradient-to-r from-accent to-accent-2"
+      style={`width: ${pct}%`}
+    >
+    </div>
+  </div>
+  <p class="mt-1.5 text-xs text-muted">{caption}</p>
+</div>

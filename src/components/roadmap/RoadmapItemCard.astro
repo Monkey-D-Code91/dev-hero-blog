@@ -1,0 +1,66 @@
+---
+import type { ResolvedItem } from "../../utils/roadmap";
+
+/**
+ * Card di una singola tappa (articolo) della roadmap.
+ * Lo stato è comunicato da colore + etichetta testuale (WCAG 1.4.1).
+ * Il titolo è link solo se la tappa è pubblicata e collegata a un post.
+ */
+interface Props {
+  item: ResolvedItem;
+  statusLabel: string;
+}
+
+const { item, statusLabel } = Astro.props;
+const { status, collaborator } = item;
+
+const statusColor =
+  status === "published"
+    ? "text-accent"
+    : status === "in-progress"
+      ? "text-accent-2"
+      : "text-muted";
+---
+
+<article
+  class:list={[
+    "flex h-full flex-col rounded-2xl border p-4 transition-colors",
+    status === "planned"
+      ? "border-border bg-surface"
+      : "border-border bg-surface-2 hover:border-accent/40",
+    status === "in-progress" && "border-accent-2/40",
+  ]}
+>
+  <div class="flex items-center justify-between gap-3">
+    <span class:list={["text-xs font-semibold", statusColor]}>
+      {status === "published" && "✓ "}{statusLabel}
+    </span>
+    <span class="whitespace-nowrap text-xs text-muted">{item.dateLabel}</span>
+  </div>
+
+  <h3 class="mt-2 text-sm font-semibold leading-snug">
+    {
+      item.href ? (
+        <a class="text-text transition-colors hover:text-accent" href={item.href}>
+          {item.title}
+        </a>
+      ) : (
+        <span class={status === "planned" ? "text-muted" : "text-text"}>
+          {item.title}
+        </span>
+      )
+    }
+  </h3>
+
+  <div class="mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 pt-3 text-xs text-muted">
+    {
+      item.focus.map((f) => (
+        <span class="rounded-full border border-border px-2 py-0.5">{f}</span>
+      ))
+    }
+    <span class="mx-0.5 opacity-50" aria-hidden="true">·</span>
+    <span class:list={[collaborator ? "font-medium text-accent/80" : ""]}>
+      {item.authorName}
+    </span>
+  </div>
+</article>

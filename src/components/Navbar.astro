@@ -15,6 +15,7 @@ const t = useTranslations(lang);
 
 const homeHref = lang === "it" ? "/" : "/en/";
 const blogHref = lang === "it" ? "/blog/" : "/en/blog/";
+const roadmapHref = lang === "it" ? "/roadmap/" : "/en/roadmap/";
 const authorsHref = lang === "it" ? "/autori/" : "/en/authors/";
 
 const pathname = Astro.url.pathname;
@@ -27,6 +28,7 @@ function isActive(href: string): boolean {
 const links = [
   { href: homeHref, label: t.nav.home },
   { href: blogHref, label: t.blog.nav },
+  { href: roadmapHref, label: t.roadmap.nav },
   { href: authorsHref, label: t.nav.authors },
 ];
 ---

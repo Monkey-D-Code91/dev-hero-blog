@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Navbar from "../../../components/Navbar.astro";
+import Footer from "../../../components/Footer.astro";
+import Roadmap from "../../../components/roadmap/Roadmap.astro";
+import { getResolvedRoadmap } from "../../../utils/roadmap";
+import { buildRoadmapSchema } from "../../../utils/structuredData";
+import { useTranslations } from "../../../i18n/utils";
+
+const lang = "en" as const;
+const t = useTranslations(lang);
+
+const arcs = await getResolvedRoadmap(lang);
+const jsonLd = buildRoadmapSchema({
+  site: Astro.site,
+  lang,
+  name: t.roadmap.heading,
+  description: t.roadmap.intro,
+  canonicalPath: "/en/roadmap/",
+  items: arcs.flatMap((a) =>
+    a.items.map((i) => ({ title: i.title, path: i.href }))
+  ),
+});
+---
+
+<BaseLayout
+  title={`${t.roadmap.heading} — First Draft`}
+  description={t.roadmap.intro}
+  lang="en"
+  path="/en/roadmap/"
+  hreflangIt="/roadmap/"
+  hreflangEn="/en/roadmap/"
+  jsonLd={jsonLd}
+>
+  <Navbar itHref="/roadmap/" enHref="/en/roadmap/" />
+  <main id="main" tabindex="-1">
+    <Roadmap lang="en" />
+  </main>
+  <Footer />
+</BaseLayout>

@@ -184,6 +184,23 @@ export const ui = {
       shareCopy: "Copia link",
       shareCopied: "Copiato!",
     },
+    roadmap: {
+      nav: "Roadmap",
+      eyebrow: "La roadmap in capitoli",
+      heading: "Un blog che si legge come un romanzo",
+      intro:
+        "Ogni arco è un capitolo. Ti raccontiamo dove sta andando First Draft e perché, un articolo alla volta.",
+      stats: { firstArc: "Arco I", pipeline: "In pipeline", signatures: "Firme" },
+      status: {
+        published: "Pubblicato",
+        inProgress: "In lavorazione",
+        planned: "In programma",
+      },
+      progressCaption: (done: number, total: number) =>
+        `${done} di ${total} pubblicati`,
+      progressAria: (numeral: string, done: number, total: number) =>
+        `Arco ${numeral}: ${done} di ${total} tappe pubblicate`,
+    },
   },
 
   en: {
@@ -355,6 +372,23 @@ export const ui = {
       shareHeading: "Share",
       shareCopy: "Copy link",
       shareCopied: "Copied!",
+    },
+    roadmap: {
+      nav: "Roadmap",
+      eyebrow: "The roadmap in chapters",
+      heading: "A blog that reads like a novel",
+      intro:
+        "Each arc is a chapter. We tell you where First Draft is heading and why, one article at a time.",
+      stats: { firstArc: "Arc I", pipeline: "In pipeline", signatures: "Bylines" },
+      status: {
+        published: "Published",
+        inProgress: "In progress",
+        planned: "Planned",
+      },
+      progressCaption: (done: number, total: number) =>
+        `${done} of ${total} published`,
+      progressAria: (numeral: string, done: number, total: number) =>
+        `Arc ${numeral}: ${done} of ${total} stops published`,
     },
   },
 } as const;

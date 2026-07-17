@@ -201,6 +201,64 @@ const authorsCollection = (locale: Locale) =>
     },
   });
 
+// ──────────────────────────────────────────────
+// Collection ROADMAP (una per lingua)
+// Allineata 1:1 allo schema Zod di src/content.config.ts.
+// ──────────────────────────────────────────────
+const roadmapCollection = (locale: Locale) =>
+  collection({
+    label: `Roadmap (${locale.toUpperCase()})`,
+    path: `src/content/roadmap/${locale}/*`,
+    slugField: "arcKey",
+    format: { data: "yaml" },
+    schema: {
+      arcKey: fields.slug({
+        name: { label: "Arc key", validation: { isRequired: true } },
+      }),
+      order: fields.integer({ label: "Ordine", validation: { isRequired: true } }),
+      numeral: fields.text({ label: "Numerale (I, II…)", validation: { isRequired: true } }),
+      title: fields.text({ label: "Titolo arco", validation: { isRequired: true } }),
+      lead: fields.text({ label: "Occhiello", multiline: true }),
+      period: fields.text({ label: "Periodo (es. Lug – Set 2026)" }),
+      signature: fields.text({ label: "Firma (es. a firma Marco)" }),
+      items: fields.array(
+        fields.object({
+          postTranslationKey: fields.text({
+            label: "Translation key del post (se pubblicato)",
+          }),
+          title: fields.text({ label: "Titolo tappa (se non collegata a un post)" }),
+          date: fields.date({ label: "Data indicativa", validation: { isRequired: true } }),
+          status: fields.select({
+            label: "Stato",
+            options: [
+              { label: "Pubblicato", value: "published" },
+              { label: "In lavorazione", value: "in-progress" },
+              { label: "In programma", value: "planned" },
+            ],
+            defaultValue: "planned",
+          }),
+          focus: fields.array(fields.text({ label: "Focus" }), {
+            label: "Focus",
+            itemLabel: (props) => props.value,
+          }),
+          authorName: fields.text({ label: "Firma tappa", validation: { isRequired: true } }),
+          collaborator: fields.checkbox({ label: "Collaboratore" }),
+        }),
+        {
+          label: "Tappe",
+          itemLabel: (props) => props.fields.title.value || props.fields.postTranslationKey.value || "Tappa",
+        }
+      ),
+      upcomingTeaser: fields.object(
+        {
+          label: fields.text({ label: "Etichetta teaser (es. In arrivo)" }),
+          text: fields.text({ label: "Testo teaser", multiline: true }),
+        },
+        { label: "Teaser in coda (opzionale)" }
+      ),
+    },
+  });
+
 export default config({
   // Local mode: nessun cloud, nessun server in produzione.
   storage: { kind: "local" },
@@ -212,6 +270,8 @@ export default config({
     blogEn: blogCollection("en"),
     authorsIt: authorsCollection("it"),
     authorsEn: authorsCollection("en"),
+    roadmapIt: roadmapCollection("it"),
+    roadmapEn: roadmapCollection("en"),
   },
 });
 

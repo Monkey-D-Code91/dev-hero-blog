@@ -14,9 +14,14 @@ export const BLOG = {
  * Configurazione Giscus per i commenti del blog.
  * Valori generati su https://giscus.app — non modificare manualmente.
  */
-export const GISCUS = {
+export const GISCUS: {
+  repo: string;
+  repoId: string;
+  category: string;
+  categoryId: string;
+} = {
   repo: "Monkey-D-Code91/dev-hero-blog",
   repoId: "R_kgDOSy0bHQ",
   category: "Ideas",
   categoryId: "DIC_kwDOSy0bHc4C-pHC",
-} as const;
+};

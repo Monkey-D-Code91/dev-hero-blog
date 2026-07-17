@@ -1,0 +1,54 @@
+---
+import type { Lang } from "../../i18n/ui";
+import { useTranslations } from "../../i18n/utils";
+import {
+  getResolvedRoadmap,
+  getRoadmapStats,
+  type RoadmapStatus,
+} from "../../utils/roadmap";
+import RoadmapHero from "./RoadmapHero.astro";
+import RoadmapArc from "./RoadmapArc.astro";
+
+/** Sezione roadmap completa: carica gli archi della lingua e li compone. */
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const tr = t.roadmap;
+
+const arcs = await getResolvedRoadmap(lang);
+const stats = getRoadmapStats(arcs);
+
+const statusLabels: Record<RoadmapStatus, string> = {
+  published: tr.status.published,
+  "in-progress": tr.status.inProgress,
+  planned: tr.status.planned,
+};
+---
+
+<section class="py-16 md:py-20">
+  <div class="mx-auto max-w-5xl px-6">
+    <RoadmapHero
+      eyebrow={tr.eyebrow}
+      title={tr.heading}
+      intro={tr.intro}
+      stats={stats}
+      labels={tr.stats}
+    />
+
+    <div class="mt-8 divide-y divide-border">
+      {
+        arcs.map((arc) => (
+          <RoadmapArc
+            arc={arc}
+            statusLabels={statusLabels}
+            progressCaption={tr.progressCaption(arc.progress.done, arc.progress.total)}
+            progressAria={tr.progressAria(arc.numeral, arc.progress.done, arc.progress.total)}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

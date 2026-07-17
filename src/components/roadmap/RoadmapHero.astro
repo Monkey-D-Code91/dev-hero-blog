@@ -1,0 +1,41 @@
+---
+import type { RoadmapStats } from "../../utils/roadmap";
+
+/** Intestazione della pagina roadmap: occhiello, titolo, sottotitolo e stat card. */
+interface Props {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  stats: RoadmapStats;
+  labels: { firstArc: string; pipeline: string; signatures: string };
+}
+
+const { eyebrow, title, intro, stats, labels } = Astro.props;
+
+const cards = [
+  { value: `${stats.firstArcDone}/${stats.firstArcTotal}`, label: labels.firstArc },
+  { value: String(stats.pipelineCount), label: labels.pipeline },
+  { value: String(stats.signatures), label: labels.signatures },
+];
+---
+
+<header class="py-4" data-reveal>
+  <p class="text-sm font-semibold uppercase tracking-widest text-accent">
+    {eyebrow}
+  </p>
+  <h1 class="mt-2 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
+    {title}
+  </h1>
+  <p class="mt-3 max-w-2xl text-base leading-relaxed text-muted">{intro}</p>
+
+  <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4">
+    {
+      cards.map((c) => (
+        <div>
+          <dt class="text-xs uppercase tracking-wide text-muted">{c.label}</dt>
+          <dd class="mt-0.5 text-2xl font-bold text-accent">{c.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</header>
