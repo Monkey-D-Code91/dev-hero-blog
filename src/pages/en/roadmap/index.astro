@@ -21,6 +21,8 @@ const jsonLd = buildRoadmapSchema({
     a.items.map((i) => ({ title: i.title, path: i.href }))
   ),
 });
+
+const ogImage = new URL("/og/roadmap/en.png", Astro.site).toString();
 ---
 
 <BaseLayout
@@ -30,6 +32,7 @@ const jsonLd = buildRoadmapSchema({
   path="/en/roadmap/"
   hreflangIt="/roadmap/"
   hreflangEn="/en/roadmap/"
+  ogImage={ogImage}
   jsonLd={jsonLd}
 >
   <Navbar itHref="/roadmap/" enHref="/en/roadmap/" />
