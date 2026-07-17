@@ -1,6 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import { BLOG } from "../config";
+import { BLOG, newsletterEnabled } from "../config";
 
 interface Props {
   /** Link LinkedIn dell'autore della pagina — se omesso il link non viene mostrato. */
@@ -11,6 +11,7 @@ const { linkedin } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const year = new Date().getFullYear();
+const newsletterUrl = lang === "it" ? "/newsletter/" : "/en/newsletter/";
 ---
 
 <footer class="border-t border-border bg-surface">
@@ -29,8 +30,20 @@ const year = new Date().getFullYear();
       </span>
     </div>
 
-    {linkedin && (
-      <div class="flex items-center gap-5">
+    <div class="flex items-center gap-5">
+      {newsletterEnabled && (
+        <a
+          href={newsletterUrl}
+          class="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+            <path d="m22 7-10 5L2 7"></path>
+          </svg>
+          {t.newsletter.nav}
+        </a>
+      )}
+      {linkedin && (
         <a
           href={linkedin}
           target="_blank"
@@ -42,8 +55,8 @@ const year = new Date().getFullYear();
           </svg>
           LinkedIn
         </a>
-      </div>
-    )}
+      )}
+    </div>
   </div>
 
   <p class="pb-8 text-center text-xs text-muted/60">{t.footer.builtWith}</p>
