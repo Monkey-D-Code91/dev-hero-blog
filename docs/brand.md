@@ -47,10 +47,15 @@ replicata negli script di rendering.
 
 ## Tipografia
 
-- **Font unico: Inter** (variable sul sito; istanze statiche 700/600/500 in `scripts/fonts/` per il
-  rendering deterministico degli asset).
+- **Inter** per UI, navigazione, card, meta e tutti gli asset generati (variable sul sito;
+  istanze statiche 700/600/500 in `scripts/fonts/` per il rendering deterministico degli asset).
+- **Newsreader** (serif, variable, self-hosted) SOLO per l'esperienza di lettura articolo:
+  titolo h1 e corpo prose della pagina articolo. Motivazione: il brand parla di scrittura
+  ("first draft", la correzione di bozza) e il serif nel corpo long-form lo racconta;
+  tutto il resto resta Inter per continuità con sito e asset. Decisione del 2026-07-17.
+- Corpo articolo: 19px, interlinea 1.7, colonna ~68 caratteri per riga (`max-w-2xl`).
 - Gerarchia negli asset: titolo bold (700), kicker/label medium (500) spaziato in minuscolo
-  (es. `tech · human · ai`).
+  (es. `tech · human · ai`). Gli asset NON usano il serif.
 
 ## Motivi visivi ricorrenti
 

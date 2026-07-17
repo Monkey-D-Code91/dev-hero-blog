@@ -1,4 +1,8 @@
 ---
+// Serif editoriale solo per l'esperienza di lettura articolo (vedi docs/brand.md).
+// L'import qui (e non in BaseLayout) evita di caricare il font sulle altre pagine.
+import "@fontsource-variable/newsreader";
+import "@fontsource-variable/newsreader/wght-italic.css";
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import type { Lang } from "../../i18n/ui";
@@ -79,7 +83,7 @@ const backLabel = t.blog.backToBlog;
       </p>
       <h1
         id="article-title"
-        class="text-3xl font-bold leading-tight tracking-tight sm:text-4xl text-text"
+        class="font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-[2.75rem] text-text"
       >
         {title}
       </h1>
