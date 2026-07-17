@@ -31,6 +31,8 @@ export interface ProcessedPost {
   readingTime: string;
   cover?: ImageMetadata;
   coverAlt?: string;
+  /** true se il pezzo ha una storia di revisioni (indicatore "rivisto"). */
+  revised: boolean;
   /** Uno o più autori (co-autori inclusi), nell'ordine del frontmatter. */
   authors: PostAuthor[];
 }
@@ -127,6 +129,7 @@ export async function processPosts(
     readingTime: getReadingTime(p.body, lang),
     cover: p.data.cover,
     coverAlt: p.data.coverAlt,
+    revised: (p.data.revisions?.length ?? 0) > 0,
     authors: p.data.authors.map((key) => {
       const data = authorMap.get(key);
       return {

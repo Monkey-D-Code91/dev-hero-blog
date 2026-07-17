@@ -99,14 +99,17 @@ Prepara la bozza del post di lancio, da consegnare come testo (non pubblicarlo t
 - Se c'è il carousel, il post lo accompagna come documento PDF.
 - Valgono le regole editoriali: niente trattini lunghi, niente nomi, anonimizzazione.
 
-## Dopo l'uscita — Dal tavolo di discussione
+## Dopo l'uscita — articoli vivi
 
-Non è un passo del giorno di pubblicazione, ma va ricordato qui: quando il pezzo ha raccolto
-discussione (LinkedIn, Giscus), i 2-3 scambi migliori possono tornare nell'articolo col campo
-`discussion` nel frontmatter (vedi `docs/editorial-guidelines.md`). Solo scambi veri che
-aggiungono qualcosa, attribuzione per ruolo (regola privacy), stessa quantità in IT ed EN
-(il preflight controlla la simmetria). Si aggiunge in un giro di ripubblicazione, aggiornando
-`updatedDate` se l'aggiunta è sostanziale.
+Non sono passi del giorno di pubblicazione, ma vanno ricordati qui: un pezzo continua a vivere.
+Entrambi si aggiungono in un giro di ripubblicazione (dettagli in `docs/editorial-guidelines.md`).
+
+- **Dal tavolo di discussione** (`discussion`): quando il pezzo ha raccolto discussione (LinkedIn,
+  Giscus), i 2-3 scambi migliori tornano nell'articolo. Solo scambi veri che aggiungono qualcosa,
+  attribuzione per ruolo (regola privacy), stessa quantità in IT ed EN (il preflight controlla).
+- **Storia delle revisioni** (`revisions`): quando il pezzo cambia in modo sostanziale (tesi, un
+  fatto, una precisazione), si registra una voce datata. Solo revisioni vere, mai refusi/cosmesi.
+  Aggiornare `updatedDate` insieme (accende l'indicatore "rivisto"); simmetria IT/EN controllata.
 
 ## Chiusura
 

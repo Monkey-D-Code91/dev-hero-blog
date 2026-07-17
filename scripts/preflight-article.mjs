@@ -195,6 +195,17 @@ function checkArticle(article, twin, authors, names, index, out) {
       const dIt = countDiscussion(article.rawFm);
       const dEn = countDiscussion(twin.rawFm ?? "");
       if (dIt !== dEn) push("W", `numero di scambi 'discussion' diverso dal gemello EN (IT: ${dIt} vs EN: ${dEn})`);
+      // "Storia delle revisioni": stesso numero di voci in IT ed EN.
+      const countRevisions = (raw) => (raw.match(/^\s*-\s+date:/gm) ?? []).length;
+      const rIt = countRevisions(article.rawFm);
+      const rEn = countRevisions(twin.rawFm ?? "");
+      if (rIt !== rEn) push("W", `numero di revisioni diverso dal gemello EN (IT: ${rIt} vs EN: ${rEn})`);
+    }
+
+    // Se il pezzo ha revisioni, updatedDate dovrebbe rifletterle (indicatore meta).
+    const revCount = (article.rawFm.match(/^\s*-\s+date:/gm) ?? []).length;
+    if (revCount > 0 && !fm.updatedDate) {
+      push("W", "presenti revisioni ma updatedDate mancante: aggiornarla insieme alla revisione");
     }
   }
 

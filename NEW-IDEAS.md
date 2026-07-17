@@ -13,13 +13,15 @@ _Analisi del 2026-07-17. Prima i principi che emergono dal progetto (la lente di
 
 ## Idee ad alto potenziale
 
-### 1. Articoli vivi: la "storia delle revisioni" come feature editoriale
+### 1. Articoli vivi: la "storia delle revisioni" come feature editoriale — IMPLEMENTATO (2026-07-17)
 
 **L'idea più on-brand dell'elenco.** Un blog che si chiama The First Draft dovrebbe mostrare le bozze successive. Concretamente: quando un articolo viene contraddetto, corretto o arricchito (da un commento LinkedIn, dal gruppo di feedback, da un ripensamento), non si riscrive in silenzio: si appende una **revisione datata e firmata** in coda al pezzo ("Seconda bozza, 2026-08: un lettore mi ha fatto notare che..."), con `updatedDate` e un indicatore discreto sulla card ("rivisto").
 
 - Costo tecnico minimo: un campo `revisions` nel frontmatter (data + nota) o una sezione convenzionale nel body; il preflight ne verifica la simmetria IT/EN.
 - Valore: nessun altro blog lo fa come formato sistematico; trasforma il principio fondativo in esperienza di lettura; premia chi commenta (il suo attrito diventa parte del pezzo).
 - Rischio da governare: le revisioni devono essere rare e vere, non un tic. Regola: solo se cambia la tesi o un fatto, mai per cosmesi.
+
+**Stato**: fatto. Campo `revisions` (`date` + `note`) nel frontmatter, bilingue; componente `RevisionHistory.astro` (changelog editoriale compatto) in coda all'articolo, prima del tavolo di discussione; badge "rivisto" sulle card (`revised` in `ProcessedPost`). Il preflight verifica la simmetria IT/EN e avvisa se ci sono revisioni ma manca `updatedDate`. Regole in `docs/editorial-guidelines.md`; passo in `publish-article`. Complementare all'idea 2 (la discussione riporta lo scambio, la revisione registra il cambiamento).
 
 ### 2. Chiudere il loop con LinkedIn: "Dal tavolo di discussione" — IMPLEMENTATO (2026-07-17)
 
