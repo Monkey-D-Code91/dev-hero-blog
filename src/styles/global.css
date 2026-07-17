@@ -17,6 +17,12 @@
   --color-accent: #38bdf8; /* accento azzurro (CTA, link) */
   --color-accent-2: #2dd4bf; /* accento teal secondario */
 
+  /* Colori dei tre pilastri (triade del brand: cover, OG, glifo focus).
+     tech/human coincidono con gli accent; ai è l'indigo degli asset. */
+  --color-pillar-tech: #38bdf8;
+  --color-pillar-human: #2dd4bf;
+  --color-pillar-ai: #818cf8;
+
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
   /* Serif editoriale: SOLO titolo e corpo articolo (vedi docs/brand.md).

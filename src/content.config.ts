@@ -12,6 +12,12 @@ const blog = defineCollection({
       /** Chiave condivisa tra IT ed EN dello stesso articolo — usata per lo switch lingua. */
       translationKey: z.string(),
       tags: z.array(z.string()).default([]),
+      /**
+       * Pilastri su cui il pezzo fa leva (tech · human · ai) — indicatore
+       * QUALITATIVO reso come glifo della triade su card e pagina articolo.
+       * Non è un punteggio: un pilastro c'è o non c'è.
+       */
+      focus: z.array(z.enum(["tech", "human", "ai"])).default([]),
       cover: image().optional(),
       coverAlt: z.string().optional(),
       /** I draft sono esclusi dalla build di produzione. */

@@ -1,0 +1,54 @@
+---
+import type { BlogFocus } from "../../utils/blog";
+
+/**
+ * Glifo della triade: tre punti in ordine fisso tech · human · ai, nei colori
+ * dei pilastri del brand. Pieno = il pezzo fa leva su quel pilastro, vuoto =
+ * no. Indicatore qualitativo, non un punteggio (vedi docs/brand.md).
+ * Se `focus` è vuoto il glifo non viene reso.
+ */
+interface Props {
+  focus: BlogFocus[];
+  /** Variante più grande per l'header dell'articolo. */
+  size?: "sm" | "md";
+}
+
+const { focus, size = "sm" } = Astro.props;
+
+const PILLARS = [
+  { key: "tech", label: "Tech", color: "var(--color-pillar-tech)" },
+  { key: "human", label: "Human", color: "var(--color-pillar-human)" },
+  { key: "ai", label: "AI", color: "var(--color-pillar-ai)" },
+] as const;
+
+const activeLabels = PILLARS.filter((p) => focus.includes(p.key)).map(
+  (p) => p.label
+);
+// "Focus" funziona identico in IT e in EN: nessuna stringa da localizzare.
+const label = `Focus: ${activeLabels.join(" · ")}`;
+const dotCls = size === "md" ? "h-2.5 w-2.5" : "h-2 w-2";
+---
+
+{
+  focus.length > 0 && (
+    <span
+      class="inline-flex shrink-0 items-center gap-1.5"
+      role="img"
+      aria-label={label}
+      title={label}
+    >
+      {PILLARS.map((pillar) =>
+        focus.includes(pillar.key) ? (
+          <span
+            class:list={["rounded-full", dotCls]}
+            style={`background-color: ${pillar.color}`}
+          />
+        ) : (
+          <span
+            class:list={["rounded-full border border-border-strong", dotCls]}
+          />
+        )
+      )}
+    </span>
+  )
+}

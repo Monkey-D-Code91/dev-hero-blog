@@ -3,6 +3,7 @@ title: "In the AI Era, We Read More Than We Write"
 description: "A two-line story lands in review as fifty changed files. AI made writing almost free, so the real craft now is reading and judging: fifteen minutes of work, four hours of review."
 pubDate: 2026-07-14
 translationKey: "we-read-more-than-we-write"
+focus: ["tech", "human"]
 authors: ["marco-mariotti"]
 tags: ["ai", "code-review", "generated-code", "software-engineering"]
 cover: "../../../assets/covers/we-read-more-than-we-write.png"

@@ -3,6 +3,7 @@ title: "Nell'era dell'AI si legge più di quanto si scrive"
 description: "Una story da due righe arriva in review come cinquanta file. L'AI ha reso lo scrivere quasi gratis, e per questo il vero mestiere adesso è leggere e giudicare: quindici minuti di lavoro, quattro ore di review."
 pubDate: 2026-07-14
 translationKey: "we-read-more-than-we-write"
+focus: ["tech", "human"]
 authors: ["marco-mariotti"]
 tags: ["ai", "code-review", "codice-generato", "ingegneria-del-software"]
 cover: "../../../assets/covers/nell-era-dell-ai-si-legge-piu-di-quanto-si-scrive.png"

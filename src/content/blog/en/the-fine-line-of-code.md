@@ -3,6 +3,7 @@ title: "The Fine Line of Code"
 description: "A migrated module, all tests green, and at the end of the month the notifications stop renewing. Where the line runs between generated code under control and out of control, and how to keep your balance on it."
 pubDate: 2026-07-24
 translationKey: "the-fine-line-of-code"
+focus: ["tech", "ai"]
 authors: ["marco-mariotti"]
 tags: ["ai", "generated-code", "software-engineering", "critical-thinking"]
 cover: "../../../assets/covers/the-fine-line-of-code.png"
