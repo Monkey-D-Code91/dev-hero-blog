@@ -27,6 +27,15 @@ Genera `public/og-image.png` (1200x630), l'OG di default del sito (home, liste, 
 node scripts/generate-og.mjs
 ```
 
+## generate-logo-png.mjs
+
+Rende un logo SVG di `public/logos/` in PNG quadrato ad alta risoluzione (1024x1024 di default), per gli usi che richiedono un raster: icona newsletter (Buttondown), avatar social, favicon di piattaforme terze. Output accanto all'SVG.
+
+```
+node scripts/generate-logo-png.mjs fd-3-nib        # public/logos/fd-3-nib.png (1024x1024)
+node scripts/generate-logo-png.mjs fd-3-nib 512    # public/logos/fd-3-nib@512.png
+```
+
 ## generate-cover.mjs
 
 Genera la cover 1600x836 di un articolo, in stile brand (triade tech/human/AI, "+" luminoso, sottolineatura ondulata, font Inter). Toolchain node del repo (`@resvg/resvg-js`, gia' in `package.json`). I font sono in `scripts/fonts/` (istanze statiche di Inter, pesi 700/600/500, generate dai woff2 del repo per un rendering deterministico e indipendente dai font di sistema).
