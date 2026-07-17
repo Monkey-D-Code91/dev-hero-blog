@@ -115,7 +115,7 @@ const titleId = `card-title-${slug}`;
       {readingTime && <span class="mx-1 opacity-50" aria-hidden="true">·</span>}
       {readingTime && <span aria-label={lang === "it" ? `Tempo di lettura: ${readingTime}` : `Reading time: ${readingTime}`}>{readingTime}</span>}
       {focus.length > 0 && <span class="mx-1 opacity-50" aria-hidden="true">·</span>}
-      <FocusTriad focus={focus} />
+      <FocusTriad focus={focus} lang={lang} />
     </div>
 
     <!-- Titolo — link principale della card -->
