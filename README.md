@@ -68,6 +68,10 @@ gli articoli, build Astro e stato pipeline. Una PR di contenuto non può rompere
 
 ## Deploy
 
-Sito statico su Cloudflare Workers: `npm run build` e poi `wrangler deploy`
-(configurazione in `wrangler.jsonc`, worker `dev-hero-blog`). Il dominio canonico è
-`https://thefirstdraft.dev` (impostato in `astro.config.mjs`: canonical, `hreflang`, sitemap, OG).
+Sito statico su Cloudflare Workers (worker `dev-hero-blog`, configurazione in
+`wrangler.jsonc`). Il deploy è **automatico via Workers Builds**: ogni push su `main` va in
+produzione, ogni PR genera una build di anteprima (visibile nei check della PR). Il deploy
+manuale (`npm run build` + `npx wrangler deploy`) resta solo come fallback.
+
+Il dominio canonico è `https://thefirstdraft.dev` (impostato in `astro.config.mjs`:
+canonical, `hreflang`, sitemap, OG).
