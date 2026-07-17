@@ -12,6 +12,12 @@ metadata:
 
 Unified design skill: brand, tokens, UI, logo, CIP, slides, banners, social photos, icons.
 
+> **Nota di progetto (The First Draft):** questa skill serve solo per il design "fuori standard".
+> Gli asset canonici di un articolo (cover, OG, carousel, PDF) si generano SEMPRE con gli script
+> deterministici in `scripts/` (vedi `scripts/README.md`). Qualunque cosa venga prodotta qui deve
+> rispettare `docs/brand.md` (palette, tipografia Inter, motivi visivi, voce): è la fonte di
+> verità del brand, che prevale sui default generici di questa skill.
+
 ## When to Use
 
 - Brand identity, voice, assets
