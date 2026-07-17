@@ -22,23 +22,53 @@ traduzione EN.
 ## Fase 1 — Lettura e analisi iniziale
 
 1. Leggi il file `.md` fornito in input (testo grezzo, senza frontmatter).
-2. Prima di fare qualsiasi modifica, fai un'analisi sintetica (max 5 righe):
+2. **Carica il profilo dell'autore (persona).** Se conosci già l'author key (es.
+   `marco-mariotti`), usalo; altrimenti chiedi subito all'autore chi firma il pezzo. Poi cerca la
+   cartella `personas/` nella root del progetto:
+   - Se esiste ed esiste il file `personas/<author-key>.md` (es. `personas/marco-mariotti.md`,
+     `personas/fabio-ziliani.md`), **leggilo** e usalo come guida per tutto il raffinamento: voce
+     personale, tono preferito, metafore ricorrenti, regole di stile (es. enfasi tipografica sobria,
+     regola asimmetrica sulle ripetizioni IT vs EN), linee guida editoriali e paletti da rispettare.
+   - Se la cartella `personas/` non esiste, oppure non c'è un file per quell'autore, prosegui
+     normalmente senza persona: **non bloccare il workflow** e non inventare preferenze non
+     documentate.
+   - Il file persona è un supporto, non un vincolo rigido: se il contenuto dell'articolo o una
+     richiesta esplicita dell'autore contraddicono la persona, prevale sempre l'autore. Non citare né
+     esporre il contenuto del file (è privato e non versionato); usalo solo per orientare le scelte.
+3. Prima di fare qualsiasi modifica, fai un'analisi sintetica (max 5 righe):
    - Argomento principale e struttura
    - Tono attuale percepito
    - 2-3 osservazioni rapide su punti di forza o frizioni stilistiche evidenti
-3. Chiedi all'autore il **tono desiderato**. Proponi esempi concreti come:
-   - *Professionale* — autorevole, diretto, poco colloquiale
-   - *Informale* — conversazionale, vicino al lettore, "come se parlassi con un collega"
-   - *Rigoroso* — preciso, tecnico, denso di dettagli
-   - *Simpatico/leggero* — aneddoti, ironia soft, ritmo vivace
-   - *Ispirazionale* — narrativo, motivante, con arc emozionale
-   - Oppure lascia che l'autore descriva il tono con parole sue.
+   - Se hai caricato una persona, segnala in una riga come pensi di usarla (es. "applico la tua
+     regola sulle ripetizioni e la preferenza per il corsivo").
+4. **Chiedi sempre all'autore di confermare o modificare il tono** prima di raffinare — non darlo mai
+   per scontato, nemmeno quando hai caricato la persona.
+   - Se la persona indica un tono/voce preferiti, **proponi quello come default**, spiegando
+     esplicitamente perché (es. "dal tuo profilo emerge una voce diretta e sintetica, con metafore
+     precise: partirei da lì — confermi o vuoi virare?").
+   - Se non hai una persona, proponi tu il tono che ti sembra più adatto al contenuto, sempre
+     motivandolo.
+   - **Non limitarti a nominare il tono: fai un esempio concreto** che lo renda tangibile. Il modo più
+     efficace è prendere una frase reale dell'articolo e mostrarla riscritta nel tono proposto, così
+     l'autore *sente* la differenza invece di immaginarla. Es.: «Con un taglio *informale* la frase
+     "L'adozione dello strumento ha comportato criticità" diventa "Appena l'abbiamo adottato, sono
+     saltati fuori i problemi" — è questo il registro che vuoi?».
+   - Presenta 2-4 alternative di tono pertinenti al pezzo (non un elenco generico), ognuna con una
+     mini-etichetta e un esempio. Attingi da questa gamma di riferimento e adattala:
+     - *Professionale* — autorevole, diretto, poco colloquiale
+     - *Informale* — conversazionale, vicino al lettore, "come se parlassi con un collega"
+     - *Rigoroso* — preciso, tecnico, denso di dettagli
+     - *Simpatico/leggero* — aneddoti, ironia soft, ritmo vivace
+     - *Ispirazionale* — narrativo, motivante, con arc emozionale
+   - Lascia sempre aperta la possibilità che l'autore descriva il tono con parole sue o chieda una
+     via di mezzo. **Attendi la conferma esplicita sul tono prima di passare alla Fase 2.**
 
 ---
 
 ## Fase 2 — Prima proposta di raffinamento
 
-Sulla base del tono scelto, riscrivi l'articolo rispettando queste regole:
+Sulla base del tono scelto — e, se disponibile, del profilo persona caricato in Fase 1 — riscrivi
+l'articolo rispettando queste regole:
 
 **Cosa puoi cambiare:**
 - Scelta delle parole, registro linguistico, lunghezza delle frasi
@@ -54,7 +84,24 @@ Sulla base del tono scelto, riscrivi l'articolo rispettando queste regole:
 
 **Come presentare la proposta:**
 Mostra l'articolo intero raffinato. Non mostrare solo le parti cambiate — l'autore deve poter leggere
-il flusso completo. Se hai modifiche significative spiega brevemente (2-3 righe) le scelte fatte.
+il flusso completo.
+
+**Spiega sempre il perché di ogni modifica rilevante.** Non presentare mai una riscrittura come un
+fatto compiuto e silenzioso: l'autore deve capire il ragionamento dietro ogni scelta, così può
+accettarla, rifiutarla o discuterla con cognizione. Dopo l'articolo raffinato, aggiungi un elenco
+sintetico delle modifiche significative, e per ciascuna dichiara la motivazione. Le motivazioni tipiche:
+- **Coerenza con la persona** — "ho tolto il maiuscolo enfatico perché dal tuo profilo preferisci il
+  corsivo".
+- **Leggibilità** — "ho spezzato una frase di 40 parole in due, per non far perdere il filo al lettore".
+- **Scorrevolezza / ritmo** — "ho variato l'attacco di tre frasi di fila che iniziavano con 'Questo'".
+- **Struttura / chiarezza** — "ho reso il titolo H2 più esplicito così si capisce subito cosa tratta
+  la sezione".
+- **Far arrivare meglio l'idea** — "ho anticipato la conclusione del paragrafo per dare al lettore la
+  chiave di lettura prima dei dettagli".
+
+Quando la modifica non è ovvia, **mostra il prima/dopo** della frase, così l'autore vede
+concretamente l'effetto invece di doverlo immaginare. Sii onesto: se una scelta è opinabile o è
+solo una preferenza, dillo, non spacciarla per regola.
 
 ---
 
@@ -67,7 +114,10 @@ Dopo ogni proposta:
    indicato.
 3. **Proponi proattivamente** 1-2 suggerimenti aggiuntivi *solo se* noti qualcosa di rilevante che
    l'autore potrebbe non aver considerato (es. una sezione che rompe il tono, una ripetizione di
-   parola, un'apertura debole). Formulali come suggerimenti opzionali, mai come imposizioni.
+   parola, un'apertura debole). Se hai caricato una persona, usala anche qui per intercettare
+   scostamenti dalla voce abituale dell'autore o dai suoi paletti di stile. Formulali come
+   suggerimenti opzionali, mai come imposizioni, e — come in Fase 2 — **spiega sempre il perché e
+   porta un esempio prima/dopo**, così l'autore può valutarli concretamente.
 4. Ripeti finché l'autore dice che è soddisfatto.
 
 ---
@@ -80,7 +130,8 @@ Quando l'autore conferma che l'articolo è pronto:
 
 Chiedi all'autore (in un unico messaggio, non uno alla volta):
 
-- **Author key** — chiave dell'autore (es. `marco-mariotti`). Autori disponibili: vedi
+- **Author key** — chiave dell'autore (es. `marco-mariotti`). Se l'hai già determinata in Fase 1
+  per caricare la persona, dalla per confermata e non richiederla di nuovo. Autori disponibili: vedi
   `src/content/authors/it/` per l'elenco aggiornato.
 - **Tags** — proponi tu 3-5 tag in italiano basati sul contenuto (es. `["leadership", "team",
   "gestione"]`). L'autore può modificarli.
@@ -109,6 +160,9 @@ A partire dall'articolo finale, genera:
 Traduci l'intero articolo in inglese (corpo + titoli H2/H3). La traduzione deve:
 - Essere idiomatica, non letterale
 - Adottare lo stesso tono dell'articolo italiano
+- Rispettare eventuali regole di stile bilingue indicate nella persona (es. la regola asimmetrica
+  sulle ripetizioni: alleggerirle in italiano, mantenere il termine chiave ripetuto in inglese per
+  coesione)
 - Tradurre anche: `title`, `description`, `tags` (adattali all'inglese)
 - Lo slug EN viene generato dal `title` EN con le stesse regole
 
