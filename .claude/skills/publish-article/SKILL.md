@@ -39,6 +39,13 @@ node scripts/preflight-article.mjs src/content/blog/it/<slug>.md
 Il gemello EN è incluso in automatico. **Zero errori è vincolante.** I warning vanno mostrati
 all'autore e risolti o accettati esplicitamente (es. cover assente → generarla ora).
 
+**Nota sull'anteprima per il feedback.** Se prima della pubblicazione serve un ultimo giro col
+gruppo di feedback, il canale è la build di anteprima di Workers Builds: apri (o riusa) una PR
+col draft e condividi il Branch Preview URL che Cloudflare commenta sulla PR
+(`<branch>-dev-hero-blog.marco-mariotti09.workers.dev`). Le build di branch diversi da `main`
+includono i draft con `noindex` e banner; l'URL è stabile per branch e si aggiorna a ogni push.
+Il PDF (`scripts/generate-feedback-pdf.py`) resta come canale secondario. Vedi `src/utils/preview.ts`.
+
 ## Passo 2 — Asset
 
 - **Cover mancanti** (IT o EN): aggiungi `cover`/`coverAlt` al frontmatter e genera con

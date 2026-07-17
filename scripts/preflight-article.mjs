@@ -15,10 +15,13 @@
  *   E  pubDate e draft identici tra IT ed EN
  *   E  cover dichiarata ma file mancante, o cover senza coverAlt
  *   E  authors non presenti nella collection authors
+ *   E  link interno a un articolo inesistente
+ *   E  articolo pubblicato che linka un articolo ancora in draft
  *   W  cover assente (ok in bozza, da generare prima di pubblicare)
  *   W  filename EN diverso dal translationKey
  *   W  description fuori range (SEO: indicativamente 50-250 caratteri)
- *   W  tags assenti
+ *   W  tags assenti, o numero di tag diverso dal gemello (i valori sono tradotti)
+ *   W  focus vuoto (nessun pilastro tech/human/ai dichiarato)
  *   W  possibili nomi di persona nel corpo (euristica; consentiti solo gli autori)
  *
  * Exit code: 0 se nessun errore (i warning non bloccano), 1 altrimenti.
@@ -110,7 +113,38 @@ function authorNames() {
 // Controlli
 // ---------------------------------------------------------------------------
 
-function checkArticle(article, twin, authors, names, out) {
+/**
+ * Indice degli articoli per risolvere i link interni: per lingua, mappa
+ * slug → { draft }. Costruito una volta e passato ai controlli.
+ */
+function buildArticleIndex(all) {
+  const index = { it: new Map(), en: new Map() };
+  for (const a of all) {
+    const slug = basename(a.path).replace(/\.(md|mdx)$/, "");
+    const draft = a.fm?.draft === "true" || a.fm?.draft === true;
+    index[a.lang].set(slug, { draft });
+  }
+  return index;
+}
+
+/**
+ * Estrae dai link markdown del corpo quelli interni al blog e ne ricava
+ * lingua e slug. Riconosce /blog/<slug>/ (IT) e /en/blog/<slug>/ (EN),
+ * con o senza slash finale, ignorando querystring e anchor.
+ */
+function internalBlogLinks(body) {
+  const links = [];
+  for (const m of body.matchAll(/\]\(([^)\s]+)\)/g)) {
+    let href = m[1].split(/[?#]/)[0];
+    const en = href.match(/^\/en\/blog\/([^/]+)\/?$/);
+    const it = href.match(/^\/blog\/([^/]+)\/?$/);
+    if (en) links.push({ lang: "en", slug: en[1] });
+    else if (it) links.push({ lang: "it", slug: it[1] });
+  }
+  return links;
+}
+
+function checkArticle(article, twin, authors, names, index, out) {
   const { path, lang, md, fm, body } = article;
   const rel = path.replace(`${ROOT}/`, "");
   const push = (level, msg) => out.push({ level, file: rel, msg });
@@ -147,6 +181,14 @@ function checkArticle(article, twin, authors, names, out) {
     if (String(t.pubDate) !== String(fm.pubDate)) push("E", `pubDate diversa dal gemello (${fm.pubDate} vs ${t.pubDate})`);
     const draft = (v) => String(v ?? "false");
     if (draft(t.draft) !== draft(fm.draft)) push("E", `stato draft diverso dal gemello (${draft(fm.draft)} vs ${draft(t.draft)})`);
+    // Tag allineati tra le due lingue: i valori SONO tradotti (writing/scrittura),
+    // quindi non si confrontano i valori ma il NUMERO: se differisce, un tag si è
+    // perso in una delle due lingue.
+    if (lang === "it") {
+      const nIt = Array.isArray(fm.tags) ? fm.tags.length : 0;
+      const nEn = Array.isArray(t.tags) ? t.tags.length : 0;
+      if (nIt !== nEn) push("W", `numero di tag diverso dal gemello EN (IT: ${nIt} vs EN: ${nEn})`);
+    }
   }
 
   // Cover
@@ -166,6 +208,22 @@ function checkArticle(article, twin, authors, names, out) {
 
   // Tags
   if (!Array.isArray(fm.tags) || fm.tags.length === 0) push("W", "nessun tag");
+
+  // Focus (pilastri tech/human/ai): indicatore qualitativo del pezzo
+  if (!Array.isArray(fm.focus) || fm.focus.length === 0) {
+    push("W", "focus vuoto: nessun pilastro tech/human/ai dichiarato (glifo della triade assente)");
+  }
+
+  // Link interni al blog: bersaglio esistente e non-draft (se il pezzo è pubblicato)
+  const selfIsDraft = fm.draft === "true" || fm.draft === true;
+  for (const link of internalBlogLinks(body)) {
+    const target = index[link.lang]?.get(link.slug);
+    if (!target) {
+      push("E", `link interno a un articolo inesistente: /${link.lang === "en" ? "en/blog" : "blog"}/${link.slug}/`);
+    } else if (target.draft && !selfIsDraft) {
+      push("E", `un articolo pubblicato linka un articolo ancora in draft: /${link.lang === "en" ? "en/blog" : "blog"}/${link.slug}/`);
+    }
+  }
 
   // Euristica nomi di persona nel corpo (consentiti solo gli autori)
   const found = new Set();
@@ -218,10 +276,11 @@ if (args.includes("--all")) {
 
 const authors = knownAuthorKeys();
 const names = authorNames();
+const index = buildArticleIndex(all);
 const findings = [];
 for (const article of targets) {
   const twin = byKey.get(article.fm?.translationKey)?.[article.lang === "it" ? "en" : "it"];
-  checkArticle(article, twin, authors, names, findings);
+  checkArticle(article, twin, authors, names, index, findings);
 }
 
 const byFile = new Map();
