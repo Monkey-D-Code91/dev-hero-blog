@@ -2,6 +2,8 @@
 
 _Analisi del 2026-07-17. Proposte ordinate per priorità; ogni voce dice perché serve, non solo cosa fare. Da spuntare o scartare esplicitamente, come la roadmap editoriale._
 
+**Stato al 2026-07-17:** fatti i punti 1-7, 10, 11 (CI, README, zombie, test, anteprima draft, preflight, analytics, pulizia docs, RSS full-content). Aperti: **8** (rimuovere React, quando si tocca la navbar) e **9** (ricerca Pagefind, trigger a ~15 articoli). Per l'analytics resta il solo passo manuale di Marco: incollare il token Cloudflare.
+
 ## Lettura d'insieme
 
 Lo stack (Astro 5 statico + Tailwind 4, Cloudflare assets-only, collection Zod con `translationKey`/`authorKey`/`arcKey`) è sano, coerente e proporzionato al progetto. L'architettura bilingue a coppia di file con chiave condivisa è la scelta giusta e va difesa, non sostituita. Il tooling editoriale (`preflight-article.mjs`, `status.mjs`, skill) è il vero asset tecnico del repo: il codice del sito è "finito" per la fase attuale, mentre la pipeline di pubblicazione è dove l'investimento tecnico rende di più.
@@ -90,13 +92,22 @@ React 19 + `@astrojs/react` esistono per una sola island (`MobileMenu.tsx`). Un 
 
 Con 4-8 articoli la ricerca è rumore. Fissare il trigger adesso per non ridiscuterlo: **oltre ~15 articoli pubblicati**, aggiungere Pagefind (statico, zero backend, i18n-aware). Prima, la pagina tag basta.
 
-### 10. Pulizia cartelle di lavorazione
+### 10. Pulizia cartelle di lavorazione — FATTO (2026-07-17)
 
-`bakeoff/` è vuota e versionata? (verificare), `personas/` e `feedback/` sono già gitignorate ma presenti in locale, `docs/roadmap_design_review.md` e `docs/roadmap-page-implementation-plan.md` sono documenti di lavorazione ormai eseguiti. Spostare i doc storici in `docs/archive/` (o eliminarli: sono in git) per tenere `docs/` come fonte di verità viva: oggi convivono documenti normativi (brand, editorial) e appunti di progetto esauriti.
+I due documenti di lavorazione eseguiti (`roadmap_design_review.md`,
+`roadmap-page-implementation-plan.md`) spostati in `docs/archive/` con un README che ne
+spiega lo stato; `docs/` resta ora solo fonte di verità viva (brand, editorial, roadmap,
+podcast). `bakeoff/` era una cartella vuota e non tracciata: rimossa in locale (`personas/`
+e `feedback/` restano gitignorate, invariate).
 
-### 11. RSS: verificare contenuto completo
+### 11. RSS a contenuto completo — FATTO (2026-07-17)
 
-Il manifesto è anti-algoritmo e l'RSS è il canale distributivo coerente con quel posizionamento (c'è già la nota a fine articolo). Verificare che i feed IT/EN espongano il **contenuto completo** e non solo il summary: un feed monco spinge il lettore RSS di nuovo dentro il browser, contro la promessa.
+Verifica: i quattro feed (IT, EN, per-autore IT/EN) esponevano solo `description`. Scelta di
+Marco: **contenuto completo** con la ricetta ufficiale Astro (`markdown-it` + `sanitize-html`).
+Il corpo dell'articolo viene reso in `<content:encoded>`; `typographer` è OFF di proposito
+(non deve convertire `--` in trattino lungo, vietato dalle linee guida). Logica condivisa in
+`src/utils/rss.ts` (`renderPostContent` + `toRssItem`), che ha anche deduplicato la costruzione
+dell'item nei quattro endpoint. Coperto da test.
 
 ## Cosa NON fare (anti-roadmap tecnica)
 
