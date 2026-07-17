@@ -80,3 +80,10 @@ gruppo di feedback. In locale: `PREVIEW_DRAFTS=1 npm run build`. Logica in
 
 Il dominio canonico è `https://thefirstdraft.dev` (impostato in `astro.config.mjs`:
 canonical, `hreflang`, sitemap, OG).
+
+## Analytics
+
+Cloudflare Web Analytics (privacy-first, no cookie, nessun banner). Il beacon è emesso solo
+sul deploy di produzione reale (non in dev né nelle anteprime). Per attivarlo: creare il sito
+su Cloudflare Web Analytics e incollare il token in `CF_BEACON_TOKEN` (`src/config.ts`) oppure
+impostarlo come variabile di build `CF_BEACON_TOKEN` su Workers Builds. Vuoto = spento.

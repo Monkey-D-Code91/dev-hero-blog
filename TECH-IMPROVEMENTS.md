@@ -67,9 +67,18 @@ produzione resta identica. Logica centralizzata in `src/utils/preview.ts`
 feedback: aprire una PR col draft e condividere il Preview URL della build Workers.
 Il PDF (`scripts/generate-feedback-pdf.py`) resta come canale secondario.
 
-### 7. Web analytics minimale
+### 7. Web analytics minimale — FATTO (2026-07-17)
 
-Non c'è alcuna misura: non sai se un articolo è stato letto da 30 o 3.000 persone, né da quale canale. Per un progetto che ragiona su "quando il blog avrà un pubblico" (vincolo esplicito della roadmap sul case study), un segnale serve. Cloudflare Web Analytics (già dentro l'ecosistema di deploy, privacy-first, uno script) o Plausible/Umami se si vuole di più. Nessun cookie banner necessario.
+Integrato Cloudflare Web Analytics (privacy-first, no cookie, nessun banner). Il beacon è
+in `BaseLayout` e viene emesso **solo sul deploy di produzione reale**: escluso in dev e
+nelle anteprime Workers, che falserebbero i dati (logica in `src/utils/analytics.ts`).
+Token pubblico in `src/config.ts` (`CF_BEACON_TOKEN`), sovrascrivibile dalla env di build
+`CF_BEACON_TOKEN` su Workers Builds. **Resta da fare (Marco)**: creare il sito su
+Cloudflare Web Analytics e incollare il token, o impostarlo come variabile su Workers
+Builds. Finché il token è "", l'analytics è spento e non viene emesso nulla.
+
+Nota: la decisione sul pubblico (gate del case study #6 = solo ok PO, non una soglia)
+rende questo un "utile per sapere se vieni letto", non un prerequisito.
 
 ## Priorità bassa / opportunistica
 

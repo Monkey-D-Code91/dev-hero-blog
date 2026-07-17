@@ -3,6 +3,7 @@ import "@fontsource-variable/inter";
 import "../styles/global.css";
 import { BLOG } from "../config";
 import { isDraftPreview } from "../utils/preview";
+import { analyticsToken } from "../utils/analytics";
 
 interface Props {
   title: string;
@@ -45,6 +46,9 @@ const {
 
 // Build di anteprima per il gruppo di feedback: bozze incluse, noindex, banner.
 const draftPreview = isDraftPreview();
+
+// Beacon Cloudflare Web Analytics: solo in produzione reale, se configurato.
+const cfBeacon = analyticsToken();
 
 const canonical = canonicalUrl ?? new URL(path, Astro.site).toString();
 const ogImage = ogImageProp ?? new URL("/og-image.png", Astro.site).toString();
@@ -157,5 +161,16 @@ const jsonLdString = jsonLd
         revealEls.forEach((el) => el.classList.add("reveal-visible"));
       }
     </script>
+
+    {
+      cfBeacon && (
+        <script
+          is:inline
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={`{"token": "${cfBeacon}"}`}
+        />
+      )
+    }
   </body>
 </html>
