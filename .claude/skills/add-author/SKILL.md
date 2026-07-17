@@ -219,16 +219,33 @@ Write both:
 From the project root, run:
 
 ```bash
-npx astro build 2>&1 | tail -5
+npx astro check 2>&1 | tail -5
 ```
 
-- **Pass** (output contains "Complete!" or "✓ Completed"): report success.
+- **Pass** (no content/schema errors): report success.
 - **Fail**: show only the relevant error lines, diagnose the likely cause (YAML quoting, missing
   required field, invalid URL), fix the file(s), and re-run.
+- If `astro check` cannot run in the current environment, fall back to
+  `npx astro build 2>&1 | tail -5` (slower, same validation of the content schema).
 
 ---
 
-## Step 7 — Summary
+## Step 7 — Persona file (private, optional but recommended)
+
+The `refine-article` skill personalises its editing using a private persona file in `personas/`
+(git-ignored, never committed). Offer to start one now:
+
+> "Vuoi che crei anche il tuo file persona (`personas/<slug>.md`)? È privato e non versionato:
+> serve alle skill editoriali per rispettare la tua voce quando rifiniamo i tuoi articoli."
+
+If yes, ask 3 short questions (voice/tone preferences, recurring metaphors or themes, style
+rules or red lines) and write `personas/<slug>.md` following the structure of the existing
+persona files: a short profile, "Come vuole collaborare", "Preferenze di stile". Keep it honest
+and minimal: it grows session after session, it does not need to be complete today.
+
+---
+
+## Step 8 — Summary
 
 ```
 ✓ Profilo autore creato!
@@ -236,6 +253,7 @@ npx astro build 2>&1 | tail -5
 File generati:
   src/content/authors/it/<slug>.md
   src/content/authors/en/<slug>.md
+  personas/<slug>.md               (solo se creato — privato, non versionato)
 
 Quando sei pronto a committare:
   git add src/content/authors/

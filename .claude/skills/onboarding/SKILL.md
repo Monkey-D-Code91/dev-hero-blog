@@ -6,8 +6,9 @@ description: >
   Accompagna una persona nuova a capire il progetto (missione, manifesto, filtro editoriale, chi fa
   cosa), a creare il proprio profilo autore, a scrivere e pubblicare un articolo IT+EN, e a produrre
   gli asset social (cover, carousel LinkedIn, PDF di feedback). È un HUB: non duplica le altre skill,
-  ma spiega il contesto e instrada verso la skill o lo script giusto (add-author, refine-article,
-  brand, design, slides, e gli script in scripts/). Usa questa skill quando qualcuno dice cose come
+  ma spiega il contesto e instrada verso la skill o lo script giusto (add-author, write-article,
+  refine-article, publish-article, podcast-repurpose, design, e gli script in scripts/). Usa questa
+  skill quando qualcuno dice cose come
   "sono nuovo nel progetto", "onboarding", "da dove inizio", "come funziona The First Draft", "come
   contribuisco al blog", "come pubblico un articolo qui", "guidami nel progetto", "onboard me",
   "I'm new here", "how does this project work". Se la richiesta è già specifica (es. "aggiungi un
@@ -75,10 +76,14 @@ anonimizzazione del datore, bilingue con `translationKey`). Meglio dirle prima c
 Per ogni azione concreta, **invoca la skill dedicata** invece di reimplementarla:
 
 - Creare un autore → skill **`add-author`**
-- Rifinire e pubblicare un articolo → skill **`refine-article`**
+- Scrivere un articolo da un'idea → skill **`write-article`**
+- Rifinire una bozza (tono/stile, traduzione, salvataggio IT+EN) → skill **`refine-article`**
+- Pubblicare il giorno dell'uscita → skill **`publish-article`**
+- Portare un articolo nel podcast → skill **`podcast-repurpose`**
 - Cover / carousel / OG / PDF → script in `scripts/` (vedi `references/asset-social.md`)
-- Voce, tono, coerenza di brand → skill **`brand`**
-- Grafica social più elaborata (banner, slide, foto) → skill **`design`** / **`slides`**
+- Verifica regole e stato pipeline → `scripts/preflight-article.mjs` e `scripts/status.mjs`
+- Voce, palette, motivi visivi → **`docs/brand.md`** (fonte di verità del brand)
+- Grafica "fuori standard" → skill **`design`** (sempre nel rispetto di `docs/brand.md`)
 
 Il tuo valore qui è il **contesto e il collegamento**, non l'esecuzione: quella la fanno le skill
 specializzate, che restano l'unica fonte di verità sui rispettivi workflow.

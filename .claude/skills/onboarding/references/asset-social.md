@@ -80,9 +80,9 @@ Legge `title`, `description`, `pubDate`. Pensato per la versione IT. Senza outpu
 
 ## Grafica più elaborata
 
-Per banner, slide non-carousel, foto social o varianti di formato oltre a questi script, usa le skill
-**`design`** (banner, social photos, icone, loghi) e **`slides`** (presentazioni HTML). Per voce/tono
-e coerenza di brand degli asset, la skill **`brand`**.
+Per banner, slide non-carousel, foto social o varianti di formato oltre a questi script, usa la skill
+**`design`**. Qualunque cosa produca deve rispettare **`docs/brand.md`** (fonte di verità del brand:
+palette, tipografia, motivi visivi, voce).
 
 ## Nota ambiente
 

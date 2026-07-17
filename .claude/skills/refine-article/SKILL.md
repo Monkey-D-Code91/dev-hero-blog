@@ -168,7 +168,8 @@ Traduci l'intero articolo in inglese (corpo + titoli H2/H3). La traduzione deve:
 
 ### 4d. Salva i file
 
-Crea entrambi i file con il seguente frontmatter:
+Lo schema di riferimento del frontmatter è `src/content.config.ts` (fonte di verità: se questo
+template e lo schema divergono, vince lo schema). Crea entrambi i file con il seguente frontmatter:
 
 **`src/content/blog/it/[slug-it].md`:**
 ```markdown
@@ -203,6 +204,55 @@ draft: false
 ```
 
 Dopo aver salvato entrambi i file, conferma all'autore i path creati.
+
+---
+
+## Fase 5 — Verifica e confezione
+
+### 5a. Preflight (obbligatorio)
+
+Esegui il controllo editoriale deterministico sulla coppia appena creata:
+
+```bash
+node scripts/preflight-article.mjs src/content/blog/it/[slug-it].md
+```
+
+Il gemello EN è incluso in automatico. Correggi tutti gli **errori** (bloccanti); mostra i
+**warning** all'autore e risolvili o fateli accettare esplicitamente.
+
+### 5b. Cover
+
+Proponi di generare subito le cover brand (1600x836): aggiungi al frontmatter di ciascun file
+
+```yaml
+cover: "../../../assets/covers/[slug].png"
+coverAlt: "[descrizione della cover con il titolo, per l'accessibilità]"
+```
+
+poi esegui, per ciascuna lingua:
+
+```bash
+node scripts/generate-cover.mjs src/content/blog/it/[slug-it].md
+node scripts/generate-cover.mjs src/content/blog/en/[slug-en].md
+```
+
+Il `coverAlt` va scritto sul modello degli articoli esistenti (triade tech/human/AI, titolo,
+sottolineatura a mano). Se l'autore preferisce rimandare, va bene: il preflight lo segnalerà
+come warning finché non è fatto.
+
+### 5c. PDF per il gruppo di feedback (opzionale)
+
+Se l'articolo passa dal giro di feedback prima di uscire:
+
+```bash
+python3 scripts/generate-feedback-pdf.py src/content/blog/it/[slug-it].md
+```
+
+### 5d. Passaggio di consegne
+
+La pubblicazione vera e propria (togliere il draft, build, roadmap, PR, LinkedIn) è compito
+della skill **`publish-article`**: indicala all'autore come passo successivo quando arriva il
+giorno di uscita. Se resta lavoro in sospeso, annotalo in `HANDOFF.md`.
 
 ---
 

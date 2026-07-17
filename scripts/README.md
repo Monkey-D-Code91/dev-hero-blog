@@ -2,6 +2,23 @@
 
 Tooling per la pubblicazione degli articoli di The First Draft. Deterministico e riutilizzabile: stesso comando per ogni articolo.
 
+## preflight-article.mjs
+
+Controllo editoriale e strutturale di un articolo (e del suo gemello nell'altra lingua, incluso in automatico): campi obbligatori del frontmatter, niente trattini lunghi, slug kebab-case, coppia IT/EN allineata (`translationKey`, `pubDate`, `draft`), cover esistente con `coverAlt`, autori noti, euristica sui nomi di persona (regola privacy). Errori bloccanti (exit 1) e warning. Da eseguire prima di rifinire e sempre prima di pubblicare.
+
+```
+node scripts/preflight-article.mjs src/content/blog/it/<slug>.md
+node scripts/preflight-article.mjs --all
+```
+
+## status.mjs
+
+Stato della pipeline calcolato dai file, in sola lettura: coppie IT/EN per `translationKey` (draft/pubblicato, cover, PDF feedback, carousel presenti) e coerenza tra la collection roadmap e il blog (tappe `published` che puntano a draft, articoli pubblicati non collegati in roadmap). Il "dove eravamo rimasti" fattuale; `HANDOFF.md` resta per le decisioni.
+
+```
+node scripts/status.mjs
+```
+
 ## generate-og.mjs
 
 Genera `public/og-image.png` (1200x630), l'OG di default del sito (home, liste, autori).

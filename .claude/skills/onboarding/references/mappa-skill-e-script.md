@@ -7,19 +7,16 @@ Orientamento rapido: quale strumento per quale bisogno. L'onboarding **instrada*
 | Skill | A cosa serve | Quando instradare |
 |---|---|---|
 | **onboarding** | Questa: contesto del progetto + routing per un collaboratore nuovo | "sono nuovo", "da dove inizio", "come funziona" |
-| **add-author** | Scaffolding profilo autore bilingue IT+EN, con auto-traduzione e validazione | "aggiungi un autore", "voglio la mia pagina autore" |
-| **refine-article** | Rifinire tono/stile di una bozza e pubblicarla in IT+EN con frontmatter e metadati | "rifinisci questo pezzo", "sistema il tono", "pubblica l'articolo" |
-| **brand** | Voce, identità visiva, messaging, coerenza e asset di brand | dubbi su tono di voce, coerenza brand, revisione asset |
-| **design** | Hub design: logo, CIP, banner, slide, social photos, icone (varie piattaforme) | grafica social elaborata oltre agli script cover/carousel |
-| **slides** | Presentazioni HTML strategiche (Chart.js, layout, copywriting) | deck/presentazioni, slide non-carousel |
-| **design-system** | Design token (primitive/semantic), integrazione Tailwind | lavoro sui token del sito |
-| **ui-styling** | shadcn/ui + Tailwind, componenti e theming | sviluppo UI del sito |
-| **banner-design** | Banner multi-formato per social/ads/web/print | banner e cover di canale |
-| **ui-ux-pro-max** | Knowledge base UI/UX (colori, tipografia, pattern, motion) | riferimento in fase di design/UI |
+| **add-author** | Scaffolding profilo autore bilingue IT+EN, con auto-traduzione, validazione e file persona | "aggiungi un autore", "voglio la mia pagina autore" |
+| **write-article** | Metodo di co-scrittura: dal materiale reale alla bozza completa, filtro editoriale come gate | "ho un'idea per un articolo", "scriviamo il prossimo pezzo" |
+| **refine-article** | Rifinire tono/stile di una bozza, tradurla e salvarla in IT+EN con frontmatter, preflight e cover | "rifinisci questo pezzo", "sistema il tono" |
+| **publish-article** | Runbook del giorno di pubblicazione: preflight, draft off, build, roadmap, PR, post LinkedIn | "pubblica l'articolo", "esce il pezzo oggi" |
+| **podcast-repurpose** | Dall'articolo al kit episodio podcast (scaletta parlata, YouTube, Spotify) per pubblico non tech | "prepariamo la puntata", "show notes" |
+| **design** | Design "fuori standard" (banner di canale, esperimenti); deve rispettare `docs/brand.md` | grafica oltre gli script cover/carousel/OG |
 
-> Nota di routing: `design` include già sotto di sé slides, banner, brand ecc. Per gli asset standard
-> di un articolo, però, parti sempre dagli **script** dedicati (cover, carousel, OG): sono
-> deterministici e allineati al brand. Le skill di design sono per il "fuori standard".
+> Nota di routing: per gli asset standard di un articolo parti sempre dagli **script** dedicati
+> (cover, carousel, OG): sono deterministici e allineati al brand. La skill `design` è per il
+> "fuori standard", e la fonte di verità del brand è `docs/brand.md`.
 
 ## Script versionati (in `scripts/`, vedi `scripts/README.md`)
 
@@ -29,6 +26,8 @@ Orientamento rapido: quale strumento per quale bisogno. L'onboarding **instrada*
 | `generate-carousel.mjs` | Carousel LinkedIn 1080x1350 (slide PNG + PDF) da spec | `node scripts/generate-carousel.mjs <articolo.md> [--spec f.json] [--out dir]` |
 | `generate-og.mjs` | `public/og-image.png` 1200x630 (OG di default del sito) | `node scripts/generate-og.mjs` |
 | `generate-feedback-pdf.py` | PDF "bozza per revisione" per il gruppo di feedback | `python3 scripts/generate-feedback-pdf.py <articolo.md> [out.pdf]` |
+| `preflight-article.mjs` | Controllo editoriale/strutturale di una coppia IT+EN (bloccante se errori) | `node scripts/preflight-article.mjs <articolo.md>` \| `--all` |
+| `status.mjs` | Stato pipeline: coppie, draft, asset, coerenza roadmap/blog (sola lettura) | `node scripts/status.mjs` |
 
 ## Documenti chiave del repo
 
@@ -37,6 +36,7 @@ Orientamento rapido: quale strumento per quale bisogno. L'onboarding **instrada*
 | `README.md` | Stack, comandi, personalizzazione contenuti, deploy |
 | `HANDOFF.md` | Stato vivo della pipeline + il metodo di co-scrittura adottato |
 | `docs/editorial-guidelines.md` | Regole editoriali e di stile (fonte canonica) |
+| `docs/brand.md` | Brand: pilastri, voce, palette, motivi visivi, formati (fonte canonica) |
 | `docs/content-roadmap.md` | Roadmap editoriale, filtro, ordine di pubblicazione, track collaboratori |
 | `src/content.config.ts` | Schema dei contenuti (blog + authors), regole di validazione |
 | `scripts/README.md` | Documentazione degli script di pubblicazione |
