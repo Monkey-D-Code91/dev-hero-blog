@@ -3,6 +3,7 @@ title: "Learning to Steer, Not to Race"
 description: "A pull request full of code that works but nobody understood, where a simple ref would have done. AI hands you speed, but speed without direction drags you around: growing isn't producing more code, it's getting to the core of problems."
 pubDate: 2026-08-03
 translationKey: "learning-to-steer-not-to-race"
+focus: ["human", "ai"]
 authors: ["marco-mariotti"]
 tags: ["ai", "generated-code", "professional-growth", "mentoring"]
 cover: "../../../assets/covers/learning-to-steer-not-to-race.png"

@@ -1,0 +1,101 @@
+---
+import type { Lang } from "../../i18n/ui";
+import type { BlogFocus } from "../../utils/blog";
+
+/**
+ * Glifo della triade: tre punti in ordine fisso tech · human · ai, nei colori
+ * dei pilastri del brand. Pieno = il pezzo fa leva su quel pilastro, vuoto =
+ * no. Indicatore qualitativo, non un punteggio (vedi docs/brand.md).
+ *
+ * Il glifo è focusabile e mostra una mini-legenda in tooltip (hover +
+ * focus da tastiera, CSS-only). Su touch il tooltip non esiste: per questo
+ * l'header articolo usa `showLabels` con le etichette testuali inline.
+ * Se `focus` è vuoto il glifo non viene reso.
+ */
+interface Props {
+  focus: BlogFocus[];
+  lang: Lang;
+  /** Variante più grande per l'header dell'articolo. */
+  size?: "sm" | "md";
+  /** Etichette testuali dei pilastri attivi accanto ai punti (header articolo). */
+  showLabels?: boolean;
+}
+
+const { focus, lang, size = "sm", showLabels = false } = Astro.props;
+
+const PILLARS = [
+  { key: "tech", label: "Tech", color: "var(--color-pillar-tech)" },
+  { key: "human", label: "Human", color: "var(--color-pillar-human)" },
+  { key: "ai", label: "AI", color: "var(--color-pillar-ai)" },
+] as const;
+
+const activeLabels = PILLARS.filter((p) => focus.includes(p.key)).map(
+  (p) => p.label
+);
+// "Focus" funziona identico in IT e in EN: nessuna stringa da localizzare.
+const label = `Focus: ${activeLabels.join(" · ")}`;
+const caption =
+  lang === "it"
+    ? "Punti pieni: i pilastri su cui fa leva il pezzo."
+    : "Filled dots: the pillars this piece leans on.";
+const dotCls = size === "md" ? "h-2.5 w-2.5" : "h-2 w-2";
+---
+
+{
+  focus.length > 0 && (
+    <span
+      class="group/triad relative inline-flex shrink-0 items-center gap-1.5"
+      role="img"
+      aria-label={label}
+      tabindex="0"
+    >
+      {PILLARS.map((pillar) =>
+        focus.includes(pillar.key) ? (
+          <span
+            class:list={["rounded-full", dotCls]}
+            style={`background-color: ${pillar.color}`}
+          />
+        ) : (
+          <span
+            class:list={["rounded-full border border-border-strong", dotCls]}
+          />
+        )
+      )}
+      {showLabels && (
+        <span class="ml-1 text-xs lowercase tracking-wide text-muted" aria-hidden="true">
+          {activeLabels.join(" · ")}
+        </span>
+      )}
+
+      {/* Mini-legenda: visiva soltanto (il nome accessibile è l'aria-label). */}
+      <span
+        aria-hidden="true"
+        class="pointer-events-none absolute bottom-full right-0 z-20 mb-2 w-max rounded-lg border border-border bg-surface-2 p-3 opacity-0 shadow-lg transition-opacity duration-150 group-hover/triad:opacity-100 group-focus-visible/triad:opacity-100"
+      >
+        <span class="flex flex-col gap-1.5">
+          {PILLARS.map((pillar) => {
+            const isActive = focus.includes(pillar.key);
+            return (
+              <span class="flex items-center gap-2 text-xs">
+                {isActive ? (
+                  <span
+                    class="h-2 w-2 rounded-full"
+                    style={`background-color: ${pillar.color}`}
+                  />
+                ) : (
+                  <span class="h-2 w-2 rounded-full border border-border-strong" />
+                )}
+                <span class={isActive ? "font-medium text-text" : "text-muted"}>
+                  {pillar.label}
+                </span>
+              </span>
+            );
+          })}
+        </span>
+        <span class="mt-2 block max-w-45 text-[0.6875rem] leading-snug text-muted">
+          {caption}
+        </span>
+      </span>
+    </span>
+  )
+}

@@ -6,8 +6,9 @@ import "@fontsource-variable/newsreader/wght-italic.css";
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import type { Lang } from "../../i18n/ui";
-import type { PostAuthor } from "../../utils/blog";
+import type { BlogFocus, PostAuthor } from "../../utils/blog";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import FocusTriad from "./FocusTriad.astro";
 import PostMeta from "./PostMeta.astro";
 import AuthorCard from "./AuthorCard.astro";
 import RelatedPosts from "./RelatedPosts.astro";
@@ -21,6 +22,7 @@ interface Props {
   pubDate: Date;
   updatedDate?: Date;
   tags: string[];
+  focus?: BlogFocus[];
   readingTime: string;
   cover?: ImageMetadata;
   coverAlt?: string;
@@ -35,6 +37,7 @@ const {
   pubDate,
   updatedDate,
   tags,
+  focus = [],
   readingTime,
   cover,
   coverAlt,
@@ -84,9 +87,12 @@ const rssUrl = lang === "it" ? "/rss.xml" : "/en/rss.xml";
   <article aria-labelledby="article-title">
     <!-- Header articolo -->
     <header class="mb-8">
-      <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
-        {t.blog.heading}
-      </p>
+      <div class="mb-3 flex items-center justify-between gap-4">
+        <p class="text-sm font-semibold uppercase tracking-widest text-accent">
+          {t.blog.heading}
+        </p>
+        <FocusTriad focus={focus} lang={lang} size="md" showLabels />
+      </div>
       <h1
         id="article-title"
         class="font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-[2.75rem] text-text"

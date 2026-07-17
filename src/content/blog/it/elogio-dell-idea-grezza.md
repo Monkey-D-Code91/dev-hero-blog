@@ -3,6 +3,7 @@ title: "Elogio dell'idea grezza"
 description: "The First Draft nasce contro il rumore dei contenuti generati in serie: uno spazio dove le idee grezze si scrivono, si discutono e si affinano."
 pubDate: 2026-07-04
 translationKey: "in-praise-of-the-rough-idea"
+focus: ["tech", "human", "ai"]
 authors: ["marco-mariotti"]
 tags: ["manifesto", "ai", "scrittura", "pensiero-critico"]
 cover: "../../../assets/covers/elogio-dell-idea-grezza.png"

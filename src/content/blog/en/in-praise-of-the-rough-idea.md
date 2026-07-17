@@ -3,6 +3,7 @@ title: "In Praise of the Rough Idea"
 description: "The First Draft is a reaction to mass-produced content: a space where raw ideas get written, discussed and refined, across tech, human and AI."
 pubDate: 2026-07-04
 translationKey: "in-praise-of-the-rough-idea"
+focus: ["tech", "human", "ai"]
 authors: ["marco-mariotti"]
 tags: ["manifesto", "ai", "writing", "critical-thinking"]
 cover: "../../../assets/covers/in-praise-of-the-rough-idea.png"

@@ -70,6 +70,11 @@ Il sistema visivo degli asset (cover, OG, carousel) è fatto di pochi elementi f
 
 Questi elementi non si ridisegnano a mano: li rendono gli script.
 
+Sul sito la triade ha anche una forma minima: il **glifo focus** (tre punti tech · human · ai
+nei colori dei pilastri, pieni o vuoti) su card e header articolo, pilotato dal campo `focus`
+del frontmatter. È un indicatore QUALITATIVO (un pilastro c'è o non c'è), mai un punteggio:
+niente barre, percentuali o voti, che sono l'estetica del contenuto in serie che combattiamo.
+
 ## Formati e strumenti canonici
 
 | Asset | Formato | Strumento |

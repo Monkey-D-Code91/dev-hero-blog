@@ -17,12 +17,16 @@ export interface PostAuthor {
   avatarAlt?: string;
 }
 
+export type BlogFocus = "tech" | "human" | "ai";
+
 export interface ProcessedPost {
   title: string;
   description: string;
   pubDate: Date;
   slug: string;
   tags: string[];
+  /** Pilastri del pezzo (tech · human · ai), per il glifo della triade. */
+  focus: BlogFocus[];
   readingTime: string;
   cover?: ImageMetadata;
   coverAlt?: string;
@@ -118,6 +122,7 @@ export async function processPosts(
     pubDate: p.data.pubDate,
     slug: getSlugFromEntryId(p.id),
     tags: p.data.tags,
+    focus: p.data.focus,
     readingTime: getReadingTime(p.body, lang),
     cover: p.data.cover,
     coverAlt: p.data.coverAlt,
