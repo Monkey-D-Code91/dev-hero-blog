@@ -3,6 +3,7 @@ import type { ProcessedPost } from "../../utils/blog";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { getResolvedRoadmap } from "../../utils/roadmap";
 import PostCard from "./PostCard.astro";
+import TagFilterBar from "./TagFilterBar.astro";
 import UpcomingPosts from "./UpcomingPosts.astro";
 
 interface Props {
@@ -36,6 +37,9 @@ const hasUpcoming = upcoming.length > 0;
       <h1 class="mt-2 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
         {t.blog.lead}
       </h1>
+      <div class="mt-8">
+        <TagFilterBar lang={lang} />
+      </div>
     </header>
 
     {

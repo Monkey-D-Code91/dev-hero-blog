@@ -5,6 +5,7 @@ import BaseLayout from "../../../../layouts/BaseLayout.astro";
 import Navbar from "../../../../components/Navbar.astro";
 import Footer from "../../../../components/Footer.astro";
 import PostCard from "../../../../components/blog/PostCard.astro";
+import TagFilterBar from "../../../../components/blog/TagFilterBar.astro";
 import { BLOG } from "../../../../config";
 
 export async function getStaticPaths() {
@@ -85,6 +86,9 @@ const articleCount =
             <span class="text-muted">#</span>{tag}
           </h1>
           <p class="mt-2 text-muted">{articleCount}</p>
+          <div class="mt-8">
+            <TagFilterBar lang={lang} activeTag={tag} />
+          </div>
         </header>
 
         <!-- Articles grid — staggered reveal per card -->
