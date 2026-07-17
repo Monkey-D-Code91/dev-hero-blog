@@ -25,3 +25,16 @@ export const GISCUS: {
   category: "Ideas",
   categoryId: "DIC_kwDOSy0bHc4C-pHC",
 };
+
+/**
+ * Cloudflare Web Analytics: misura privacy-first (no cookie, no dato personale,
+ * nessun banner richiesto), un solo beacon. Il token NON è segreto: compare
+ * nell'HTML della pagina. Si ottiene dalla dashboard Cloudflare
+ * (Web Analytics → Add a site → Manual → JS snippet, campo "token").
+ *
+ * Lasciare "" per tenerlo spento. In alternativa si può impostare da Workers
+ * Builds senza toccare il codice con la env `CF_BEACON_TOKEN`, che ha la
+ * precedenza (vedi src/utils/analytics.ts). Il beacon viene emesso SOLO sul
+ * deploy di produzione reale (non in dev, non nelle anteprime Workers).
+ */
+export const CF_BEACON_TOKEN = "";
