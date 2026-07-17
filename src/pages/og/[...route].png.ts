@@ -1,6 +1,7 @@
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import { getLangFromEntryId, buildAuthorNameMap } from "../../utils/blog";
+import { includeDrafts } from "../../utils/preview";
 import { renderOgImage } from "../../utils/og";
 
 /**
@@ -14,7 +15,7 @@ export const prerender = true;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getCollection("blog", (entry) =>
-    import.meta.env.PROD ? !entry.data.draft : true
+    includeDrafts() || !entry.data.draft
   );
   const names = {
     it: await buildAuthorNameMap("it"),
