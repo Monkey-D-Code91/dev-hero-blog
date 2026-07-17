@@ -118,6 +118,7 @@ const articleSchema = buildArticleSchema({
       coverAlt={post.data.coverAlt}
       authors={authors}
       related={related}
+      discussion={post.data.discussion}
       url={new URL(`/blog/${slug}/`, Astro.site).toString()}
     >
       <Content />

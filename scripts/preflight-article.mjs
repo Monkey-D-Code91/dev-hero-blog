@@ -188,6 +188,13 @@ function checkArticle(article, twin, authors, names, index, out) {
       const nIt = Array.isArray(fm.tags) ? fm.tags.length : 0;
       const nEn = Array.isArray(t.tags) ? t.tags.length : 0;
       if (nIt !== nEn) push("W", `numero di tag diverso dal gemello EN (IT: ${nIt} vs EN: ${nEn})`);
+      // "Dal tavolo di discussione": stesso numero di scambi in IT ed EN.
+      // Il parser frontmatter salta le righe indentate, quindi si contano le
+      // voci dalla riga "- from:" del rawFm.
+      const countDiscussion = (raw) => (raw.match(/^\s*-\s+from:/gm) ?? []).length;
+      const dIt = countDiscussion(article.rawFm);
+      const dEn = countDiscussion(twin.rawFm ?? "");
+      if (dIt !== dEn) push("W", `numero di scambi 'discussion' diverso dal gemello EN (IT: ${dIt} vs EN: ${dEn})`);
     }
   }
 
