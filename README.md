@@ -73,5 +73,10 @@ Sito statico su Cloudflare Workers (worker `dev-hero-blog`, configurazione in
 produzione, ogni PR genera una build di anteprima (visibile nei check della PR). Il deploy
 manuale (`npm run build` + `npx wrangler deploy`) resta solo come fallback.
 
+Le build di anteprima (branch diversi da `main`) **includono anche le bozze**
+(`draft: true`), con `noindex` e un banner dedicato: è il canale di revisione per il
+gruppo di feedback. In locale: `PREVIEW_DRAFTS=1 npm run build`. Logica in
+`src/utils/preview.ts`.
+
 Il dominio canonico è `https://thefirstdraft.dev` (impostato in `astro.config.mjs`:
 canonical, `hreflang`, sitemap, OG).

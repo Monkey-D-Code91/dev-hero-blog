@@ -2,6 +2,7 @@
 import "@fontsource-variable/inter";
 import "../styles/global.css";
 import { BLOG } from "../config";
+import { isDraftPreview } from "../utils/preview";
 
 interface Props {
   title: string;
@@ -42,6 +43,9 @@ const {
   canonicalUrl,
 } = Astro.props;
 
+// Build di anteprima per il gruppo di feedback: bozze incluse, noindex, banner.
+const draftPreview = isDraftPreview();
+
 const canonical = canonicalUrl ?? new URL(path, Astro.site).toString();
 const ogImage = ogImageProp ?? new URL("/og-image.png", Astro.site).toString();
 
@@ -64,6 +68,7 @@ const jsonLdString = jsonLd
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    {draftPreview && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
 
     <link rel="alternate" hreflang="it" href={itHref} />
@@ -121,6 +126,15 @@ const jsonLdString = jsonLd
     >
       {lang === "it" ? "Salta al contenuto" : "Skip to content"}
     </a>
+    {
+      draftPreview && (
+        <div class="border-b border-accent/30 bg-accent/10 px-4 py-2 text-center text-sm text-accent">
+          {lang === "it"
+            ? "Anteprima di lavoro: include anche le bozze non ancora pubblicate."
+            : "Working preview: unpublished drafts are included."}
+        </div>
+      )
+    }
     <slot />
 
     <script>

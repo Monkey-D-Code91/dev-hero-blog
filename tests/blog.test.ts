@@ -70,6 +70,24 @@ describe("getPublishedPosts", () => {
     const prod = await getPublishedPosts("it");
     expect(prod.map((p) => p.id)).not.toContain("it/bozza");
   });
+
+  it("nella build di anteprima (PREVIEW_DRAFTS=1) include i draft anche in PROD", async () => {
+    vi.stubEnv("PROD", true);
+    vi.stubEnv("PREVIEW_DRAFTS", "1");
+    const preview = await getPublishedPosts("it");
+    expect(preview.map((p) => p.id)).toContain("it/bozza");
+  });
+
+  it("una build Workers di un branch diverso da main è un'anteprima", async () => {
+    vi.stubEnv("PROD", true);
+    vi.stubEnv("WORKERS_CI_BRANCH", "feat/qualcosa");
+    const preview = await getPublishedPosts("it");
+    expect(preview.map((p) => p.id)).toContain("it/bozza");
+
+    vi.stubEnv("WORKERS_CI_BRANCH", "main");
+    const prod = await getPublishedPosts("it");
+    expect(prod.map((p) => p.id)).not.toContain("it/bozza");
+  });
 });
 
 describe("getAlternatePost (accoppiamento IT/EN via translationKey)", () => {

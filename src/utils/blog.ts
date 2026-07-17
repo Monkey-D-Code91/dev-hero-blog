@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import type { ImageMetadata } from "astro";
 import type { Lang } from "../i18n/ui";
 import { getReadingTime } from "./readingTime";
+import { includeDrafts } from "./preview";
 
 // ──────────────────────────────────────────────
 // Tipi condivisi tra BlogList e PostCard
@@ -141,12 +142,13 @@ export async function processPosts(
 
 /**
  * Recupera gli articoli pubblicati per una lingua, ordinati per pubDate decrescente.
- * In produzione i draft sono esclusi; in dev sono visibili per anteprima.
+ * In produzione i draft sono esclusi; in dev e nelle build di anteprima
+ * (vedi utils/preview.ts) sono visibili.
  */
 export async function getPublishedPosts(lang: Lang) {
   const posts = await getCollection("blog", (entry) => {
     const isRightLang = getLangFromEntryId(entry.id) === lang;
-    const isVisible = import.meta.env.PROD ? !entry.data.draft : true;
+    const isVisible = includeDrafts() || !entry.data.draft;
     return isRightLang && isVisible;
   });
   return posts.sort(
@@ -201,7 +203,7 @@ export async function getAlternatePost(translationKey: string, targetLang: Lang)
   const posts = await getCollection("blog", (entry) => {
     const isRightLang = getLangFromEntryId(entry.id) === targetLang;
     const isMatch = entry.data.translationKey === translationKey;
-    const isVisible = import.meta.env.PROD ? !entry.data.draft : true;
+    const isVisible = includeDrafts() || !entry.data.draft;
     return isRightLang && isMatch && isVisible;
   });
   return posts[0] ?? null;

@@ -55,11 +55,15 @@ Il preflight è ottimo; tre controlli che oggi mancano e che costano poco:
 - **coerenza dei tag** tra le due lingue della coppia (i tag sono per lingua e possono divergere silenziosamente);
 - **lunghezza `description`** (target SEO/OG ~150-160 caratteri) e presenza di `focus` non vuoto.
 
-### 6. Anteprima dei draft per il gruppo di feedback
+### 6. Anteprima dei draft per il gruppo di feedback — FATTO (2026-07-17)
 
-**Deciso (2026-07-17): si fa, canale principale al posto dei PDF.** Da implementare dopo la CI (riusa lo stesso workflow).
-
-Oggi il feedback pre-pubblicazione passa da PDF generati (weasyprint, binari nativi, workaround sandbox). Un deploy di preview (branch → Cloudflare, build con `DRAFT=1` che include i draft, `noindex` globale) darebbe al gruppo la pagina reale: tipografia vera, cover vera, link cliccabili, e un solo URL da rigenerare invece di un PDF per giro di revisione. Il PDF può restare per chi lo preferisce, ma smette di essere l'unico canale. Da fare dopo la CI (riusa lo stesso workflow).
+Implementato sulle build di anteprima di Cloudflare Workers Builds: ogni build di un
+branch diverso da `main` (es. le PR) include anche gli articoli `draft: true`, con
+`noindex, nofollow` e un banner "Anteprima di lavoro" in cima a ogni pagina. La
+produzione resta identica. Logica centralizzata in `src/utils/preview.ts`
+(`PREVIEW_DRAFTS=1 npm run build` per riprodurla in locale). Flusso per il gruppo di
+feedback: aprire una PR col draft e condividere il Preview URL della build Workers.
+Il PDF (`scripts/generate-feedback-pdf.py`) resta come canale secondario.
 
 ### 7. Web analytics minimale
 
