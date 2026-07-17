@@ -191,6 +191,10 @@ export const ui = {
       discussionIntro:
         "Dopo l'uscita, la conversazione ha aggiunto qualcosa. Gli scambi che valeva la pena riportare qui.",
       discussionReplyLabel: "Risposta",
+      revisedBadge: "rivisto",
+      revisionsHeading: "Storia delle revisioni",
+      revisionsIntro:
+        "Questo pezzo è cambiato dopo la pubblicazione. Le bozze successive, con la loro data.",
     },
     roadmap: {
       nav: "Roadmap",
@@ -388,6 +392,10 @@ export const ui = {
       discussionIntro:
         "After it went out, the conversation added something. The exchanges worth bringing back here.",
       discussionReplyLabel: "Reply",
+      revisedBadge: "revised",
+      revisionsHeading: "Revision history",
+      revisionsIntro:
+        "This piece changed after publication. The later drafts, with their dates.",
     },
     roadmap: {
       nav: "Roadmap",

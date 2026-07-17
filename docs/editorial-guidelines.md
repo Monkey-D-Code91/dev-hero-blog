@@ -26,6 +26,18 @@ Bonus: lo sguardo **tech / human / AI** emerge in modo naturale.
 - **Ripetizioni: da ridurre in italiano, non in inglese.** In italiano la ripetizione ravvicinata della stessa parola appesantisce: se un termine torna più volte nello stesso paragrafo o in paragrafi contigui, varia con sinonimi, pronomi o riformulando la frase, per far scorrere il testo. In inglese la stessa ripetizione è naturale e spesso preferibile, perché ripetere il termine chiave dà coesione e chiarezza: non forzare sinonimi solo per evitarla. La traduzione idiomatica tiene conto di questa asimmetria (lo stesso concetto può restare ripetuto in EN e comparire con più varianti in IT).
 - **Eccezione: il termine-tesi.** Se una parola è il concetto portante del pezzo (es. "attrito" in un articolo che parla proprio di quello), tenerla dov'è il cuore dell'argomento e alleggerire solo le occorrenze di servizio. La ripetizione voluta come martellamento retorico è legittima; quella involontaria e ravvicinata no.
 
+## Articoli vivi: la storia delle revisioni
+
+Il blog si chiama The First Draft: la prima bozza non è l'ultima. Quando un pezzo cambia in modo sostanziale dopo la pubblicazione (una tesi corretta, un fatto aggiornato, una precisazione nata dalla discussione), la modifica non si fa in silenzio: si registra.
+
+Come funziona (campo `revisions` nel frontmatter, un blocco per lingua):
+
+- **Solo revisioni sostanziali**: cambia la tesi, un fatto, un'affermazione importante. Mai per refusi, formattazione o cosmesi (quelle si correggono e basta). Rara e voluta.
+- **Ogni voce è datata e nella tua voce**: `date` (YYYY-MM-DD) e `note` (cosa è cambiato e perché). La nota è in prima persona, come il resto del pezzo.
+- **Aggiornare `updatedDate`** insieme alla revisione (il preflight avvisa se manca): è ciò che accende l'indicatore "rivisto" nei meta e il badge sulle card.
+- **Simmetria IT/EN**: stesso numero di voci nelle due lingue, tradotte idiomaticamente (il preflight controlla il conteggio). Valgono le regole di stile: niente trattini lunghi.
+- **Rapporto con "Dal tavolo di discussione"**: sono complementari. La discussione riporta lo scambio; la revisione registra cosa hai cambiato di conseguenza. Una revisione può nascere da uno scambio, ma non deve: puoi rivedere anche per un tuo ripensamento.
+
 ## Dal tavolo di discussione
 
 Un articolo non si chiude alla pubblicazione: la conversazione che genera (LinkedIn, commenti Giscus) può tornare nel pezzo. È il principio del manifesto reso concreto, "le idee migliori raramente restano come le avevi scritte la prima volta".

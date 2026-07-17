@@ -37,6 +37,23 @@ const blog = defineCollection({
       author: z.string().optional(),
       authors: z.array(z.string()).optional(),
       /**
+       * "Articoli vivi": storia delle revisioni sostanziali fatte DOPO la
+       * pubblicazione (tesi corretta, fatto aggiornato, precisazione da un
+       * lettore). Non per refusi o cosmesi: rara e voluta. Ogni voce è datata
+       * e nella voce dell'autore; bilingue, con simmetria IT/EN verificata dal
+       * preflight. Attiva l'indicatore "rivisto" su card e pagina articolo.
+       */
+      revisions: z
+        .array(
+          z.object({
+            /** Data della revisione (YYYY-MM-DD). */
+            date: z.coerce.date(),
+            /** Cosa è cambiato e perché, nella voce dell'autore. */
+            note: z.string(),
+          })
+        )
+        .optional(),
+      /**
        * "Dal tavolo di discussione": scambi selezionati tornati nel pezzo DOPO
        * la pubblicazione (LinkedIn, commenti Giscus). Attribuzione per RUOLO,
        * non per nome (regola privacy), salvo che sia un autore del blog.

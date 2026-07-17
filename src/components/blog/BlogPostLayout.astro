@@ -16,6 +16,8 @@ import ShareButtons from "./ShareButtons.astro";
 import Comments from "./Comments.astro";
 import DiscussionTable from "./DiscussionTable.astro";
 import type { DiscussionEntry } from "./DiscussionTable.astro";
+import RevisionHistory from "./RevisionHistory.astro";
+import type { Revision } from "./RevisionHistory.astro";
 import type { ProcessedPost } from "../../utils/blog";
 
 interface Props {
@@ -31,6 +33,7 @@ interface Props {
   authors: PostAuthor[];
   related?: ProcessedPost[];
   discussion?: DiscussionEntry[];
+  revisions?: Revision[];
   url: string;
 }
 
@@ -47,6 +50,7 @@ const {
   authors,
   related = [],
   discussion = [],
+  revisions = [],
   url,
 } = Astro.props;
 
@@ -136,6 +140,9 @@ const rssUrl = lang === "it" ? "/rss.xml" : "/en/rss.xml";
     <div class="prose prose-dark max-w-none">
       <slot />
     </div>
+
+    <!-- Storia delle revisioni: le bozze successive del pezzo -->
+    <RevisionHistory revisions={revisions} lang={lang} />
 
     <!-- "Dal tavolo di discussione": scambi tornati nel pezzo dopo l'uscita -->
     <DiscussionTable entries={discussion} lang={lang} />

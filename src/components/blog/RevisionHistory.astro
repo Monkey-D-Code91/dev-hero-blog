@@ -1,0 +1,57 @@
+---
+/**
+ * "Storia delle revisioni" — le bozze successive di un pezzo vivo. Compatto,
+ * come un changelog editoriale: data + nota nella voce dell'autore. Reso solo
+ * se ci sono revisioni. Incarna il nome del blog: la prima bozza non è l'ultima.
+ */
+import type { Lang } from "../../i18n/ui";
+import { useTranslations } from "../../i18n/utils";
+import { formatDate } from "../../utils/blog";
+
+export interface Revision {
+  date: Date;
+  note: string;
+}
+
+interface Props {
+  revisions: Revision[];
+  lang: Lang;
+}
+
+const { revisions, lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Dalla più recente alla più vecchia.
+const ordered = [...revisions].sort((a, b) => b.date.getTime() - a.date.getTime());
+---
+
+{
+  ordered.length > 0 && (
+    <section
+      class="mt-12 border-t border-border pt-8"
+      aria-labelledby="revisions-heading"
+    >
+      <p
+        id="revisions-heading"
+        class="text-sm font-semibold uppercase tracking-widest text-accent-2"
+      >
+        {t.blog.revisionsHeading}
+      </p>
+      <p class="mt-2 text-sm text-muted">{t.blog.revisionsIntro}</p>
+
+      <ol class="mt-6 flex flex-col gap-4">
+        {ordered.map((rev) => (
+          <li class="flex flex-col gap-1 sm:flex-row sm:gap-4">
+            <time
+              datetime={rev.date.toISOString()}
+              class="shrink-0 text-sm font-medium text-muted sm:w-36"
+            >
+              {formatDate(rev.date, lang)}
+            </time>
+            <p class="text-sm leading-relaxed text-text/90">{rev.note}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )
+}

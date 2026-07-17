@@ -19,6 +19,8 @@ interface Props {
   cover?: ImageMetadata;
   coverAlt?: string;
   authors: PostAuthor[];
+  /** true se il pezzo ha una storia di revisioni (mostra il badge "rivisto"). */
+  revised?: boolean;
   /** Variante in evidenza (indice blog): card scalata, titolo più grande. */
   featured?: boolean;
 }
@@ -35,6 +37,7 @@ const {
   cover,
   coverAlt,
   authors,
+  revised = false,
   featured = false,
 } = Astro.props;
 
@@ -116,6 +119,13 @@ const titleId = `card-title-${slug}`;
       {readingTime && <span aria-label={lang === "it" ? `Tempo di lettura: ${readingTime}` : `Reading time: ${readingTime}`}>{readingTime}</span>}
       {focus.length > 0 && <span class="mx-1 opacity-50" aria-hidden="true">·</span>}
       <FocusTriad focus={focus} lang={lang} />
+      {
+        revised && (
+          <span class="ml-1 rounded-full border border-accent-2/40 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-accent-2">
+            {lang === "it" ? "rivisto" : "revised"}
+          </span>
+        )
+      }
     </div>
 
     <!-- Titolo — link principale della card -->
