@@ -50,7 +50,47 @@ Bonus: lo sguardo **tech / human / AI** emerge in modo naturale.
 
 Pezzi ad altra firma, da inserire tra gli articoli di Marco per dare varietà e respiro al calendario:
 
-- **AI ed etica** — (collaboratore)
-- **AI e musica** — (collaboratore)
+- **AI e musica** — Fabio Ziliani. Serie di **4 pezzi** progettata come cerchio (origine → profondità → originalità → valore, chiusura sulla rosa del Piccolo Principe). Da tenere in ordine; gli ultimi due ravvicinati per non diluire la chiusura.
+- **AI ed etica** — (collaboratore). Numero di pezzi ancora da definire.
 
 Ogni inserimento sposta in avanti le date della pipeline di Marco.
+
+---
+
+## Secondo arco (bozza provvisoria)
+
+_Tema portante: dal controllare il codice generato al progettare il sistema uomo-AI attorno. Il primo arco era sulla disciplina personale (io e il codice); il secondo sale di livello, sul sistema (io che progetto il loop) e sui temi umani/culturali attorno all'AI. **Struttura provvisoria: numeri e ordine cambieranno quando si definiscono i pezzi etica e le idee aggiuntive di Marco.**_
+
+### Principi di ordinamento (specifici del secondo arco)
+
+- Valgono i principi del primo arco: alternare l'effort (mai due pezzi alti di fila), collaboratori come respiro tra i pezzi di Marco, ogni inserimento slitta le date.
+- **Serie musica di Fabio**: è un cerchio con chiusura esplicita, va tenuta in ordine (1→2→3→4). Non spezzarla a caso; il pezzo #4 (valore/rosa) chiude l'intero arco sulla nota umana, come l'articolo 8 chiudeva il primo.
+- **I due pezzi context di Marco** (estrazione, doc automatica) sono entrambi medio-alti e sullo stesso sotto-tema: tenerli distanti (≥3 slot), mai vicini, per carico ed evitare ridondanza.
+- **Risonanza cross-firma**: il pezzo musica #3 (originalità: "l'autentico era già una formula?") è il gemello del filone di Marco sul codice generato. Se Marco aggiunge un pezzo sull'originalità del codice, va reso adiacente al #3 per creare un dittico esplicito tra i due mondi.
+
+### Pipeline provvisoria
+
+| # | Titolo di lavoro | Firma | Focus | Effort | Ruolo & note |
+|---|------------------|-------|-------|--------|--------------|
+| 9 | **The new loop** | Marco | Tech · AI · Human | Medio | Cappello dell'arco: dal human-in-the-loop al loop chiuso dev↔AI su ogni fase del workflow. **Da ancorare a un episodio reale** (una fase dove il loop si è chiuso e ti ha sorpreso), altrimenti resta teoria. Gestire la tensione col manifesto e con l'articolo 5: non "il confine sparisce" ma "decido dove tengo la mano sul volante". |
+| 10 | **Musica #1 — l'origine** | Fabio Ziliani | Human · AI | — | "Conta sapere chi ha scritto una cosa, per poterla amare?" Respiro dopo il concettuale; eco del cappello (AI come specchio dell'umano). |
+| 11 | **Context fantastici e dove trovarli** (estrazione) | Marco | Tech · Human | Medio-alto | Skill che a ogni code review estrae dal dev il contesto mancante; struttura gerarchica modulo→feature; il contesto alimenta l'AI per meno iterazioni. La prova concreta del "new loop". **Dittico con l'articolo 7** (7 pone il problema, questo è la risposta ingegneristica). Rischio: diventare changelog/annuncio di prodotto → la tesi resta sul principio (il contesto come asset di prima classe, estratto quando la conoscenza è fresca), i dettagli sono prova non contenuto. Anonimizzazione + probabile ok PO. |
+| 12 | **Musica #2 — la profondità** | Fabio Ziliani | Human · AI | — | "Una cosa vera deve per forza essere seria, sofferta, importante?" L'ironia come forma legittima di sincerità. Respiro leggero. |
+| 13 | **AI ed etica #1** | Collab | Human · AI | — | Apre il filone etica. Tema/i da definire col collaboratore. |
+| 14 | **Context → documentazione automatica** | Marco | Tech · Human | Medio-alto | Seconda skill: traduce il context tecnico/funzionale in documento funzionale pubblicato su Confluence. Tesi: la documentazione funzionale come sottoprodotto automatico del lavoro, non come tassa separata. Distante 3 slot da #11: ok sul carico. Anonimizzazione + probabile ok PO. |
+| 15 | **Musica #3 — l'originalità** | Fabio Ziliani | Human · AI | — | "Quanto di ciò che chiamiamo autentico era già una formula?" Il gemello musicale del filone codice generato. **Tenere adiacente a un eventuale pezzo di Marco sull'originalità del codice** (dittico cross-firma). |
+| 16 | **AI ed etica #2…N** | Collab | — | — | Placeholder: dipende dal numero di pezzi etica. |
+| 17 | **Musica #4 — il valore** | Fabio Ziliani | Human · AI | — | "Il valore nasce da quanto tempo ci hai messo, o da quanto tempo qualcuno sceglie di dedicarle?" La rosa del Piccolo Principe, chiusura del cerchio. **Chiude l'intero secondo arco** sulla nota umana. Rima con "il costo nascosto del codice" (art. 7). |
+
+## Next steps — Secondo arco
+
+_Da riprendere alla prossima sessione. Le prime tre voci sbloccano la sequenza definitiva._
+
+- [ ] **Definire il numero di pezzi su AI ed etica** e i loro temi (col collaboratore). Adesso sono 2 placeholder: il numero reale sposta la chiusura dell'arco e la numerazione da #16 in poi.
+- [ ] **Aggiungere le idee di Marco** per bilanciare l'identità del blog. Conteggio attuale: 3 Marco / 4 Fabio / ≥1 etica → la firma di Marco è in minoranza. Decisione da prendere di proposito: aggiungere 2-3 idee Marco per tenere il 50%+1, oppure accettare consapevolmente un "arco corale" più polifonico del primo.
+- [ ] **Valutare il pezzo Marco sull'originalità del codice** ("l'AI non ha rubato l'originalità, l'ha resa visibile") da appaiare al pezzo musica #3: riempirebbe sia il buco d'identità sia lo slot del dittico cross-firma.
+- [ ] **#9 The new loop**: trovare l'episodio reale che ancora la tesi (test "esperienza reale" non ancora superato). Verificare che non contraddica il manifesto / articolo 5.
+- [ ] **#11 e #14 (context)**: valutare clearance PO e anonimizzazione (stesso vincolo del case study #6); decidere se separarli ancora di più o inserire uno slot cuscinetto a basso effort tra i due.
+- [ ] **#11 context**: decidere il titolo. Il riferimento a J.K. Rowling ("Animali fantastici e dove trovarli") ammicca a una public figure controversa: valutare se il tono del pezzo regge la leggerezza o se stona su un tema tecnico. Da decidere in fase di scrittura.
+- [ ] **Serie musica**: confermare con Fabio l'ordine e la ravvicinatura degli ultimi due pezzi (chiusura del cerchio).
+- [ ] **Rivedere le date indicative** una volta fissata la sequenza (il primo arco chiude ~2026-09-12; il secondo parte ~10 giorni dopo, poi slitta a ogni inserimento).
