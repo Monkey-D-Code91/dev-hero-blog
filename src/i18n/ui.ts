@@ -183,6 +183,8 @@ export const ui = {
       shareHeading: "Condividi",
       shareCopy: "Copia link",
       shareCopied: "Copiato!",
+      upcomingHeading: "In arrivo",
+      upcomingRoadmapCta: "Tutta la roadmap",
     },
     roadmap: {
       nav: "Roadmap",
@@ -372,6 +374,8 @@ export const ui = {
       shareHeading: "Share",
       shareCopy: "Copy link",
       shareCopied: "Copied!",
+      upcomingHeading: "Coming up",
+      upcomingRoadmapCta: "Full roadmap",
     },
     roadmap: {
       nav: "Roadmap",

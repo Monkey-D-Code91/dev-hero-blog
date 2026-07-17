@@ -1,0 +1,72 @@
+---
+import type { Lang } from "../../i18n/ui";
+import type { ResolvedItem } from "../../utils/roadmap";
+import { useTranslations } from "../../i18n/utils";
+
+/**
+ * Pannello "In arrivo" dell'indice blog: le prossime tappe NON pubblicate
+ * della roadmap editoriale (dati risolti a build-time da `utils/roadmap`).
+ * Comunica la cadenza e riempie lo spazio quando gli articoli sono pochi.
+ */
+interface Props {
+  items: ResolvedItem[];
+  lang: Lang;
+}
+
+const { items, lang } = Astro.props;
+const t = useTranslations(lang);
+const roadmapUrl = lang === "it" ? "/roadmap/" : "/en/roadmap/";
+---
+
+<aside
+  class="flex h-full flex-col rounded-2xl border border-border bg-surface p-6"
+  aria-labelledby="upcoming-heading"
+>
+  <p
+    id="upcoming-heading"
+    class="text-sm font-semibold uppercase tracking-widest text-accent-2"
+  >
+    {t.blog.upcomingHeading}
+  </p>
+
+  <ul class="mt-5 flex flex-1 flex-col gap-4" role="list">
+    {
+      items.map((item) => (
+        <li class="border-b border-border pb-4 last:border-b-0 last:pb-0">
+          <p class="text-xs text-muted">
+            {item.dateLabel}
+            <span class="mx-1 opacity-50" aria-hidden="true">
+              ·
+            </span>
+            {item.status === "in-progress"
+              ? t.roadmap.status.inProgress
+              : t.roadmap.status.planned}
+          </p>
+          <p class="mt-1 font-medium leading-snug text-text">{item.title}</p>
+          <p class="mt-1 text-xs text-muted">{item.authorName}</p>
+        </li>
+      ))
+    }
+  </ul>
+
+  <a
+    href={roadmapUrl}
+    class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent transition-colors hover:text-accent-2"
+  >
+    {t.blog.upcomingRoadmapCta}
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  </a>
+</aside>
