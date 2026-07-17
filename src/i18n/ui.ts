@@ -183,6 +183,10 @@ export const ui = {
       shareHeading: "Condividi",
       shareCopy: "Copia link",
       shareCopied: "Copiato!",
+      upcomingHeading: "In arrivo",
+      upcomingRoadmapCta: "Tutta la roadmap",
+      rssCtaText: "Niente newsletter, niente algoritmi: i prossimi articoli arrivano via RSS.",
+      rssCtaLabel: "Segui il feed",
     },
     roadmap: {
       nav: "Roadmap",
@@ -372,6 +376,10 @@ export const ui = {
       shareHeading: "Share",
       shareCopy: "Copy link",
       shareCopied: "Copied!",
+      upcomingHeading: "Coming up",
+      upcomingRoadmapCta: "Full roadmap",
+      rssCtaText: "No newsletter, no algorithms: new essays arrive via RSS.",
+      rssCtaLabel: "Follow the feed",
     },
     roadmap: {
       nav: "Roadmap",

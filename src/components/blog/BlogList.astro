@@ -1,7 +1,10 @@
 ---
 import type { ProcessedPost } from "../../utils/blog";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getResolvedRoadmap } from "../../utils/roadmap";
 import PostCard from "./PostCard.astro";
+import TagFilterBar from "./TagFilterBar.astro";
+import UpcomingPosts from "./UpcomingPosts.astro";
 
 interface Props {
   posts: ProcessedPost[];
@@ -10,6 +13,18 @@ interface Props {
 const { posts } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+// Prossime uscite dalla roadmap editoriale (tappe non ancora pubblicate),
+// per il pannello "In arrivo" accanto al pezzo in evidenza.
+const arcs = await getResolvedRoadmap(lang);
+const upcoming = arcs
+  .flatMap((arc) => arc.items)
+  .filter((item) => item.status !== "published")
+  .sort((a, b) => a.isoDate.localeCompare(b.isoDate))
+  .slice(0, 3);
+
+const [featuredPost, ...restPosts] = posts;
+const hasUpcoming = upcoming.length > 0;
 ---
 
 <section class="py-20 md:py-24">
@@ -22,6 +37,9 @@ const t = useTranslations(lang);
       <h1 class="mt-2 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
         {t.blog.lead}
       </h1>
+      <div class="mt-8">
+        <TagFilterBar lang={lang} />
+      </div>
     </header>
 
     {
@@ -30,18 +48,39 @@ const t = useTranslations(lang);
           {t.blog.noArticles}
         </p>
       ) : (
-        /* Ogni card ha il proprio data-reveal con delay crescente
-           così appaiono in sequenza anziché tutte insieme. */
-        <div class="mt-12 grid gap-6 sm:grid-cols-2">
-          {posts.map((post, i) => (
-            <div
-              data-reveal
-              data-reveal-delay={i > 0 ? String(Math.min(i, 3)) : undefined}
-            >
-              <PostCard {...post} lang={lang} />
+        /* Layout "featured + In arrivo": l'ultimo articolo in evidenza (2/3)
+           con accanto le prossime uscite dalla roadmap (1/3). Gli altri
+           articoli seguono in griglia. Ogni blocco ha il proprio data-reveal
+           con delay crescente così appaiono in sequenza. */
+        <>
+          <div
+            class:list={[
+              "mt-12 grid gap-6",
+              hasUpcoming && "lg:grid-cols-3",
+            ]}
+          >
+            <div class:list={[hasUpcoming && "lg:col-span-2"]} data-reveal>
+              <PostCard {...featuredPost} lang={lang} featured />
             </div>
-          ))}
-        </div>
+            {hasUpcoming && (
+              <div data-reveal data-reveal-delay="1">
+                <UpcomingPosts items={upcoming} lang={lang} />
+              </div>
+            )}
+          </div>
+          {restPosts.length > 0 && (
+            <div class="mt-6 grid gap-6 sm:grid-cols-2">
+              {restPosts.map((post, i) => (
+                <div
+                  data-reveal
+                  data-reveal-delay={String(Math.min(i + 1, 3))}
+                >
+                  <PostCard {...post} lang={lang} />
+                </div>
+              ))}
+            </div>
+          )}
+        </>
       )
     }
   </div>

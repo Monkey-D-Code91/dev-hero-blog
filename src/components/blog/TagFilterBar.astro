@@ -1,0 +1,62 @@
+---
+import type { Lang } from "../../i18n/ui";
+import { getPublishedPosts } from "../../utils/blog";
+import { useTranslations } from "../../i18n/utils";
+
+/**
+ * Barra di navigazione per tag: tutti i tag degli articoli pubblicati,
+ * ordinati per frequenza. Usata nell'indice blog e nelle pagine tag
+ * (dove `activeTag` evidenzia il filtro corrente).
+ */
+interface Props {
+  lang: Lang;
+  activeTag?: string;
+}
+
+const { lang, activeTag } = Astro.props;
+const t = useTranslations(lang);
+
+const posts = await getPublishedPosts(lang);
+const tagCount = new Map<string, number>();
+for (const post of posts) {
+  for (const tag of post.data.tags) {
+    tagCount.set(tag, (tagCount.get(tag) ?? 0) + 1);
+  }
+}
+const tags = [...tagCount.entries()]
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  .map(([tag]) => tag);
+
+const allUrl = lang === "it" ? "/blog/" : "/en/blog/";
+const tagUrl = (tag: string) =>
+  lang === "it" ? `/blog/tag/${tag}/` : `/en/blog/tag/${tag}/`;
+
+const baseCls =
+  "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors";
+const idleCls =
+  "border-border bg-surface-2 text-muted hover:border-accent/40 hover:text-accent";
+const activeCls = "border-accent/60 bg-accent/10 text-accent";
+---
+
+{
+  tags.length > 0 && (
+    <nav aria-label={t.blog.tags} class="flex flex-wrap items-center gap-2">
+      <a
+        href={allUrl}
+        class:list={[baseCls, activeTag ? idleCls : activeCls]}
+        aria-current={activeTag ? undefined : "page"}
+      >
+        {t.blog.allPosts}
+      </a>
+      {tags.map((tag) => (
+        <a
+          href={tagUrl(tag)}
+          class:list={[baseCls, tag === activeTag ? activeCls : idleCls]}
+          aria-current={tag === activeTag ? "page" : undefined}
+        >
+          #{tag}
+        </a>
+      ))}
+    </nav>
+  )
+}

@@ -4,7 +4,7 @@ name: Marco Mariotti
 role: Software Engineer & Tech Lead
 badge: "Tech Lead • Frontend & Telecomunicazioni"
 headline: "Ingegnere frontend e Tech Lead. Trasformo requisiti complessi in prodotti che funzionano."
-subline: "Sono Marco Mariotti, Software Engineer & Tech Lead in TeamSystem. Guido un team distribuito tra Italia e Albania nello sviluppo di una piattaforma SaaS per il monitoraggio del traffico dati in roaming — prevenzione extracosti, alert automatici, blocchi di navigazione in tempo reale. Mi occupo dell'architettura frontend in React e TypeScript e del percorso di crescita delle persone nel team."
+subline: "Sono Marco Mariotti, Software Engineer & Tech Lead in TeamSystem. Guido un team distribuito tra Italia e Albania nello sviluppo di una piattaforma SaaS per il monitoraggio del traffico dati in roaming: prevenzione extracosti, alert automatici, blocchi di navigazione in tempo reale. Mi occupo dell'architettura frontend in React e TypeScript e del percorso di crescita delle persone nel team."
 monogram: MM
 links:
   linkedin: "https://www.linkedin.com/in/marco-mariotti-627074187/"
@@ -45,7 +45,7 @@ skills:
       - "Technical leadership"
       - "Scrum / Pianificazione Agile"
       - "Code review"
-  - title: "Dominio — Telecom"
+  - title: "Dominio: Telecom"
     items:
       - "Monitoraggio traffico dati in roaming"
       - "Sistemi di alerting e automazione"

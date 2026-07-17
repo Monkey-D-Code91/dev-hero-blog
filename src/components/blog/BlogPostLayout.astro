@@ -1,4 +1,8 @@
 ---
+// Serif editoriale solo per l'esperienza di lettura articolo (vedi docs/brand.md).
+// L'import qui (e non in BaseLayout) evita di caricare il font sulle altre pagine.
+import "@fontsource-variable/newsreader";
+import "@fontsource-variable/newsreader/wght-italic.css";
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import type { Lang } from "../../i18n/ui";
@@ -44,9 +48,16 @@ const t = useTranslations(lang);
 
 const backUrl = lang === "it" ? "/blog/" : "/en/blog/";
 const backLabel = t.blog.backToBlog;
+const rssUrl = lang === "it" ? "/rss.xml" : "/en/rss.xml";
 ---
 
-<div class="mx-auto max-w-3xl px-6 py-14 md:py-20">
+<!-- Barra di progresso lettura (riempita dallo script in fondo) -->
+<div class="reading-progress" aria-hidden="true">
+  <div class="reading-progress__fill" data-reading-progress></div>
+</div>
+
+<!-- Colonna a misura di lettura: ~68–72 caratteri per riga col corpo a 19px -->
+<div class="mx-auto max-w-2xl px-6 py-14 md:py-20">
   <!-- Link "torna al blog" (sopra) -->
   <a
     href={backUrl}
@@ -78,7 +89,7 @@ const backLabel = t.blog.backToBlog;
       </p>
       <h1
         id="article-title"
-        class="text-3xl font-bold leading-tight tracking-tight sm:text-4xl text-text"
+        class="font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-[2.75rem] text-text"
       >
         {title}
       </h1>
@@ -103,6 +114,8 @@ const backLabel = t.blog.backToBlog;
             alt={coverAlt ?? ""}
             width={896}
             height={468}
+            loading="eager"
+            fetchpriority="high"
             class="w-full h-auto"
           />
         </div>
@@ -140,6 +153,17 @@ const backLabel = t.blog.backToBlog;
     <ShareButtons url={url} title={title} lang={lang} />
   </div>
 
+  <!-- Micro-CTA sobrio di fine lettura: solo RSS, niente popup/newsletter -->
+  <p class="mt-8 text-sm text-muted">
+    {t.blog.rssCtaText}
+    <a
+      href={rssUrl}
+      class="ml-1 font-medium text-accent transition-colors hover:text-accent-2"
+    >
+      {t.blog.rssCtaLabel}
+    </a>
+  </p>
+
   <!-- Articoli correlati -->
   <RelatedPosts posts={related} lang={lang} />
 
@@ -162,3 +186,26 @@ const backLabel = t.blog.backToBlog;
   <!-- Commenti -->
   <Comments />
 </div>
+
+<script>
+  // Progresso di lettura: scaleX in base allo scroll, aggiornato via rAF.
+  const fill = document.querySelector<HTMLElement>("[data-reading-progress]");
+  if (fill) {
+    let ticking = false;
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+      fill.style.transform = `scaleX(${ratio})`;
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  }
+</script>
