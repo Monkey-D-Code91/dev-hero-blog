@@ -33,9 +33,11 @@ Il manifesto promette che la discussione vive su LinkedIn. Oggi il flusso è a s
 
 La roadmap ha già l'intuizione dei dittici (musica #3 gemello del filone codice). Un passo oltre: un formato ricorrente in cui un secondo autore **risponde** a un pezzo esistente con una tesi opposta o ortogonale, linkato bidirezionalmente ("questo pezzo contraddice → / è contraddetto da ←"). Il manifesto invita esplicitamente a contraddire; questo lo trasforma in un formato editoriale che nessun listicle può imitare, e dà ai collaboratori un modo di entrare a basso attrito (rispondere è più facile che inaugurare un filone). Tecnicamente: un campo `respondsTo: translationKey` e un blocco visivo dedicato.
 
-### 4. Newsletter essenziale (distribuzione anti-algoritmo)
+### 4. Newsletter essenziale (distribuzione anti-algoritmo) — IMPLEMENTATO (2026-07-17)
 
 C'è una contraddizione strategica da risolvere: il manifesto combatte il contenuto ottimizzato per l'algoritmo, ma la distribuzione dipende quasi solo da LinkedIn (un algoritmo). L'RSS è il canale coerente ma di nicchia. Una newsletter minimale (Buttondown o simili, RSS-to-email, bilingue o solo IT all'inizio) è il canale proprietario: chi si iscrive è il pubblico che il progetto dice di volere, e il numero di iscritti è la metrica di "pubblico" che la roadmap usa come vincolo (il case study esce "quando c'è pubblico"). Da fare **prima** che serva: una lista si costruisce lentamente. Nessuna feature in più: un form, un invio per uscita.
+
+**Stato**: scaffold pronto, provider **Buttondown**, inquadrata come **canale anti-algoritmo** (decisione di Marco: reframe della copy, non più "niente newsletter"). Gated da `NEWSLETTER.buttondownUser` in `src/config.ts`: finché è vuoto la newsletter è spenta e resta la CTA RSS (produzione invariata). Quando si imposta lo username compaiono: form di fine articolo (con "oppure via RSS"), link nel footer, pagina `/newsletter` IT/EN. Form senza JavaScript (POST al form pubblico Buttondown, double opt-in gestito dal provider). **Resta da fare (Marco)**: creare l'account Buttondown e incollare lo username. Possibile evoluzione: collegare l'automazione RSS-to-email di Buttondown così ogni uscita parte da sola; un link "Newsletter" anche in navbar.
 
 ### 5. La pagina "Domande aperte"
 

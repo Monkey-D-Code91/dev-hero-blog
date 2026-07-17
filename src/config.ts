@@ -38,3 +38,18 @@ export const GISCUS: {
  * deploy di produzione reale (non in dev, non nelle anteprime Workers).
  */
 export const CF_BEACON_TOKEN = "";
+
+/**
+ * Newsletter (Buttondown): il canale proprietario e senza algoritmo del blog.
+ * `buttondownUser` è lo username Buttondown (compare nell'URL pubblico del form
+ * di iscrizione, non è un segreto). Vuoto = newsletter SPENTA: form e copy non
+ * compaiono da nessuna parte e resta la CTA RSS. Appena valorizzato, compaiono
+ * il form di fine articolo, il link nel footer e la pagina /newsletter.
+ * L'account e gli invii si gestiscono su https://buttondown.com.
+ */
+export const NEWSLETTER = {
+  buttondownUser: "",
+} as const;
+
+/** true se la newsletter è configurata (username presente). */
+export const newsletterEnabled = NEWSLETTER.buttondownUser.trim() !== "";

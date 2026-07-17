@@ -1,0 +1,68 @@
+---
+/**
+ * Form di iscrizione alla newsletter (Buttondown). Funziona senza JavaScript:
+ * un POST al form pubblico di Buttondown, che gestisce il double opt-in. La
+ * conferma si apre in una nuova scheda, così il lettore resta sul sito.
+ * Reso solo se la newsletter è configurata (vedi src/config.ts).
+ */
+import type { Lang } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
+import { NEWSLETTER, newsletterEnabled } from "../config";
+
+interface Props {
+  lang: Lang;
+  /** Variante compatta (footer): solo campo + bottone, senza testo di contorno. */
+  compact?: boolean;
+}
+
+const { lang, compact = false } = Astro.props;
+const t = useTranslations(lang);
+
+const action = `https://buttondown.com/api/emails/embed-subscribe/${NEWSLETTER.buttondownUser}`;
+const emailId = compact ? "bd-email-footer" : "bd-email";
+---
+
+{
+  newsletterEnabled && (
+    <div class:list={[!compact && "rounded-2xl border border-border bg-surface-2 p-6 sm:p-8"]}>
+      {!compact && (
+        <>
+          <p class="text-sm font-semibold uppercase tracking-widest text-accent">
+            {t.newsletter.heading}
+          </p>
+          <p class="mt-3 leading-relaxed text-muted">{t.newsletter.intro}</p>
+        </>
+      )}
+
+      <form
+        action={action}
+        method="post"
+        target="_blank"
+        class:list={["flex flex-col gap-3 sm:flex-row", !compact && "mt-5"]}
+      >
+        <label for={emailId} class="sr-only">
+          {t.newsletter.placeholder}
+        </label>
+        <input
+          type="email"
+          name="email"
+          id={emailId}
+          required
+          placeholder={t.newsletter.placeholder}
+          class="min-w-0 flex-1 rounded-lg border border-border bg-bg px-4 py-2.5 text-text placeholder:text-muted/60 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+        />
+        <input type="hidden" name="embed" value="1" />
+        <button
+          type="submit"
+          class="shrink-0 rounded-lg bg-accent px-5 py-2.5 font-medium text-bg transition-colors hover:bg-accent-2"
+        >
+          {t.newsletter.button}
+        </button>
+      </form>
+
+      {!compact && (
+        <p class="mt-3 text-xs text-muted/70">{t.newsletter.privacy}</p>
+      )}
+    </div>
+  )
+}

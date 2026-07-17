@@ -15,6 +15,12 @@ anche qui (e viceversa).
   tecnico: stessa identità visiva, wordmark proprio (vedi `docs/podcast-episode-cover.md`).
 - **Anti-modello:** il contenuto generato e intercambiabile (listicle). Il manifesto lo combatte;
   il brand non deve mai somigliargli.
+- **Distribuzione:** canali proprietari e senza algoritmo prima di tutto. RSS (feed a contenuto
+  completo) e **newsletter** (Buttondown, un'email a uscita) sono i canali diretti; LinkedIn è il
+  tavolo di discussione, non il padrone del pubblico. La newsletter è inquadrata come canale
+  anti-algoritmo (coerente con "niente algoritmi"), non come marketing. Si attiva impostando lo
+  username Buttondown in `src/config.ts` (`NEWSLETTER`); finché è vuoto, resta spenta e il sito
+  mostra la CTA RSS.
 
 ## Voce
 

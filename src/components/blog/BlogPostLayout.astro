@@ -18,6 +18,8 @@ import DiscussionTable from "./DiscussionTable.astro";
 import type { DiscussionEntry } from "./DiscussionTable.astro";
 import RevisionHistory from "./RevisionHistory.astro";
 import type { Revision } from "./RevisionHistory.astro";
+import NewsletterSignup from "../NewsletterSignup.astro";
+import { newsletterEnabled } from "../../config";
 import type { ProcessedPost } from "../../utils/blog";
 
 interface Props {
@@ -173,16 +175,36 @@ const rssUrl = lang === "it" ? "/rss.xml" : "/en/rss.xml";
     <ShareButtons url={url} title={title} lang={lang} />
   </div>
 
-  <!-- Micro-CTA sobrio di fine lettura: solo RSS, niente popup/newsletter -->
-  <p class="mt-8 text-sm text-muted">
-    {t.blog.rssCtaText}
-    <a
-      href={rssUrl}
-      class="ml-1 font-medium text-accent transition-colors hover:text-accent-2"
-    >
-      {t.blog.rssCtaLabel}
-    </a>
-  </p>
+  <!-- Fine lettura: newsletter (canale proprietario) se attiva, altrimenti RSS -->
+  {
+    newsletterEnabled ? (
+      <div class="mt-8">
+        <p class="text-sm text-muted">{t.newsletter.articleCtaText}</p>
+        <div class="mt-4">
+          <NewsletterSignup lang={lang} compact />
+        </div>
+        <p class="mt-3 text-xs text-muted/70">
+          {t.newsletter.articleCtaOrRss}
+          <a
+            href={rssUrl}
+            class="ml-1 font-medium text-accent transition-colors hover:text-accent-2"
+          >
+            {t.blog.rssCtaLabel}
+          </a>
+        </p>
+      </div>
+    ) : (
+      <p class="mt-8 text-sm text-muted">
+        {t.blog.rssCtaText}
+        <a
+          href={rssUrl}
+          class="ml-1 font-medium text-accent transition-colors hover:text-accent-2"
+        >
+          {t.blog.rssCtaLabel}
+        </a>
+      </p>
+    )
+  }
 
   <!-- Articoli correlati -->
   <RelatedPosts posts={related} lang={lang} />

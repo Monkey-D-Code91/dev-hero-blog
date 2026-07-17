@@ -196,6 +196,23 @@ export const ui = {
       revisionsIntro:
         "Questo pezzo è cambiato dopo la pubblicazione. Le bozze successive, con la loro data.",
     },
+    newsletter: {
+      nav: "Newsletter",
+      heading: "Ricevi i pezzi, senza algoritmo",
+      intro:
+        "Un canale mio, non di una piattaforma: ogni articolo arriva nella tua casella, senza feed che decide per te e senza rumore. Un'email a uscita, niente di più.",
+      placeholder: "La tua email",
+      button: "Iscriviti",
+      privacy:
+        "Solo i nuovi articoli. Niente spam, niente cessione dei dati: puoi disiscriverti quando vuoi.",
+      // Pagina dedicata
+      pageTitle: "Newsletter",
+      pageLead:
+        "The First Draft senza intermediari. Gli articoli, appena escono, direttamente da me a te.",
+      // CTA di fine articolo quando la newsletter è attiva
+      articleCtaText: "Ti è piaciuto? Ricevi i prossimi pezzi senza algoritmo:",
+      articleCtaOrRss: "oppure via RSS",
+    },
     roadmap: {
       nav: "Roadmap",
       eyebrow: "La roadmap in capitoli",
@@ -396,6 +413,23 @@ export const ui = {
       revisionsHeading: "Revision history",
       revisionsIntro:
         "This piece changed after publication. The later drafts, with their dates.",
+    },
+    newsletter: {
+      nav: "Newsletter",
+      heading: "Get the pieces, without the algorithm",
+      intro:
+        "A channel of mine, not a platform's: every article lands in your inbox, with no feed deciding for you and no noise. One email per release, nothing more.",
+      placeholder: "Your email",
+      button: "Subscribe",
+      privacy:
+        "New articles only. No spam, no data selling: unsubscribe whenever you want.",
+      // Dedicated page
+      pageTitle: "Newsletter",
+      pageLead:
+        "The First Draft with no middleman. The articles, as they go out, straight from me to you.",
+      // End-of-article CTA when the newsletter is on
+      articleCtaText: "Enjoyed it? Get the next pieces without the algorithm:",
+      articleCtaOrRss: "or via RSS",
     },
     roadmap: {
       nav: "Roadmap",
