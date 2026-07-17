@@ -41,7 +41,7 @@ export function toRssItem(
   return {
     title: post.data.title,
     description: post.data.description,
-    content: renderPostContent(post.body),
+    content: renderPostContent(post.body ?? ""),
     pubDate: post.data.pubDate,
     link: getBlogPostUrl(lang, getSlugFromEntryId(post.id)),
     categories: post.data.tags,

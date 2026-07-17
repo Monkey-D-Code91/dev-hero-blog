@@ -36,6 +36,27 @@ const blog = defineCollection({
        */
       author: z.string().optional(),
       authors: z.array(z.string()).optional(),
+      /**
+       * "Dal tavolo di discussione": scambi selezionati tornati nel pezzo DOPO
+       * la pubblicazione (LinkedIn, commenti Giscus). Attribuzione per RUOLO,
+       * non per nome (regola privacy), salvo che sia un autore del blog.
+       * Bilingue come il resto: il testo è nella lingua del file; la simmetria
+       * IT/EN (numero di scambi) è verificata dal preflight.
+       */
+      discussion: z
+        .array(
+          z.object({
+            /** Chi ha portato il punto: ruolo (es. "Un lettore") o nome autore. */
+            from: z.string(),
+            /** Il punto sollevato. */
+            quote: z.string(),
+            /** Replica dell'autore (opzionale). */
+            reply: z.string().optional(),
+            /** Dove è avvenuto lo scambio (es. "LinkedIn"), opzionale. */
+            via: z.string().optional(),
+          })
+        )
+        .optional(),
     })
     .transform((data, ctx) => {
       const authors = data.authors?.length

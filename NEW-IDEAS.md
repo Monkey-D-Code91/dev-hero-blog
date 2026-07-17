@@ -21,9 +21,11 @@ _Analisi del 2026-07-17. Prima i principi che emergono dal progetto (la lente di
 - Valore: nessun altro blog lo fa come formato sistematico; trasforma il principio fondativo in esperienza di lettura; premia chi commenta (il suo attrito diventa parte del pezzo).
 - Rischio da governare: le revisioni devono essere rare e vere, non un tic. Regola: solo se cambia la tesi o un fatto, mai per cosmesi.
 
-### 2. Chiudere il loop con LinkedIn: "Dal tavolo di discussione"
+### 2. Chiudere il loop con LinkedIn: "Dal tavolo di discussione" — IMPLEMENTATO (2026-07-17)
 
 Il manifesto promette che la discussione vive su LinkedIn. Oggi il flusso è a senso unico (blog → post LinkedIn). L'idea: dopo ogni uscita, i 2-3 scambi migliori dei commenti tornano nell'articolo (citati col ruolo, non col nome, salvo consenso: coerente con le regole privacy) come appendice o come prima "revisione" (si aggancia all'idea 1). Effetto composto: chi commenta bene sa che può finire nel pezzo, e la qualità dei commenti sale. È l'attrito del principio 4 reso visibile.
+
+**Stato**: meccanismo pronto. Campo `discussion` nel frontmatter (schema Zod), componente `DiscussionTable.astro` in coda all'articolo (occhiello "Dal tavolo di discussione", citazione in serif, replica opzionale), reso solo se ci sono scambi. Preflight verifica la simmetria IT/EN; regole in `docs/editorial-guidelines.md`; passo aggiunto a `publish-article`. **Resta da fare (Marco)**: fornire il primo scambio reale (es. dai commenti del #3, che aveva il gancio forte su LinkedIn) per inaugurarlo, invece di contenuto inventato. Possibile evoluzione: includere gli scambi anche nel feed RSS (oggi sono nel frontmatter, quindi fuori dal `<content:encoded>`).
 
 ### 3. Il formato "Contraddizione" (dittico a due firme)
 

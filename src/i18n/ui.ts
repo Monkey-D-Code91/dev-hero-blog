@@ -187,6 +187,10 @@ export const ui = {
       upcomingRoadmapCta: "Tutta la roadmap",
       rssCtaText: "Niente newsletter, niente algoritmi: i prossimi articoli arrivano via RSS.",
       rssCtaLabel: "Segui il feed",
+      discussionHeading: "Dal tavolo di discussione",
+      discussionIntro:
+        "Dopo l'uscita, la conversazione ha aggiunto qualcosa. Gli scambi che valeva la pena riportare qui.",
+      discussionReplyLabel: "Risposta",
     },
     roadmap: {
       nav: "Roadmap",
@@ -380,6 +384,10 @@ export const ui = {
       upcomingRoadmapCta: "Full roadmap",
       rssCtaText: "No newsletter, no algorithms: new essays arrive via RSS.",
       rssCtaLabel: "Follow the feed",
+      discussionHeading: "From the discussion table",
+      discussionIntro:
+        "After it went out, the conversation added something. The exchanges worth bringing back here.",
+      discussionReplyLabel: "Reply",
     },
     roadmap: {
       nav: "Roadmap",

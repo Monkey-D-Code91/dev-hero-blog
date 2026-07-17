@@ -14,6 +14,8 @@ import AuthorCard from "./AuthorCard.astro";
 import RelatedPosts from "./RelatedPosts.astro";
 import ShareButtons from "./ShareButtons.astro";
 import Comments from "./Comments.astro";
+import DiscussionTable from "./DiscussionTable.astro";
+import type { DiscussionEntry } from "./DiscussionTable.astro";
 import type { ProcessedPost } from "../../utils/blog";
 
 interface Props {
@@ -28,6 +30,7 @@ interface Props {
   coverAlt?: string;
   authors: PostAuthor[];
   related?: ProcessedPost[];
+  discussion?: DiscussionEntry[];
   url: string;
 }
 
@@ -43,6 +46,7 @@ const {
   coverAlt,
   authors,
   related = [],
+  discussion = [],
   url,
 } = Astro.props;
 
@@ -132,6 +136,9 @@ const rssUrl = lang === "it" ? "/rss.xml" : "/en/rss.xml";
     <div class="prose prose-dark max-w-none">
       <slot />
     </div>
+
+    <!-- "Dal tavolo di discussione": scambi tornati nel pezzo dopo l'uscita -->
+    <DiscussionTable entries={discussion} lang={lang} />
   </article>
 
   <!-- Link "torna al blog" + bottoni di condivisione (sotto) -->

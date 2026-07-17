@@ -99,6 +99,15 @@ Prepara la bozza del post di lancio, da consegnare come testo (non pubblicarlo t
 - Se c'è il carousel, il post lo accompagna come documento PDF.
 - Valgono le regole editoriali: niente trattini lunghi, niente nomi, anonimizzazione.
 
+## Dopo l'uscita — Dal tavolo di discussione
+
+Non è un passo del giorno di pubblicazione, ma va ricordato qui: quando il pezzo ha raccolto
+discussione (LinkedIn, Giscus), i 2-3 scambi migliori possono tornare nell'articolo col campo
+`discussion` nel frontmatter (vedi `docs/editorial-guidelines.md`). Solo scambi veri che
+aggiungono qualcosa, attribuzione per ruolo (regola privacy), stessa quantità in IT ed EN
+(il preflight controlla la simmetria). Si aggiunge in un giro di ripubblicazione, aggiornando
+`updatedDate` se l'aggiunta è sostanziale.
+
 ## Chiusura
 
 Riepiloga: URL attesi IT/EN, stato roadmap, PR aperta, post LinkedIn pronto. Se qualcosa è
