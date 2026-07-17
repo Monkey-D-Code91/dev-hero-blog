@@ -80,6 +80,12 @@
    ============================================================ */
 @layer utilities {
   .prose-dark {
+    /* Corpo long-form: 19px / 1.7 dentro una colonna max-w-2xl
+       (misura ~68–72 caratteri per riga). I margini em del plugin
+       typography scalano di conseguenza. */
+    font-size: 1.1875rem;
+    line-height: 1.7;
+
     --tw-prose-body: #c8d6e4;
     --tw-prose-headings: #f0f6fc;
     --tw-prose-lead: #a8bdd0;
