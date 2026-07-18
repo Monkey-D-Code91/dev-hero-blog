@@ -74,6 +74,29 @@ const blog = defineCollection({
           })
         )
         .optional(),
+      /**
+       * "Domande aperte": le domande che il pezzo lascia volutamente in sospeso
+       * ("è un'altra storia", un finale che non chiude). Vengono raccolte nella
+       * pagina /domande-aperte come mappa del pensiero in evoluzione e come
+       * inneschi dei pezzi futuri. Regola: rare e vere, una domanda che il testo
+       * pone davvero, non un riempitivo. Bilingue: il testo è nella lingua del
+       * file, la simmetria IT/EN (numero di domande) è verificata dal preflight.
+       * Una domanda si considera "ripresa" quando `resumedBy` punta al
+       * translationKey di un articolo pubblicato che la raccoglie.
+       */
+      openQuestions: z
+        .array(
+          z.object({
+            /** La domanda, nella voce dell'autore. */
+            question: z.string(),
+            /**
+             * translationKey dell'articolo che riprende la domanda. Se presente
+             * e l'articolo è pubblicato, la domanda risulta "ripresa" e linka lì.
+             */
+            resumedBy: z.string().optional(),
+          })
+        )
+        .optional(),
     })
     .transform((data, ctx) => {
       const authors = data.authors?.length

@@ -200,6 +200,11 @@ function checkArticle(article, twin, authors, names, index, out) {
       const rIt = countRevisions(article.rawFm);
       const rEn = countRevisions(twin.rawFm ?? "");
       if (rIt !== rEn) push("W", `numero di revisioni diverso dal gemello EN (IT: ${rIt} vs EN: ${rEn})`);
+      // "Domande aperte": stesso numero di domande in IT ed EN.
+      const countQuestions = (raw) => (raw.match(/^\s*-\s+question:/gm) ?? []).length;
+      const qIt = countQuestions(article.rawFm);
+      const qEn = countQuestions(twin.rawFm ?? "");
+      if (qIt !== qEn) push("W", `numero di domande 'openQuestions' diverso dal gemello EN (IT: ${qIt} vs EN: ${qEn})`);
     }
 
     // Se il pezzo ha revisioni, updatedDate dovrebbe rifletterle (indicatore meta).

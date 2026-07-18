@@ -50,6 +50,18 @@ Come funziona (campo `discussion` nel frontmatter, un blocco per lingua):
 - **Struttura di ogni scambio**: `from` (chi), `quote` (il punto sollevato), `reply` (la tua risposta, opzionale), `via` (dove, es. "LinkedIn", opzionale).
 - **Quando aggiungerlo**: dopo che il pezzo ha raccolto discussione, in un giro di ripubblicazione (togliere e rimettere non serve: si aggiunge il campo e si rifà la build). Aggiornare `updatedDate` se l'aggiunta è sostanziale.
 
+## Domande aperte (`/domande-aperte`)
+
+Ogni pezzo lascia qualcosa in sospeso: un "è un'altra storia", un finale che non chiude, una domanda che il testo pone e non risolve. Queste domande sono raccolte nella pagina `/domande-aperte`: la mappa del pensiero in evoluzione (principio 1 del progetto) e l'innesco pubblico dei pezzi futuri. È anche un punto d'ingresso per collaboratori e lettori ("questa domanda la voglio prendere io").
+
+Come funziona (campo `openQuestions` nel frontmatter, un blocco per lingua):
+
+- **Solo domande vere che il pezzo pone davvero**: quelle che l'articolo lascia esplicitamente aperte, non riempitivi generati per avere una riga in più. Rara e voluta: spesso una per pezzo, a volte nessuna.
+- **Nella voce dell'autore**, una domanda per voce (campo `question`). Valgono le regole di stile: niente trattini lunghi.
+- **Simmetria IT/EN**: stesso numero di domande nelle due lingue, tradotte idiomaticamente (il preflight controlla il conteggio).
+- **Quando una domanda viene ripresa**: se un articolo successivo la raccoglie, aggiungere `resumedBy: <translationKey>` alla domanda d'origine. Appena quel pezzo è pubblicato, la pagina la marca come "ripresa" e la linka. Fino ad allora resta "aperta".
+- **Quando aggiungerle**: al publish-day del pezzo che le pone (fanno parte del pezzo), oppure quando un nuovo pezzo ne riprende una vecchia (si aggiorna `resumedBy` sull'origine e si rifà la build).
+
 ## Pagina Roadmap (`/roadmap`)
 
 La pagina roadmap è la versione pubblica e reader-facing del piano editoriale: racconta la direzione del blog per **archi narrativi** (capitoli), non come calendario. La fonte strategica interna resta `content-roadmap.md`; la pagina ha la sua fonte dati curata.

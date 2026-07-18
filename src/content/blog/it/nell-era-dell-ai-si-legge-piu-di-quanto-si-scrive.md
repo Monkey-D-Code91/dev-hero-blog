@@ -9,6 +9,8 @@ tags: ["ai", "code-review", "codice-generato", "ingegneria-del-software"]
 cover: "../../../assets/covers/nell-era-dell-ai-si-legge-piu-di-quanto-si-scrive.png"
 coverAlt: "Copertina di The First Draft: tre cerchi sovrapposti (tech, human e AI) che si incontrano in un punto luminoso, con il titolo 'Nell'era dell'AI si legge più di quanto si scrive' sottolineato a mano come una correzione di bozza."
 draft: false
+openQuestions:
+  - question: "Quanto pesa il controllo che scivola via, quando l'accumulo di codice non voluto si ripete uscita dopo uscita?"
 ---
 
 C'era una story semplice: scambiare il payload di due endpoint, cioè far sì che due servizi si scambiassero i dati che ricevono in ingresso. Due righe di descrizione, mezza giornata di lavoro se andava lunga. Apro la pull request per la review e trovo cinquanta file modificati. Cosa sta succedendo?
