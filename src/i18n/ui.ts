@@ -230,6 +230,20 @@ export const ui = {
       progressAria: (numeral: string, done: number, total: number) =>
         `Arco ${numeral}: ${done} di ${total} tappe pubblicate`,
     },
+    openQuestions: {
+      nav: "Domande aperte",
+      eyebrow: "Il pensiero in sospeso",
+      heading: "Domande aperte",
+      intro:
+        "Ogni pezzo lascia qualcosa in sospeso: un \"è un'altra storia\", un finale che non chiude. Le raccogliamo qui, con il pezzo da cui nascono. Sono gli inneschi degli articoli che verranno, e un invito: se una ti chiama, prendila tu.",
+      fromLabel: "Da",
+      statusOpen: "Aperta",
+      statusResumed: "Ripresa",
+      resumedInLabel: "Ripresa in",
+      countCaption: (open: number, resumed: number) =>
+        `${open} aperte · ${resumed} riprese`,
+      empty: "Nessuna domanda aperta, per ora.",
+    },
   },
 
   en: {
@@ -447,6 +461,20 @@ export const ui = {
         `${done} of ${total} published`,
       progressAria: (numeral: string, done: number, total: number) =>
         `Arc ${numeral}: ${done} of ${total} stops published`,
+    },
+    openQuestions: {
+      nav: "Open questions",
+      eyebrow: "Thinking left hanging",
+      heading: "Open questions",
+      intro:
+        "Every piece leaves something hanging: an \"that's another story\", an ending that doesn't close. We collect them here, with the piece they come from. They're the seeds of the articles to come, and an invitation: if one calls to you, take it.",
+      fromLabel: "From",
+      statusOpen: "Open",
+      statusResumed: "Picked up",
+      resumedInLabel: "Picked up in",
+      countCaption: (open: number, resumed: number) =>
+        `${open} open · ${resumed} picked up`,
+      empty: "No open questions yet.",
     },
   },
 } as const;

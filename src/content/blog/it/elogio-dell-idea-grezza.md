@@ -9,6 +9,8 @@ tags: ["manifesto", "ai", "scrittura", "pensiero-critico"]
 cover: "../../../assets/covers/elogio-dell-idea-grezza.png"
 coverAlt: "Copertina di The First Draft: tre cerchi sovrapposti (tech, human e AI) che si incontrano in un punto luminoso, con la scritta 'Elogio dell'idea grezza' sottolineata a mano come una correzione di bozza."
 draft: false
+openQuestions:
+  - question: "Un progetto nato per diventare corale riuscirà davvero a esserlo, o la voce resterà una sola?"
 ---
 
 Passo troppo tempo a scorrere articoli che sembrano scritti tutti dalla stessa mano. Titoli che promettono, paragrafi levigati, e alla fine niente: nessuna idea che resti, nessun punto di vista, nessuno che si sia davvero esposto. Contenuto prodotto per riempire, a una frequenza che nessun pensiero vero riesce a tenere. È un rumore di fondo che cresce, e più cresce meno stiamo dicendo.

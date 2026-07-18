@@ -9,6 +9,8 @@ tags: ["manifesto", "ai", "writing", "critical-thinking"]
 cover: "../../../assets/covers/in-praise-of-the-rough-idea.png"
 coverAlt: "The First Draft cover: three overlapping circles (tech, human and AI) meeting at a bright point, with the title 'In Praise of the Rough Idea' underlined by hand like a proofreading mark."
 draft: false
+openQuestions:
+  - question: "A project meant to become collective, will it truly manage to be, or will the voice stay a single one?"
 ---
 
 I spend too much time scrolling through articles that all seem written by the same hand. Titles that promise, polished paragraphs, and in the end nothing: no idea that sticks, no point of view, no one who has actually put themselves on the line. Content produced to fill space, at a pace no real thought can keep up with. It's a background noise that keeps growing, and the more it grows, the less we're actually saying.

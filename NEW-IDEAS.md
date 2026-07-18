@@ -39,9 +39,11 @@ C'è una contraddizione strategica da risolvere: il manifesto combatte il conten
 
 **Stato**: scaffold pronto, provider **Buttondown**, inquadrata come **canale anti-algoritmo** (decisione di Marco: reframe della copy, non più "niente newsletter"). Gated da `NEWSLETTER.buttondownUser` in `src/config.ts`: finché è vuoto la newsletter è spenta e resta la CTA RSS (produzione invariata). Quando si imposta lo username compaiono: form di fine articolo (con "oppure via RSS"), link nel footer, pagina `/newsletter` IT/EN. Form senza JavaScript (POST al form pubblico Buttondown, double opt-in gestito dal provider). **Resta da fare (Marco)**: creare l'account Buttondown e incollare lo username. Possibile evoluzione: collegare l'automazione RSS-to-email di Buttondown così ogni uscita parte da sola; un link "Newsletter" anche in navbar.
 
-### 5. La pagina "Domande aperte"
+### 5. La pagina "Domande aperte" — IMPLEMENTATO (2026-07-18)
 
 Ogni articolo lascia domande volutamente aperte ("è un'altra storia" nel #3, il finale del manifesto). Una pagina che le colleziona (una riga ciascuna, link al pezzo d'origine, stato: aperta / ripresa nel pezzo X) fa tre cose: mostra il pensiero in evoluzione (principio 1), semina i pezzi futuri in pubblico (la roadmap narrativa già lo fa per i titoli, questa lo fa per le idee), e offre ai collaboratori e ai lettori un punto d'ingresso concreto ("questa domanda la voglio prendere io"). Manutenzione quasi nulla: si aggiorna al publish-day, dentro il runbook `publish-article`.
+
+**Stato**: fatto. Campo `openQuestions` (`question` + `resumedBy` opzionale) nel frontmatter, bilingue; util `getOpenQuestions` che raccoglie le domande dagli articoli pubblicati e risolve titolo/URL d'origine e lo stato (aperta / ripresa se `resumedBy` punta a un pezzo pubblicato). Componente `OpenQuestions.astro` e pagine `/domande-aperte` (IT) e `/en/open-questions` (EN), link in navbar. Il preflight verifica la simmetria IT/EN (numero di domande). Regole in `docs/editorial-guidelines.md`; passo aggiunto a `publish-article` (Passo 4). Inaugurata con due domande reali già poste dai pezzi pubblicati: il "quanto pesa, accumulato" di #2 (l'esplicito "è un'altra storia") e il "riuscirà a diventare corale" del manifesto. Complementare all'idea 1 (le revisioni registrano i cambiamenti, le domande aperte seminano quelli futuri).
 
 ### 6. Ripubblicazione EN con canonical (crescita del pubblico anglofono)
 
