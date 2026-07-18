@@ -48,7 +48,7 @@ export const CF_BEACON_TOKEN = "";
  * L'account e gli invii si gestiscono su https://buttondown.com.
  */
 export const NEWSLETTER = {
-  buttondownUser: "",
+  buttondownUser: "thefirstdraft",
 } as const;
 
 /** true se la newsletter è configurata (username presente). */
