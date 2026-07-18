@@ -1,0 +1,26 @@
+---
+/**
+ * Sezione newsletter di chiusura della homepage: aggancio a monte per chi
+ * arriva dalla home senza entrare in un articolo. Riusa NewsletterSignup
+ * (variante piena) e si mostra solo se la newsletter è configurata.
+ */
+import type { Lang } from "../../i18n/ui";
+import { newsletterEnabled } from "../../config";
+import NewsletterSignup from "../NewsletterSignup.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+{
+  newsletterEnabled && (
+    <section class="border-t border-border bg-surface py-20 md:py-24">
+      <div data-reveal class="mx-auto max-w-2xl px-6">
+        <NewsletterSignup lang={lang} />
+      </div>
+    </section>
+  )
+}
