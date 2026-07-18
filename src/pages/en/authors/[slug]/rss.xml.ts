@@ -2,7 +2,7 @@ import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
 import { getCollection } from "astro:content";
 import { getPublishedPosts, buildAuthorNameMap } from "../../../../utils/blog";
-import { toRssItem } from "../../../../utils/rss";
+import { toRssItem, atomSelfLink, ATOM_XMLNS } from "../../../../utils/rss";
 import { BLOG } from "../../../../config";
 
 export async function getStaticPaths() {
@@ -31,8 +31,10 @@ export async function GET(context: APIContext) {
     title: `${BLOG.name} — ${authorName}`,
     description: `Articles published by ${authorName} on ${BLOG.name}.`,
     site: context.site!,
-    xmlns: { dc: "http://purl.org/dc/elements/1.1/" },
+    xmlns: { dc: "http://purl.org/dc/elements/1.1/", ...ATOM_XMLNS },
     items: posts.map((post) => toRssItem(post, "en", authorMap)),
-    customData: "<language>en-GB</language>",
+    customData:
+      atomSelfLink(context.site, `/en/authors/${slug}/rss.xml`) +
+      "<language>en-GB</language>",
   });
 }
