@@ -18,6 +18,8 @@ import DiscussionTable from "./DiscussionTable.astro";
 import type { DiscussionEntry } from "./DiscussionTable.astro";
 import RevisionHistory from "./RevisionHistory.astro";
 import type { Revision } from "./RevisionHistory.astro";
+import Contradiction from "./Contradiction.astro";
+import type { Contradictions } from "../../utils/contradictions";
 import NewsletterSignup from "../NewsletterSignup.astro";
 import { newsletterEnabled } from "../../config";
 import type { ProcessedPost } from "../../utils/blog";
@@ -36,6 +38,7 @@ interface Props {
   related?: ProcessedPost[];
   discussion?: DiscussionEntry[];
   revisions?: Revision[];
+  contradictions?: Contradictions;
   url: string;
 }
 
@@ -53,6 +56,7 @@ const {
   related = [],
   discussion = [],
   revisions = [],
+  contradictions = { respondedBy: [] },
   url,
 } = Astro.props;
 
@@ -138,6 +142,13 @@ const rssUrl = lang === "it" ? "/rss.xml" : "/en/rss.xml";
       )
     }
 
+    <!-- Contraddizione: se il pezzo risponde a un altro, lo si dichiara prima -->
+    <Contradiction
+      direction="responds"
+      links={contradictions.respondsTo ? [contradictions.respondsTo] : []}
+      lang={lang}
+    />
+
     <!-- Contenuto Markdown/MDX in stile prose -->
     <div class="prose prose-dark max-w-none">
       <slot />
@@ -148,6 +159,13 @@ const rssUrl = lang === "it" ? "/rss.xml" : "/en/rss.xml";
 
     <!-- "Dal tavolo di discussione": scambi tornati nel pezzo dopo l'uscita -->
     <DiscussionTable entries={discussion} lang={lang} />
+
+    <!-- Contraddizione: i pezzi che rispondono a questo (dialogo che continua) -->
+    <Contradiction
+      direction="responded"
+      links={contradictions.respondedBy}
+      lang={lang}
+    />
   </article>
 
   <!-- Link "torna al blog" + bottoni di condivisione (sotto) -->

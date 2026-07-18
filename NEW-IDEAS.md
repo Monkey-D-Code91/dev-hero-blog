@@ -29,9 +29,11 @@ Il manifesto promette che la discussione vive su LinkedIn. Oggi il flusso è a s
 
 **Stato**: meccanismo pronto. Campo `discussion` nel frontmatter (schema Zod), componente `DiscussionTable.astro` in coda all'articolo (occhiello "Dal tavolo di discussione", citazione in serif, replica opzionale), reso solo se ci sono scambi. Preflight verifica la simmetria IT/EN; regole in `docs/editorial-guidelines.md`; passo aggiunto a `publish-article`. **Resta da fare (Marco)**: fornire il primo scambio reale (es. dai commenti del #3, che aveva il gancio forte su LinkedIn) per inaugurarlo, invece di contenuto inventato. Possibile evoluzione: includere gli scambi anche nel feed RSS (oggi sono nel frontmatter, quindi fuori dal `<content:encoded>`).
 
-### 3. Il formato "Contraddizione" (dittico a due firme)
+### 3. Il formato "Contraddizione" (dittico a due firme) — IMPLEMENTATO (2026-07-18)
 
 La roadmap ha già l'intuizione dei dittici (musica #3 gemello del filone codice). Un passo oltre: un formato ricorrente in cui un secondo autore **risponde** a un pezzo esistente con una tesi opposta o ortogonale, linkato bidirezionalmente ("questo pezzo contraddice → / è contraddetto da ←"). Il manifesto invita esplicitamente a contraddire; questo lo trasforma in un formato editoriale che nessun listicle può imitare, e dà ai collaboratori un modo di entrare a basso attrito (rispondere è più facile che inaugurare un filone). Tecnicamente: un campo `respondsTo: translationKey` e un blocco visivo dedicato.
+
+**Stato**: meccanismo pronto (come per newsletter/discussion: costruito ora, dormiente finché non serve). Campo `respondsTo` (translationKey) nel frontmatter del pezzo che risponde; util `getContradictions` che risolve il legame **bidirezionale** verso i soli articoli pubblicati; componente `Contradiction.astro` reso in due punti della pagina articolo: "In risposta a →" in cima al pezzo nuovo, "Il dialogo continua ←" in coda all'originale. Bilingue (respondsTo è una chiave, identica IT/EN). Il preflight verifica esistenza del bersaglio, no auto-riferimento e simmetria IT/EN. Regole in `docs/editorial-guidelines.md`; passo in `publish-article`. **Resta da fare (Marco)**: usarlo davvero quando Fabio o il collaboratore etica pubblicano il primo pezzo di risposta (basta aggiungere `respondsTo` al loro frontmatter IT+EN).
 
 ### 4. Newsletter essenziale (distribuzione anti-algoritmo) — IMPLEMENTATO (2026-07-17)
 

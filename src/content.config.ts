@@ -75,6 +75,16 @@ const blog = defineCollection({
         )
         .optional(),
       /**
+       * Formato "Contraddizione" (dittico a due firme): translationKey di un
+       * articolo precedente a cui QUESTO pezzo risponde con una tesi opposta o
+       * ortogonale. Il manifesto invita a contraddire; questo lo rende un formato.
+       * Il collegamento è bidirezionale e risolto a build-time: il pezzo che
+       * risponde mostra "in risposta a →", l'originale mostra "gli risponde ←"
+       * (solo verso articoli pubblicati). Identico in IT ed EN (è una chiave,
+       * non testo); il preflight verifica esistenza, simmetria e no auto-riferimento.
+       */
+      respondsTo: z.string().optional(),
+      /**
        * "Domande aperte": le domande che il pezzo lascia volutamente in sospeso
        * ("è un'altra storia", un finale che non chiude). Vengono raccolte nella
        * pagina /domande-aperte come mappa del pensiero in evoluzione e come

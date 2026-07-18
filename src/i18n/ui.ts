@@ -195,6 +195,15 @@ export const ui = {
       revisionsHeading: "Storia delle revisioni",
       revisionsIntro:
         "Questo pezzo è cambiato dopo la pubblicazione. Le bozze successive, con la loro data.",
+      contradiction: {
+        respondsHeading: "In risposta a",
+        respondsIntro:
+          "Questo pezzo raccoglie e contraddice un articolo precedente. Due firme, due tesi.",
+        respondedHeading: "Il dialogo continua",
+        respondedIntro:
+          "Un altro autore ha risposto a questo pezzo con una tesi diversa.",
+        by: "di",
+      },
     },
     newsletter: {
       nav: "Newsletter",
@@ -427,6 +436,15 @@ export const ui = {
       revisionsHeading: "Revision history",
       revisionsIntro:
         "This piece changed after publication. The later drafts, with their dates.",
+      contradiction: {
+        respondsHeading: "In response to",
+        respondsIntro:
+          "This piece takes up and contradicts an earlier article. Two bylines, two theses.",
+        respondedHeading: "The dialogue continues",
+        respondedIntro:
+          "Another author responded to this piece with a different thesis.",
+        by: "by",
+      },
     },
     newsletter: {
       nav: "Newsletter",

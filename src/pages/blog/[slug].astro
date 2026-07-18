@@ -14,6 +14,7 @@ import {
   findAuthors,
   getRelatedPosts,
 } from "../../utils/blog";
+import { getContradictions } from "../../utils/contradictions";
 import { getReadingTime } from "../../utils/readingTime";
 import { buildArticleSchema } from "../../utils/structuredData";
 
@@ -57,6 +58,9 @@ const authors = post.data.authors.map((key) => {
 
 // Articoli correlati (per tag + autori comuni).
 const related = await getRelatedPosts(post, lang);
+
+// Formato "Contraddizione": legami bidirezionali con i pezzi che risponde/gli rispondono.
+const contradictions = await getContradictions(post, lang);
 
 // OG image: preferisci la cover dell'articolo come anteprima social,
 // con fallback all'OG generata per-articolo (titolo + autore/i).
@@ -120,6 +124,7 @@ const articleSchema = buildArticleSchema({
       related={related}
       discussion={post.data.discussion}
       revisions={post.data.revisions}
+      contradictions={contradictions}
       url={new URL(`/blog/${slug}/`, Astro.site).toString()}
     >
       <Content />

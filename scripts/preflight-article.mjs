@@ -144,7 +144,7 @@ function internalBlogLinks(body) {
   return links;
 }
 
-function checkArticle(article, twin, authors, names, index, out) {
+function checkArticle(article, twin, authors, names, index, tkeys, out) {
   const { path, lang, md, fm, body } = article;
   const rel = path.replace(`${ROOT}/`, "");
   const push = (level, msg) => out.push({ level, file: rel, msg });
@@ -205,6 +205,19 @@ function checkArticle(article, twin, authors, names, index, out) {
       const qIt = countQuestions(article.rawFm);
       const qEn = countQuestions(twin.rawFm ?? "");
       if (qIt !== qEn) push("W", `numero di domande 'openQuestions' diverso dal gemello EN (IT: ${qIt} vs EN: ${qEn})`);
+      // Formato "Contraddizione": respondsTo è una chiave, identica in IT ed EN.
+      if (String(t.respondsTo ?? "") !== String(fm.respondsTo ?? "")) {
+        push("E", `respondsTo diverso dal gemello EN (IT: "${fm.respondsTo ?? ""}" vs EN: "${t.respondsTo ?? ""}")`);
+      }
+    }
+
+    // respondsTo: no auto-riferimento, e il bersaglio deve esistere.
+    if (fm.respondsTo) {
+      if (fm.respondsTo === fm.translationKey) {
+        push("E", "respondsTo punta all'articolo stesso");
+      } else if (tkeys.size && !tkeys.has(fm.respondsTo)) {
+        push("E", `respondsTo punta a un translationKey inesistente: "${fm.respondsTo}"`);
+      }
     }
 
     // Se il pezzo ha revisioni, updatedDate dovrebbe rifletterle (indicatore meta).
@@ -300,10 +313,12 @@ if (args.includes("--all")) {
 const authors = knownAuthorKeys();
 const names = authorNames();
 const index = buildArticleIndex(all);
+// Tutti i translationKey noti (inclusi i draft), per validare respondsTo.
+const tkeys = new Set(all.map((a) => a.fm?.translationKey).filter(Boolean));
 const findings = [];
 for (const article of targets) {
   const twin = byKey.get(article.fm?.translationKey)?.[article.lang === "it" ? "en" : "it"];
-  checkArticle(article, twin, authors, names, index, findings);
+  checkArticle(article, twin, authors, names, index, tkeys, findings);
 }
 
 const byFile = new Map();
