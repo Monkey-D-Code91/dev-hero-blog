@@ -9,6 +9,7 @@ tags: ["ai", "code-review", "codice-generato", "ingegneria-del-software"]
 cover: "../../../assets/covers/nell-era-dell-ai-si-legge-piu-di-quanto-si-scrive.png"
 coverAlt: "Copertina di The First Draft: tre cerchi sovrapposti (tech, human e AI) che si incontrano in un punto luminoso, con il titolo 'Nell'era dell'AI si legge più di quanto si scrive' sottolineato a mano come una correzione di bozza."
 draft: false
+feedbackReviewed: true
 openQuestions:
   - question: "Quanto pesa il controllo che scivola via, quando l'accumulo di codice non voluto si ripete uscita dopo uscita?"
 ---

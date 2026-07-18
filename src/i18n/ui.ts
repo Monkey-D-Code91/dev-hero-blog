@@ -204,6 +204,8 @@ export const ui = {
           "Un altro autore ha risposto a questo pezzo con una tesi diversa.",
         by: "di",
       },
+      feedbackReviewedNote:
+        "Questo pezzo è passato dal gruppo di feedback prima di uscire.",
     },
     newsletter: {
       nav: "Newsletter",
@@ -445,6 +447,8 @@ export const ui = {
           "Another author responded to this piece with a different thesis.",
         by: "by",
       },
+      feedbackReviewedNote:
+        "This piece went through the feedback group before publishing.",
     },
     newsletter: {
       nav: "Newsletter",

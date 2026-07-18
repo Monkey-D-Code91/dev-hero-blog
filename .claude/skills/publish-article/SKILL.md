@@ -72,13 +72,17 @@ Il PDF (`scripts/generate-feedback-pdf.py`) resta come canale secondario. Vedi `
    ricalibra le date della pipeline se l'uscita è slittata.
 3. **`HANDOFF.md`**: aggiorna lo stato (cosa è uscito oggi, prossimo pezzo in pipeline) e la data
    di ultimo aggiornamento. Nota: HANDOFF.md non è versionato, va comunque tenuto aggiornato.
-4. **Domande aperte** (`openQuestions`, opzionale ma consigliato): se il pezzo lascia una domanda
+4. **Gruppo di feedback** (`feedbackReviewed`, opzionale): se il pezzo è passato davvero dal
+   gruppo di feedback prima di uscire, metti `feedbackReviewed: true` **in IT e in EN** (stesso
+   valore, il preflight avvisa). Compare una riga discreta in coda all'articolo. Solo sui pezzi
+   che ci sono passati (non è una dichiarazione globale).
+5. **Domande aperte** (`openQuestions`, opzionale ma consigliato): se il pezzo lascia una domanda
    davvero in sospeso ("è un'altra storia", un finale che non chiude), dichiarala nel frontmatter
    **in IT e in EN** (stesso numero, il preflight controlla). Confluisce nella pagina
    `/domande-aperte`. Solo domande vere che il testo pone, non riempitivi. Se questo pezzo riprende
    una domanda di un articolo precedente, aggiungi `resumedBy: <translationKey di questo pezzo>`
    alla domanda d'origine (verrà marcata "ripresa" e linkata). Dettagli in `docs/editorial-guidelines.md`.
-5. Verifica l'allineamento: `node scripts/status.mjs` non deve segnalare incoerenze roadmap/blog.
+6. Verifica l'allineamento: `node scripts/status.mjs` non deve segnalare incoerenze roadmap/blog.
 
 ## Passo 5 — Commit e PR
 

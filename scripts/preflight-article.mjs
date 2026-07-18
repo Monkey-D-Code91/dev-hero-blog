@@ -181,6 +181,11 @@ function checkArticle(article, twin, authors, names, index, tkeys, out) {
     if (String(t.pubDate) !== String(fm.pubDate)) push("E", `pubDate diversa dal gemello (${fm.pubDate} vs ${t.pubDate})`);
     const draft = (v) => String(v ?? "false");
     if (draft(t.draft) !== draft(fm.draft)) push("E", `stato draft diverso dal gemello (${draft(fm.draft)} vs ${draft(t.draft)})`);
+    // "Gruppo di feedback": booleano, stesso valore nelle due lingue.
+    const bool = (v) => String(v ?? "false");
+    if (bool(t.feedbackReviewed) !== bool(fm.feedbackReviewed)) {
+      push("W", `feedbackReviewed diverso dal gemello (${bool(fm.feedbackReviewed)} vs ${bool(t.feedbackReviewed)})`);
+    }
     // Tag allineati tra le due lingue: i valori SONO tradotti (writing/scrittura),
     // quindi non si confrontano i valori ma il NUMERO: se differisce, un tag si è
     // perso in una delle due lingue.

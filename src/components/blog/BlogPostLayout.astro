@@ -20,6 +20,7 @@ import RevisionHistory from "./RevisionHistory.astro";
 import type { Revision } from "./RevisionHistory.astro";
 import Contradiction from "./Contradiction.astro";
 import type { Contradictions } from "../../utils/contradictions";
+import FeedbackNote from "./FeedbackNote.astro";
 import NewsletterSignup from "../NewsletterSignup.astro";
 import { newsletterEnabled } from "../../config";
 import type { ProcessedPost } from "../../utils/blog";
@@ -39,6 +40,7 @@ interface Props {
   discussion?: DiscussionEntry[];
   revisions?: Revision[];
   contradictions?: Contradictions;
+  feedbackReviewed?: boolean;
   url: string;
 }
 
@@ -57,6 +59,7 @@ const {
   discussion = [],
   revisions = [],
   contradictions = { respondedBy: [] },
+  feedbackReviewed = false,
   url,
 } = Astro.props;
 
@@ -166,6 +169,9 @@ const rssUrl = lang === "it" ? "/rss.xml" : "/en/rss.xml";
       links={contradictions.respondedBy}
       lang={lang}
     />
+
+    <!-- Nota di processo: il pezzo è passato dal gruppo di feedback -->
+    <FeedbackNote reviewed={feedbackReviewed} lang={lang} />
   </article>
 
   <!-- Link "torna al blog" + bottoni di condivisione (sotto) -->

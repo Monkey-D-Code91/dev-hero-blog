@@ -62,6 +62,18 @@ Come funziona (campo `openQuestions` nel frontmatter, un blocco per lingua):
 - **Quando una domanda viene ripresa**: se un articolo successivo la raccoglie, aggiungere `resumedBy: <translationKey>` alla domanda d'origine. Appena quel pezzo è pubblicato, la pagina la marca come "ripresa" e la linka. Fino ad allora resta "aperta".
 - **Quando aggiungerle**: al publish-day del pezzo che le pone (fanno parte del pezzo), oppure quando un nuovo pezzo ne riprende una vecchia (si aggiorna `resumedBy` sull'origine e si rifà la build).
 
+## Gruppo di feedback (nota di processo)
+
+Il gruppo di feedback rivede i pezzi prima che escano, ma è invisibile al lettore. Una riga discreta in coda all'articolo rende visibile il processo di qualità senza esporre nessuno.
+
+Come funziona (campo `feedbackReviewed` nel frontmatter, un booleano per lingua):
+
+- **`feedbackReviewed: true`** → compare in coda al pezzo la riga "Questo pezzo è passato dal gruppo di feedback prima di uscire". Assente o `false` → niente riga.
+- **Per-articolo e onesto**: attivarlo **solo** sui pezzi che ci sono passati davvero. Non è una dichiarazione globale (i primi pezzi a firma singola non ci passano).
+- **Niente nomi, niente numeri**: la riga parla del gruppo, mai delle persone (regola privacy).
+- **Solo pagina articolo**, non sulle card (a differenza del badge "rivisto"): è un dettaglio di processo, non un attributo da lista.
+- **Simmetria IT/EN**: stesso valore nelle due lingue (il preflight avvisa se differisce).
+
 ## Formato "Contraddizione" (dittico a due firme)
 
 Il manifesto invita a contraddire. Questo formato lo rende un oggetto editoriale: un secondo autore risponde a un pezzo esistente con una tesi opposta o ortogonale, e i due pezzi si linkano a vicenda. È un modo a basso attrito per far entrare i collaboratori (rispondere è più facile che inaugurare un filone).

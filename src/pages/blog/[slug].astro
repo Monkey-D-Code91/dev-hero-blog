@@ -125,6 +125,7 @@ const articleSchema = buildArticleSchema({
       discussion={post.data.discussion}
       revisions={post.data.revisions}
       contradictions={contradictions}
+      feedbackReviewed={post.data.feedbackReviewed}
       url={new URL(`/blog/${slug}/`, Astro.site).toString()}
     >
       <Content />
