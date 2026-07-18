@@ -15,6 +15,19 @@ import { getSlugFromEntryId, getBlogPostUrl } from "./blog";
  */
 const md = new MarkdownIt({ html: false, linkify: true, typographer: false });
 
+/** Namespace Atom, da aggiungere all'`xmlns` del feed per usare <atom:link>. */
+export const ATOM_XMLNS = { atom: "http://www.w3.org/2005/Atom" } as const;
+
+/**
+ * Link self-referenziale del feed (<atom:link rel="self">): il feed dichiara il
+ * proprio URL canonico. Raccomandato dai validatori RSS. `path` è il percorso
+ * del feed stesso (es. "/rss.xml").
+ */
+export function atomSelfLink(site: URL | undefined, path: string): string {
+  const href = new URL(path, site).toString();
+  return `<atom:link href="${href}" rel="self" type="application/rss+xml"/>`;
+}
+
 /** Rende il markdown del corpo articolo in HTML sicuro per il tag <content:encoded>. */
 export function renderPostContent(body: string): string {
   return sanitizeHtml(md.render(body), {
