@@ -1,0 +1,62 @@
+---
+/**
+ * Formato "Contraddizione" (dittico a due firme). Rende il collegamento tra un
+ * pezzo e quello che contraddice/risponde, in una delle due direzioni:
+ *  - "responds": QUESTO pezzo risponde a un altro (in cima all'articolo, →)
+ *  - "responded": un altro pezzo risponde a QUESTO (in coda, ←)
+ * Reso solo se ci sono collegamenti. Il manifesto invita a contraddire: qui
+ * la contraddizione diventa un formato editoriale, non un commento a lato.
+ */
+import type { Lang } from "../../i18n/ui";
+import { useTranslations } from "../../i18n/utils";
+import type { ContradictionLink } from "../../utils/contradictions";
+
+interface Props {
+  direction: "responds" | "responded";
+  links: ContradictionLink[];
+  lang: Lang;
+}
+
+const { direction, links, lang } = Astro.props;
+const t = useTranslations(lang);
+const tc = t.blog.contradiction;
+
+const heading = direction === "responds" ? tc.respondsHeading : tc.respondedHeading;
+const intro = direction === "responds" ? tc.respondsIntro : tc.respondedIntro;
+const arrow = direction === "responds" ? "→" : "←";
+---
+
+{
+  links.length > 0 && (
+    <section
+      class:list={[
+        "rounded-2xl border border-border border-l-2 border-l-accent bg-surface-2/60 px-6 py-6 sm:px-8",
+        direction === "responds" ? "mb-10" : "mt-16",
+      ]}
+      aria-label={heading}
+    >
+      <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-accent">
+        <span aria-hidden="true">{arrow}</span>
+        {heading}
+      </p>
+      <p class="mt-2 text-sm text-muted">{intro}</p>
+      <ul class="mt-4 flex flex-col gap-3">
+        {links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="group inline-flex flex-col gap-0.5 transition-colors"
+            >
+              <span class="font-serif text-lg leading-snug text-text group-hover:text-accent">
+                {link.title}
+              </span>
+              <span class="text-sm text-muted">
+                {`${tc.by} ${link.authorName}`}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

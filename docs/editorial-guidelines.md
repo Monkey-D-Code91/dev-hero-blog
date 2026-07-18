@@ -62,6 +62,17 @@ Come funziona (campo `openQuestions` nel frontmatter, un blocco per lingua):
 - **Quando una domanda viene ripresa**: se un articolo successivo la raccoglie, aggiungere `resumedBy: <translationKey>` alla domanda d'origine. Appena quel pezzo è pubblicato, la pagina la marca come "ripresa" e la linka. Fino ad allora resta "aperta".
 - **Quando aggiungerle**: al publish-day del pezzo che le pone (fanno parte del pezzo), oppure quando un nuovo pezzo ne riprende una vecchia (si aggiorna `resumedBy` sull'origine e si rifà la build).
 
+## Formato "Contraddizione" (dittico a due firme)
+
+Il manifesto invita a contraddire. Questo formato lo rende un oggetto editoriale: un secondo autore risponde a un pezzo esistente con una tesi opposta o ortogonale, e i due pezzi si linkano a vicenda. È un modo a basso attrito per far entrare i collaboratori (rispondere è più facile che inaugurare un filone).
+
+Come funziona (campo `respondsTo` nel frontmatter del pezzo che risponde):
+
+- **`respondsTo: <translationKey>`**: la chiave dell'articolo a cui il pezzo risponde. Va **solo sul pezzo nuovo** (quello che risponde); l'originale non si tocca, il legame all'indietro è automatico.
+- **Bidirezionale e automatico**: il pezzo che risponde mostra in cima "In risposta a →"; l'originale mostra in coda "Il dialogo continua ←". Entrambi solo verso articoli **pubblicati** (un legame verso una bozza compare quando la bozza esce).
+- **Identico in IT ed EN**: `respondsTo` è una chiave, non testo, quindi lo stesso valore nelle due lingue (il preflight lo verifica, insieme all'esistenza del bersaglio e al no-auto-riferimento).
+- **Quando usarlo**: quando un pezzo è davvero una risposta a un altro (tesi opposta o ortogonale), non per semplice affinità tematica (per quella ci sono i tag e i correlati). Raro e voluto.
+
 ## Pagina Roadmap (`/roadmap`)
 
 La pagina roadmap è la versione pubblica e reader-facing del piano editoriale: racconta la direzione del blog per **archi narrativi** (capitoli), non come calendario. La fonte strategica interna resta `content-roadmap.md`; la pagina ha la sua fonte dati curata.

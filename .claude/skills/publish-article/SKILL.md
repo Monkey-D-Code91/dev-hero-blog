@@ -116,6 +116,10 @@ Entrambi si aggiungono in un giro di ripubblicazione (dettagli in `docs/editoria
 - **Storia delle revisioni** (`revisions`): quando il pezzo cambia in modo sostanziale (tesi, un
   fatto, una precisazione), si registra una voce datata. Solo revisioni vere, mai refusi/cosmesi.
   Aggiornare `updatedDate` insieme (accende l'indicatore "rivisto"); simmetria IT/EN controllata.
+- **Formato "Contraddizione"** (`respondsTo`): quando il pezzo che stai pubblicando è una risposta
+  a un articolo precedente (tesi opposta o ortogonale), aggiungi `respondsTo: <translationKey>` nel
+  frontmatter **in IT e in EN** (stesso valore, il preflight controlla). Il link bidirezionale
+  (in cima al pezzo nuovo, in coda all'originale) è automatico. L'originale non va toccato.
 
 ## Chiusura
 
