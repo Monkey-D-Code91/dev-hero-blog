@@ -100,3 +100,56 @@ skill `design`, che deve comunque rispettare questo documento.
 - Podcast (The Human Constant): stesso brand visivo e stessa palette; l'angolo di ogni episodio è
   la "contraddizione apparente" tra i tre pilastri (vedi skill `podcast-repurpose`). Formati e
   regole delle cover episodio in `docs/podcast-episode-cover.md`.
+
+## Newsletter — email di benvenuto
+
+Testo canonico della welcome email di Buttondown (parte alla conferma dell'iscrizione).
+Icona: `public/logos/fd-3-nib.png`. Colore accento: `#38bdf8` (su fondo scuro `#0b1120`).
+Vale la regola: niente trattini lunghi, prima persona, nessun effetto elenco.
+
+### Versione italiana (in uso)
+
+**Oggetto:** Benvenuto sulla prima bozza
+
+> Ciao,
+>
+> grazie per l'iscrizione, e benvenuto. Sono Marco.
+>
+> The First Draft è lo spazio dove scrivo di tre cose che sembrano tirare in direzioni opposte e invece si spiegano a vicenda: tech, human e AI. Non opinioni levigate costruite per un feed, ma il ragionamento mentre prende forma, sempre a partire da qualcosa di reale successo al lavoro.
+>
+> La maggior parte dei pezzi nasce dalla mia esperienza da sviluppatore e Tech Lead: cosa cambia davvero l'AI nel modo in cui scriviamo codice, come crescono le persone attorno, i problemi concreti che incontro. Ma vuole essere uno sforzo corale, non un monologo: altre voci sono già in arrivo, una su AI e musica, una su AI ed etica. Sguardi differenti sulla stessa tecnologia.
+>
+> Mi farò vivo a ogni nuovo articolo. Un'email, nient'altro.
+>
+> Per iniziare, ti lascio il manifesto: è il modo più chiaro per capire da dove nasce tutto questo e dove sta andando.
+>
+> **Elogio dell'idea grezza**
+> https://thefirstdraft.dev/blog/elogio-dell-idea-grezza/
+>
+> Ci vediamo alla prossima bozza,
+> Marco
+
+### Versione inglese (non ancora in uso)
+
+Pronta per quando la distribuzione punterà anche al pubblico anglofono (obiettivo 2026). Non
+è la welcome email attiva: oggi il pubblico arriva soprattutto da LinkedIn (italiano).
+
+**Oggetto:** Welcome to the first draft
+
+> Hi,
+>
+> Thanks for subscribing, and welcome. I'm Marco.
+>
+> The First Draft is where I write about three things that seem to pull in different directions and end up explaining each other: tech, human, and AI. Not polished takes built for a feed, but reasoning while it still takes shape, always starting from something real that happened at work.
+>
+> Most pieces come from my own experience as a developer and Tech Lead: what AI actually changes in how we write code, how people grow around it, the real problems I run into. But this is meant to be a chorus, not a monologue. Other voices are already on the way: one on AI and music, one on AI and ethics. Different ways of looking at the same technology.
+>
+> You'll hear from me whenever a new piece goes out. One email, nothing else.
+>
+> A good place to start is the manifesto. It's the clearest way to see where this comes from and where it's going:
+>
+> **In Praise of the Rough Idea**
+> https://thefirstdraft.dev/en/blog/in-praise-of-the-rough-idea/
+>
+> See you at the next draft,
+> Marco
