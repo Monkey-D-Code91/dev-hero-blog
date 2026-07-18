@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import LandingHero from "../components/landing/LandingHero.astro";
 import RecentPosts from "../components/landing/RecentPosts.astro";
 import AuthorsShowcase from "../components/landing/AuthorsShowcase.astro";
+import NewsletterCta from "../components/landing/NewsletterCta.astro";
 import { useTranslations } from "../i18n/utils";
 import { getPublishedPosts, processPosts } from "../utils/blog";
 
@@ -31,6 +32,7 @@ const itAuthors = allAuthors.filter((a) => a.id.startsWith("it/"));
     <LandingHero lang="it" />
     <RecentPosts posts={recentPosts} lang="it" />
     <AuthorsShowcase authors={itAuthors} lang="it" />
+    <NewsletterCta lang="it" />
   </main>
   <Footer />
 </BaseLayout>
