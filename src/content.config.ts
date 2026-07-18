@@ -23,6 +23,14 @@ const blog = defineCollection({
       /** I draft sono esclusi dalla build di produzione. */
       draft: z.boolean().default(false),
       /**
+       * true se il pezzo è passato dal gruppo di feedback prima di uscire.
+       * Rende visibile il processo di qualità con una riga discreta in coda
+       * all'articolo, senza esporre nessuno (nessun nome, nessun numero).
+       * Per-articolo e onesto: solo i pezzi che ci sono passati davvero.
+       * Booleano, stesso valore in IT ed EN (simmetria verificata dal preflight).
+       */
+      feedbackReviewed: z.boolean().default(false),
+      /**
        * Se l'articolo è stato pubblicato originariamente altrove (Medium, dev.to,
        * blog personale), dichiara l'URL canonico esterno per consolidare il valore
        * SEO sulla fonte originale.

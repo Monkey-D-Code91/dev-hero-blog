@@ -9,6 +9,7 @@ tags: ["ai", "code-review", "generated-code", "software-engineering"]
 cover: "../../../assets/covers/we-read-more-than-we-write.png"
 coverAlt: "The First Draft cover: three overlapping circles (tech, human and AI) meeting at a bright point, with the title 'In the AI Era, We Read More Than We Write' underlined by hand like a proofreading mark."
 draft: false
+feedbackReviewed: true
 openQuestions:
   - question: "How much does the control that slips away weigh, when the buildup of unwanted code repeats release after release?"
 ---

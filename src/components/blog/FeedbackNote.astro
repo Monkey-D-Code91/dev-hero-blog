@@ -1,0 +1,28 @@
+---
+/**
+ * Riga discreta in coda all'articolo: segnala che il pezzo è passato dal gruppo
+ * di feedback prima di uscire. Rende visibile il processo di qualità senza
+ * esporre nessuno (nessun nome, nessun numero). Reso solo se `reviewed`.
+ */
+import type { Lang } from "../../i18n/ui";
+import { useTranslations } from "../../i18n/utils";
+
+interface Props {
+  reviewed: boolean;
+  lang: Lang;
+}
+
+const { reviewed, lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+{
+  reviewed && (
+    <p class="mt-10 flex items-center gap-2 text-xs text-muted/80">
+      <span aria-hidden="true" class="text-accent/70">
+        ◇
+      </span>
+      {t.blog.feedbackReviewedNote}
+    </p>
+  )
+}
