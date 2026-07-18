@@ -142,23 +142,35 @@ const jsonLdString = jsonLd
     <slot />
 
     <script>
-      // Reveal on-scroll: aggiunge .reveal-visible agli elementi [data-reveal].
+      // Reveal on-scroll. Per non penalizzare l'LCP, gli elementi restano
+      // VISIBILI di default: nascondiamo (.reveal-hidden) SOLO quelli che al
+      // caricamento sono sotto la piega, e li riveliamo quando entrano in vista.
+      // Così l'elemento LCP above-the-fold viene dipinto subito.
       const revealEls = document.querySelectorAll<HTMLElement>("[data-reveal]");
-      if ("IntersectionObserver" in window && revealEls.length) {
+      const reduce = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      if (!reduce && "IntersectionObserver" in window && revealEls.length) {
         const io = new IntersectionObserver(
           (entries) => {
             for (const entry of entries) {
               if (entry.isIntersecting) {
-                entry.target.classList.add("reveal-visible");
+                entry.target.classList.remove("reveal-hidden");
                 io.unobserve(entry.target);
               }
             }
           },
           { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
         );
-        revealEls.forEach((el) => io.observe(el));
-      } else {
-        revealEls.forEach((el) => el.classList.add("reveal-visible"));
+        const fold = window.innerHeight * 0.9;
+        revealEls.forEach((el) => {
+          // Solo gli elementi sotto la piega partono nascosti e animano; quelli
+          // già visibili (above-the-fold) non vengono mai toccati.
+          if (el.getBoundingClientRect().top > fold) {
+            el.classList.add("reveal-hidden");
+            io.observe(el);
+          }
+        });
       }
     </script>
 
