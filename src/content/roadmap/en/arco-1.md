@@ -17,15 +17,15 @@ items:
     status: published
     focus: [Tech, Human]
     authorName: Marco Mariotti
-  - title: The fine line of code
+  - title: Learning to steer, not to race
     date: 2026-07-24
     status: in-progress
-    focus: [Tech, AI]
+    focus: [Human, AI]
     authorName: Marco Mariotti
-  - title: Learning to steer, not to race
+  - title: The fine line of code
     date: 2026-08-03
     status: planned
-    focus: [Human, AI]
+    focus: [Tech, AI]
     authorName: Marco Mariotti
   - title: What I don't delegate to AI
     date: 2026-08-13

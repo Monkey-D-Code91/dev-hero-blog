@@ -1,7 +1,7 @@
 ---
 title: "Imparare a guidare, non a correre"
 description: "Una pull request piena di codice che funziona ma che nessuno ha capito, dove bastava una ref. L'AI regala velocità, ma la velocità senza direzione ti trascina in giro: crescere non è produrre più codice, è arrivare al cuore dei problemi."
-pubDate: 2026-08-03
+pubDate: 2026-07-24
 translationKey: "learning-to-steer-not-to-race"
 focus: ["human", "ai"]
 authors: ["marco-mariotti"]

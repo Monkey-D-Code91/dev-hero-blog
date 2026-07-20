@@ -17,15 +17,15 @@ items:
     status: published
     focus: [Tech, Human]
     authorName: Marco Mariotti
-  - title: La sottile linea del codice
+  - title: Imparare a guidare, non a correre
     date: 2026-07-24
     status: in-progress
-    focus: [Tech, AI]
+    focus: [Human, AI]
     authorName: Marco Mariotti
-  - title: Imparare a guidare, non a correre
+  - title: La sottile linea del codice
     date: 2026-08-03
     status: planned
-    focus: [Human, AI]
+    focus: [Tech, AI]
     authorName: Marco Mariotti
   - title: Cosa non delego all'AI
     date: 2026-08-13

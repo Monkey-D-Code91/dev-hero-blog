@@ -1,7 +1,7 @@
 ---
 title: "La sottile linea del codice"
 description: "Un modulo migrato, tutti i test verdi, e a fine mese le notifiche smettono di rinnovarsi. Dove passa la linea tra codice generato controllato e fuori controllo, e come restarci in equilibrio."
-pubDate: 2026-07-24
+pubDate: 2026-08-03
 translationKey: "the-fine-line-of-code"
 focus: ["tech", "ai"]
 authors: ["marco-mariotti"]
