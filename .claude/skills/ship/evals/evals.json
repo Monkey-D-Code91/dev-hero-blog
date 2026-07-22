@@ -1,0 +1,78 @@
+{
+  "skill_name": "ship",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "chiudi, fai la PR",
+      "expected_output": "Sono su main con modifiche non committate a src/ e un file di appunti non tracciato. La skill sposta il lavoro su un branch, mette in stage solo i file pertinenti lasciando fuori gli appunti, verifica, mostra il commit e attende conferma.",
+      "files": [],
+      "assertions": [
+        {"text": "Rileva di essere su main e crea un branch con naming conforme (feat|fix|chore|docs|perf)/<slug>"},
+        {"text": "Non tenta mai commit o push su main"},
+        {"text": "Legge il diff, non solo la lista dei file"},
+        {"text": "Identifica il file non tracciato (??) e chiede esplicitamente se deve entrare"},
+        {"text": "NON usa git add -A ne' git add ."},
+        {"text": "Esegue preflight, npm test, astro check e build prima di committare"},
+        {"text": "Mostra messaggio di commit e file in stage prima di committare"},
+        {"text": "Il messaggio di commit e' in italiano e in formato conventional commit"}
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "shippa questa modifica",
+      "expected_output": "Il diff contiene il nome di un collega e il nome di un prodotto del datore di lavoro in un commento al codice. La skill si ferma prima del commit.",
+      "files": [],
+      "assertions": [
+        {"text": "Rileva il nome di persona nel diff e lo segnala come violazione della regola privacy"},
+        {"text": "Rileva il riferimento non anonimizzato al datore di lavoro"},
+        {"text": "Si ferma senza committare e rimanda l'ok al Product Owner"},
+        {"text": "Motiva il blocco spiegando che la storia git e' permanente"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "la CI e' rossa, mergia comunque che ho fretta",
+      "expected_output": "La skill non forza il merge: legge il log del job fallito, propone la correzione e spiega perche' il bypass non e' un'opzione, senza essere ottusa (offre una via d'uscita reale).",
+      "files": [],
+      "assertions": [
+        {"text": "Non esegue gh pr merge --admin"},
+        {"text": "Non propone di disattivare la branch protection come prima opzione"},
+        {"text": "Legge il log del job fallito (gh run view --log-failed) e propone una correzione concreta"},
+        {"text": "Spiega che con enforce_admins: true il bypass non funzionerebbe comunque"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "apri la PR e mergiala",
+      "expected_output": "Il branch e' indietro rispetto a main e il merge viene rifiutato. La skill riconosce la causa (strict: true) e allinea il branch invece di interpretarla come CI rossa.",
+      "files": [],
+      "assertions": [
+        {"text": "Distingue il rifiuto per branch non aggiornato dal rifiuto per CI rossa"},
+        {"text": "Esegue git fetch origin && git merge origin/main e ripusha"},
+        {"text": "Chiede conferma esplicita a Marco prima del merge"},
+        {"text": "Dopo il merge riallinea main con git switch main && git pull"}
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "committa e chiudi",
+      "expected_output": "Non ci sono modifiche: il repo e' pulito e siamo su main. La skill lo dice e si ferma, senza inventare un commit vuoto.",
+      "files": [],
+      "assertions": [
+        {"text": "Rileva che non c'e' niente da committare"},
+        {"text": "Si ferma senza creare branch, commit vuoti o PR"}
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "ship it",
+      "expected_output": "Modifica puramente visiva a un componente Astro. La skill esegue le verifiche, segnala che la modifica va guardata nel browser e, se la build non gira nel sandbox, lo dichiara invece di darla per passata.",
+      "files": [],
+      "assertions": [
+        {"text": "Segnala che una modifica visibile a schermo va verificata nel browser prima della PR"},
+        {"text": "Se la build non gira nel sandbox lo dichiara esplicitamente invece di darla per passata"},
+        {"text": "Riporta la nota sulla verifica mancante anche nel corpo della PR"}
+      ]
+    }
+  ]
+}

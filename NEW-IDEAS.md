@@ -2,6 +2,14 @@
 
 _Analisi del 2026-07-17. Prima i principi che emergono dal progetto (la lente di valutazione), poi le idee. Ogni idea è passata dallo stesso filtro che usiamo per gli articoli: rafforza l'identità o la diluisce? Le idee che non passano stanno in fondo, scartate esplicitamente._
 
+> **Convenzione di stato** (letta dalla skill `roadmap-next`, vedi `.claude/skills/roadmap-next/`).
+> **Il marker `— IMPLEMENTATO (YYYY-MM-DD)` nel titolo è il segnale autorevole**: le idee senza
+> marker sono aperte. Un'idea conclusa porta anche un paragrafo `**Stato**:` con cosa è stato
+> fatto e cosa resta (incluso il `**Resta da fare (Marco)**`, che è un'azione
+> umana e non un lavoro da riaprire). Le sezioni "Idee da
+> esplorare" (immature, da discutere prima) e "Idee valutate e scartate" (decisioni negative)
+> non si implementano.
+
 ## I principi del progetto (come li leggo dal repo)
 
 1. **Il nome è la tesi.** "The First Draft" dice che il valore sta nel pensiero mentre prende forma, non nella risposta levigata. Il manifesto chiude con: "le idee migliori raramente restano come le avevi scritte la prima volta". Questo principio è dichiarato ma **non ancora incarnato dal prodotto**: oggi gli articoli, una volta pubblicati, sono statici come su qualunque altro blog. Qui c'è lo spazio di evoluzione più originale (idea 1).
