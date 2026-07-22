@@ -2,7 +2,14 @@
 
 _Analisi del 2026-07-17. Proposte ordinate per priorità; ogni voce dice perché serve, non solo cosa fare. Da spuntare o scartare esplicitamente, come la roadmap editoriale._
 
-**Stato al 2026-07-17:** fatti i punti 1-7, 10, 11 (CI, README, zombie, test, anteprima draft, preflight, analytics, pulizia docs, RSS full-content). Aperti: **8** (rimuovere React, quando si tocca la navbar) e **9** (ricerca Pagefind, trigger a ~15 articoli). Per l'analytics resta il solo passo manuale di Marco: incollare il token Cloudflare.
+**Stato al 2026-07-22:** implementati i punti 1-7, 10, 11 (CI, README, zombie, test, anteprima draft, preflight, analytics, pulizia docs, RSS full-content). Aperti, **entrambi in attesa del loro trigger**: **8** (rimuovere React, alla prima volta che si tocca la navbar) e **9** (ricerca Pagefind, oltre ~15 articoli pubblicati). Per l'analytics resta il solo passo manuale di Marco: incollare il token Cloudflare.
+
+> **Convenzione di stato** (letta dalla skill `roadmap-next`, vedi `.claude/skills/roadmap-next/`).
+> **Il marker `— IMPLEMENTATO (YYYY-MM-DD)` nel titolo `###` è il segnale autorevole**: le voci
+> senza marker sono aperte. Le voci chiuse da qui in avanti portano anche un paragrafo `**Stato**:`
+> con cosa è stato fatto davvero e cosa è rimasto fuori (le voci chiuse prima del 2026-07-22 hanno
+> il corpo già scritto come prosa di stato, e vanno bene così).
+> Le sezioni "Cosa NON fare" sono decisioni negative: non si implementano mai.
 
 ## Lettura d'insieme
 
@@ -12,7 +19,7 @@ I problemi reali sono pochi e quasi tutti di **igiene**, non di architettura: ma
 
 ## Priorità alta
 
-### 1. CI su GitHub Actions (build + preflight)
+### 1. CI su GitHub Actions (build + preflight) — IMPLEMENTATO (2026-07-17)
 
 Oggi la validazione è tutta manuale e locale, e HANDOFF documenta che nel sandbox la build nemmeno gira (binari nativi macOS). Una CI su `ubuntu-latest` che a ogni PR esegue:
 
@@ -24,16 +31,20 @@ risolve tre problemi in un colpo: nessuna PR di contenuto rompe la build, il pre
 
 Estensione opzionale: un job che rigenera le cover e fallisce se differiscono da quelle committate (determinismo degli asset verificato, non promesso).
 
-### 2. Riscrivere il README
+**Stato**: fatto. `.github/workflows/ci.yml` gira su ogni PR e su push a `main` (ubuntu-latest, node 24): `npm ci`, preflight su tutti gli articoli, `npm test` (vitest), `npx astro check`, `npm run build`, più `status.mjs` informativo. Il job "Preflight & build" è il check richiesto dalla branch protection di `main`. **Non fatta** l'estensione opzionale sul determinismo delle cover: resta un'idea aperta, da valutare quando gli asset cambieranno abbastanza spesso da giustificarla.
+
+### 2. Riscrivere il README — IMPLEMENTATO (2026-07-17)
 
 Il README descrive ancora il "sito professionale di personal branding, single-page con Hero/Chi sono/Esperienza": è il progetto di partenza, non The First Draft. Chi arriva dal repo (collaboratori inclusi: esiste una skill di onboarding, ma il README è la prima cosa che si legge) trova una descrizione fuorviante. Va riscritto attorno a: cos'è il blog, la struttura bilingue a `translationKey`, dove vivono contenuti e docs (`docs/brand.md`, `docs/editorial-guidelines.md`), i comandi degli script, il deploy Cloudflare. Mezz'ora di lavoro, alto ritorno.
 
-### 3. Decidere il destino dei componenti zombie — RISOLTO (2026-07-17)
+**Stato**: fatto. Il README ora descrive The First Draft: stack (Astro 5 statico, Tailwind 4, React solo per le island, deploy Cloudflare Workers), tabella dei comandi con gli script di `scripts/`, il pattern bilingue cartella-per-lingua + chiave condivisa (`translationKey`, `authorKey`, `arcKey`), i documenti normativi e il workflow editoriale guidato dalle skill.
+
+### 3. Decidere il destino dei componenti zombie — IMPLEMENTATO (2026-07-17)
 
 - **`keystatic.config.ts`**: eliminato. Era un doppio schema parallelo allo Zod per un CMS mai attivato; il metodo editoriale reale è la co-scrittura via skill. Recuperabile da git se mai servisse.
 - **`Comments.astro` (Giscus)**: falso allarme dell'analisi iniziale: Giscus è **già configurato e attivo** (`GISCUS` compilato in `src/config.ts`, widget presente sulle pagine articolo live, categoria Discussions "Ideas"). Nessuna azione necessaria.
 
-### 4. Test sulle funzioni load-bearing — FATTO (2026-07-17)
+### 4. Test sulle funzioni load-bearing — IMPLEMENTATO (2026-07-17)
 
 Implementato con Vitest (`vitest.config.ts` via `getViteConfig`, fixture e mock di
 `astro:content` in `tests/`): accoppiamento IT/EN, ereditarietà roadmap→blog, draft
@@ -49,7 +60,7 @@ Contesto originale: zero test nel repo. Non serve una suite: servono test mirati
 
 ## Priorità media
 
-### 5. Preflight più ricco — FATTO (2026-07-17)
+### 5. Preflight più ricco — IMPLEMENTATO (2026-07-17)
 
 Aggiunti quattro controlli a `scripts/preflight-article.mjs`:
 
@@ -59,7 +70,7 @@ Aggiunti quattro controlli a `scripts/preflight-article.mjs`:
 
 Nota di calibrazione: la banda "description ottimale 110-160" ipotizzata in analisi è stata **scartata** dopo la verifica: scattava su tutti gli 8 articoli reali (scritti volutamente più lunghi), quindi sarebbe stata rumore. Resta il solo range 50-250 che cattura le description davvero rotte.
 
-### 6. Anteprima dei draft per il gruppo di feedback — FATTO (2026-07-17)
+### 6. Anteprima dei draft per il gruppo di feedback — IMPLEMENTATO (2026-07-17)
 
 Implementato sulle build di anteprima di Cloudflare Workers Builds: ogni build di un
 branch diverso da `main` (es. le PR) include anche gli articoli `draft: true`, con
@@ -69,7 +80,7 @@ produzione resta identica. Logica centralizzata in `src/utils/preview.ts`
 feedback: aprire una PR col draft e condividere il Preview URL della build Workers.
 Il PDF (`scripts/generate-feedback-pdf.py`) resta come canale secondario.
 
-### 7. Web analytics minimale — FATTO (2026-07-17)
+### 7. Web analytics minimale — IMPLEMENTATO (2026-07-17)
 
 Integrato Cloudflare Web Analytics (privacy-first, no cookie, nessun banner). Il beacon è
 in `BaseLayout` e viene emesso **solo sul deploy di produzione reale**: escluso in dev e
@@ -92,7 +103,7 @@ React 19 + `@astrojs/react` esistono per una sola island (`MobileMenu.tsx`). Un 
 
 Con 4-8 articoli la ricerca è rumore. Fissare il trigger adesso per non ridiscuterlo: **oltre ~15 articoli pubblicati**, aggiungere Pagefind (statico, zero backend, i18n-aware). Prima, la pagina tag basta.
 
-### 10. Pulizia cartelle di lavorazione — FATTO (2026-07-17)
+### 10. Pulizia cartelle di lavorazione — IMPLEMENTATO (2026-07-17)
 
 I due documenti di lavorazione eseguiti (`roadmap_design_review.md`,
 `roadmap-page-implementation-plan.md`) spostati in `docs/archive/` con un README che ne
@@ -100,7 +111,7 @@ spiega lo stato; `docs/` resta ora solo fonte di verità viva (brand, editorial,
 podcast). `bakeoff/` era una cartella vuota e non tracciata: rimossa in locale (`personas/`
 e `feedback/` restano gitignorate, invariate).
 
-### 11. RSS a contenuto completo — FATTO (2026-07-17)
+### 11. RSS a contenuto completo — IMPLEMENTATO (2026-07-17)
 
 Verifica: i quattro feed (IT, EN, per-autore IT/EN) esponevano solo `description`. Scelta di
 Marco: **contenuto completo** con la ricetta ufficiale Astro (`markdown-it` + `sanitize-html`).

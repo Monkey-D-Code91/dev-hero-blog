@@ -23,6 +23,8 @@ npm-debug.log*
 # note personali (non condivise)
 personas/
 HANDOFF.md
+CLAUDE-IMPROVEMENTS.md
+HOW-TO-PLAN.md
 
 # PDF di revisione (artefatti generati, non versionati)
 feedback/

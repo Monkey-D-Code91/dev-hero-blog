@@ -1,0 +1,84 @@
+{
+  "skill_name": "roadmap-next",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "leggi la roadmap tecnica e implementa il prossimo punto",
+      "expected_output": "La skill classifica le voci di TECH-IMPROVEMENTS.md, misura i trigger sul repo, scopre che gli unici punti aperti (8 React, 9 ricerca) sono entrambi in attesa del loro trigger, e conclude che oggi non c'e' niente da implementare. Non apre nessun branch.",
+      "files": [],
+      "assertions": [
+        {"text": "La skill legge CLAUDE.md prima di agire"},
+        {"text": "Classifica le voci distinguendo concluse (marker IMPLEMENTATO) da aperte"},
+        {"text": "Conta gli articoli pubblicati per valutare il trigger del punto 9 invece di stimarlo"},
+        {"text": "Dichiara che il punto 9 non e' pronto perche' i pubblicati sono sotto la soglia di ~15"},
+        {"text": "Dichiara che il punto 8 non e' pronto perche' nessuno sta toccando la navbar"},
+        {"text": "Conclude esplicitamente che non c'e' niente da implementare e si ferma"},
+        {"text": "NON crea branch, NON modifica file di codice, NON apre PR"},
+        {"text": "NON ripiega su una voce dell'anti-roadmap o delle idee scartate"}
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "prendi la prossima idea da NEW-IDEAS e portala avanti",
+      "expected_output": "La skill riconosce che le idee 6 e 7 sono a trigger (publish-day EN, lancio podcast), che le voci sotto 'Idee da esplorare' vanno discusse e non implementate, e che le idee 2, 3 e 4 hanno un 'Resta da fare (Marco)' che e' azione umana, non lavoro riapribile.",
+      "files": [],
+      "assertions": [
+        {"text": "Non propone nessuna idea della sezione 'Idee valutate e scartate'"},
+        {"text": "Non propone come implementabili le voci sotto 'Idee da esplorare (meno mature, da discutere)'"},
+        {"text": "Riconosce 'Resta da fare (Marco)' come azione umana e non come voce aperta"},
+        {"text": "Se propone l'idea 6 (dev.to canonical) verifica prima se c'e' un publish-day EN in corso"},
+        {"text": "Chiede conferma prima di implementare qualsiasi cosa"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "qual e' il prossimo articolo da pubblicare? aggiorna la roadmap",
+      "expected_output": "La skill riconosce che si tratta della roadmap editoriale, non di un backlog tecnico, e instrada verso publish-article senza toccare niente.",
+      "files": [],
+      "assertions": [
+        {"text": "Riconosce che la richiesta riguarda docs/content-roadmap.md e la collection src/content/roadmap"},
+        {"text": "Instrada verso publish-article (o write-article) invece di procedere"},
+        {"text": "Non modifica TECH-IMPROVEMENTS.md ne' NEW-IDEAS.md"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "implementa il punto 9 di TECH-IMPROVEMENTS, la ricerca full-text",
+      "expected_output": "Marco chiede esplicitamente un punto il cui trigger non e' scattato. La skill segnala il conflitto con la soglia dichiarata nella voce e chiede conferma esplicita prima di procedere, invece di eseguire in silenzio o di rifiutare seccamente.",
+      "files": [],
+      "assertions": [
+        {"text": "Segnala che il trigger dichiarato (~15 articoli pubblicati) non e' scattato, con il numero reale"},
+        {"text": "Non esegue in silenzio ignorando la soglia"},
+        {"text": "Non rifiuta senza alternative: chiede conferma esplicita o propone di aggiornare la soglia nella voce"}
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "abbiamo appena finito la ricerca full-text, aggiorna il backlog",
+      "expected_output": "La skill aggiorna la voce con marker IMPLEMENTATO datato oggi, scrive un paragrafo di stato concreto e allinea la riga 'Stato al ...' in testa al file.",
+      "files": [],
+      "assertions": [
+        {"text": "Aggiunge il marker '— IMPLEMENTATO (YYYY-MM-DD)' con la data di oggi al titolo della voce"},
+        {"text": "Aggiunge un paragrafo che inizia con '**Stato**:' e cita file e componenti reali del repo"},
+        {"text": "Dichiara esplicitamente cosa e' rimasto fuori, se qualcosa e' rimasto fuori"},
+        {"text": "Aggiorna la riga 'Stato al ...' in testa al file con data ed elenco dei punti aperti"},
+        {"text": "Non usa i marker deprecati FATTO o RISOLTO"}
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "prossimo punto della roadmap tecnica: prendi il punto 8, sto rifacendo la navbar",
+      "expected_output": "Il trigger opportunistico e' scattato davvero. La skill verifica anche il vincolo dichiarato nella voce (island interattive future), propone con dimensione e file toccati, e dopo l'ok implementa su branch fino alla PR aggiornando il backlog.",
+      "files": [],
+      "assertions": [
+        {"text": "Riconosce che il trigger del punto 8 e' scattato perche' la navbar e' in lavorazione"},
+        {"text": "Verifica il vincolo dichiarato nella voce sulle island interattive future"},
+        {"text": "Propone con dimensione stimata e file toccati, e attende l'ok"},
+        {"text": "Dopo l'ok crea un branch con naming conforme (feat|fix|chore|docs|perf)/<slug>"},
+        {"text": "Esegue le verifiche di CLAUDE.md §3 (preflight, test, astro check, build)"},
+        {"text": "Aggiorna TECH-IMPROVEMENTS.md nella stessa PR"},
+        {"text": "Non usa gh pr merge --admin"}
+      ]
+    }
+  ]
+}

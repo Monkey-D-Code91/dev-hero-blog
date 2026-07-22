@@ -86,16 +86,21 @@ Il PDF (`scripts/generate-feedback-pdf.py`) resta come canale secondario. Vedi `
 
 ## Passo 5 — Commit e PR
 
-Mostra all'autore il diff sintetico e proponi:
+La coda git non si improvvisa qui: **passa alla skill `ship`**, che e' la fonte di verita' del
+processo (branch, staging esplicito, verifiche, commit, PR, CI, merge, riallineamento di `main`).
 
-```bash
-git checkout -b publish/<slug>
-git add src/content/blog src/content/roadmap src/assets/covers docs/content-roadmap.md [carousels/<slug>]
-git commit -m "feat(blog): publish <titolo IT>"
-```
+Quello che le consegni, specifico della pubblicazione:
 
-PR su GitHub con `gh pr create` (titolo = titolo dell'articolo, corpo con link IT ed EN attesi).
-Commit e push solo con l'ok esplicito dell'autore.
+- **branch**: `feat/publish-<slug>`;
+- **file da mettere in stage**: `src/content/blog`, `src/content/roadmap`, `src/assets/covers`,
+  `docs/content-roadmap.md`, ed eventualmente `carousels/<slug>`;
+- **commit**: `feat(blog): pubblica <titolo IT>`;
+- **corpo della PR**: titolo dell'articolo, link IT ed EN attesi, nota se il pezzo aveva vincoli
+  (es. ok del datore di lavoro) e come sono stati sciolti.
+
+Attenzione particolare al controllo sui contenuti sensibili del Passo 1 di `ship`: un articolo
+che racconta un caso reale e' esattamente il tipo di materiale che richiede l'ok del Product
+Owner prima del commit. Commit e push solo con l'ok esplicito dell'autore.
 
 ## Passo 6 — Bozza post LinkedIn
 

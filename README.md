@@ -61,6 +61,11 @@ Il flusso di scrittura e pubblicazione è guidato dalle skill Claude Code del re
 `add-author` (nuovo profilo autore IT+EN), `publish-article` (runbook del giorno di uscita),
 `podcast-repurpose` (kit episodio).
 
+Il lavoro sul repo è guidato da altre due skill: `roadmap-next` (prende il prossimo punto aperto
+da `TECH-IMPROVEMENTS.md` o `NEW-IDEAS.md` e lo porta fino alla PR) e `ship` (la coda git
+standard: branch, commit, PR, CI, merge). Le convenzioni vincolanti di progetto stanno in
+`CLAUDE.md`.
+
 ## CI
 
 Ogni PR esegue su GitHub Actions (`.github/workflows/ci.yml`): preflight editoriale su tutti
