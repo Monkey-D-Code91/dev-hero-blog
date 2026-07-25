@@ -19,6 +19,21 @@ Stato della pipeline calcolato dai file, in sola lettura: coppie IT/EN per `tran
 node scripts/status.mjs
 ```
 
+## check-translation-sync.mjs
+
+Rileva le coppie IT/EN disallineate nelle tre collection bilingui: blog (`translationKey`), authors (`authorKey`), roadmap (`arcKey`). Il preflight verifica che il gemello *esista* e che i conteggi dichiarati siano simmetrici; questo script risponde a un'altra domanda: le due lingue sono ancora la stessa cosa, o una e' stata modificata da sola dopo l'ultimo allineamento?
+
+Due segnali indipendenti. **Git**: il "punto di sync" e' l'ultimo commit che ha toccato entrambi i file; quello che e' successo a un solo lato dopo quel commit (commit o modifiche non ancora committate) e' il disallineamento da propagare. **Struttura**: heading, blocchi, code fence, link, immagini, chiavi e voci di lista del frontmatter, che non dipendono da git e intercettano il caso in cui un commit ha toccato entrambi i file per ragioni non correlate.
+
+Sola lettura, exit 0 salvo `--strict`: in CI e' informativo, perche' un disallineamento e' una decisione editoriale, non un errore di build. Richiede la storia git completa (in CI serve `fetch-depth: 0`); su un clone shallow lo dichiara e ripiega sul solo confronto strutturale. Il fix passa dalla skill `sync-translation`.
+
+```
+node scripts/check-translation-sync.mjs                          # tutte le coppie
+node scripts/check-translation-sync.mjs src/content/blog/it/<slug>.md
+node scripts/check-translation-sync.mjs --json                   # output per la skill
+node scripts/check-translation-sync.mjs --strict                 # exit 1 se c'e' drift
+```
+
 ## generate-og.mjs
 
 Genera `public/og-image.png` (1200x630), l'OG di default del sito (home, liste, autori).

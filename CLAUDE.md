@@ -20,6 +20,7 @@ Lingua di lavoro delle sessioni: **italiano**.
 | entrare nel progetto da zero | skill `onboarding` |
 | pianificare una feature nuova | `HOW-TO-PLAN.md` se presente, `NEW-IDEAS.md`, `TECH-IMPROVEMENTS.md` |
 | capire come sta messo il sito | ultimo report in `docs/audits/` + skill `site-audit` per rifarlo |
+| modificare un contenuto che esiste gia' in IT e EN | skill `sync-translation` (`node scripts/check-translation-sync.mjs`) |
 
 > **Attenzione:** `HANDOFF.md` è in `.gitignore` e `HOW-TO-PLAN.md` non è versionato, quindi
 > esistono solo sulla macchina di Marco. Se non li trovi, non sono spariti: non li hai mai avuti.
@@ -71,7 +72,8 @@ script diverge da lì, il bug è nel codice.
 - **Modifiche di codice non banali**: passa da `/code-review` prima di aprire la PR. Costa un
   messaggio, risparmia un fix post-deploy.
 - La CI (`.github/workflows/ci.yml`) esegue: preflight su tutti gli articoli, `npm test` (vitest),
-  `npx astro check`, `npm run build`, più `status.mjs` informativo.
+  `npx astro check`, `npm run build`, più `status.mjs` e `check-translation-sync.mjs` informativi
+  (non bloccano: un disallineamento IT/EN è una decisione editoriale, non un errore di build).
 
 ---
 
@@ -81,6 +83,10 @@ script diverge da lì, il bug è nel codice.
   dalla stessa chiave (`translationKey`, `authorKey`, `arcKey`). Mai pubblicare una lingua sola.
 - **Gli slug sono diversi tra IT ed EN** (`imparare-a-guidare-non-a-correre` /
   `learning-to-steer-not-to-race`): a legarli è la chiave nel frontmatter, non il nome del file.
+- **Il bilinguismo va mantenuto, non solo creato.** Se modifichi una lingua sola di un contenuto
+  già esistente in entrambe, la coppia è disallineata finché non propaghi: skill `sync-translation`,
+  rilevatore `node scripts/check-translation-sync.mjs`. Le due lingue vanno **nello stesso commit**:
+  il punto di sync del rilevamento successivo è quel commit.
 - Traduzione **idiomatica, non letterale**. In IT le ripetizioni ravvicinate si alleggeriscono,
   in EN no (ripetere il termine chiave dà coesione).
 - **Niente trattini lunghi (—)** in nessun testo del brand: articoli IT/EN, newsletter, copy del
@@ -118,6 +124,7 @@ npm test                                        # vitest
 npx astro check                                 # type check
 node scripts/preflight-article.mjs --all        # controlli editoriali (bloccanti in CI)
 node scripts/status.mjs                         # stato pipeline, sola lettura
+node scripts/check-translation-sync.mjs         # coppie IT/EN disallineate, sola lettura
 node scripts/generate-cover.mjs <articolo.md>   # cover 1600x836
 node scripts/generate-carousel.mjs <articolo.md># carousel LinkedIn 1080x1350 + PDF
 node scripts/generate-og.mjs                    # OG di default del sito
@@ -165,8 +172,11 @@ ferma il dev server, `rm -rf node_modules/.vite .astro`, riavvia.
 
 **Editoriali:** `onboarding` (hub per chi è nuovo) · `write-article` (co-scrittura dalla prima
 idea) · `refine-article` (tono e stile) · `publish-article` (runbook del giorno di uscita) ·
-`add-author` (nuovo profilo autore IT+EN) · `podcast-repurpose` (kit episodio) ·
-`design` (solo per il fuori standard).
+`add-author` (nuovo profilo autore IT+EN) · `sync-translation` (manutenzione delle coppie IT/EN
+dopo una modifica) · `podcast-repurpose` (kit episodio) · `design` (solo per il fuori standard).
+
+Le skill editoriali si dividono per momento: `write-article` e `add-author` **creano** la coppia
+bilingue, `sync-translation` la **mantiene** quando una sola lingua viene toccata dopo.
 
 **Di processo:** `roadmap-next` (prende il prossimo punto aperto da `TECH-IMPROVEMENTS.md` o
 `NEW-IDEAS.md`, valuta i trigger, implementa e aggiorna il backlog) · `site-audit` (controllo

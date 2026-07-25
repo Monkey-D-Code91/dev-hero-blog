@@ -1,0 +1,102 @@
+{
+  "skill_name": "sync-translation",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "ho corretto un passaggio nell'articolo italiano, aggiorna l'inglese",
+      "expected_output": "Un articolo pubblicato ha un paragrafo riscritto in IT e non committato. La skill misura con lo script, legge il diff, propaga solo quel passaggio in EN e passa a ship con entrambi i file nello stesso commit.",
+      "files": [],
+      "assertions": [
+        {"text": "Esegue node scripts/check-translation-sync.mjs invece di improvvisare comandi git"},
+        {"text": "Trova il gemello tramite translationKey, non per somiglianza del nome file"},
+        {"text": "Legge il diff dal punto di sync e poi entrambi i file per intero"},
+        {"text": "Propaga SOLO il passaggio cambiato: non ritraduce l'articolo da capo"},
+        {"text": "Chiede l'ok sul piano di propagazione prima di modificare"},
+        {"text": "Non tocca translationKey, pubDate, draft, focus"},
+        {"text": "Consegna a ship con IT ed EN nello stesso commit"}
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "allinea le traduzioni",
+      "expected_output": "Il diff IT contiene solo sostituzioni di sinonimi introdotte per evitare ripetizioni ravvicinate. La skill riconosce che in inglese non c'e' niente da propagare e lo dichiara invece di forzare varianti in EN.",
+      "files": [],
+      "assertions": [
+        {"text": "Classifica la modifica come cosmetica di una lingua sola"},
+        {"text": "NON introduce sinonimi in EN per rispecchiare la variazione italiana"},
+        {"text": "Cita l'asimmetria delle ripetizioni tra IT ed EN come motivo"},
+        {"text": "Dichiara esplicitamente cosa non propaga, perche' non sembri una dimenticanza"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "sistema il disallineamento di questo articolo",
+      "expected_output": "Lo script restituisce both-changed: IT ed EN sono state modificate separatamente dopo l'ultimo commit comune. La skill non sceglie da sola quale versione vince.",
+      "files": [],
+      "assertions": [
+        {"text": "Riconosce lo stato both-changed e non procede in autonomia"},
+        {"text": "Mostra entrambi i diff a Marco"},
+        {"text": "Chiede quale versione fa testo o se vanno fuse"},
+        {"text": "Motiva la fermata dicendo che scegliere da solo cancellerebbe del lavoro"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "il titolo italiano e' cambiato, aggiorna l'inglese e rinomina i file cosi' combaciano",
+      "expected_output": "L'articolo e' pubblicato. La skill traduce il nuovo titolo ma rifiuta il rename, spiegando che lo slug e' l'URL pubblico e che gli slug IT/EN sono diversi per scelta.",
+      "files": [],
+      "assertions": [
+        {"text": "Traduce il nuovo title in EN in modo idiomatico"},
+        {"text": "NON rinomina i file di un contenuto pubblicato"},
+        {"text": "Spiega che gli slug IT ed EN sono diversi per progetto e che a legarli e' la chiave nel frontmatter"},
+        {"text": "Segnala che un cambio di slug su un pezzo pubblicato richiede un redirect ed e' una decisione di Marco"}
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "controlla se le traduzioni sono allineate",
+      "expected_output": "Tutte le coppie risultano ok. La skill riporta l'esito e si ferma, senza cercare micro-differenze stilistiche da sistemare.",
+      "files": [],
+      "assertions": [
+        {"text": "Esegue lo script e riporta l'esito"},
+        {"text": "Si ferma senza modificare file ne' creare branch"},
+        {"text": "NON propone ritocchi stilistici per avere qualcosa da fare"}
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "ho aggiornato un dato sbagliato nell'articolo IT dopo la pubblicazione, propaga in EN",
+      "expected_output": "La correzione e' una revisione sostanziale su un pezzo gia' pubblicato. Oltre a propagare, la skill segnala che va dichiarata al lettore con una voce in revisions, in entrambe le lingue.",
+      "files": [],
+      "assertions": [
+        {"text": "Riconosce che si tratta di una revisione sostanziale e non di semplice manutenzione"},
+        {"text": "Propone una voce revisions datata in IT ed EN, nella voce dell'autore"},
+        {"text": "Verifica la simmetria richiesta dal preflight sul numero di voci"},
+        {"text": "Chiede conferma a Marco perche' e' una decisione editoriale"}
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "aggiorna la roadmap inglese, ho aggiunto una tappa in italiano",
+      "expected_output": "Un arco della collection roadmap ha una tappa in piu' in IT. La skill replica la tappa in EN traducendo i campi testuali e copiando identici quelli che sono chiavi o dati.",
+      "files": [],
+      "assertions": [
+        {"text": "Lavora sulla collection roadmap accoppiando i file con arcKey"},
+        {"text": "Copia identici postTranslationKey, date, status, authorName, collaborator, order, numeral"},
+        {"text": "Traduce solo i campi testuali (title della tappa di pipeline, lead, period, signature)"},
+        {"text": "NON traduce il postTranslationKey"}
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "controlla l'allineamento",
+      "expected_output": "Lo script gira su un clone shallow e restituisce lo stato unknown: la storia git non e' interrogabile. La skill non spaccia il confronto strutturale per una verifica completa.",
+      "files": [],
+      "assertions": [
+        {"text": "Dichiara che la storia git non e' interrogabile e perche'"},
+        {"text": "NON afferma che le coppie sono allineate: dice che ha verificato solo la struttura"},
+        {"text": "Indica che in CI serve fetch-depth: 0"}
+      ]
+    }
+  ]
+}

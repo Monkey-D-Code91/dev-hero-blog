@@ -1,6 +1,7 @@
 # CI di The First Draft: ogni PR (e ogni push su main) deve superare
-# il preflight editoriale e la build Astro. `status.mjs` è informativo
-# (non esce mai con codice ≠ 0): fotografa la pipeline nel log del job.
+# il preflight editoriale e la build Astro. `status.mjs` e
+# `check-translation-sync.mjs` sono informativi (non escono mai con codice ≠ 0):
+# fotografano nel log del job lo stato della pipeline e l'allineamento IT/EN.
 #
 # Gira su ubuntu-latest anche per avere un ambiente Linux riproducibile:
 # npm installa da solo i binari nativi giusti (es. @resvg/resvg-js),
@@ -17,7 +18,11 @@ jobs:
     name: Preflight & build
     runs-on: ubuntu-latest
     steps:
+      # fetch-depth: 0 serve a check-translation-sync.mjs: il "punto di sync" di
+      # una coppia IT/EN si calcola sulla storia, che in un clone shallow non c'è.
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v5
         with:
@@ -41,3 +46,6 @@ jobs:
 
       - name: Stato pipeline (informativo)
         run: node scripts/status.mjs
+
+      - name: Allineamento traduzioni IT/EN (informativo)
+        run: node scripts/check-translation-sync.mjs
