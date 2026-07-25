@@ -8,7 +8,7 @@ authors: ["marco-mariotti"]
 tags: ["ai", "generated-code", "professional-growth", "mentoring"]
 cover: "../../../assets/covers/learning-to-steer-not-to-race.png"
 coverAlt: "The First Draft cover: three overlapping circles (tech, human and AI) meeting at a bright point, with the title 'Learning to Steer, Not to Race' underlined by hand like a proofreading mark."
-draft: true
+draft: false
 ---
 
 There's one thing that, since AI entered my daily work, I find harder to hold back: the urge to do more. The extra feature nobody asked for, the refactor we've been putting off for months and that "while I'm at it" I could fix now, the piece of architecture I could make more elegant. It isn't laziness, it's the opposite: it's the urge to build, to leave things better than I found them. A good drive, and that's exactly why it's hard to govern: I don't want to switch it off, I want to give it a direction.

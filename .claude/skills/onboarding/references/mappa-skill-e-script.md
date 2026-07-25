@@ -14,6 +14,17 @@ Orientamento rapido: quale strumento per quale bisogno. L'onboarding **instrada*
 | **podcast-repurpose** | Dall'articolo al kit episodio podcast (scaletta parlata, YouTube, Spotify) per pubblico non tech | "prepariamo la puntata", "show notes" |
 | **design** | Design "fuori standard" (banner di canale, esperimenti); deve rispettare `docs/brand.md` | grafica oltre gli script cover/carousel/OG |
 
+## Skill di processo
+
+| Skill | A cosa serve | Quando instradare |
+|---|---|---|
+| **roadmap-next** | Prende il prossimo punto aperto da `TECH-IMPROVEMENTS.md` o `NEW-IDEAS.md`, valuta i trigger, implementa e aggiorna il backlog | "cosa c'è da fare adesso", "prossimo punto della roadmap" |
+| **site-audit** | Controllo periodico del sito su checklist stabile (a11y, SEO, performance, leggibilità, brand, entry point); report datato in `docs/audits/`. **Sola lettura** | "audit del sito", "come sta messo", "cosa è peggiorato" |
+| **ship** | La coda git: branch, staging esplicito, commit in italiano, PR, CI, merge, riallineamento di `main`. Fonte di verità della coda git | "chiudi", "fai la PR", "shippa" |
+
+> Le tre si passano il lavoro in catena: `site-audit` trova e non tocca, `roadmap-next` sceglie e
+> implementa, `ship` chiude. Nessuna delle tre fa il mestiere delle altre.
+
 > Nota di routing: per gli asset standard di un articolo parti sempre dagli **script** dedicati
 > (cover, carousel, OG): sono deterministici e allineati al brand. La skill `design` è per il
 > "fuori standard", e la fonte di verità del brand è `docs/brand.md`.
@@ -38,6 +49,7 @@ Orientamento rapido: quale strumento per quale bisogno. L'onboarding **instrada*
 | `docs/editorial-guidelines.md` | Regole editoriali e di stile (fonte canonica) |
 | `docs/brand.md` | Brand: pilastri, voce, palette, motivi visivi, formati (fonte canonica) |
 | `docs/content-roadmap.md` | Roadmap editoriale, filtro, ordine di pubblicazione, track collaboratori |
+| `docs/audits/` | Storico degli audit del sito, con il formato del report (`README.md`) |
 | `src/content.config.ts` | Schema dei contenuti (blog + authors), regole di validazione |
 | `scripts/README.md` | Documentazione degli script di pubblicazione |
 

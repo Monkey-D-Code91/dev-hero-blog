@@ -2,7 +2,7 @@
 
 _Analisi del 2026-07-17. Proposte ordinate per priorità; ogni voce dice perché serve, non solo cosa fare. Da spuntare o scartare esplicitamente, come la roadmap editoriale._
 
-**Stato al 2026-07-22:** implementati i punti 1-7, 10, 11 (CI, README, zombie, test, anteprima draft, preflight, analytics, pulizia docs, RSS full-content). Aperti, **entrambi in attesa del loro trigger**: **8** (rimuovere React, alla prima volta che si tocca la navbar) e **9** (ricerca Pagefind, oltre ~15 articoli pubblicati). Per l'analytics resta il solo passo manuale di Marco: incollare il token Cloudflare.
+**Stato al 2026-07-22:** implementati i punti 1-7, 10, 11 (CI, README, zombie, test, anteprima draft, preflight, analytics, pulizia docs, RSS full-content). Aperti in attesa del loro trigger: **8** (rimuovere React, alla prima volta che si tocca la navbar) e **9** (ricerca Pagefind, oltre ~15 articoli pubblicati). Aperti e pronti da fare: **12, 13, 14**, trovati dalla checklist di `site-audit` il 2026-07-22. Per l'analytics resta il solo passo manuale di Marco: incollare il token Cloudflare.
 
 > **Convenzione di stato** (letta dalla skill `roadmap-next`, vedi `.claude/skills/roadmap-next/`).
 > **Il marker `— IMPLEMENTATO (YYYY-MM-DD)` nel titolo `###` è il segnale autorevole**: le voci
@@ -119,6 +119,56 @@ Il corpo dell'articolo viene reso in `<content:encoded>`; `typographer` è OFF d
 (non deve convertire `--` in trattino lungo, vietato dalle linee guida). Logica condivisa in
 `src/utils/rss.ts` (`renderPostContent` + `toRssItem`), che ha anche deduplicato la costruzione
 dell'item nei quattro endpoint. Coperto da test.
+
+## Trovati dalla checklist di `site-audit` (2026-07-22)
+
+Emersi mentre si validavano i comandi della checklist della skill `site-audit` sulla `dist/`
+esistente, quindi **prima** del primo report formale in `docs/audits/`. Ogni voce porta l'ID del
+finding: quando l'audit girerà davvero, questi ID saranno quelli con cui li ritroverà.
+
+### 12. Trattini lunghi nel copy del sito (`BRAND-emdash-copy-sito`) — severità alta
+
+`CLAUDE.md` §4 vieta il trattino lungo in **tutto** il copy del brand, non nei soli articoli. Ma
+l'unico controllo automatico che esiste, `preflight-article.mjs`, guarda solo i file degli
+articoli: title, meta description, `og:title` e `aria-label` non li vede nessuno. Risultato:
+**29 pagine su 33** della build lo contengono fuori dai commenti HTML.
+
+```bash
+for f in $(find dist -name "*.html"); do perl -0pe 's/<!--.*?-->//gs' "$f" | grep -q '—' && echo "$f"; done
+```
+
+Casi tipici: `<title>First Draft — Blog tech & AI</title>` e la sua `og:title`, i title delle
+pagine tag (`#ai — Blog — First Draft`), il title della roadmap, `aria-label={`${name} — ...`}`
+in `src/components/landing/AuthorCard.astro:26`. È il testo che finisce nei risultati di ricerca
+e nelle anteprime social, cioè il primo contatto con il brand.
+
+Il fix nei sorgenti è meccanico (due punti, virgole, parentesi). La parte che conta davvero è la
+seconda: **un controllo automatico che impedisca il ritorno**, o come estensione di
+`preflight-article.mjs` sui sorgenti `.astro`/`.ts`, o come test su `dist/` in `tests/`. Senza
+quello si ripresenta al primo componente nuovo, e l'audit successivo lo registrerà come
+regressione.
+
+### 13. Pagina di lavoro `public/logos/` pubblicata in produzione (`ENTRY-pagina-di-servizio-pubblica`) — severità media
+
+`dist/logos/index.html` viene deployato ed è raggiungibile. È una pagina di confronto tra le
+opzioni di logo: nessun canonical, nessuna description, nessun OG, nessun hreflang, e mostra
+anche le alternative scartate quando l'unico logo ufficiale è `fd-3-nib.svg` (`CLAUDE.md` §5).
+
+```bash
+for f in $(find dist -name "*.html"); do grep -q 'rel="canonical"' "$f" || echo "$f"; done
+```
+
+Decisione binaria, non un lavoro: o è una pagina pubblica e allora va curata come le altre, o è
+materiale di lavoro e allora esce dal deploy (fuori da `public/`, o esclusa dalla build). La
+seconda sembra quella giusta, ma è una scelta di Marco.
+
+### 14. Il title di `/blog` dice "Marco Mariotti", non "First Draft" (`SEO-title-incoerente`) — severità media
+
+`dist/blog/index.html` ha `<title>Blog — Marco Mariotti</title>`, residuo del sito di personal
+branding da cui il progetto è partito. Tutto il resto del sito si presenta come First Draft, e la
+pagina in questione è l'indice degli articoli: è la più probabile porta d'ingresso da ricerca dopo
+i singoli pezzi. Vale la pena passare in rassegna i title di tutte le pagine non-articolo nella
+stessa occasione, non solo questo.
 
 ## Cosa NON fare (anti-roadmap tecnica)
 

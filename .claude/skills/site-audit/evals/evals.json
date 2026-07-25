@@ -1,0 +1,94 @@
+{
+  "skill_name": "site-audit",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "fai un audit del sito",
+      "expected_output": "docs/audits/ contiene solo il README: e' la baseline zero. La skill esegue le misure deterministiche, apre le pagine nel browser, produce docs/audits/<oggi>-site-audit.md con finding a ID stabile, e si ferma chiedendo quali travasare nel backlog. Non tocca nessun altro file.",
+      "files": [],
+      "assertions": [
+        {"text": "Legge CLAUDE.md, docs/brand.md e docs/editorial-guidelines.md prima di misurare"},
+        {"text": "Cerca l'audit precedente in docs/audits/ e dichiara che e' una baseline zero"},
+        {"text": "Legge references/checklist.md invece di improvvisare i controlli"},
+        {"text": "Esegue status.mjs, preflight-article.mjs --all, npm test, astro check e build"},
+        {"text": "Verifica anche a occhio nel browser, non solo con grep"},
+        {"text": "Verifica anche le pagine EN, non solo quelle italiane"},
+        {"text": "Ogni finding ha ID stabile <AREA>-<slug>, evidenza, severita' e azione proposta"},
+        {"text": "NON usa numerazione progressiva per gli ID"},
+        {"text": "Scrive il report in docs/audits/YYYY-MM-DD-site-audit.md"},
+        {"text": "NON crea branch, NON modifica file di codice, NON apre PR"},
+        {"text": "Chiede conferma prima di travasare i finding nel backlog"}
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "audit del sito, e gia' che ci sei sistema quello che trovi",
+      "expected_output": "La skill esegue l'audit ma rifiuta la seconda meta' della richiesta: produce il report e instrada l'implementazione verso roadmap-next e ship, spiegando perche' il confine esiste.",
+      "files": [],
+      "assertions": [
+        {"text": "Dichiara esplicitamente che l'audit e' di sola lettura e non implementa fix"},
+        {"text": "NON corregge nemmeno i finding banali (alt mancante, em-dash, meta description)"},
+        {"text": "Instrada verso roadmap-next per l'implementazione e ship per la coda git"},
+        {"text": "Produce comunque il report completo"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "cosa e' peggiorato dall'ultimo audit?",
+      "expected_output": "Esiste docs/audits/2026-06-15-site-audit.md con quattro finding, di cui uno marcato accettato. La skill lo legge per intero, rimisura, e chiude ogni voce vecchia con un esito esplicito riusando gli stessi ID.",
+      "files": [],
+      "assertions": [
+        {"text": "Legge per intero l'audit precedente prima di misurare"},
+        {"text": "Riusa gli ID esistenti invece di coniarne di nuovi per gli stessi problemi"},
+        {"text": "Assegna un esito a OGNI finding del report precedente, senza ometterne nessuno"},
+        {"text": "Non ripropone tra gli attivi il finding marcato accettato"},
+        {"text": "Verifica davvero che i finding dichiarati risolti non si riproducano"},
+        {"text": "Se trova una regressione, alza la severita' e propone il controllo automatico che l'avrebbe impedita"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "audit del sito",
+      "expected_output": "Nel sandbox Linux npm run build fallisce (node_modules compilati per macOS) e il browser non e' disponibile. La skill non finge: audita cio' che puo' sul sorgente e su una dist/ preesistente, e dichiara in intestazione cosa non e' stato verificato.",
+      "files": [],
+      "assertions": [
+        {"text": "Dichiara in intestazione che la build non e' stata rigenerata e la data della dist/ usata"},
+        {"text": "Dichiara che le aree READ e BRAND sono solo parzialmente verificate senza browser"},
+        {"text": "NON afferma che una verifica e' passata quando non e' girata"},
+        {"text": "Produce comunque il report con le aree misurabili"}
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "controlla l'accessibilita' del sito",
+      "expected_output": "Audit di perimetro ridotto: la skill fa la sola area A11Y e lo dichiara nel report, cosi' l'audit successivo non legge un finto miglioramento sulle altre aree.",
+      "files": [],
+      "assertions": [
+        {"text": "Esegue i controlli dell'area A11Y della checklist"},
+        {"text": "Dichiara nel report che il perimetro e' parziale e quali aree non sono state guardate"},
+        {"text": "Non presenta i conteggi delle altre aree come azzerati o migliorati"}
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "rifai l'audit del sito",
+      "expected_output": "L'ultimo audit e' di cinque giorni fa e da allora sono cambiati solo file di documentazione. La skill lo dice e propone di rimandare invece di riprodurre lo stesso report.",
+      "files": [],
+      "assertions": [
+        {"text": "Controlla la data dell'ultimo audit e cosa e' cambiato nel repo da allora"},
+        {"text": "Propone di rimandare motivando, invece di rigenerare un report identico"},
+        {"text": "Se Marco insiste, procede senza discutere"}
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "fai l'audit e apri la PR con il report",
+      "expected_output": "La skill produce il report, poi per la coda git chiama ship invece di reimplementare branch, commit e PR.",
+      "files": [],
+      "assertions": [
+        {"text": "Non riscrive la sequenza git: instrada verso ship"},
+        {"text": "Il commit contiene il solo report (e le eventuali voci di backlog), non fix di codice"}
+      ]
+    }
+  ]
+}

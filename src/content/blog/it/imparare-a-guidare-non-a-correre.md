@@ -8,7 +8,7 @@ authors: ["marco-mariotti"]
 tags: ["ai", "codice-generato", "crescita-professionale", "mentoring"]
 cover: "../../../assets/covers/imparare-a-guidare-non-a-correre.png"
 coverAlt: "Copertina di The First Draft: tre cerchi sovrapposti (tech, human e AI) che si incontrano in un punto luminoso, con il titolo 'Imparare a guidare, non a correre' sottolineato a mano come una correzione di bozza."
-draft: true
+draft: false
 ---
 
 C'è una cosa che, da quando l'AI è entrata nel mio lavoro quotidiano, faccio più fatica a tenere a freno: la voglia di fare di più. La feature in più che nessuno aveva chiesto, il refactor che rimandiamo da mesi e che "già che ci sono" potrei sistemare adesso, il pezzo di architettura che potrei rendere più elegante. Non è pigrizia, è l'opposto: è il desiderio di costruire, di lasciare le cose meglio di come le ho trovate. Una spinta buona, ed è proprio per questo che è difficile da governare: non voglio spegnerla, voglio darle una direzione.

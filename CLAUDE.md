@@ -19,6 +19,7 @@ Lingua di lavoro delle sessioni: **italiano**.
 | capire "dove eravamo rimasti" | `node scripts/status.mjs` (fatti) + `HANDOFF.md` se presente (decisioni) |
 | entrare nel progetto da zero | skill `onboarding` |
 | pianificare una feature nuova | `HOW-TO-PLAN.md` se presente, `NEW-IDEAS.md`, `TECH-IMPROVEMENTS.md` |
+| capire come sta messo il sito | ultimo report in `docs/audits/` + skill `site-audit` per rifarlo |
 
 > **Attenzione:** `HANDOFF.md` è in `.gitignore` e `HOW-TO-PLAN.md` non è versionato, quindi
 > esistono solo sulla macchina di Marco. Se non li trovi, non sono spariti: non li hai mai avuti.
@@ -168,9 +169,14 @@ idea) · `refine-article` (tono e stile) · `publish-article` (runbook del giorn
 `design` (solo per il fuori standard).
 
 **Di processo:** `roadmap-next` (prende il prossimo punto aperto da `TECH-IMPROVEMENTS.md` o
-`NEW-IDEAS.md`, valuta i trigger, implementa e aggiorna il backlog) · `ship` (la coda git:
-branch, staging esplicito, commit, PR, CI, merge, riallineamento di `main`). `ship` è la **fonte
-di verità della coda git**: le altre skill la richiamano invece di riscriverla.
+`NEW-IDEAS.md`, valuta i trigger, implementa e aggiorna il backlog) · `site-audit` (controllo
+periodico del sito su checklist stabile, report datato in `docs/audits/`, **sola lettura**) ·
+`ship` (la coda git: branch, staging esplicito, commit, PR, CI, merge, riallineamento di `main`).
+`ship` è la **fonte di verità della coda git**: le altre skill la richiamano invece di riscriverla.
+
+Le tre skill di processo si passano il lavoro in catena e non si sovrappongono: `site-audit`
+trova e non tocca, `roadmap-next` sceglie e implementa, `ship` chiude. Se una delle tre inizia a
+fare il mestiere di un'altra, la divergenza è un bug: si corregge la skill.
 
 Usa la skill invece di andare a memoria. Se una skill è sbagliata o incompleta, correggila:
 è la fonte di verità del processo, non un promemoria.
