@@ -11,6 +11,7 @@ Orientamento rapido: quale strumento per quale bisogno. L'onboarding **instrada*
 | **write-article** | Metodo di co-scrittura: dal materiale reale alla bozza completa, filtro editoriale come gate | "ho un'idea per un articolo", "scriviamo il prossimo pezzo" |
 | **refine-article** | Rifinire tono/stile di una bozza, tradurla e salvarla in IT+EN con frontmatter, preflight e cover | "rifinisci questo pezzo", "sistema il tono" |
 | **publish-article** | Runbook del giorno di pubblicazione: preflight, draft off, build, roadmap, PR, post LinkedIn | "pubblica l'articolo", "esce il pezzo oggi" |
+| **sync-translation** | Manutenzione delle coppie IT/EN: quando modifichi una lingua sola di un contenuto già bilingue, trova il gemello, misura il disallineamento e propaga in traduzione idiomatica | "ho modificato l'italiano, aggiorna l'inglese", "allinea le traduzioni" |
 | **podcast-repurpose** | Dall'articolo al kit episodio podcast (scaletta parlata, YouTube, Spotify) per pubblico non tech | "prepariamo la puntata", "show notes" |
 | **design** | Design "fuori standard" (banner di canale, esperimenti); deve rispettare `docs/brand.md` | grafica oltre gli script cover/carousel/OG |
 
@@ -24,6 +25,10 @@ Orientamento rapido: quale strumento per quale bisogno. L'onboarding **instrada*
 
 > Le tre si passano il lavoro in catena: `site-audit` trova e non tocca, `roadmap-next` sceglie e
 > implementa, `ship` chiude. Nessuna delle tre fa il mestiere delle altre.
+
+> Nota di routing sulle skill editoriali: `write-article` e `add-author` **creano** la coppia
+> bilingue, `sync-translation` la **mantiene** quando una sola lingua viene toccata dopo. Se una
+> modifica riguarda un contenuto già esistente in IT e EN, la skill giusta è la terza.
 
 > Nota di routing: per gli asset standard di un articolo parti sempre dagli **script** dedicati
 > (cover, carousel, OG): sono deterministici e allineati al brand. La skill `design` è per il
@@ -39,6 +44,7 @@ Orientamento rapido: quale strumento per quale bisogno. L'onboarding **instrada*
 | `generate-feedback-pdf.py` | PDF "bozza per revisione" per il gruppo di feedback | `python3 scripts/generate-feedback-pdf.py <articolo.md> [out.pdf]` |
 | `preflight-article.mjs` | Controllo editoriale/strutturale di una coppia IT+EN (bloccante se errori) | `node scripts/preflight-article.mjs <articolo.md>` \| `--all` |
 | `status.mjs` | Stato pipeline: coppie, draft, asset, coerenza roadmap/blog (sola lettura) | `node scripts/status.mjs` |
+| `check-translation-sync.mjs` | Coppie IT/EN disallineate nelle tre collection bilingui (sola lettura, warning in CI) | `node scripts/check-translation-sync.mjs [file] [--json]` |
 
 ## Documenti chiave del repo
 
