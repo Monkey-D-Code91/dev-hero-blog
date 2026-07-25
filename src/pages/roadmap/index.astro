@@ -6,6 +6,7 @@ import Roadmap from "../../components/roadmap/Roadmap.astro";
 import { getResolvedRoadmap } from "../../utils/roadmap";
 import { buildRoadmapSchema } from "../../utils/structuredData";
 import { useTranslations } from "../../i18n/utils";
+import { BLOG } from "../../config";
 
 const lang = "it" as const;
 const t = useTranslations(lang);
@@ -27,7 +28,7 @@ const ogImage = new URL("/og/roadmap/it.png", Astro.site).toString();
 ---
 
 <BaseLayout
-  title={`${t.roadmap.heading} — First Draft`}
+  title={`${t.roadmap.heading} · ${BLOG.name}`}
   description={t.roadmap.intro}
   lang="it"
   path="/roadmap/"

@@ -9,7 +9,7 @@ import { BLOG } from "../../config";
 const allAuthors = await getCollection("authors");
 const itAuthors = allAuthors.filter((a) => a.id.startsWith("it/"));
 
-const title = `Autori — ${BLOG.name}`;
+const title = `Autori · ${BLOG.name}`;
 const description = `Tutti gli autori di ${BLOG.name}.`;
 ---
 

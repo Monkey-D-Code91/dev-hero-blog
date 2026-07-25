@@ -2,7 +2,7 @@
 
 _Analisi del 2026-07-17. Proposte ordinate per priorità; ogni voce dice perché serve, non solo cosa fare. Da spuntare o scartare esplicitamente, come la roadmap editoriale._
 
-**Stato al 2026-07-22:** implementati i punti 1-7, 10, 11 (CI, README, zombie, test, anteprima draft, preflight, analytics, pulizia docs, RSS full-content). Aperti in attesa del loro trigger: **8** (rimuovere React, alla prima volta che si tocca la navbar) e **9** (ricerca Pagefind, oltre ~15 articoli pubblicati). Aperti e pronti da fare: **12, 13, 14**, trovati dalla checklist di `site-audit` il 2026-07-22. Per l'analytics resta il solo passo manuale di Marco: incollare il token Cloudflare.
+**Stato al 2026-07-25:** implementati i punti 1-7, 10, 11 (CI, README, zombie, test, anteprima draft, preflight, analytics, pulizia docs, RSS full-content). Aperti in attesa del loro trigger: **8** (rimuovere React, alla prima volta che si tocca la navbar) e **9** (ricerca Pagefind, oltre ~15 articoli pubblicati). Chiusi il 2026-07-25: **12** (trattini lunghi nel copy, con guardia automatica) e **14** (title di /blog). Aperto e pronto da fare: **13** (pagina di lavoro `public/logos/` in produzione), che e' una decisione binaria di Marco. Per l'analytics resta il solo passo manuale di Marco: incollare il token Cloudflare.
 
 > **Convenzione di stato** (letta dalla skill `roadmap-next`, vedi `.claude/skills/roadmap-next/`).
 > **Il marker `— IMPLEMENTATO (YYYY-MM-DD)` nel titolo `###` è il segnale autorevole**: le voci
@@ -126,7 +126,7 @@ Emersi mentre si validavano i comandi della checklist della skill `site-audit` s
 esistente, quindi **prima** del primo report formale in `docs/audits/`. Ogni voce porta l'ID del
 finding: quando l'audit girerà davvero, questi ID saranno quelli con cui li ritroverà.
 
-### 12. Trattini lunghi nel copy del sito (`BRAND-emdash-copy-sito`) — severità alta
+### 12. Trattini lunghi nel copy del sito (`BRAND-emdash-copy-sito`) — severità alta — IMPLEMENTATO (2026-07-25)
 
 `CLAUDE.md` §4 vieta il trattino lungo in **tutto** il copy del brand, non nei soli articoli. Ma
 l'unico controllo automatico che esiste, `preflight-article.mjs`, guarda solo i file degli
@@ -148,6 +148,14 @@ seconda: **un controllo automatico che impedisca il ritorno**, o come estensione
 quello si ripresenta al primo componente nuovo, e l'audit successivo lo registrerà come
 regressione.
 
+**Stato**: corrette **24 occorrenze in 21 file** e, soprattutto, aggiunta la guardia che impedisce il ritorno: `scripts/check-copy.mjs` (sola lettura, exit 1 sulle violazioni) piu' `tests/copy-guard.test.ts`, quindi **bloccante in CI** attraverso `npm test`. A differenza del drift IT/EN, un trattino lungo nel copy non e' una decisione editoriale ma una violazione deterministica di `CLAUDE.md` §4: bloccare e' corretto.
+
+Tre scelte. (1) **Controllo sui sorgenti, non su `dist/`**: in CI `npm test` gira **prima** di `npm run build`, quindi un controllo su `dist/` leggerebbe una build vecchia o assente. (2) **I commenti di codice non sono violazioni** e vengono rimossi prima di cercare (JSDoc, blocco, riga, HTML): dei 62 trattini presenti nei sorgenti, 38 erano commenti. Lo stripping dei commenti di riga scatta solo quando `//` apre la riga, altrimenti un `https://` dentro una stringa troncherebbe la riga e nasconderebbe violazioni vere; c'e' un test apposta. (3) **Solo l'em dash**: il trattino medio (–) e' stato escluso di proposito, perche' nei range di date ("Ott 2024 – Oggi") e' la forma tipograficamente corretta e vietarlo produrrebbe solo falsi positivi. Resta il buco teorico di chi scrive – al posto di —: se capitasse, si aggiunge una riga a `FORBIDDEN`.
+
+Come separatore nei title e' stato scelto il **punto mediano** (`First Draft · Blog tech & AI`), che e' gia' il segno del brand (la triade tech · human · AI). Eccezione: nell'`aria-label` di `AuthorCard` si usa la **virgola**, perche' il punto mediano viene letto male dagli screen reader. Nella prosa (bio, meta description) si usano due punti o virgola, come prescrive `CLAUDE.md` §4.
+
+**Non fatto** di proposito: gli articoli non sono toccati, li copre gia' `preflight-article.mjs`. La riga 1 della checklist di `site-audit` e' stata aggiornata per puntare al controllo automatico invece che al grep manuale su `dist/`.
+
 ### 13. Pagina di lavoro `public/logos/` pubblicata in produzione (`ENTRY-pagina-di-servizio-pubblica`) — severità media
 
 `dist/logos/index.html` viene deployato ed è raggiungibile. È una pagina di confronto tra le
@@ -162,13 +170,17 @@ Decisione binaria, non un lavoro: o è una pagina pubblica e allora va curata co
 materiale di lavoro e allora esce dal deploy (fuori da `public/`, o esclusa dalla build). La
 seconda sembra quella giusta, ma è una scelta di Marco.
 
-### 14. Il title di `/blog` dice "Marco Mariotti", non "First Draft" (`SEO-title-incoerente`) — severità media
+### 14. Il title di `/blog` dice "Marco Mariotti", non "First Draft" (`SEO-title-incoerente`) — severità media — IMPLEMENTATO (2026-07-25)
 
 `dist/blog/index.html` ha `<title>Blog — Marco Mariotti</title>`, residuo del sito di personal
 branding da cui il progetto è partito. Tutto il resto del sito si presenta come First Draft, e la
 pagina in questione è l'indice degli articoli: è la più probabile porta d'ingresso da ricerca dopo
 i singoli pezzi. Vale la pena passare in rassegna i title di tutte le pagine non-articolo nella
 stessa occasione, non solo questo.
+
+**Stato**: `src/pages/blog/index.astro` e la gemella EN ora compongono il title come `Blog · ${BLOG.name}`. Chiuso insieme al punto 12 perche' erano esattamente le stesse righe: riscriverle per il trattino lungo e lasciarci "Marco Mariotti" avrebbe significato reintrodurre a mano un bug noto.
+
+Fatta anche la rassegna dei title di tutte le pagine non-articolo suggerita dalla voce. Emerse due cose oltre a /blog: sei pagine (roadmap, domande aperte, newsletter, IT ed EN) avevano la stringa **"First Draft" hardcoded** invece di `BLOG.name`, ora normalizzate, cosi' il nome del brand ha una sola fonte; e gli **articoli non portano il brand nel title** (`title={post.data.title}`, senza suffisso), a differenza di ogni altra pagina. Quest'ultima **non e' stata cambiata**: tocca il title in SERP di ogni articolo gia' pubblicato, quindi e' una decisione SEO di Marco, non un fix di igiene. Se la si vuole, e' una voce nuova del backlog.
 
 ## Cosa NON fare (anti-roadmap tecnica)
 

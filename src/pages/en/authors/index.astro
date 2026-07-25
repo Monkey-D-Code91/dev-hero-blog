@@ -9,7 +9,7 @@ import { BLOG } from "../../../config";
 const allAuthors = await getCollection("authors");
 const enAuthors = allAuthors.filter((a) => a.id.startsWith("en/"));
 
-const title = `Authors — ${BLOG.name}`;
+const title = `Authors · ${BLOG.name}`;
 const description = `All ${BLOG.name} authors.`;
 ---
 
