@@ -71,7 +71,8 @@ script diverge da lì, il bug è nel codice.
   I bug arrivati in produzione finora erano tutti visivi e tutti trovati a occhio dopo il deploy.
 - **Modifiche di codice non banali**: passa da `/code-review` prima di aprire la PR. Costa un
   messaggio, risparmia un fix post-deploy.
-- La CI (`.github/workflows/ci.yml`) esegue: preflight su tutti gli articoli, `npm test` (vitest),
+- La CI (`.github/workflows/ci.yml`) esegue: preflight su tutti gli articoli, `npm test` (vitest,
+  che include la guardia sul copy),
   `npx astro check`, `npm run build`, più `status.mjs` e `check-translation-sync.mjs` informativi
   (non bloccano: un disallineamento IT/EN è una decisione editoriale, non un errore di build).
 
@@ -91,7 +92,11 @@ script diverge da lì, il bug è nel codice.
   in EN no (ripetere il termine chiave dà coesione).
 - **Niente trattini lunghi (—)** in nessun testo del brand: articoli IT/EN, newsletter, copy del
   sito, post social, testo negli asset. È una firma del testo generato: usa due punti, virgole,
-  parentesi, punti. (Nei documenti interni come questo la regola non si applica.)
+  parentesi, punti. (Nei documenti interni come questo la regola non si applica.) Due controlli
+  automatici, entrambi bloccanti: `preflight-article.mjs` sui contenuti,
+  `node scripts/check-copy.mjs` sul copy dei sorgenti (title, description, `aria-label`), quest'ultimo
+  eseguito anche da `npm test`. Come separatore nei title il brand usa il **punto mediano**
+  (`First Draft · Blog`); negli `aria-label` la virgola, che gli screen reader leggono meglio.
 - **Niente nomi di persone**, tranne gli autori del blog. Per tutti gli altri: il ruolo
   ("un collega del team", "il Product Owner"). Dati del datore sempre anonimizzati.
 - Prima persona, tono diretto. Filtro editoriale di ogni pezzo: **esperienza reale · tesi ·
@@ -125,6 +130,7 @@ npx astro check                                 # type check
 node scripts/preflight-article.mjs --all        # controlli editoriali (bloccanti in CI)
 node scripts/status.mjs                         # stato pipeline, sola lettura
 node scripts/check-translation-sync.mjs         # coppie IT/EN disallineate, sola lettura
+node scripts/check-copy.mjs                     # trattini lunghi nel copy del sito (bloccante in CI)
 node scripts/generate-cover.mjs <articolo.md>   # cover 1600x836
 node scripts/generate-carousel.mjs <articolo.md># carousel LinkedIn 1080x1350 + PDF
 node scripts/generate-og.mjs                    # OG di default del sito

@@ -5,6 +5,7 @@ import BlogList from "../../../components/blog/BlogList.astro";
 import Footer from "../../../components/Footer.astro";
 import { getPublishedPosts, processPosts } from "../../../utils/blog";
 import { useTranslations } from "../../../i18n/utils";
+import { BLOG } from "../../../config";
 
 const lang = "en" as const;
 const t = useTranslations(lang);
@@ -13,7 +14,7 @@ const processedPosts = await processPosts(await getPublishedPosts(lang), lang);
 ---
 
 <BaseLayout
-  title={`Blog — Marco Mariotti`}
+  title={`Blog · ${BLOG.name}`}
   description={t.blog.lead}
   lang="en"
   path="/en/blog/"

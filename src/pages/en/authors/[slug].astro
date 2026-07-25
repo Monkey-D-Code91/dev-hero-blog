@@ -30,7 +30,7 @@ const slug = Astro.params.slug;
 const itHref = `/autori/${itSlug}/`;
 const enHref = `/en/authors/${slug}/`;
 
-const title = `${author.name} — ${author.role}`;
+const title = `${author.name} · ${author.role}`;
 const description = author.subline;
 
 const allPosts = await getPublishedPosts("en");

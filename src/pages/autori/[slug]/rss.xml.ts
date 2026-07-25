@@ -28,7 +28,7 @@ export async function GET(context: APIContext) {
   const authorMap = await buildAuthorNameMap("it");
 
   return rss({
-    title: `${BLOG.name} — ${authorName}`,
+    title: `${BLOG.name} · ${authorName}`,
     description: `Articoli pubblicati da ${authorName} su ${BLOG.name}.`,
     site: context.site!,
     xmlns: { dc: "http://purl.org/dc/elements/1.1/", ...ATOM_XMLNS },

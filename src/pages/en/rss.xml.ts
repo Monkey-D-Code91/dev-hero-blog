@@ -9,7 +9,7 @@ export async function GET(context: APIContext) {
   const authorMap = await buildAuthorNameMap("en");
 
   return rss({
-    title: `${BLOG.name} — Blog`,
+    title: `${BLOG.name} · Blog`,
     description:
       "Critical thinking in a sea of generated content. Tech, human & AI.",
     site: context.site!,

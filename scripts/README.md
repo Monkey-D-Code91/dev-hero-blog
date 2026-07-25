@@ -19,6 +19,18 @@ Stato della pipeline calcolato dai file, in sola lettura: coppie IT/EN per `tran
 node scripts/status.mjs
 ```
 
+## check-copy.mjs
+
+Guardia sul copy del sito: nessun trattino lungo nel testo che il lettore vede. `CLAUDE.md` §4 vieta l'em dash in **tutto** il copy del brand, ma `preflight-article.mjs` guarda solo i file dei contenuti: `title`, meta description, `og:title` e `aria-label` non li controllava nessuno, ed e' esattamente il testo che finisce nei risultati di ricerca e nelle anteprime social.
+
+Gira sui **sorgenti** (`src/**/*.{astro,ts,tsx}`, esclusi i contenuti) e non su `dist/`, perche' in CI `npm test` viene prima di `npm run build` e un controllo sulla build leggerebbe artefatti vecchi o assenti. I **commenti** di codice (JSDoc, blocco, riga, HTML) non sono violazioni e vengono rimossi prima di cercare. Solo l'em dash: il trattino medio e' escluso di proposito, perche' nei range di date e' la forma corretta.
+
+Exit 1 sulle violazioni, con file, riga, colonna e contesto. Lo stesso controllo gira in `npm test` (`tests/copy-guard.test.ts`), quindi e' **bloccante in CI**: un trattino lungo nel copy non e' una decisione editoriale, e' una violazione deterministica di una regola.
+
+```
+node scripts/check-copy.mjs
+```
+
 ## check-translation-sync.mjs
 
 Rileva le coppie IT/EN disallineate nelle tre collection bilingui: blog (`translationKey`), authors (`authorKey`), roadmap (`arcKey`). Il preflight verifica che il gemello *esista* e che i conteggi dichiarati siano simmetrici; questo script risponde a un'altra domanda: le due lingue sono ancora la stessa cosa, o una e' stata modificata da sola dopo l'ultimo allineamento?

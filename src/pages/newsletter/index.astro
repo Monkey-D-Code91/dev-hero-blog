@@ -4,14 +4,14 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import NewsletterSignup from "../../components/NewsletterSignup.astro";
 import { useTranslations } from "../../i18n/utils";
-import { newsletterEnabled } from "../../config";
+import { BLOG, newsletterEnabled } from "../../config";
 
 const lang = "it" as const;
 const t = useTranslations(lang);
 ---
 
 <BaseLayout
-  title={`${t.newsletter.pageTitle} — First Draft`}
+  title={`${t.newsletter.pageTitle} · ${BLOG.name}`}
   description={t.newsletter.pageLead}
   lang="it"
   path="/newsletter/"

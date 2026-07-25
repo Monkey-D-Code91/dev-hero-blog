@@ -16,7 +16,7 @@ export type Lang = keyof typeof languages;
 export const ui = {
   it: {
     meta: {
-      title: "Marco Mariotti — Software Engineer & Tech Lead",
+      title: "Marco Mariotti · Software Engineer & Tech Lead",
       description:
         "Software Engineer & Tech Lead Frontend in TeamSystem. Architettura frontend in React e TypeScript, team distribuito tra Italia e Albania, piattaforma SaaS per il monitoraggio del roaming.",
     },
@@ -34,7 +34,7 @@ export const ui = {
       badge: "Tech Lead • Frontend & Telecomunicazioni",
       headline: "Ingegnere frontend e Tech Lead. Trasformo requisiti complessi in prodotti che funzionano.",
       subline:
-        "Sono Marco Mariotti, Software Engineer & Tech Lead in TeamSystem. Guido un team distribuito tra Italia e Albania nello sviluppo di una piattaforma SaaS per il monitoraggio del traffico dati in roaming — prevenzione extracosti, alert automatici, blocchi in tempo reale. Mi occupo dell'architettura frontend in React e TypeScript e del percorso di crescita delle persone nel team.",
+        "Sono Marco Mariotti, Software Engineer & Tech Lead in TeamSystem. Guido un team distribuito tra Italia e Albania nello sviluppo di una piattaforma SaaS per il monitoraggio del traffico dati in roaming: prevenzione extracosti, alert automatici, blocchi in tempo reale. Mi occupo dell'architettura frontend in React e TypeScript e del percorso di crescita delle persone nel team.",
       ctaPrimary: "Contattami",
       ctaSecondary: "Scopri di più",
     },
@@ -111,7 +111,7 @@ export const ui = {
           ],
         },
         {
-          title: "Dominio — Telecom",
+          title: "Dominio: Telecom",
           items: [
             "Monitoraggio traffico dati in roaming",
             "Sistemi di alerting e automazione",
@@ -138,9 +138,9 @@ export const ui = {
     },
     landing: {
       meta: {
-        title: "First Draft — Blog tech & AI",
+        title: "First Draft · Blog tech & AI",
         description:
-          "Articoli su tecnologia, AI e crescita professionale — scritti da chi lavora nel settore.",
+          "Articoli su tecnologia, AI e crescita professionale, scritti da chi lavora nel settore.",
       },
       hero: {
         badge: "Tech, Humans & AI",
@@ -259,7 +259,7 @@ export const ui = {
 
   en: {
     meta: {
-      title: "Marco Mariotti — Software Engineer & Tech Lead",
+      title: "Marco Mariotti · Software Engineer & Tech Lead",
       description:
         "Software Engineer & Tech Lead Frontend at TeamSystem. Frontend architecture in React and TypeScript, distributed team across Italy and Albania, SaaS platform for roaming data monitoring.",
     },
@@ -277,7 +277,7 @@ export const ui = {
       badge: "Tech Lead • Frontend & Telecommunications",
       headline: "Frontend engineer and Tech Lead. I turn complex requirements into products that work.",
       subline:
-        "I'm Marco Mariotti, Software Engineer & Tech Lead at TeamSystem. I lead a team across Italy and Albania building a SaaS platform for roaming data traffic monitoring — cost prevention, automated alerts, real-time traffic blocks. I handle frontend architecture in React and TypeScript and the growth of the people in the team.",
+        "I'm Marco Mariotti, Software Engineer & Tech Lead at TeamSystem. I lead a team across Italy and Albania building a SaaS platform for roaming data traffic monitoring: cost prevention, automated alerts, real-time traffic blocks. I handle frontend architecture in React and TypeScript and the growth of the people in the team.",
       ctaPrimary: "Get in touch",
       ctaSecondary: "Learn more",
     },
@@ -354,7 +354,7 @@ export const ui = {
           ],
         },
         {
-          title: "Domain — Telecom",
+          title: "Domain: Telecom",
           items: [
             "Roaming data traffic monitoring",
             "Alerting systems and automation",
@@ -381,9 +381,9 @@ export const ui = {
     },
     landing: {
       meta: {
-        title: "First Draft — Tech & AI Blog",
+        title: "First Draft · Tech & AI Blog",
         description:
-          "Articles on technology, AI and professional growth — written by people who work in the field.",
+          "Articles on technology, AI and professional growth, written by people who work in the field.",
       },
       hero: {
         badge: "Tech, Humans & AI",

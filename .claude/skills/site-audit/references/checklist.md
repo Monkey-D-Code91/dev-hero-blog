@@ -85,7 +85,7 @@ marca l'area come parzialmente verificata nel report.
 
 | # | Controllo | Come | Soglia / atteso | ID tipico |
 |---|---|---|---|---|
-| 1 | Trattini lunghi nel copy del sito | `for f in $(find dist -name "*.html"); do perl -0pe 's/<!--.*?-->//gs' "$f" \| grep -q '—' && echo "$f"; done` | nessun risultato. `preflight-article.mjs` copre **solo gli articoli**: title, meta description, `aria-label` e copy dei componenti sfuggono al preflight e sono il posto dove il problema si annida (`CLAUDE.md` §4) | `BRAND-emdash-copy-sito` |
+| 1 | Trattini lunghi nel copy del sito | `node scripts/check-copy.mjs` | exit 0. Dal 2026-07-25 il controllo e' automatico e **bloccante in CI** (`npm test`), quindi qui ci si aspetta che sia gia' verde: se e' rosso, qualcuno ha aggirato la CI. Copre i sorgenti; gli articoli restano a `preflight-article.mjs` | `BRAND-emdash-copy-sito` |
 | 2 | Logo ufficiale | `grep -rn "logos/" src --include="*.astro" \| grep -v "fd-3-nib"` | nessun risultato: l'unico logo è `public/logos/fd-3-nib.svg` (`CLAUDE.md` §5), gli altri file sono alternative scartate | `BRAND-logo-non-ufficiale` |
 | 3 | Favicon e OG di default | `ls dist/favicon.svg dist/og-image.png` e apri entrambi | coerenti con il logo attuale, non con una versione precedente | `BRAND-asset-vecchio` |
 | 4 | Colori fuori dai token | `grep -rn "#[0-9a-fA-F]\{3,6\}" src --include="*.astro" --include="*.tsx"` | i colori vivono in `global.css` come token; un esadecimale in un componente è debito, e se non è in palette è un finding | `BRAND-colore-hardcoded` |
