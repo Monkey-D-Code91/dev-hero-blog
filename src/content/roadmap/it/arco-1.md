@@ -17,9 +17,9 @@ items:
     status: published
     focus: [Tech, Human]
     authorName: Marco Mariotti
-  - title: Imparare a guidare, non a correre
+  - postTranslationKey: learning-to-steer-not-to-race
     date: 2026-07-24
-    status: in-progress
+    status: published
     focus: [Human, AI]
     authorName: Marco Mariotti
   - title: La sottile linea del codice

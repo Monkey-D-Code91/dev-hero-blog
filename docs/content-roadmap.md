@@ -1,6 +1,6 @@
 # The First Draft — Roadmap editoriale
 
-_Ultimo aggiornamento: 2026-07-20 · Cadenza iniziale: 1 articolo ogni 10 giorni (obiettivo: settimanale)_
+_Ultimo aggiornamento: 2026-07-23 · Cadenza iniziale: 1 articolo ogni 10 giorni (obiettivo: settimanale)_
 
 Questo documento tiene l'ordine di pubblicazione della pipeline di articoli **a firma Marco**. Le date sono indicative: i pezzi dei collaboratori (vedi in fondo) si inseriscono tra un articolo e l'altro e spostano il calendario.
 
@@ -28,12 +28,12 @@ Bonus: lo sguardo **tech / human / AI** emerge in modo naturale.
 |---|--------|------|-------|
 | 1 | Elogio dell'idea grezza (manifesto) | 2026-07-04 | ✅ Pubblicato |
 | 2 | Nell'era dell'AI si legge più di quanto si scrive | 2026-07-14 | ✅ Pubblicato |
+| 3 | Imparare a guidare, non a correre | 2026-07-24 | ✅ Pubblicato |
 
 ## Pipeline
 
 | # | Titolo di lavoro | Data ind. | Origine | Focus | Effort | Angolo & note |
 |---|------------------|-----------|---------|-------|--------|----------------|
-| 3 | **Imparare a guidare, non a correre** (già "La crescita dello sviluppatore con l'AI") | 2026-07-24 | Idea Marco | Human · AI | Medio | Crescere in modo strutturato nell'era del codice generato, senza restare fermi. Differenziatore: il lato Tech Lead/mentoring, cosa vedi davvero succedere ai junior. **Bozza pronta (`draft: true`), cover e PDF generati.** Perno: una PR con un pattern di hydration/rehydration dove bastava una ref. Tesi: la velocità è il prodotto di scarto di un buon design. |
 | 4 | **La sottile linea del codice** | 2026-08-03 | Idea Marco | Tech · AI | Medio | Camminare sulla linea tra codice generato controllato e incontrollato. Converte il manifesto in pratica. **In attesa dell'ok del datore di lavoro**: è il vincolo che ha fatto scalare avanti il #3. **Perno: un caso reale** in cui il codice generato è sfuggito di mano, da cui ricavare le euristiche. Rischio: diventare il listicle che critica. |
 | 5 | **Cosa non delego all'AI** | 2026-08-13 | Suggerimento | Tech · Human · AI | Basso-medio | Il confine del giudizio umano, raccontato per decisioni concrete. Pezzo-tesi che tira le fila del filone; il tech/human/AI in forma pura. |
 | 6 | **Case study: 22s → 1.1s** | 2026-08-23 | Idea Marco | Tech (rigore) | **Alto** | Deep refactor di componenti frontend, query backend e API sullo stesso dataset. Il pezzo più credibile e condivisibile. **Prerequisiti: anonimizzare prodotto/dati/architettura + ok del Product Owner (PO); diagrammi e misurazioni.** Da fare quando c'è buffer di tempo. Opzionale: un paragrafo su dove l'AI ha aiutato e dove no. |
