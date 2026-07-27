@@ -3,6 +3,7 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { BLOG, newsletterEnabled } from "../config";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import MobileMenu from "./MobileMenu.tsx";
+import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
 
 interface Props {
   itHref?: string;
@@ -78,6 +79,15 @@ const links = [
     </nav>
 
     <div class="flex items-center gap-3 sm:gap-4">
+      <!--
+        Ricerca full-text (Pagefind, vedi TECH-IMPROVEMENTS.md #9). PagefindConfig
+        registra i web component (pagefind-modal-trigger/-modal) e punta al bundle
+        generato a build time in dist/pagefind: in dev serve un build precedente,
+        quindi lanciare "npm run build" almeno una volta prima di provarla in locale.
+      -->
+      <PagefindConfig />
+      <pagefind-modal-trigger compact></pagefind-modal-trigger>
+      <pagefind-modal></pagefind-modal>
       <LanguageSwitcher itHref={itHref} enHref={enHref} />
       <MobileMenu
         client:load

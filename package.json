@@ -23,6 +23,7 @@
     "@tailwindcss/vite": "^4.0.0",
     "astro": "^5.5.0",
     "astro-icon": "^1.1.5",
+    "astro-pagefind": "^2.0.1",
     "markdown-it": "^14.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

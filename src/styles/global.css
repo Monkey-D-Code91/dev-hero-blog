@@ -181,3 +181,51 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ============================================================
+   Ricerca (Pagefind) — ricolorata on-brand.
+   Il sito è sempre in dark navy (niente switch light/dark), quindi le
+   variabili si sovrascrivono direttamente invece che sotto
+   prefers-color-scheme (vedi TECH-IMPROVEMENTS.md #9 e docs/brand.md).
+   Attenzione: il CSS di @pagefind/component-ui dichiara le sue di
+   default anche lui su :root, con la stessa specificità della nostra:
+   a vincere sarebbe quello caricato per ultimo nel bundle, non
+   affidabile. Le impostiamo su `body` invece: un valore dichiarato
+   direttamente su un elemento batte sempre quello ereditato da un
+   antenato (qui `html`), indipendentemente dall'ordine di caricamento
+   dei due fogli di stile. */
+body {
+  --pf-text: var(--color-text);
+  --pf-text-secondary: var(--color-muted);
+  --pf-text-muted: var(--color-muted);
+  --pf-background: var(--color-surface-2);
+  --pf-border: var(--color-border);
+  --pf-border-focus: var(--color-border-strong);
+  --pf-skeleton: var(--color-surface);
+  --pf-skeleton-shine: var(--color-border);
+  --pf-hover: var(--color-surface);
+  --pf-mark: var(--color-accent);
+  --pf-scroll-shadow: rgba(0, 0, 0, 0.35);
+
+  --pf-outline-focus: var(--color-accent);
+
+  --pf-font: var(--font-sans);
+  --pf-border-radius: 10px;
+
+  --pf-modal-backdrop: rgba(11, 17, 32, 0.75); /* --color-bg con alpha */
+
+  --pf-error-bg: var(--color-surface);
+  --pf-error-border: var(--color-border);
+  --pf-error-text: #f87171;
+  --pf-error-text-secondary: #ef4444;
+}
+
+/* pagefind-modal-trigger di default è un pulsante con testo: qui lo vogliamo
+   solo icona, coerente con gli altri controlli della navbar (compact
+   sull'attributo lascia comunque l'icona nativa del componente). */
+pagefind-modal-trigger {
+  --pf-text: var(--color-muted);
+}
+pagefind-modal-trigger:hover {
+  --pf-text: var(--color-text);
+}
