@@ -20,8 +20,8 @@ uscita, e chi la riceve ha dato il permesso. Questo cambia il modo di scrivere. 
 combatti per l'attenzione; qui l'attenzione ce l'hai gia', e il rischio opposto e' sprecarla con
 un'email che il lettore ha gia' letto sul blog. Lingua di lavoro: italiano.
 
-Prima di scrivere leggi `docs/brand.md` §Newsletter (testo canonico della welcome, regole di
-stile) e `docs/BRAND-IDENTITY.md` §3.6. Se divergono da questa skill, hanno ragione loro.
+Prima di scrivere leggi `docs/brand.md` §3.6 (inquadramento del canale, testo canonico della
+welcome email IT ed EN) e §2.1 (regole di voce). Se divergono da questa skill, hanno ragione loro.
 
 **Autonomia.** Un punto di controllo: la bozza (Passo 4). Prima misuri e proponi l'angolo, dopo
 rifinisci con Marco. **L'invio non lo fai mai tu**, nemmeno se te lo chiede: vedi Passo 6.
@@ -83,7 +83,7 @@ Il formato, ricavato dall'uscita reale del 2026-07-25:
 - **Prima persona**, tono diretto, la voce dell'autore. Nessuna formula da redazione.
 - **La tesi arriva in fondo**, condensata, come la frase che rimane.
 - **Una domanda al lettore** prima del link: e' il canale dove la risposta vale piu'
-  dell'iscrizione (`BRAND-IDENTITY.md` §1.1), quindi l'email deve dare qualcosa a cui rispondere.
+  dell'iscrizione (`brand.md` §1.1), quindi l'email deve dare qualcosa a cui rispondere.
 - **Lunghezza**: se supera le 350 parole circa, stai rifacendo l'articolo. Taglia.
 
 Regole non negoziabili (`CLAUDE.md` §4):
@@ -195,7 +195,7 @@ Prepara la versione EN solo se Marco la chiede esplicitamente. E quando lo fa, r
 punto vero: senza una **seconda lista** su Buttondown quell'email non ha destinatari, e mandarla
 alla lista italiana significa due email per articolo alle stesse persone. La decisione e' di
 canale, non di traduzione. Il testo EN della welcome email e' gia' pronto in `brand.md`
-§Newsletter, e serve da riferimento di voce.
+§3.6, e serve da riferimento di voce.
 
 ---
 

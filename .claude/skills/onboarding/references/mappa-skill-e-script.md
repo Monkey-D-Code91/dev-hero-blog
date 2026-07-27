@@ -14,7 +14,7 @@ Orientamento rapido: quale strumento per quale bisogno. L'onboarding **instrada*
 | **sync-translation** | Manutenzione delle coppie IT/EN: quando modifichi una lingua sola di un contenuto già bilingue, trova il gemello, misura il disallineamento e propaga in traduzione idiomatica | "ho modificato l'italiano, aggiorna l'inglese", "allinea le traduzioni" |
 | **newsletter-issue** | L'uscita email di un articolo pubblicato: oggetto, corpo riscritto per la casella di posta (non un digest) e link con UTM, pronti da incollare in Buttondown. Si ferma prima dell'invio | "prepara la newsletter", "l'email dell'articolo" |
 | **podcast-repurpose** | Dall'articolo al kit episodio podcast (scaletta parlata, YouTube, Spotify) per pubblico non tech | "prepariamo la puntata", "show notes" |
-| **design** | Design "fuori standard" (banner di canale, esperimenti); deve rispettare `docs/brand.md` | grafica oltre gli script cover/carousel/OG |
+| **design** | Design "fuori standard" (banner di canale, esperimenti); deve rispettare `docs/brand.md` e `docs/DESIGN-SYSTEM.md` | grafica oltre gli script cover/carousel/OG |
 
 ## Skill di processo
 
@@ -33,7 +33,8 @@ Orientamento rapido: quale strumento per quale bisogno. L'onboarding **instrada*
 
 > Nota di routing: per gli asset standard di un articolo parti sempre dagli **script** dedicati
 > (cover, carousel, OG): sono deterministici e allineati al brand. La skill `design` è per il
-> "fuori standard", e la fonte di verità del brand è `docs/brand.md`.
+> "fuori standard", e la fonte di verità del brand è la coppia `docs/brand.md` (il perché) +
+> `docs/DESIGN-SYSTEM.md` (i valori).
 
 ## Script versionati (in `scripts/`, vedi `scripts/README.md`)
 
@@ -54,7 +55,8 @@ Orientamento rapido: quale strumento per quale bisogno. L'onboarding **instrada*
 | `README.md` | Stack, comandi, personalizzazione contenuti, deploy |
 | `HANDOFF.md` | Stato vivo della pipeline + il metodo di co-scrittura adottato |
 | `docs/editorial-guidelines.md` | Regole editoriali e di stile (fonte canonica) |
-| `docs/brand.md` | Brand: pilastri, voce, palette, motivi visivi, formati (fonte canonica) |
+| `docs/brand.md` | Brand: scopo, lettore, registro, voce, pilastri, motivi visivi, asset, ereditarietà (fonte canonica) |
+| `docs/DESIGN-SYSTEM.md` | Token, scale, componenti, accessibilità: ogni valore concreto (fonte canonica) |
 | `docs/content-roadmap.md` | Roadmap editoriale, filtro, ordine di pubblicazione, track collaboratori |
 | `docs/audits/` | Storico degli audit del sito, con il formato del report (`README.md`) |
 | `src/content.config.ts` | Schema dei contenuti (blog + authors), regole di validazione |

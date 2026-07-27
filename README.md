@@ -49,7 +49,8 @@ gli articoli con `draft: true` sono esclusi dalla build di produzione.
 
 ## Documenti normativi
 
-- `docs/brand.md`: fonte di verità del brand (identità, voce, palette, tipografia)
+- `docs/brand.md`: fonte di verità del brand (scopo, lettore, registro, voce, motivi visivi, asset)
+- `docs/DESIGN-SYSTEM.md`: sistema di design (token, scale, componenti, accessibilità): i valori stanno qui
 - `docs/editorial-guidelines.md`: regole editoriali e privacy (mai nomi di persone, niente trattini lunghi, traduzione idiomatica)
 - `docs/content-roadmap.md`: roadmap editoriale interna (la pagina `/roadmap` è la versione pubblica)
 

@@ -24,7 +24,7 @@ si verifica che non sia stata erosa.
 | 3 | Gerarchia dei titoli senza salti | leggi l'articolo renderizzato: `h2` non deve saltare a `h4` | nessun salto | `A11Y-gerarchia-heading` |
 | 4 | `lang` coerente col percorso | `grep -oh '<html[^>]*lang="[^"]*"' dist/index.html dist/en/index.html` | `it` sulle pagine IT, `en` su quelle sotto `/en/` | `A11Y-lang-errato` |
 | 5 | Link con sola icona senza nome accessibile | `find dist -name "*.html" -print0 \| xargs -0 perl -0ne 'while(/<a\b[^>]*>\s*<svg.*?<\/svg>\s*<\/a>/gs){ $m=$&; print "$ARGV\n" unless $m=~/aria-label\|sr-only\|<title>/ }' \| sort -u` | nessun risultato. Il pattern cerca gli `<a>` il cui contenuto è **solo** una `svg`: i link con icona **e** testo non sono un problema e non devono comparire | `A11Y-link-icona-senza-nome` |
-| 6 | Contrasto dei token | confronta `src/styles/global.css` con `docs/brand.md`; i sospetti sono `--color-muted` su `--color-surface` e i colori dei pilastri sul bg | corpo ≥4.5:1, testo grande e bordi interattivi ≥3:1 | `A11Y-contrasto-<elemento>` |
+| 6 | Contrasto dei token | confronta `src/styles/global.css` con `docs/DESIGN-SYSTEM.md` §2, che riporta i contrasti gia' misurati; i sospetti sono `--color-muted` su `--color-surface` e i colori dei pilastri sul bg | corpo ≥4.5:1, testo grande e bordi interattivi ≥3:1 | `A11Y-contrasto-<elemento>` |
 | 7 | Focus visibile ovunque | nel browser: `Tab` lungo home, indice, articolo, form newsletter | il focus si vede su ogni elemento raggiungibile, anche sulle card | `A11Y-focus-invisibile` |
 | 8 | Navigazione da tastiera | nel browser: menu mobile, filtri per tag, share, commenti | tutto raggiungibile e azionabile senza mouse, senza trappole | `A11Y-tastiera-<componente>` |
 | 9 | `prefers-reduced-motion` rispettato | `grep -rn "prefers-reduced-motion" src/styles/global.css src/components` | ogni animazione introdotta dopo l'ultimo audit è coperta | `A11Y-motion-non-coperto` |
@@ -59,7 +59,7 @@ si verifica che non sia stata erosa.
 | 4 | Immagine LCP dell'articolo | `grep -o '<img[^>]*>' dist/blog/<slug>/index.html \| head -1` | la cover above-the-fold ha `loading="eager"` e `fetchpriority="high"`, mai `lazy` | `PERF-lcp-lazy` |
 | 5 | Immagini sotto la piega | stesso file, occorrenze successive | `loading="lazy"` | `PERF-lazy-mancante` |
 | 6 | Dimensioni esplicite sulle immagini | `grep -o '<img[^>]*>' dist/blog/*/index.html \| grep -v 'width='` | ogni `img` ha `width`/`height` o un contenitore con aspect-ratio: evita il layout shift | `PERF-layout-shift` |
-| 7 | Font | `find dist/_astro -name "*.woff2" \| wc -l` e i `@font-face` in `global.css` | solo Inter e Newsreader (`brand.md` §Tipografia), sottoinsiemi ragionevoli, `font-display` impostato | `PERF-font` |
+| 7 | Font | `find dist/_astro -name "*.woff2" \| wc -l` e i `@font-face` in `global.css` | solo Inter e Newsreader (`DESIGN-SYSTEM.md` §3.1), sottoinsiemi ragionevoli, `font-display` impostato | `PERF-font` |
 | 8 | Beacon analytics (solo live) | sul sito live, presenza dello script Cloudflare Web Analytics | presente se `CF_BEACON_TOKEN` è configurato in Workers Builds (`CLAUDE.md` §7); assente in locale è normale | `PERF-analytics-assente` |
 
 ---
@@ -73,7 +73,7 @@ marca l'area come parzialmente verificata nel report.
 |---|---|---|---|---|
 | 1 | Misura della riga nel corpo articolo | nel browser, articolo aperto a larghezza desktop | 65-75 caratteri per riga | `READ-misura-riga` |
 | 2 | Dimensione e interlinea del corpo | ispeziona il contenitore del testo | corpo 19-21px, `line-height` circa 1.7 su long-form | `READ-corpo-piccolo` |
-| 3 | Gerarchia visiva dei titoli | scorri un articolo lungo | i livelli si distinguono a colpo d'occhio, il serif Newsreader è dove `brand.md` dice (h1 e corpo articolo) | `READ-gerarchia-debole` |
+| 3 | Gerarchia visiva dei titoli | scorri un articolo lungo | i livelli si distinguono a colpo d'occhio, il serif Newsreader è dove `DESIGN-SYSTEM.md` §3.1 dice (h1 e corpo articolo) | `READ-gerarchia-debole` |
 | 4 | Resa su mobile | riduci a 390px | niente overflow orizzontale, tabelle e blocchi di codice scrollabili, tap target adeguati | `READ-mobile-<pagina>` |
 | 5 | Indice e home con pochi articoli | home e `/blog` | il layout regge anche con pochi pezzi pubblicati, senza buchi che sembrano una pagina rotta | `READ-layout-vuoto` |
 | 6 | Componenti editoriali speciali | apri un articolo che usa `revisions`, `discussion`, `openQuestions`, `Contradiction` | ogni componente è leggibile e distinguibile dal corpo; nessuno rompe il ritmo di lettura | `READ-componente-<nome>` |
@@ -81,7 +81,7 @@ marca l'area come parzialmente verificata nel report.
 
 ---
 
-## BRAND — Coerenza con brand.md
+## BRAND — Coerenza con brand.md e DESIGN-SYSTEM.md
 
 | # | Controllo | Come | Soglia / atteso | ID tipico |
 |---|---|---|---|---|
@@ -89,8 +89,8 @@ marca l'area come parzialmente verificata nel report.
 | 2 | Logo ufficiale | `grep -rn "logos/" src --include="*.astro" \| grep -v "fd-3-nib"` | nessun risultato: l'unico logo è `public/logos/fd-3-nib.svg` (`CLAUDE.md` §5), gli altri file sono alternative scartate | `BRAND-logo-non-ufficiale` |
 | 3 | Favicon e OG di default | `ls dist/favicon.svg dist/og-image.png` e apri entrambi | coerenti con il logo attuale, non con una versione precedente | `BRAND-asset-vecchio` |
 | 4 | Colori fuori dai token | `grep -rn "#[0-9a-fA-F]\{3,6\}" src --include="*.astro" --include="*.tsx"` | i colori vivono in `global.css` come token; un esadecimale in un componente è debito, e se non è in palette è un finding | `BRAND-colore-hardcoded` |
-| 5 | Palette allineata | confronta i token di `global.css` con `docs/brand.md` §Palette | identici; se divergono, il bug è nel codice | `BRAND-palette-divergente` |
-| 6 | Tipografia allineata | `brand.md` §Tipografia contro l'uso reale | Inter per tutto, Newsreader serif solo per h1 e corpo articolo | `BRAND-tipografia-divergente` |
+| 5 | Palette allineata | confronta i token di `global.css` con `docs/DESIGN-SYSTEM.md` §2.2-2.3 | identici; se divergono, il bug è nel codice | `BRAND-palette-divergente` |
+| 6 | Tipografia allineata | `DESIGN-SYSTEM.md` §3 contro l'uso reale | Inter per tutto, Newsreader serif solo per h1 e corpo articolo | `BRAND-tipografia-divergente` |
 | 7 | Voce del copy di interfaccia | leggi `src/i18n/ui.ts` | prima persona e tono diretto come nell'editoriale; nessun nome di persona oltre agli autori; nessun nome del datore di lavoro | `BRAND-voce-ui` |
 | 8 | Asset live non aggiornati | sul sito live, apri logo, favicon e la cover dell'ultimo articolo | corrispondono ai file nel repo; se no è cache CDN e va invalidata | `BRAND-cdn-stale` |
 

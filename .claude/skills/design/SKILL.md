@@ -15,8 +15,10 @@ Unified design skill: brand, tokens, UI, logo, CIP, slides, banners, social phot
 > **Nota di progetto (The First Draft):** questa skill serve solo per il design "fuori standard".
 > Gli asset canonici di un articolo (cover, OG, carousel, PDF) si generano SEMPRE con gli script
 > deterministici in `scripts/` (vedi `scripts/README.md`). Qualunque cosa venga prodotta qui deve
-> rispettare `docs/brand.md` (palette, tipografia Inter, motivi visivi, voce): è la fonte di
-> verità del brand, che prevale sui default generici di questa skill.
+> rispettare la coppia normativa del brand, che prevale sui default generici di questa skill:
+> `docs/brand.md` per il senso (motivi visivi, voce, cosa il brand non è) e
+> `docs/DESIGN-SYSTEM.md` per i valori (palette, tipografia, contrasti). Nessun colore o font
+> scelto a occhio: se serve un valore che non c'è, si aggiunge al design system, non al pezzo.
 
 ## When to Use
 

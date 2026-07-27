@@ -14,21 +14,29 @@ Lingua di lavoro delle sessioni: **italiano**.
 | Se stai per... | Leggi prima |
 |---|---|
 | scrivere, tradurre o rifinire un testo | `docs/editorial-guidelines.md` |
-| toccare colori, font, asset, logo | `docs/brand.md` |
+| capire il senso di una scelta di brand (voce, logo, motivi visivi, asset) | `docs/brand.md` |
+| toccare un valore concreto: colore, font, spaziatura, componente | `docs/DESIGN-SYSTEM.md` |
 | pianificare o riordinare le uscite | `docs/content-roadmap.md` |
 | capire "dove eravamo rimasti" | `node scripts/status.mjs` (fatti) + `HANDOFF.md` se presente (decisioni) |
 | entrare nel progetto da zero | skill `onboarding` |
 | pianificare una feature nuova | `HOW-TO-PLAN.md` se presente, `NEW-IDEAS.md`, `TECH-IMPROVEMENTS.md` |
 | capire come sta messo il sito | ultimo report in `docs/audits/` + skill `site-audit` per rifarlo |
 | modificare un contenuto che esiste gia' in IT e EN | skill `sync-translation` (`node scripts/check-translation-sync.mjs`) |
-| preparare l'email agli iscritti di un pezzo uscito | skill `newsletter-issue` + `docs/brand.md` §Newsletter |
+| preparare l'email agli iscritti di un pezzo uscito | skill `newsletter-issue` + `docs/brand.md` §3.6 |
 
 > **Attenzione:** `HANDOFF.md` è in `.gitignore` e `HOW-TO-PLAN.md` non è versionato, quindi
 > esistono solo sulla macchina di Marco. Se non li trovi, non sono spariti: non li hai mai avuti.
 > Ricostruisci lo stato con `node scripts/status.mjs` e con la roadmap.
 
-`docs/brand.md` ed `docs/editorial-guidelines.md` sono **fonte di verità**: se il codice o uno
-script diverge da lì, il bug è nel codice.
+`docs/brand.md`, `docs/DESIGN-SYSTEM.md` ed `docs/editorial-guidelines.md` sono **fonte di
+verità**: se il codice o uno script diverge da lì, il bug è nel codice.
+
+I primi due sono una coppia con ruoli distinti e **nessuna sovrapposizione**: `brand.md` dice
+*perché* (scopo, lettore, registro, voce, motivi visivi, asset canonici, ereditarietà sui prodotti
+interni), `DESIGN-SYSTEM.md` dice *quanto* (token, scale, componenti, contrasti misurati). Se
+cerchi un hex, una dimensione o una ricetta di componente, sta nel secondo anche quando il primo
+parla dello stesso argomento. Un valore non si duplica mai tra i due: nel dubbio, si mette in
+`DESIGN-SYSTEM.md` e si rimanda.
 
 ---
 
@@ -113,11 +121,14 @@ script diverge da lì, il bug è nel codice.
 ## 5. Asset e brand
 
 - **Logo ufficiale: `public/logos/fd-3-nib.svg`** (raster: `fd-3-nib.png`). Gli altri file in
-  `public/logos/` sono alternative scartate: non usarli.
-- Palette e tipografia: `docs/brand.md` e `src/styles/global.css` (Inter per tutto, Newsreader
-  serif solo per titolo h1 e corpo dell'articolo).
-- Gli asset standard **si generano con gli script, mai a mano**. Il fuori standard passa dalla
-  skill `design`, che deve comunque rispettare `docs/brand.md`.
+  `public/logos/` sono alternative scartate: non usarli (`brand.md` §3.2).
+- **Palette e tipografia: `docs/DESIGN-SYSTEM.md`** §2 e §3, implementate in `src/styles/global.css`
+  (`@theme`). Inter per tutto, Newsreader serif solo per titolo h1 e corpo dell'articolo. Il perché
+  della scelta sta in `brand.md` §2.3-2.4; i valori stanno solo nel design system.
+- I tre colori dei pilastri (`--color-pillar-tech|human|ai`) non si portano su prodotti che non
+  sono First Draft: `brand.md` Parte 4 dice cosa eredita un tool interno e cosa no.
+- Gli asset standard **si generano con gli script, mai a mano** (`brand.md` §3.4). Il fuori standard
+  passa dalla skill `design`, che deve comunque rispettare i due documenti.
 
 ---
 
