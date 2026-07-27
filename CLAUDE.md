@@ -120,8 +120,9 @@ parla dello stesso argomento. Un valore non si duplica mai tra i due: nel dubbio
 
 ## 5. Asset e brand
 
-- **Logo ufficiale: `public/logos/fd-3-nib.svg`** (raster: `fd-3-nib.png`). Gli altri file in
-  `public/logos/` sono alternative scartate: non usarli (`brand.md` §3.2).
+- **Logo ufficiale: `public/logos/fd-3-nib.svg`** (raster: `fd-3-nib.png`), gli unici file
+  rimasti in `public/logos/`. Le alternative scartate vivono in `docs/archive/logo-options/`,
+  fuori dal deploy (`brand.md` §3.2).
 - **Palette e tipografia: `docs/DESIGN-SYSTEM.md`** §2 e §3, implementate in `src/styles/global.css`
   (`@theme`). Inter per tutto, Newsreader serif solo per titolo h1 e corpo dell'articolo. Il perché
   della scelta sta in `brand.md` §2.3-2.4; i valori stanno solo nel design system.
