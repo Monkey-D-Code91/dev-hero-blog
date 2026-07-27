@@ -5,7 +5,7 @@ description: >
   da draft a pubblicata in modo completo e verificato. Esegue il preflight editoriale, toglie
   draft su entrambe le lingue, verifica/genera gli asset (cover, PDF feedback, carousel), valida
   la build, aggiorna la roadmap (collection IT+EN e docs/content-roadmap.md) e HANDOFF.md,
-  prepara commit/PR e la bozza del post LinkedIn. Usa questa skill quando l'autore dice cose come
+  prepara commit/PR, la bozza del post LinkedIn e passa a newsletter-issue per l'uscita email. Usa questa skill quando l'autore dice cose come
   "pubblica l'articolo oggi", "esce il pezzo", "manda live", "togli il draft", "publication day",
   "publish this article", o quando in HANDOFF.md è previsto che oggi esca un pezzo. Per rifinire
   il testo prima della pubblicazione la skill giusta è refine-article; questa parte da un
@@ -114,6 +114,19 @@ Prepara la bozza del post di lancio, da consegnare come testo (non pubblicarlo t
 - Se c'è il carousel, il post lo accompagna come documento PDF.
 - Valgono le regole editoriali: niente trattini lunghi, niente nomi, anonimizzazione.
 
+## Passo 7 — Uscita newsletter
+
+La newsletter e' l'altro canale del giorno di pubblicazione, ed e' quello proprietario: un'email
+a uscita, nessun algoritmo in mezzo. **Non la scrivi qui**: passa la palla alla skill
+`newsletter-issue`, che e' la fonte di verita' del formato (riscrittura per l'email, non digest;
+oggetto senza brand; link con UTM; bozza in `newsletter/<slug>.md`).
+
+Due cose che restano a Marco e che vanno nel riepilogo: **caricare la cover** su Buttondown e
+**premere invia**. La skill si ferma prima dell'invio di proposito.
+
+Se la newsletter e' spenta (`NEWSLETTER.buttondownUser` vuoto in `src/config.ts`), salta il passo
+e dillo, invece di preparare un'uscita che non ha dove andare.
+
 ## Dopo l'uscita — articoli vivi
 
 Non sono passi del giorno di pubblicazione, ma vanno ricordati qui: un pezzo continua a vivere.
@@ -132,5 +145,7 @@ Entrambi si aggiungono in un giro di ripubblicazione (dettagli in `docs/editoria
 
 ## Chiusura
 
-Riepiloga: URL attesi IT/EN, stato roadmap, PR aperta, post LinkedIn pronto. Se qualcosa è
-rimasto fuori (es. carousel rimandato), scrivilo in `HANDOFF.md` come prossimo passo.
+Riepiloga: URL attesi IT/EN, stato roadmap, PR aperta, post LinkedIn pronto, uscita newsletter
+pronta (con cover da caricare e invio a Marco). Se qualcosa è rimasto fuori (es. carousel
+rimandato, newsletter non ancora mandata), scrivilo in `HANDOFF.md` come prossimo passo: sono
+esattamente i passi manuali che finora sono rimasti indietro dopo la pubblicazione.

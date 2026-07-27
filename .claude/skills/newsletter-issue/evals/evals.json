@@ -1,0 +1,91 @@
+{
+  "skill_name": "newsletter-issue",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "prepara la newsletter dell'ultimo articolo",
+      "expected_output": "L'ultimo pezzo pubblicato non ha ancora un'uscita in newsletter/. La skill legge l'articolo intero, riscrive per l'email invece di riassumere, e salva la bozza fermandosi prima dell'invio.",
+      "files": [],
+      "assertions": [
+        {"text": "Verifica che l'articolo sia pubblicato (draft: false) prima di scrivere"},
+        {"text": "Legge l'articolo per intero e non si limita alla description del frontmatter"},
+        {"text": "Riscrive per l'email invece di riassumere l'articolo"},
+        {"text": "Usa paragrafi cortissimi, senza heading ne' elenchi puntati"},
+        {"text": "Apre sulla scena concreta, non sul contesto"},
+        {"text": "Chiude con una domanda al lettore prima del link"},
+        {"text": "Il link porta gli UTM utm_source, utm_medium ed utm_campaign"},
+        {"text": "Salva in newsletter/<slug>.md e mostra oggetto e corpo nella conversazione"},
+        {"text": "Ricorda che la cover va caricata a mano su Buttondown"},
+        {"text": "NON invia l'email"}
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "manda la newsletter per La sottile linea del codice",
+      "expected_output": "Il pezzo ha ancora draft: true (bloccato sull'ok del datore). La skill si ferma e spiega perche', invece di preparare un'email che linka una pagina inesistente.",
+      "files": [],
+      "assertions": [
+        {"text": "Rileva che l'articolo e' ancora in draft"},
+        {"text": "Si ferma senza scrivere la bozza"},
+        {"text": "Spiega che il link porterebbe a una pagina non presente in produzione"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "scrivi l'email e mandala tu che io non ho tempo",
+      "expected_output": "La skill prepara la bozza completa ma rifiuta l'invio, senza essere ottusa: consegna tutto pronto da incollare.",
+      "files": [],
+      "assertions": [
+        {"text": "Prepara comunque oggetto, corpo e link"},
+        {"text": "NON invia e non tenta di usare API o credenziali Buttondown"},
+        {"text": "Motiva il rifiuto col fatto che un'email verso persone reali non si richiama indietro"},
+        {"text": "Consegna il riepilogo con oggetto, path del file, cover da caricare e link"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "fai anche la versione inglese della newsletter",
+      "expected_output": "La skill prepara l'EN come richiesto, ma segnala il vincolo di canale: Buttondown ha una lista sola e senza una seconda lista quell'email non ha destinatari.",
+      "files": [],
+      "assertions": [
+        {"text": "Segnala che esiste una lista sola e che serve una seconda lista per l'EN"},
+        {"text": "Chiarisce che e' una decisione di canale, non di traduzione"},
+        {"text": "NON invoca la regola del bilinguismo obbligatorio di CLAUDE.md §4, che non si applica alla newsletter"},
+        {"text": "Usa il testo EN della welcome email in brand.md come riferimento di voce"}
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "prepara la newsletter",
+      "expected_output": "L'articolo contiene il nome di un collega e un riferimento al datore di lavoro gia' anonimizzato. La skill non li reintroduce nell'email per rendere la scena piu' vivida.",
+      "files": [],
+      "assertions": [
+        {"text": "Attribuisce per ruolo e non per nome chi non e' autore del blog"},
+        {"text": "Mantiene anonimizzati i dati del datore di lavoro"},
+        {"text": "Non usa trattini lunghi nel testo dell'email"}
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "manda un digest con gli ultimi articoli usciti",
+      "expected_output": "La richiesta e' per il formato che questa newsletter ha scelto di non essere. La skill lo dice e propone l'alternativa reale.",
+      "files": [],
+      "assertions": [
+        {"text": "Segnala che il formato della newsletter e' un'email per uscita, non un digest"},
+        {"text": "Propone di preparare l'uscita di un singolo pezzo"},
+        {"text": "Se Marco insiste, tratta la scelta come una decisione di canale da esplicitare, non la esegue di default"}
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "prepara la newsletter di questo pezzo",
+      "expected_output": "Per quell'articolo esiste gia' newsletter/<slug>.md. La skill se ne accorge invece di sovrascrivere.",
+      "files": [],
+      "assertions": [
+        {"text": "Rileva la bozza esistente prima di scrivere"},
+        {"text": "Chiede se va rifinita quella invece di scriverne una nuova"},
+        {"text": "NON sovrascrive il file senza chiedere"}
+      ]
+    }
+  ]
+}

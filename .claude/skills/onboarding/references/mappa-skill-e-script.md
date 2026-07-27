@@ -12,6 +12,7 @@ Orientamento rapido: quale strumento per quale bisogno. L'onboarding **instrada*
 | **refine-article** | Rifinire tono/stile di una bozza, tradurla e salvarla in IT+EN con frontmatter, preflight e cover | "rifinisci questo pezzo", "sistema il tono" |
 | **publish-article** | Runbook del giorno di pubblicazione: preflight, draft off, build, roadmap, PR, post LinkedIn | "pubblica l'articolo", "esce il pezzo oggi" |
 | **sync-translation** | Manutenzione delle coppie IT/EN: quando modifichi una lingua sola di un contenuto già bilingue, trova il gemello, misura il disallineamento e propaga in traduzione idiomatica | "ho modificato l'italiano, aggiorna l'inglese", "allinea le traduzioni" |
+| **newsletter-issue** | L'uscita email di un articolo pubblicato: oggetto, corpo riscritto per la casella di posta (non un digest) e link con UTM, pronti da incollare in Buttondown. Si ferma prima dell'invio | "prepara la newsletter", "l'email dell'articolo" |
 | **podcast-repurpose** | Dall'articolo al kit episodio podcast (scaletta parlata, YouTube, Spotify) per pubblico non tech | "prepariamo la puntata", "show notes" |
 | **design** | Design "fuori standard" (banner di canale, esperimenti); deve rispettare `docs/brand.md` | grafica oltre gli script cover/carousel/OG |
 
