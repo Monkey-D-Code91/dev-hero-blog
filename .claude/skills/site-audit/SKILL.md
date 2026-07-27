@@ -23,8 +23,9 @@ cosa è migliorato, cosa è peggiorato e cosa è stato deciso di non fare. Un au
 riscrive tutto da zero, con voci nuove e numerazione diversa, vale meno di zero: fa rumore.
 
 Lingua di lavoro: italiano. Prima di qualsiasi cosa leggi `CLAUDE.md` alla radice del repo, più
-`docs/brand.md` e `docs/editorial-guidelines.md`: sono la fonte di verità contro cui misuri, e se
-il codice diverge da lì il bug è nel codice, non nel documento.
+`docs/brand.md`, `docs/DESIGN-SYSTEM.md` e `docs/editorial-guidelines.md`: sono la fonte di verità
+contro cui misuri, e se il codice diverge da lì il bug è nel codice, non nel documento. Per i
+valori (colori, scale, contrasti) l'autorità è `DESIGN-SYSTEM.md`; `brand.md` dice perché.
 
 **Confine invalicabile: questa skill non tocca nulla.** Non crea branch, non modifica file di
 codice, non corregge neanche le cose banali. L'unico file che scrive è il report in
@@ -99,7 +100,7 @@ Le sei aree:
 | SEO e social card | `SEO` | canonical, hreflang reciproci, title/description, OG e Twitter, sitemap, feed |
 | Performance | `PERF` | peso pagina, immagine LCP, font, JS spedito, dimensione degli asset |
 | Leggibilità | `READ` | misura di riga, corpo testo, gerarchia, densità, resa su mobile |
-| Coerenza col brand | `BRAND` | palette e tipografia vs `brand.md`, logo ufficiale, niente trattini lunghi nel copy |
+| Coerenza col brand | `BRAND` | palette e tipografia vs `DESIGN-SYSTEM.md`, logo ufficiale, niente trattini lunghi nel copy |
 | Entry point e contenuti | `ENTRY` | newsletter, RSS, commenti, podcast, simmetria IT/EN, link morti |
 
 **Quello che si vede solo a occhio, guardalo a occhio.** Su questo progetto i bug arrivati in
@@ -140,7 +141,7 @@ un'impressione, e le impressioni vanno nella sezione "osservazioni", non nell'el
    osservazioni con la domanda aperta.
 
 **Cosa non è un finding.** Non gonfiare l'elenco con: scelte di gusto senza una regola dietro
-(`brand.md` non dice tutto, e dove tace la scelta è di Marco); problemi già coperti in modo
+(i documenti normativi non dicono tutto, e dove tacciono la scelta è di Marco); problemi già coperti in modo
 deterministico da `preflight-article.mjs` (quello è il suo mestiere, tu riporti solo che è verde
 o rosso); voci di `TECH-IMPROVEMENTS.md` già aperte e conosciute (citale come "già a backlog",
 non come scoperte); e tutto ciò che dipende da quanti articoli ci sono oggi e si risolverà da
