@@ -2,7 +2,7 @@
 
 _Analisi del 2026-07-17. Proposte ordinate per priorità; ogni voce dice perché serve, non solo cosa fare. Da spuntare o scartare esplicitamente, come la roadmap editoriale._
 
-**Stato al 2026-07-27:** implementati i punti 1-7, 9, 10, 11 (CI, README, zombie, test, anteprima draft, preflight, analytics, pulizia docs, RSS full-content, ricerca Pagefind). Aperto in attesa del suo trigger: **8** (rimuovere React, alla prima volta che si tocca la navbar). Chiusi il 2026-07-25: **12** (trattini lunghi nel copy, con guardia automatica) e **14** (title di /blog). Aperto e pronto da fare: **13** (pagina di lavoro `public/logos/` in produzione), che e' una decisione binaria di Marco. Per l'analytics resta il solo passo manuale di Marco: incollare il token Cloudflare.
+**Stato al 2026-07-27:** implementati i punti 1-7, 9, 10, 11, 13 (CI, README, zombie, test, anteprima draft, preflight, analytics, pulizia docs, RSS full-content, ricerca Pagefind, pagina di lavoro `public/logos/` esclusa dal deploy). Aperto in attesa del suo trigger: **8** (rimuovere React, alla prima volta che si tocca la navbar). Chiusi il 2026-07-25: **12** (trattini lunghi nel copy, con guardia automatica) e **14** (title di /blog). Per l'analytics resta il solo passo manuale di Marco: incollare il token Cloudflare.
 
 > **Convenzione di stato** (letta dalla skill `roadmap-next`, vedi `.claude/skills/roadmap-next/`).
 > **Il marker `— IMPLEMENTATO (YYYY-MM-DD)` nel titolo `###` è il segnale autorevole**: le voci
@@ -164,7 +164,7 @@ Come separatore nei title e' stato scelto il **punto mediano** (`First Draft · 
 
 **Non fatto** di proposito: gli articoli non sono toccati, li copre gia' `preflight-article.mjs`. La riga 1 della checklist di `site-audit` e' stata aggiornata per puntare al controllo automatico invece che al grep manuale su `dist/`.
 
-### 13. Pagina di lavoro `public/logos/` pubblicata in produzione (`ENTRY-pagina-di-servizio-pubblica`) — severità media
+### 13. Pagina di lavoro `public/logos/` pubblicata in produzione (`ENTRY-pagina-di-servizio-pubblica`) — severità media — IMPLEMENTATO (2026-07-27)
 
 `dist/logos/index.html` viene deployato ed è raggiungibile. È una pagina di confronto tra le
 opzioni di logo: nessun canonical, nessuna description, nessun OG, nessun hreflang, e mostra
@@ -177,6 +177,17 @@ for f in $(find dist -name "*.html"); do grep -q 'rel="canonical"' "$f" || echo 
 Decisione binaria, non un lavoro: o è una pagina pubblica e allora va curata come le altre, o è
 materiale di lavoro e allora esce dal deploy (fuori da `public/`, o esclusa dalla build). La
 seconda sembra quella giusta, ma è una scelta di Marco.
+
+**Stato**: Marco ha scelto di escluderla dal deploy. `public/logos/index.html` e le quattro SVG
+delle opzioni scartate (`fd-1-monogram`, `fd-2-caret`, `fd-4-pilcrow`, `fd-5-wordmark`) spostate
+in `docs/archive/logo-options/` (con una copia di `fd-3-nib.svg` per tenere la pagina di
+confronto autosufficiente; percorsi delle immagini nell'HTML resi relativi di conseguenza). In
+`public/logos/` restano solo `fd-3-nib.svg` e `fd-3-nib.png`, gli unici usati dal codice
+(`src/config.ts`, `src/utils/og.ts`): dopo la build, `/logos/` come pagina non esiste più, i due
+asset restano serviti come file statici (corretto: sono l'unico logo ufficiale, non "materiale
+di lavoro"). Nessun'altra reference nel codice puntava alle quattro SVG scartate, quindi lo
+spostamento non ha toccato nient'altro. La riga 2 della checklist `site-audit` (`BRAND-logo-non-ufficiale`)
+resta valida così com'è: verificava già solo i riferimenti da `src/`, non da `public/`.
 
 ### 14. Il title di `/blog` dice "Marco Mariotti", non "First Draft" (`SEO-title-incoerente`) — severità media — IMPLEMENTATO (2026-07-25)
 

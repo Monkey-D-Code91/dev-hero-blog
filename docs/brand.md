@@ -273,9 +273,12 @@ Il prodotto blog + podcast. Non si eredita per default.
 
 ## 3.2 Logo
 
-- **Logo ufficiale:** `public/logos/fd-3-nib.svg` (raster: `fd-3-nib.png`).
-- Gli altri file in `public/logos/` (`fd-1-monogram`, `fd-2-caret`, `fd-4-pilcrow`,
-  `fd-5-wordmark`) sono **alternative scartate**: non si usano.
+- **Logo ufficiale:** `public/logos/fd-3-nib.svg` (raster: `fd-3-nib.png`), gli unici due file
+  rimasti in `public/logos/`.
+- Le quattro alternative scartate (`fd-1-monogram`, `fd-2-caret`, `fd-4-pilcrow`,
+  `fd-5-wordmark`) non si usano: erano pubblicate come pagina di confronto a `/logos/`, spostate
+  in `docs/archive/logo-options/` il 2026-07-27 (punto 13 di `TECH-IMPROVEMENTS.md`) perché
+  materiale di lavoro, non contenuto del sito.
 - Navbar: 36×36 con `rounded-lg`, accanto al wordmark testuale "First Draft" in Inter semibold,
   `tracking-tight`, nascosto sotto il breakpoint `sm`.
 - Quando è accompagnato dal nome il logo è decorativo: `alt=""` e `aria-hidden`, con l'`aria-label`
