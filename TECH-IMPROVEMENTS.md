@@ -2,7 +2,7 @@
 
 _Analisi del 2026-07-17. Proposte ordinate per priorità; ogni voce dice perché serve, non solo cosa fare. Da spuntare o scartare esplicitamente, come la roadmap editoriale._
 
-**Stato al 2026-07-25:** implementati i punti 1-7, 10, 11 (CI, README, zombie, test, anteprima draft, preflight, analytics, pulizia docs, RSS full-content). Aperti in attesa del loro trigger: **8** (rimuovere React, alla prima volta che si tocca la navbar) e **9** (ricerca Pagefind, oltre ~15 articoli pubblicati). Chiusi il 2026-07-25: **12** (trattini lunghi nel copy, con guardia automatica) e **14** (title di /blog). Aperto e pronto da fare: **13** (pagina di lavoro `public/logos/` in produzione), che e' una decisione binaria di Marco. Per l'analytics resta il solo passo manuale di Marco: incollare il token Cloudflare.
+**Stato al 2026-07-27:** implementati i punti 1-7, 9, 10, 11 (CI, README, zombie, test, anteprima draft, preflight, analytics, pulizia docs, RSS full-content, ricerca Pagefind). Aperto in attesa del suo trigger: **8** (rimuovere React, alla prima volta che si tocca la navbar). Chiusi il 2026-07-25: **12** (trattini lunghi nel copy, con guardia automatica) e **14** (title di /blog). Aperto e pronto da fare: **13** (pagina di lavoro `public/logos/` in produzione), che e' una decisione binaria di Marco. Per l'analytics resta il solo passo manuale di Marco: incollare il token Cloudflare.
 
 > **Convenzione di stato** (letta dalla skill `roadmap-next`, vedi `.claude/skills/roadmap-next/`).
 > **Il marker `— IMPLEMENTATO (YYYY-MM-DD)` nel titolo `###` è il segnale autorevole**: le voci
@@ -99,9 +99,17 @@ rende questo un "utile per sapere se vieni letto", non un prerequisito.
 
 React 19 + `@astrojs/react` esistono per una sola island (`MobileMenu.tsx`). Un menu mobile si fa con un `<script>` vanilla in un componente Astro: si tolgono 4 dipendenze e l'unico bundle JS framework del sito. Non urgente (il costo runtime è già minimo grazie alle island), ma è una semplificazione onesta la prima volta che si tocca la navbar. Vincolo: se in roadmap ci sono island interattive future reali, tenerlo.
 
-### 9. Ricerca full-text: non ora, ma con un trigger
+### 9. Ricerca full-text — IMPLEMENTATO (2026-07-27)
 
 Con 4-8 articoli la ricerca è rumore. Fissare il trigger adesso per non ridiscuterlo: **oltre ~15 articoli pubblicati**, aggiungere Pagefind (statico, zero backend, i18n-aware). Prima, la pagina tag basta.
+
+**Stato**: implementata in anticipo sul trigger (8 articoli, non ancora 15) su richiesta di Marco, per non doverla ridiscutere più avanti. Integrazione `astro-pagefind`, che indicizza a build time nell'hook `astro:build:done` (nessun passo CI aggiuntivo: `npm run build` produce già `dist/pagefind/`) e serve l'indice già costruito in `astro dev`.
+
+Tre decisioni prese insieme a Marco. (1) **Scope solo articoli**: `data-pagefind-body` sull'`<article>` di `BlogPostLayout.astro`. Una volta presente su una pagina del sito, Pagefind indicizza *solo* le pagine che portano l'attributo: homepage, roadmap, autori e domande aperte restano fuori senza doverle escludere una per una. (2) **Ricerca per lingua corrente, non incrociata**: zero-config, comportamento nativo di Pagefind che legge l'attributo `lang` dell'`<html>` (già impostato da `BaseLayout`) e costruisce un indice indipendente per IT ed EN; su `/blog` si cerca solo tra gli articoli IT, su `/en/blog` solo tra gli EN. (3) **UI**: icona di ricerca in `Navbar.astro` (`pagefind-modal-trigger` in modalità `compact`) che apre un overlay (`pagefind-modal`), entrambi web component nativi di Pagefind 1.5+ (zero React aggiuntivo, coerente con la direzione del punto 8). Ricolorati via CSS custom properties `--pf-*` in `global.css` sulla palette navy di `docs/brand.md` (il sito è sempre dark, niente `prefers-color-scheme`).
+
+**Non fatto**: metadata di risultato oltre al titolo (es. immagine di copertina nei risultati) — il default di Pagefind (titolo + estratto con evidenziazione del match) è già utile con 8 articoli; da rivalutare se la lista dei risultati diventa affollata.
+
+Nota d'ambiente: nel sandbox di sviluppo usato per questa implementazione, `npm run build` fallisce per un limite noto del filesystem montato (vedi §7 di `CLAUDE.md`: qui è la fase di pulizia interna di Astro a non riuscire a rimuovere i file temporanei, non l'indicizzazione Pagefind in sé). `npx astro check` (0 errori) e `npm test` (51/51) passano regolarmente nello stesso ambiente. **La build va comunque validata in locale da Marco prima del merge**, come da regola generale del progetto.
 
 ### 10. Pulizia cartelle di lavorazione — IMPLEMENTATO (2026-07-17)
 
