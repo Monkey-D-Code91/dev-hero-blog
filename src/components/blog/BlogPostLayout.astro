@@ -100,8 +100,14 @@ const rssUrl = lang === "it" ? "/rss.xml" : "/en/rss.xml";
     {backLabel}
   </a>
 
-  <!-- Landmark article con titolo collegato via aria-labelledby -->
-  <article aria-labelledby="article-title">
+  <!--
+    Landmark article con titolo collegato via aria-labelledby.
+    data-pagefind-body scopa l'indice di ricerca a questo solo contenuto: una volta
+    presente su una pagina del sito, Pagefind indicizza SOLO le pagine che portano
+    questo attributo (vedi TECH-IMPROVEMENTS.md #9). Homepage, roadmap, autori e
+    domande aperte restano fuori di conseguenza, senza bisogno di escluderle a mano.
+  -->
+  <article aria-labelledby="article-title" data-pagefind-body>
     <!-- Header articolo -->
     <header class="mb-8">
       <div class="mb-3 flex items-center justify-between gap-4">

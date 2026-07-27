@@ -3,6 +3,7 @@ import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
+import pagefind from 'astro-pagefind';
 import tailwindcss from '@tailwindcss/vite';
 
 // `site` — usato per sitemap, canonical e tag Open Graph.
@@ -15,7 +16,7 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
-  integrations: [react(), mdx(), icon(), sitemap()],
+  integrations: [react(), mdx(), icon(), sitemap(), pagefind()],
   vite: {
     plugins: [tailwindcss()],
     ssr: {
