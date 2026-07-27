@@ -21,6 +21,7 @@ Lingua di lavoro delle sessioni: **italiano**.
 | pianificare una feature nuova | `HOW-TO-PLAN.md` se presente, `NEW-IDEAS.md`, `TECH-IMPROVEMENTS.md` |
 | capire come sta messo il sito | ultimo report in `docs/audits/` + skill `site-audit` per rifarlo |
 | modificare un contenuto che esiste gia' in IT e EN | skill `sync-translation` (`node scripts/check-translation-sync.mjs`) |
+| preparare l'email agli iscritti di un pezzo uscito | skill `newsletter-issue` + `docs/brand.md` §Newsletter |
 
 > **Attenzione:** `HANDOFF.md` è in `.gitignore` e `HOW-TO-PLAN.md` non è versionato, quindi
 > esistono solo sulla macchina di Marco. Se non li trovi, non sono spariti: non li hai mai avuti.
@@ -179,7 +180,8 @@ ferma il dev server, `rm -rf node_modules/.vite .astro`, riavvia.
 **Editoriali:** `onboarding` (hub per chi è nuovo) · `write-article` (co-scrittura dalla prima
 idea) · `refine-article` (tono e stile) · `publish-article` (runbook del giorno di uscita) ·
 `add-author` (nuovo profilo autore IT+EN) · `sync-translation` (manutenzione delle coppie IT/EN
-dopo una modifica) · `podcast-repurpose` (kit episodio) · `design` (solo per il fuori standard).
+dopo una modifica) · `newsletter-issue` (l'uscita email di un pezzo pubblicato) ·
+`podcast-repurpose` (kit episodio) · `design` (solo per il fuori standard).
 
 Le skill editoriali si dividono per momento: `write-article` e `add-author` **creano** la coppia
 bilingue, `sync-translation` la **mantiene** quando una sola lingua viene toccata dopo.
