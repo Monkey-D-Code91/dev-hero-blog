@@ -185,10 +185,16 @@
 /* ============================================================
    Ricerca (Pagefind) — ricolorata on-brand.
    Il sito è sempre in dark navy (niente switch light/dark), quindi le
-   variabili si sovrascrivono direttamente in :root invece che sotto
+   variabili si sovrascrivono direttamente invece che sotto
    prefers-color-scheme (vedi TECH-IMPROVEMENTS.md #9 e docs/brand.md).
-   ============================================================ */
-:root {
+   Attenzione: il CSS di @pagefind/component-ui dichiara le sue di
+   default anche lui su :root, con la stessa specificità della nostra:
+   a vincere sarebbe quello caricato per ultimo nel bundle, non
+   affidabile. Le impostiamo su `body` invece: un valore dichiarato
+   direttamente su un elemento batte sempre quello ereditato da un
+   antenato (qui `html`), indipendentemente dall'ordine di caricamento
+   dei due fogli di stile. */
+body {
   --pf-text: var(--color-text);
   --pf-text-secondary: var(--color-muted);
   --pf-text-muted: var(--color-muted);
