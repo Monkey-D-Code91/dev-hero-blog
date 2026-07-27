@@ -47,7 +47,7 @@ La roadmap ha già l'intuizione dei dittici (musica #3 gemello del filone codice
 
 C'è una contraddizione strategica da risolvere: il manifesto combatte il contenuto ottimizzato per l'algoritmo, ma la distribuzione dipende quasi solo da LinkedIn (un algoritmo). L'RSS è il canale coerente ma di nicchia. Una newsletter minimale (Buttondown o simili, RSS-to-email, bilingue o solo IT all'inizio) è il canale proprietario: chi si iscrive è il pubblico che il progetto dice di volere, e il numero di iscritti è la metrica di "pubblico" che la roadmap usa come vincolo (il case study esce "quando c'è pubblico"). Da fare **prima** che serva: una lista si costruisce lentamente. Nessuna feature in più: un form, un invio per uscita.
 
-**Stato**: scaffold pronto, provider **Buttondown**, inquadrata come **canale anti-algoritmo** (decisione di Marco: reframe della copy, non più "niente newsletter"). Gated da `NEWSLETTER.buttondownUser` in `src/config.ts`: finché è vuoto la newsletter è spenta e resta la CTA RSS (produzione invariata). Quando si imposta lo username compaiono: form di fine articolo (con "oppure via RSS"), link nel footer, pagina `/newsletter` IT/EN. Form senza JavaScript (POST al form pubblico Buttondown, double opt-in gestito dal provider). **Resta da fare (Marco)**: creare l'account Buttondown e incollare lo username. Possibile evoluzione: collegare l'automazione RSS-to-email di Buttondown così ogni uscita parte da sola; un link "Newsletter" anche in navbar.
+**Stato**: scaffold pronto, provider **Buttondown**, inquadrata come **canale anti-algoritmo** (decisione di Marco: reframe della copy, non più "niente newsletter"). Gated da `NEWSLETTER.buttondownUser` in `src/config.ts`: finché è vuoto la newsletter è spenta e resta la CTA RSS (produzione invariata). Quando si imposta lo username compaiono: form di fine articolo (con "oppure via RSS"), link nel footer, pagina `/newsletter` IT/EN. Form senza JavaScript (POST al form pubblico Buttondown, double opt-in gestito dal provider). **Attiva dal 2026-07-18**: account creato, username `thefirstdraft` in `src/config.ts`, welcome email in uso (testo canonico in `docs/brand.md` §Newsletter). La prima uscita curata è partita il 2026-07-25; dal 2026-07-25 il formato è codificato nella skill `newsletter-issue`, che prepara oggetto, corpo e link con UTM e si ferma prima dell'invio. Valutata e per ora scartata l'automazione RSS-to-email di Buttondown: manderebbe un digest, mentre la scelta è un'email riscritta per la casella di posta. Possibile evoluzione: un link "Newsletter" anche in navbar.
 
 ### 5. La pagina "Domande aperte" — IMPLEMENTATO (2026-07-18)
 
@@ -62,6 +62,24 @@ Lo schema ha già `canonicalUrl` (mai usato). Rovesciarlo: pubblicare le version
 ### 7. Podcast: pagina episodio sul sito, non solo piattaforme
 
 Quando The Human Constant parte (spec cover già pronte), dare a ogni episodio una pagina sul sito: player embed, show notes, link incrociati articolo↔episodio. Il sito resta l'hub di tutte le forme dello stesso pensiero (blog per chi lavora nel settore, podcast per i curiosi) e ogni episodio rimanda al pezzo d'origine e viceversa. Da progettare come collection `podcast` col pattern bilingue già rodato. **Trigger: al lancio del podcast, non prima.**
+
+### 8. Riassorbire il CV nella pagina autore
+
+Il sito nasce come sito personale (`About`, `Experience`, `Skills`, `Contact` più la home
+portfolio) ed è diventato una pubblicazione multi-firma, senza che la transizione fosse mai
+decisa. `docs/BRAND-IDENTITY.md` §1.6 la decide: **l'ombrello è The First Draft, il profilo
+professionale di Marco vive in `/autori/marco-mariotti`, non esiste una sezione portfolio
+separata.** Finché le componenti restano dove sono, il sito comunica un'architettura di brand
+diversa da quella scritta.
+
+Cosa comporta: far confluire esperienza, competenze, dominio e contatti nella pagina autore (il
+frontmatter di `src/content/authors/{it,en}/marco-mariotti.md` li contiene già quasi tutti),
+ridisegnare la home come home della pubblicazione, rimuovere o riusare le componenti orfane.
+Intervento medio, tutto visivo: da verificare in browser prima del merge.
+
+**Trigger: la prima volta che si tocca la home o la pagina autore.** Non merita una sessione
+dedicata subito (nessun lettore se ne lamenta), ma non va fatto a pezzi: quando si apre quel
+file, si apre tutto il lavoro. Vincolo: la pagina autore resta bilingue e simmetrica IT/EN.
 
 ## Idee da esplorare (meno mature, da discutere)
 
@@ -83,7 +101,7 @@ Quando The Human Constant parte (spec cover già pronte), dare a ogni episodio u
 1. **Subito, a costo quasi zero**: idea 2 (dal tavolo di discussione, già dal post del #3) e la riga sul gruppo di feedback.
 2. **Prossime 2-3 uscite**: idea 1 (revisioni: definire il formato ora, usarlo alla prima occasione vera) e idea 4 (newsletter aperta prima che serva).
 3. **Con i collaboratori**: idea 3 (contraddizione) quando Fabio o il collaboratore etica hanno il primo pezzo pubblicato.
-4. **A trigger**: idea 6 (al prossimo publish-day EN), idea 5 (quando le domande aperte sono ≥5), idea 7 (al lancio del podcast).
+4. **A trigger**: idea 6 (al prossimo publish-day EN), idea 5 (quando le domande aperte sono ≥5), idea 7 (al lancio del podcast), idea 8 (alla prima volta che si tocca la home o la pagina autore).
 
 ## Domande aperte — risposte di Marco (2026-07-17)
 
