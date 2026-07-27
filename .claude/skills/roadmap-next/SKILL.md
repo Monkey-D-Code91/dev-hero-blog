@@ -176,7 +176,7 @@ ragione per cui questa skill esiste.
 3. **Riga di intestazione "Stato al ..."** in testa al file: aggiorna data ed elenco dei punti
    aperti e conclusi.
 4. Se la voce apre o chiude qualcosa in altri documenti (`docs/brand.md`,
-   `docs/editorial-guidelines.md`, README, una skill), aggiorna anche quelli: sono fonte di
+   `docs/DESIGN-SYSTEM.md`, `docs/editorial-guidelines.md`, README, una skill), aggiorna anche quelli: sono fonte di
    verità e divergere è un bug.
 5. Se lo stato del progetto è cambiato in modo sostanziale e `HANDOFF.md` esiste, aggiornalo
    (non è versionato: non finirà nella PR, ma serve alla prossima sessione).

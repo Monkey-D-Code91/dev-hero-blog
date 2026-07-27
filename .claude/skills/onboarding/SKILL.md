@@ -82,8 +82,9 @@ Per ogni azione concreta, **invoca la skill dedicata** invece di reimplementarla
 - Portare un articolo nel podcast → skill **`podcast-repurpose`**
 - Cover / carousel / OG / PDF → script in `scripts/` (vedi `references/asset-social.md`)
 - Verifica regole e stato pipeline → `scripts/preflight-article.mjs` e `scripts/status.mjs`
-- Voce, palette, motivi visivi → **`docs/brand.md`** (fonte di verità del brand)
-- Grafica "fuori standard" → skill **`design`** (sempre nel rispetto di `docs/brand.md`)
+- Voce, motivi visivi, senso delle scelte → **`docs/brand.md`** (fonte di verità del brand)
+- Colori, scale, componenti, contrasti → **`docs/DESIGN-SYSTEM.md`** (i valori stanno solo qui)
+- Grafica "fuori standard" → skill **`design`** (nel rispetto di entrambi)
 
 Il tuo valore qui è il **contesto e il collegamento**, non l'esecuzione: quella la fanno le skill
 specializzate, che restano l'unica fonte di verità sui rispettivi workflow.

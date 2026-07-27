@@ -64,7 +64,8 @@ Fonti:
    dell'episodio su max 2 righe con auto-wrap (stessa logica di `generate-cover.mjs`). Niente
    altro testo sulla rendition YouTube; sul quadrato anche il wordmark del podcast.
 4. **Identità:** il podcast si chiama **The Human Constant**. È un'estensione del brand
-   The First Draft: stessa palette, Inter, motivi visivi compatibili (vedi `docs/brand.md`),
+   The First Draft: stessa palette, Inter, motivi visivi compatibili (`docs/brand.md` §3.3 e
+   `docs/DESIGN-SYSTEM.md` §2),
    ma con wordmark proprio.
 
 ## Spec dello script `generate-episode-cover.mjs` (da implementare)
@@ -102,7 +103,7 @@ basso a destra (youtube); "EP. NN" leggibile a 64px (square) e 156px (youtube).
 ## Punti aperti
 
 - **Wordmark/logo di The Human Constant**: da disegnare (skill `design`, nel rispetto di
-  `docs/brand.md`). Finché non c'è, lo script usa il nome in tipografia Inter.
+  `docs/brand.md` §3.5). Finché non c'è, lo script usa il nome in tipografia Inter.
 - **Show cover** (la copertina del canale, una tantum): non tra gli output per-episodio; da
   fare con lo stesso sistema quando il canale apre.
 - **Motivo visivo distintivo del podcast**: capire se la triade dei cerchi resta identica al
