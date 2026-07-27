@@ -81,8 +81,8 @@ Legge `title`, `description`, `pubDate`. Pensato per la versione IT. Senza outpu
 ## Grafica più elaborata
 
 Per banner, slide non-carousel, foto social o varianti di formato oltre a questi script, usa la skill
-**`design`**. Qualunque cosa produca deve rispettare **`docs/brand.md`** (fonte di verità del brand:
-palette, tipografia, motivi visivi, voce).
+**`design`**. Qualunque cosa produca deve rispettare **`docs/brand.md`** (motivi visivi, voce, senso
+delle scelte) e **`docs/DESIGN-SYSTEM.md`** (palette, tipografia e ogni altro valore concreto).
 
 ## Nota ambiente
 
