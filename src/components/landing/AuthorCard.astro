@@ -22,7 +22,7 @@ const t = useTranslations(lang);
 
 <a
   href={profileHref}
-  class="group flex flex-col items-center rounded-2xl border border-border bg-surface-2 p-8 text-center transition-colors hover:border-accent/40"
+  class="group flex h-full flex-col items-center rounded-2xl border border-border bg-surface-2 p-8 text-center transition-colors hover:border-accent/40"
   aria-label={`${name}, ${t.landing.authors.viewProfile}`}
 >
   <!-- Avatar o monogramma -->
@@ -62,7 +62,7 @@ const t = useTranslations(lang);
 
   <!-- CTA visuale -->
   <span
-    class="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-muted transition-colors group-hover:text-accent"
+    class="mt-auto pt-5 inline-flex items-center gap-1.5 text-xs font-medium text-muted transition-colors group-hover:text-accent"
     aria-hidden="true"
   >
     {t.landing.authors.viewProfile}

@@ -42,6 +42,7 @@ const headingEN = "All First Draft authors.";
         <div class="mt-12 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {items.map((item, i) => (
             <div
+              class="h-full"
               data-reveal
               data-reveal-delay={i > 0 ? String(Math.min(i, 3)) : undefined}
             >
