@@ -12,7 +12,7 @@ items:
     status: planned
     focus: [Tech, AI, Human]
     authorName: Marco Mariotti
-  - title: "Musica #1: l'origine"
+  - title: "Dove vive una canzone, quando la ascolti"
     date: 2026-10-02
     status: planned
     focus: [Human, AI]

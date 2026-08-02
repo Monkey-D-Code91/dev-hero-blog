@@ -1,6 +1,6 @@
 # The First Draft — Roadmap editoriale
 
-_Ultimo aggiornamento: 2026-07-23 · Cadenza iniziale: 1 articolo ogni 10 giorni (obiettivo: settimanale)_
+_Ultimo aggiornamento: 2026-08-02 · Cadenza iniziale: 1 articolo ogni 10 giorni (obiettivo: settimanale)_
 
 Questo documento tiene l'ordine di pubblicazione della pipeline di articoli **a firma Marco**. Le date sono indicative: i pezzi dei collaboratori (vedi in fondo) si inseriscono tra un articolo e l'altro e spostano il calendario.
 
@@ -73,7 +73,7 @@ _Tema portante: dal controllare il codice generato al progettare il sistema uomo
 | # | Titolo di lavoro | Firma | Focus | Effort | Ruolo & note |
 |---|------------------|-------|-------|--------|--------------|
 | 9 | **The new loop** | Marco | Tech · AI · Human | Medio | Cappello dell'arco: dal human-in-the-loop al loop chiuso dev↔AI su ogni fase del workflow. **Da ancorare a un episodio reale** (una fase dove il loop si è chiuso e ti ha sorpreso), altrimenti resta teoria. Gestire la tensione col manifesto e con l'articolo 5: non "il confine sparisce" ma "decido dove tengo la mano sul volante". |
-| 10 | **Musica #1 — l'origine** | Fabio Ziliani | Human · AI | — | "Conta sapere chi ha scritto una cosa, per poterla amare?" Respiro dopo il concettuale; eco del cappello (AI come specchio dell'umano). |
+| 10 | **Musica #1 — l'origine** ("Dove vive una canzone, quando la ascolti") | Fabio Ziliani | Human · AI | — | "Conta sapere chi ha scritto una cosa, per poterla amare?" Respiro dopo il concettuale; eco del cappello (AI come specchio dell'umano). Titolo ufficiale definito, draft pronto in `src/content/blog/{it,en}` (pubDate allineata alla roadmap pubblica: 2026-10-02). |
 | 11 | **Context fantastici e dove trovarli** (estrazione) | Marco | Tech · Human | Medio-alto | Skill che a ogni code review estrae dal dev il contesto mancante; struttura gerarchica modulo→feature; il contesto alimenta l'AI per meno iterazioni. La prova concreta del "new loop". **Dittico con l'articolo 7** (7 pone il problema, questo è la risposta ingegneristica). Rischio: diventare changelog/annuncio di prodotto → la tesi resta sul principio (il contesto come asset di prima classe, estratto quando la conoscenza è fresca), i dettagli sono prova non contenuto. Anonimizzazione + probabile ok PO. |
 | 12 | **Musica #2 — la profondità** | Fabio Ziliani | Human · AI | — | "Una cosa vera deve per forza essere seria, sofferta, importante?" L'ironia come forma legittima di sincerità. Respiro leggero. |
 | 13 | **AI ed etica #1** | Collab | Human · AI | — | Apre il filone etica. Tema/i da definire col collaboratore. |
