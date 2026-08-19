@@ -16,20 +16,23 @@ Lingua di lavoro delle sessioni: **italiano**.
 | scrivere, tradurre o rifinire un testo | `docs/editorial-guidelines.md` |
 | capire il senso di una scelta di brand (voce, logo, motivi visivi, asset) | `docs/brand.md` |
 | toccare un valore concreto: colore, font, spaziatura, componente | `docs/DESIGN-SYSTEM.md` |
+| portare un pezzo dalla bozza alla pubblicazione, o capire chi fa cosa | `docs/workflow.md` |
 | pianificare o riordinare le uscite | `docs/content-roadmap.md` |
 | capire "dove eravamo rimasti" | `node scripts/status.mjs` (fatti) + `HANDOFF.md` se presente (decisioni) |
 | entrare nel progetto da zero | skill `onboarding` |
-| pianificare una feature nuova | `HOW-TO-PLAN.md` se presente, `NEW-IDEAS.md`, `TECH-IMPROVEMENTS.md` |
+| pianificare una feature nuova | `docs/HOW-TO-PLAN.md`, `NEW-IDEAS.md`, `TECH-IMPROVEMENTS.md` |
 | capire come sta messo il sito | ultimo report in `docs/audits/` + skill `site-audit` per rifarlo |
 | modificare un contenuto che esiste gia' in IT e EN | skill `sync-translation` (`node scripts/check-translation-sync.mjs`) |
 | preparare l'email agli iscritti di un pezzo uscito | skill `newsletter-issue` + `docs/brand.md` §3.6 |
 
-> **Attenzione:** `HANDOFF.md` è in `.gitignore` e `HOW-TO-PLAN.md` non è versionato, quindi
-> esistono solo sulla macchina di Marco. Se non li trovi, non sono spariti: non li hai mai avuti.
-> Ricostruisci lo stato con `node scripts/status.mjs` e con la roadmap.
+> **Attenzione:** `HANDOFF.md` è in `.gitignore`, quindi esiste solo sulla macchina di Marco. Se
+> non lo trovi, non è sparito: non l'hai mai avuto. Ricostruisci lo stato con
+> `node scripts/status.mjs` e con la roadmap. Stessa cosa per i profili in `personas/`, di cui è
+> versionato solo il `README.md` col template e la regola di fallback.
 
-`docs/brand.md`, `docs/DESIGN-SYSTEM.md` ed `docs/editorial-guidelines.md` sono **fonte di
-verità**: se il codice o uno script diverge da lì, il bug è nel codice.
+`docs/brand.md`, `docs/DESIGN-SYSTEM.md`, `docs/editorial-guidelines.md` e `docs/workflow.md` sono
+**fonte di verità**: se il codice o uno script diverge da lì, il bug è nel codice. I primi tre
+dicono *cosa* si scrive e con che aspetto, `workflow.md` dice *in che ordine* e *chi fa cosa*.
 
 I primi due sono una coppia con ruoli distinti e **nessuna sovrapposizione**: `brand.md` dice
 *perché* (scopo, lettore, registro, voce, motivi visivi, asset canonici, ereditarietà sui prodotti
@@ -160,7 +163,10 @@ ferma il dev server, `rm -rf node_modules/.vite .astro`, riavvia.
 
 - Nel sandbox Linux `astro sync`/`build`, la generazione cover e il PDF **possono non girare**
   (`node_modules` compilati per macOS). Validare sempre in locale prima di pubblicare.
-  Dettagli e workaround in `HANDOFF.md`.
+  Dettagli e workaround in `HANDOFF.md`. **In CI il problema non si pone**: il workflow gira su
+  `ubuntu-latest` con `npm ci`, che installa i binari nativi giusti.
+- In una sessione Cowork la cartella `.claude/` è **protetta in scrittura**: skill, comandi e
+  settings si modificano da Claude Code nel terminale, non da lì.
 - `src/config.ts` contiene brand, Giscus e `CF_BEACON_TOKEN` (Cloudflare Web Analytics). Il token
   **non è segreto** ma si imposta come **variabile `CF_BEACON_TOKEN` in Cloudflare Workers Builds**,
   non nel codice: la env ha la precedenza. Newsletter (Buttondown): username in `NEWSLETTER`;
@@ -174,8 +180,12 @@ ferma il dev server, `rm -rf node_modules/.vite .astro`, riavvia.
 - **Una feature per sessione.** Tra un'idea e l'altra usa `/clear`: le sessioni lunghe finiscono
   in auto-compaction e da lì in poi Claude lavora su un riassunto, non sulla conversazione.
 - **Il piano sta su file, non in chat.** Feature non banali: scrivi il piano in `docs/` o in un
-  `.md` dedicato prima di implementare (vedi `HOW-TO-PLAN.md`), così sopravvive al cambio di
+  `.md` dedicato prima di implementare (vedi `docs/HOW-TO-PLAN.md`), così sopravvive al cambio di
   sessione o di modello.
+- **I cinque principi di `docs/workflow.md` §6 valgono anche fuori dal workflow editoriale**: un
+  solo posto conosce l'ordine di una catena; lo stato si deduce dagli artefatti invece di
+  memorizzarlo; la correttezza si impone in CI e gli hook la anticipano; il contesto è scarso,
+  quindi gli step autosufficienti girano isolati; una skill non documentata non esiste.
 - **Chiedi prima di eseguire** quando la richiesta è ambigua: l'intervista iniziale ha sempre
   prodotto risultati migliori del one-shot. Ma se le informazioni ci sono, **procedi senza chiedere
   micro-conferme**: le conferme si riservano alle decisioni vere (prodotto, costi, contenuti
@@ -210,3 +220,11 @@ fare il mestiere di un'altra, la divergenza è un bug: si corregge la skill.
 
 Usa la skill invece di andare a memoria. Se una skill è sbagliata o incompleta, correggila:
 è la fonte di verità del processo, non un promemoria.
+
+**Una skill che non è documentata non esiste.** La PR che introduce o modifica una skill aggiorna
+nello stesso commit questo elenco e la skill `onboarding`. Non è pedanteria: è l'unica difesa
+contro il processo reale e il processo documentato che divergono, che è il difetto che
+`docs/workflow.md` corregge.
+
+L'ordine in cui le skill editoriali si passano il lavoro sta in `docs/workflow.md` §1, non qui:
+quella tabella è l'unica a conoscerlo.

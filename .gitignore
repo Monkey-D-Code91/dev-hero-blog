@@ -21,13 +21,12 @@ npm-debug.log*
 .claude/settings.local.json
 
 # note personali (non condivise)
-personas/
+# La voce di un autore e' materiale privato, ma il template e le regole d'uso
+# vanno condivisi: personas/README.md fa eccezione ed e' versionato.
+personas/*
+!personas/README.md
 HANDOFF.md
 CLAUDE-IMPROVEMENTS.md
-HOW-TO-PLAN.md
 
 # PDF di revisione (artefatti generati, non versionati)
 feedback/
-
-# bozze delle uscite newsletter (il testo definitivo vive nell'archivio Buttondown)
-newsletter/

@@ -53,19 +53,40 @@ gli articoli con `draft: true` sono esclusi dalla build di produzione.
 - `docs/DESIGN-SYSTEM.md`: sistema di design (token, scale, componenti, accessibilità): i valori stanno qui
 - `docs/editorial-guidelines.md`: regole editoriali e privacy (mai nomi di persone, niente trattini lunghi, traduzione idiomatica)
 - `docs/content-roadmap.md`: roadmap editoriale interna (la pagina `/roadmap` è la versione pubblica)
+- `docs/workflow.md`: il processo editoriale (in che ordine si fanno le cose e chi fa cosa)
+
+## Come si contribuisce
+
+Cinque passi, dal clone al primo pezzo. Tutto quello che serve è nel repo.
+
+1. `npm ci`
+2. leggi `CLAUDE.md` (le regole vincolanti) e `docs/workflow.md` (il processo)
+3. invoca la skill `onboarding`, che ti accompagna nel resto
+4. crea il tuo profilo autore con la skill `add-author` (genera IT ed EN)
+5. metti la bozza del pezzo in `drafts/<slug>.md` e parti da lì
+
+Non serve arrivare con l'articolo finito: se hai solo un'idea, la skill `write-article`
+accompagna dalla prima intuizione alla bozza. Ogni pezzo deve comunque superare il filtro
+editoriale (esperienza reale, tesi, anti-listicle) e uscire in **entrambe le lingue**.
+
+Due cose restano a Marco, ed è una scelta, non un limite tecnico: il merge su `main` e l'invio
+della newsletter. Il perché sta in `docs/workflow.md` §5.
 
 ## Workflow editoriale
 
-Il flusso di scrittura e pubblicazione è guidato dalle skill Claude Code del repo
-(`.claude/skills/`): `onboarding` (punto di ingresso per chi è nuovo), `write-article`
-(co-scrittura dalla prima idea), `refine-article` (rifinitura di tono e stile),
-`add-author` (nuovo profilo autore IT+EN), `publish-article` (runbook del giorno di uscita),
-`podcast-repurpose` (kit episodio).
+L'ordine dei passaggi e i confini fra le skill stanno in `docs/workflow.md`, che è la fonte di
+verità del processo.
 
-Il lavoro sul repo è guidato da altre due skill: `roadmap-next` (prende il prossimo punto aperto
-da `TECH-IMPROVEMENTS.md` o `NEW-IDEAS.md` e lo porta fino alla PR) e `ship` (la coda git
-standard: branch, commit, PR, CI, merge). Le convenzioni vincolanti di progetto stanno in
-`CLAUDE.md`.
+Le skill del repo (`.claude/skills/`) sono: `onboarding` (punto di ingresso per chi è nuovo),
+`write-article` (co-scrittura dalla prima idea), `refine-article` (rifinitura di tono e stile),
+`add-author` (nuovo profilo autore IT+EN), `sync-translation` (allineamento delle coppie IT/EN),
+`publish-article` (runbook del giorno di uscita), `newsletter-issue` (l'uscita email),
+`podcast-repurpose` (kit episodio), `design` (solo per il fuori standard).
+
+Il lavoro sul repo è guidato da altre tre: `roadmap-next` (prende il prossimo punto aperto da
+`TECH-IMPROVEMENTS.md` o `NEW-IDEAS.md` e lo porta fino alla PR), `site-audit` (controllo
+periodico del sito, sola lettura) e `ship` (la coda git standard: branch, commit, PR, CI, merge).
+Le convenzioni vincolanti di progetto stanno in `CLAUDE.md`.
 
 ## CI
 

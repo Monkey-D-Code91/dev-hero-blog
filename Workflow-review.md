@@ -496,7 +496,7 @@ Sono emerse dieci incoerenze. Sei si chiudono nel piano, quattro hanno richiesto
 | V6 | Un collaboratore può mergiare da solo | PR richiesta e CI verde, ma zero approvazioni: pubblicazione e roadmap pubblica modificabili senza revisione umana | D18 |
 | V7 | Verdetti dentro `drafts/` | Con D17 `drafts/` è transitoria: un artefatto permanente non ci sta | D17 |
 | V8 | Nessuna lista di grandfathering | La CI fallirebbe dal primo giorno sui 4 articoli esistenti | F1, §8.2 |
-| V9 | `_design-review/` ancora tracciato | `TECH-IMPROVEMENTS.md` §10 dà la pulizia delle cartelle di lavorazione per implementata, ma questa è rimasta. Chi arriva non sa cos'è | F0 |
+| V9 | `_design-review/` ancora tracciato | `TECH-IMPROVEMENTS.md` §10 dà la pulizia delle cartelle di lavorazione per implementata, ma questa è rimasta. Non va cancellata: `site-audit/SKILL.md` e `docs/audits/README.md` la citano come contesto storico. Va spostata in `docs/archive/`, dov'è già la stessa classe di materiale | F0b |
 | V10 | Il `README.md` non dice come si contribuisce | È la prima pagina su GitHub: documenta stack e comandi, non il workflow | F0, §8.2 |
 
 Restano due asimmetrie **volute**, da scrivere in chiaro invece che lasciarle implicite: solo
@@ -507,21 +507,40 @@ una scelta), e solo Marco mergia (D18).
 
 ## 9. Piano
 
-### F0 — Fondamenta e confini (`docs/workflow-foundation`)
+> **Vincolo operativo scoperto in attuazione.** In una sessione Cowork la cartella `.claude/` è
+> **protetta in scrittura**: non solo `settings.json` e i comandi, ma anche le skill. Tutto ciò
+> che tocca `.claude/` va fatto da Claude Code nel terminale. Divisione pratica: Cowork per
+> documenti, cartelle, script e configurazione del repo; Claude Code per skill, comandi, agenti e
+> hook. Riguarda ogni fase da F0b in poi.
 
-1. `docs/workflow.md` e riga in `CLAUDE.md` §1; principi §3 in `CLAUDE.md` §8.
-2. Confini (G2): `refine-article` ridotta al tono con description riscritta, nasce
-   `finalize-article`, `publish-article` perde i passi 2, 6 e 7.
-3. `drafts/` versionata con README (G12).
-4. `personas/README.md`, `HOW-TO-PLAN.md` in `docs/`, `.claude/settings.json` versionato,
-   `/code-review` locale (G11).
-5. Regola P5 scritta in `CLAUDE.md` §9.
-6. `add-author` scrive la persona (D20); sezione "Come si contribuisce" nel `README.md` (V10);
-   riga su chi approva i contenuti sensibili di un collaboratore in `docs/workflow.md` (V5);
-   `_design-review/` rimossa dal repo (V9).
+### F0a — Impalcatura del repo (`docs/workflow-foundation`) — FATTA
+
+1. `docs/workflow.md`, con la catena, le tre fermate, chi approva i contenuti sensibili di un
+   collaboratore (V5), le asimmetrie volute (§5) e i cinque principi.
+2. `drafts/` e `social/` versionate con README che spiegano le convenzioni (G12, D17, D4).
+3. `newsletter/` fuori dal `.gitignore` con README (D19); `personas/*` ignorato con eccezione per
+   `README.md` (template e fallback, D20); `HOW-TO-PLAN.md` spostato in `docs/`.
+4. `CLAUDE.md`: riga per `docs/workflow.md` in §1, principi in §8, regola P5 in §9, correzione su
+   CI e ambiente in §7.
+5. `README.md`: sezione "Come si contribuisce" in cinque passi (V10).
+6. Preparati ma da installare a mano (vincolo `.claude/`): `settings.json` versionato,
+   `/code-review` locale, e le correzioni ai rimandi diventati falsi in `roadmap-next` e
+   `newsletter-issue`.
+
+### F0b — Confini delle skill (`refactor/confini-skill`)
+
+1. `refine-article` ridotta al tono, description riscritta perché non trigghi più su "pubblica";
+   evals riscritti sul nuovo perimetro (G2).
+2. Nasce `finalize-article` con metadati, slug, traduzione e scrittura della coppia.
+3. `publish-article` perde i passi 2, 6 e 7.
+4. `add-author` scrive la persona come ultimo passo (D20).
+5. `_design-review/` spostata in `docs/archive/` con i rimandi aggiornati in `site-audit/SKILL.md`
+   e `docs/audits/README.md` (V9, rinviata da F0a perché il rimando sta in una skill).
+6. `onboarding` riallineata alla nuova catena.
 
 *Fatto quando:* un collaboratore che legge solo `CLAUDE.md` e `docs/workflow.md` sa in che ordine
-succedono le cose e quale skill invocare.
+succedono le cose e quale skill invocare, e le skill fanno esattamente quello che il documento
+dice.
 
 ### F1 — Il gate editoriale (`feat/gate-article`)
 
@@ -529,8 +548,10 @@ succedono le cose e quale skill invocare.
    titoli/paragrafi, denylist per hash (D11), euristica nomi promossa a errore fuori da `drafts/`.
 2. `scripts/hash-denylist.mjs` per rigenerare gli hash dal file locale.
 3. Skill `gate-article`, verdetto a struttura fissa, cinque criteri con esito e motivazione.
-4. `scripts/check-gate-verdicts.mjs` + step in CI, con `gate-grandfathered.json` per i 4 articoli
-   esistenti (D16, V8).
+4. `scripts/check-gate-verdicts.mjs` + step in CI, con `gate-grandfathered.json` (D16, V8). In
+   grandfathering vanno i **4** pezzi già pubblicati o in uscita ad agosto: il draft "Musica #1"
+   di Fabio, che esce in ottobre, **passa dal gate** e diventa il primo verdetto vero, oltre che
+   il primo collaudo del gate su un pezzo non di Marco.
 5. `write-article` perde la Fase 1, invoca il gate e consegna in `drafts/<slug>.md` (V1).
 6. Evals per `gate-article` (3, di cui uno bocciato e uno borderline) e per `write-article`.
 7. Comando `/gate`.
