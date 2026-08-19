@@ -1,6 +1,6 @@
 # The First Draft — Roadmap editoriale
 
-_Ultimo aggiornamento: 2026-08-02 · Cadenza iniziale: 1 articolo ogni 10 giorni (obiettivo: settimanale)_
+_Ultimo aggiornamento: 2026-08-19 · Cadenza iniziale: 1 articolo ogni 10 giorni (obiettivo: settimanale)_
 
 Questo documento tiene l'ordine di pubblicazione della pipeline di articoli **a firma Marco**. Le date sono indicative: i pezzi dei collaboratori (vedi in fondo) si inseriscono tra un articolo e l'altro e spostano il calendario.
 
@@ -29,16 +29,16 @@ Bonus: lo sguardo **tech / human / AI** emerge in modo naturale.
 | 1 | Elogio dell'idea grezza (manifesto) | 2026-07-04 | ✅ Pubblicato |
 | 2 | Nell'era dell'AI si legge più di quanto si scrive | 2026-07-14 | ✅ Pubblicato |
 | 3 | Imparare a guidare, non a correre | 2026-07-24 | ✅ Pubblicato |
+| 4 | La sottile linea del codice | 2026-08-19 | ✅ Pubblicato |
 
 ## Pipeline
 
 | # | Titolo di lavoro | Data ind. | Origine | Focus | Effort | Angolo & note |
 |---|------------------|-----------|---------|-------|--------|----------------|
-| 4 | **La sottile linea del codice** | 2026-08-03 | Idea Marco | Tech · AI | Medio | Camminare sulla linea tra codice generato controllato e incontrollato. Converte il manifesto in pratica. **In attesa dell'ok del datore di lavoro**: è il vincolo che ha fatto scalare avanti il #3. **Perno: un caso reale** in cui il codice generato è sfuggito di mano, da cui ricavare le euristiche. Rischio: diventare il listicle che critica. |
-| 5 | **Cosa non delego all'AI** | 2026-08-13 | Suggerimento | Tech · Human · AI | Basso-medio | Il confine del giudizio umano, raccontato per decisioni concrete. Pezzo-tesi che tira le fila del filone; il tech/human/AI in forma pura. |
-| 6 | **Case study: 22s → 1.1s** | 2026-08-23 | Idea Marco | Tech (rigore) | **Alto** | Deep refactor di componenti frontend, query backend e API sullo stesso dataset. Il pezzo più credibile e condivisibile. **Prerequisiti: anonimizzare prodotto/dati/architettura + ok del Product Owner (PO); diagrammi e misurazioni.** Da fare quando c'è buffer di tempo. Opzionale: un paragrafo su dove l'AI ha aiutato e dove no. |
-| 7 | **Il costo nascosto del codice che non hai scritto** | 2026-09-02 | Suggerimento | Tech · Human | Medio | Manutenibilità e ownership del codice generato in un contesto B2B secure: chi lo capisce fra sei mesi? Prolunga il case study nelle conseguenze di lungo periodo; è il tuo dominio esatto. |
-| 8 | **Criticità e vantaggi di un team distribuito Italia–Albania** | 2026-09-12 | Idea Marco | Human (+ AI) | Medio | Differenze culturali, seniority diverse, capirsi in inglese. Il più personale. Cambio di ritmo dopo un filone tecnico. **Da scrivere con rispetto e umiltà, dal lato di cosa hai imparato tu**, mai come giudizio sui colleghi. Aggancio al filo: async, inglese lingua franca, AI come livellatore linguistico. |
+| 5 | **Cosa non delego all'AI** | 2026-08-29 | Suggerimento | Tech · Human · AI | Basso-medio | Il confine del giudizio umano, raccontato per decisioni concrete. Pezzo-tesi che tira le fila del filone; il tech/human/AI in forma pura. |
+| 6 | **Case study: 22s → 1.1s** | 2026-09-08 | Idea Marco | Tech (rigore) | **Alto** | Deep refactor di componenti frontend, query backend e API sullo stesso dataset. Il pezzo più credibile e condivisibile. **Prerequisiti: anonimizzare prodotto/dati/architettura + ok del Product Owner (PO); diagrammi e misurazioni.** Da fare quando c'è buffer di tempo. Opzionale: un paragrafo su dove l'AI ha aiutato e dove no. |
+| 7 | **Il costo nascosto del codice che non hai scritto** | 2026-09-18 | Suggerimento | Tech · Human | Medio | Manutenibilità e ownership del codice generato in un contesto B2B secure: chi lo capisce fra sei mesi? Prolunga il case study nelle conseguenze di lungo periodo; è il tuo dominio esatto. |
+| 8 | **Criticità e vantaggi di un team distribuito Italia–Albania** | 2026-09-28 | Idea Marco | Human (+ AI) | Medio | Differenze culturali, seniority diverse, capirsi in inglese. Il più personale. Cambio di ritmo dopo un filone tecnico. **Da scrivere con rispetto e umiltà, dal lato di cosa hai imparato tu**, mai come giudizio sui colleghi. Aggancio al filo: async, inglese lingua franca, AI come livellatore linguistico. |
 
 ## Note sulla struttura
 
@@ -73,7 +73,7 @@ _Tema portante: dal controllare il codice generato al progettare il sistema uomo
 | # | Titolo di lavoro | Firma | Focus | Effort | Ruolo & note |
 |---|------------------|-------|-------|--------|--------------|
 | 9 | **The new loop** | Marco | Tech · AI · Human | Medio | Cappello dell'arco: dal human-in-the-loop al loop chiuso dev↔AI su ogni fase del workflow. **Da ancorare a un episodio reale** (una fase dove il loop si è chiuso e ti ha sorpreso), altrimenti resta teoria. Gestire la tensione col manifesto e con l'articolo 5: non "il confine sparisce" ma "decido dove tengo la mano sul volante". |
-| 10 | **Musica #1 — l'origine** ("Dove vive una canzone, quando la ascolti") | Fabio Ziliani | Human · AI | — | "Conta sapere chi ha scritto una cosa, per poterla amare?" Respiro dopo il concettuale; eco del cappello (AI come specchio dell'umano). Titolo ufficiale definito, draft pronto in `src/content/blog/{it,en}` (pubDate allineata alla roadmap pubblica: 2026-10-02). |
+| 10 | **Musica #1 — l'origine** ("Dove vive una canzone, quando la ascolti") | Fabio Ziliani | Human · AI | — | "Conta sapere chi ha scritto una cosa, per poterla amare?" Respiro dopo il concettuale; eco del cappello (AI come specchio dell'umano). Titolo ufficiale definito, draft pronto in `src/content/blog/{it,en}` (pubDate allineata alla roadmap pubblica: 2026-10-18). |
 | 11 | **Context fantastici e dove trovarli** (estrazione) | Marco | Tech · Human | Medio-alto | Skill che a ogni code review estrae dal dev il contesto mancante; struttura gerarchica modulo→feature; il contesto alimenta l'AI per meno iterazioni. La prova concreta del "new loop". **Dittico con l'articolo 7** (7 pone il problema, questo è la risposta ingegneristica). Rischio: diventare changelog/annuncio di prodotto → la tesi resta sul principio (il contesto come asset di prima classe, estratto quando la conoscenza è fresca), i dettagli sono prova non contenuto. Anonimizzazione + probabile ok PO. |
 | 12 | **Musica #2 — la profondità** | Fabio Ziliani | Human · AI | — | "Una cosa vera deve per forza essere seria, sofferta, importante?" L'ironia come forma legittima di sincerità. Respiro leggero. |
 | 13 | **AI ed etica #1** | Collab | Human · AI | — | Apre il filone etica. Tema/i da definire col collaboratore. |
@@ -93,4 +93,4 @@ _Da riprendere alla prossima sessione. Le prime tre voci sbloccano la sequenza d
 - [ ] **#11 e #14 (context)**: valutare clearance PO e anonimizzazione (stesso vincolo del case study #6); decidere se separarli ancora di più o inserire uno slot cuscinetto a basso effort tra i due.
 - [ ] **#11 context**: decidere il titolo. Il riferimento a J.K. Rowling ("Animali fantastici e dove trovarli") ammicca a una public figure controversa: valutare se il tono del pezzo regge la leggerezza o se stona su un tema tecnico. Da decidere in fase di scrittura.
 - [ ] **Serie musica**: confermare con Fabio l'ordine e la ravvicinatura degli ultimi due pezzi (chiusura del cerchio).
-- [ ] **Rivedere le date indicative** una volta fissata la sequenza (il primo arco chiude ~2026-09-12; il secondo parte ~10 giorni dopo, poi slitta a ogni inserimento).
+- [ ] **Rivedere le date indicative** una volta fissata la sequenza (il primo arco chiude ~2026-09-28; il secondo parte ~10 giorni dopo, poi slitta a ogni inserimento).

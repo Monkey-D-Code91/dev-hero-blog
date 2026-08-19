@@ -22,28 +22,28 @@ items:
     status: published
     focus: [Human, AI]
     authorName: Marco Mariotti
-  - title: La sottile linea del codice
-    date: 2026-08-03
-    status: planned
+  - postTranslationKey: the-fine-line-of-code
+    date: 2026-08-19
+    status: published
     focus: [Tech, AI]
     authorName: Marco Mariotti
   - title: Cosa non delego all'AI
-    date: 2026-08-13
+    date: 2026-08-29
     status: planned
     focus: [Tech, Human, AI]
     authorName: Marco Mariotti
   - title: "Case study: 22s → 1.1s"
-    date: 2026-08-23
+    date: 2026-09-08
     status: planned
     focus: [Tech]
     authorName: Marco Mariotti
   - title: Il costo nascosto del codice che non hai scritto
-    date: 2026-09-02
+    date: 2026-09-18
     status: planned
     focus: [Tech, Human]
     authorName: Marco Mariotti
   - title: Criticità e vantaggi di un team distribuito Italia–Albania
-    date: 2026-09-12
+    date: 2026-09-28
     status: planned
     focus: [Human, AI]
     authorName: Marco Mariotti
