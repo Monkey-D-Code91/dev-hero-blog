@@ -9,7 +9,8 @@ description: >
   cose come "chiudi", "fai la PR", "committa e apri la PR", "manda in PR", "shippa", "mergia",
   "porta a casa questa modifica", "ship it", "open the PR", "close this out". Non e' la skill che
   decide COSA fare (per quello: roadmap-next) ne' che pubblica un articolo (publish-article, che
-  usa questa skill per la sua coda git). Non fa mai push diretti su main e non usa mai --admin.
+  usa questa skill per la sua coda git). Non fa mai push diretti su main e non mergia mai con la
+  CI rossa.
 ---
 
 # ship — Dalla modifica al merge
@@ -172,13 +173,22 @@ git push
 Secondo punto di conferma: il merge lo fai **su ok esplicito di Marco**.
 
 ```bash
-gh pr merge --squash --delete-branch
+gh pr merge --squash --delete-branch --admin
 git switch main && git pull
 git remote prune origin        # opzionale: ripulisce i riferimenti ai branch remoti cancellati
 ```
 
-**Mai `--admin`.** Con `enforce_admins: true` non funzionerebbe comunque, ma la ragione vera e'
-che quel flag serviva a saltare i controlli, e i controlli sono il punto.
+**`--admin` qui e' la procedura normale, non una forzatura** (`CLAUDE.md` §2). Sul repo agisce il
+ruleset `No_thanks`, che richiede 1 approvazione su tutti i branch: Marco e' l'unico maintainer e
+su GitHub nessuno puo' approvare la propria PR, quindi senza bypass ogni PR resta `BLOCKED` per
+sempre. Il flag salta **solo** quel gate.
+
+Quello che `--admin` non autorizza, e che non si aggira mai: la PR obbligatoria (niente push
+diretti su `main`, respinti per tutti con `enforce_admins: true`), la **CI verde**, il branch
+aggiornato rispetto a `main`. Se il merge fallisce anche con `--admin`, la causa e' una di queste
+due: CI rossa, e allora si aggiusta il codice; oppure branch indietro, e allora
+`git switch <branch> && git merge origin/main && git push`. Se ti viene voglia di usare `--admin`
+per qualcosa che non sia l'approvazione mancante, stai forzando la cosa sbagliata: fermati.
 
 Chiudi riportando: cosa e' stato mergiato, il numero della PR, e cosa resta da fare a mano se
 resta qualcosa (aggiornare `HANDOFF.md`, un passo manuale su Cloudflare o Buttondown, un post
@@ -202,9 +212,10 @@ bug: si corregge la skill, non si segue la versione vecchia.
 
 - **`git add -A`**. Un file di appunti non tracciato diventa pubblico e la storia se lo tiene.
 - **Committare senza aver letto il diff.** La lista dei file non e' il diff.
-- **Forzare un merge con CI rossa**, con `--admin` o disattivando la protezione. Se la protezione
-  va davvero disattivata per una causa esterna, e' una decisione di Marco, esplicita, e si
-  riattiva subito dopo.
+- **Forzare un merge con CI rossa.** `--admin` serve a saltare il gate delle approvazioni, mai i
+  controlli: con la CI rossa si aggiusta il codice. Vale lo stesso per il disattivare la
+  protezione o il ruleset: se serve davvero per una causa esterna, e' una decisione di Marco,
+  esplicita, e si riattiva subito dopo.
 - **Un commit gigante che chiude tre lavori diversi.** Una PR, un cambiamento comprensibile.
 - **Messaggio di commit in inglese** o non conventional: il repo ha una storia mista per ragioni
   storiche, la convenzione attuale e' italiano + conventional commit.
