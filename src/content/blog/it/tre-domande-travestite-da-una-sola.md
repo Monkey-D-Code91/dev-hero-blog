@@ -47,11 +47,11 @@ Tre domande separate vogliono tre risposte separate: tre query nel backend, cias
 
 So che cosa costa questa scelta. Tre query specializzate sono tre punti da aggiornare quando il modello cambia, mentre quella generica era uno solo: ho accettato una duplicazione in cambio della selettività. Il riuso è un principio, ed è uno di quelli buoni. Ma i principi esistono per un motivo, e parte del mestiere è sapere quando deformarli senza perdere di vista il risultato per cui lo stai facendo. Qui il risultato era una pagina che si aprisse in tempo utile per chi era stato appena avvisato, e nessuna aggregazione riusabile ci arrivava.
 
-Sul frontend le tre risposte sono diventate tre momenti. Le prime due partono insieme quando la pagina si apre: le statistiche generali tornano in 88 millisecondi, i dati aggregati delle notifiche in poco più di un secondo, e la pagina è pronta quando è arrivata la più lenta delle due. La terza non parte affatto, finché non serve. Quando apri una notifica, e solo quella, arrivano i suoi dettagli e le sue utenze, altri settecento millisecondi. Se la richiudi e la riapri, quello che avevi è ancora lì.
+Sul frontend le tre risposte sono diventate tre momenti. Le prime due partono insieme quando la pagina si apre: le statistiche generali tornano in 88 millisecondi, i dati aggregati delle notifiche in poco più di un secondo, e la pagina è pronta appena arriva la più lenta delle due. La terza non parte affatto, finché non serve. Quando apri una notifica, e solo quella, arrivano i suoi dettagli e le sue utenze, altri settecento millisecondi. Se la richiudi e la riapri, quello che avevi è ancora lì.
 
 ![Due barre sulla stessa scala temporale: prima ventidue secondi, dopo un secondo e un decimo. Un riquadro ingrandisce il primo secondo e mostra le due chiamate che partono insieme, di 88 e di 1100 millisecondi, e una terza di 700 millisecondi che parte da un click.](../../../assets/diagrams/tre-domande-travestite-da-una-sola.png)
 
-*Le due barre in alto sono sulla stessa scala. Il riquadro ingrandisce il primo secondo: le due chiamate che partono insieme all'apertura, e la terza che parte solo quando apri una notifica.*
+*Le due barre in alto stanno sulla stessa scala: il confronto è a occhio nudo. Il riquadro ingrandisce quel primo secondo.*
 
 Ventidue secondi diventati poco più di uno.
 
