@@ -41,3 +41,13 @@ Non era un problema di performance, ma di dominio. Quella pagina non era lenta, 
 
 È lo stesso sguardo del [pezzo precedente](/blog/la-sottile-linea-del-codice), rovesciato. Là avevo mappato un dominio a metà, mi ero dimenticato che le notifiche non soltanto scattano ma si rinnovano, e il pezzo che mancava mi è tornato indietro a fine mese sotto forma di guasto. Qui il dominio c'era tutto, però stava in un blocco unico: tre cose diverse tenute insieme da una funzione sola. Nel primo caso il conto l'ho pagato con un errore. Nel secondo con ventidue secondi.
 
+Da qui in poi il lavoro è stato quasi meccanico, ed è la parte che di solito viene raccontata per prima.
+
+Tre domande separate vogliono tre risposte separate: tre query nel backend, ciascuna costruita per la sua, e tre modi diversi di chiederle dal frontend. Arrivato lì la tentazione era riusare le aggregazioni che già esistevano, adattandole. Ho scelto di non farlo e di scriverne tre mirate, ognuna con le sole tabelle che le servono davvero: da otto join per rispondere a tutto si è scesi a tre per ciascun sotto dominio, e i filtri sono saliti a monte, così ogni query si porta dietro una frazione dei dati che leggeva prima, invece di scartarli dopo averli letti.
+
+So che cosa costa questa scelta. Tre query specializzate sono tre punti da aggiornare quando il modello cambia, mentre quella generica era uno solo: ho accettato una duplicazione in cambio della selettività. Il riuso è un principio, ed è uno di quelli buoni. Ma i principi esistono per un motivo, e parte del mestiere è sapere quando deformarli senza perdere di vista il risultato per cui lo stai facendo. Qui il risultato era una pagina che si aprisse in tempo utile per chi era stato appena avvisato, e nessuna aggregazione riusabile ci arrivava.
+
+Sul frontend le tre risposte sono diventate tre momenti. Le prime due partono insieme quando la pagina si apre: le statistiche generali tornano in 88 millisecondi, i dati aggregati delle notifiche in poco più di un secondo, e la pagina è pronta quando è arrivata la più lenta delle due. La terza non parte affatto, finché non serve. Quando apri una notifica, e solo quella, arrivano i suoi dettagli e le sue utenze, altri settecento millisecondi. Se la richiudi e la riapri, quello che avevi è ancora lì.
+
+Ventidue secondi diventati poco più di uno.
+
