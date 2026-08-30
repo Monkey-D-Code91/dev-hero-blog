@@ -1,6 +1,6 @@
 # The First Draft — Roadmap editoriale
 
-_Ultimo aggiornamento: 2026-08-02 · Cadenza iniziale: 1 articolo ogni 10 giorni (obiettivo: settimanale)_
+_Ultimo aggiornamento: 2026-08-30 · Cadenza iniziale: 1 articolo ogni 10 giorni (obiettivo: settimanale)_
 
 Questo documento tiene l'ordine di pubblicazione della pipeline di articoli **a firma Marco**. Le date sono indicative: i pezzi dei collaboratori (vedi in fondo) si inseriscono tra un articolo e l'altro e spostano il calendario.
 
@@ -35,10 +35,10 @@ Bonus: lo sguardo **tech / human / AI** emerge in modo naturale.
 
 | # | Titolo di lavoro | Data ind. | Origine | Focus | Effort | Angolo & note |
 |---|------------------|-----------|---------|-------|--------|----------------|
-| 5 | **Cosa non delego all'AI** | 2026-08-13 | Suggerimento | Tech · Human · AI | Basso-medio | Il confine del giudizio umano, raccontato per decisioni concrete. Pezzo-tesi che tira le fila del filone; il tech/human/AI in forma pura. |
-| 6 | **Case study: 22s → 1.1s** | 2026-08-23 | Idea Marco | Tech (rigore) | **Alto** | Deep refactor di componenti frontend, query backend e API sullo stesso dataset. Il pezzo più credibile e condivisibile. **Prerequisiti: anonimizzare prodotto/dati/architettura + ok del Product Owner (PO); diagrammi e misurazioni.** Da fare quando c'è buffer di tempo. Opzionale: un paragrafo su dove l'AI ha aiutato e dove no. |
-| 7 | **Il costo nascosto del codice che non hai scritto** | 2026-09-02 | Suggerimento | Tech · Human | Medio | Manutenibilità e ownership del codice generato in un contesto B2B secure: chi lo capisce fra sei mesi? Prolunga il case study nelle conseguenze di lungo periodo; è il tuo dominio esatto. |
-| 8 | **Criticità e vantaggi di un team distribuito Italia–Albania** | 2026-09-12 | Idea Marco | Human (+ AI) | Medio | Differenze culturali, seniority diverse, capirsi in inglese. Il più personale. Cambio di ritmo dopo un filone tecnico. **Da scrivere con rispetto e umiltà, dal lato di cosa hai imparato tu**, mai come giudizio sui colleghi. Aggancio al filo: async, inglese lingua franca, AI come livellatore linguistico. |
+| 5 | **Cosa non delego all'AI** | 2026-09-09 | Suggerimento | Tech · Human · AI | Basso-medio | Il confine del giudizio umano, raccontato per decisioni concrete. Pezzo-tesi che tira le fila del filone; il tech/human/AI in forma pura. |
+| 6 | **Case study: 22s → 1.1s** | 2026-09-19 | Idea Marco | Tech (rigore) | **Alto** | Deep refactor di componenti frontend, query backend e API sullo stesso dataset. Il pezzo più credibile e condivisibile. **Prerequisiti: anonimizzare prodotto/dati/architettura + ok del Product Owner (PO); diagrammi e misurazioni.** Da fare quando c'è buffer di tempo. Opzionale: un paragrafo su dove l'AI ha aiutato e dove no. |
+| 7 | **Il costo nascosto del codice che non hai scritto** | 2026-09-29 | Suggerimento | Tech · Human | Medio | Manutenibilità e ownership del codice generato in un contesto B2B secure: chi lo capisce fra sei mesi? Prolunga il case study nelle conseguenze di lungo periodo; è il tuo dominio esatto. |
+| 8 | **Criticità e vantaggi di un team distribuito Italia–Albania** | 2026-10-09 | Idea Marco | Human (+ AI) | Medio | Differenze culturali, seniority diverse, capirsi in inglese. Il più personale. Cambio di ritmo dopo un filone tecnico. **Da scrivere con rispetto e umiltà, dal lato di cosa hai imparato tu**, mai come giudizio sui colleghi. Aggancio al filo: async, inglese lingua franca, AI come livellatore linguistico. |
 
 ## Note sulla struttura
 
@@ -93,4 +93,4 @@ _Da riprendere alla prossima sessione. Le prime tre voci sbloccano la sequenza d
 - [ ] **#11 e #14 (context)**: valutare clearance PO e anonimizzazione (stesso vincolo del case study #6); decidere se separarli ancora di più o inserire uno slot cuscinetto a basso effort tra i due.
 - [ ] **#11 context**: decidere il titolo. Il riferimento a J.K. Rowling ("Animali fantastici e dove trovarli") ammicca a una public figure controversa: valutare se il tono del pezzo regge la leggerezza o se stona su un tema tecnico. Da decidere in fase di scrittura.
 - [ ] **Serie musica**: confermare con Fabio l'ordine e la ravvicinatura degli ultimi due pezzi (chiusura del cerchio).
-- [ ] **Rivedere le date indicative** una volta fissata la sequenza (il primo arco chiude ~2026-09-12; il secondo parte ~10 giorni dopo, poi slitta a ogni inserimento).
+- [ ] **Rivedere le date indicative** una volta fissata la sequenza (il primo arco chiude ~2026-10-09; il secondo parte ~10 giorni dopo, poi slitta a ogni inserimento).
