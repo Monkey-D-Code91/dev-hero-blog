@@ -6,6 +6,8 @@ translationKey: "three-questions-disguised-as-one"
 focus: ["tech"]
 authors: ["marco-mariotti"]
 tags: ["case-study", "performance", "dominio-funzionale", "ingegneria-del-software"]
+openQuestions:
+  - question: "Quante altre leve restano invisibili finché non separi i domini di una cosa che credevi una sola?"
 draft: true
 ---
 
@@ -23,7 +25,7 @@ Perché la decisione che stava sotto al pasticcio, carico tutto quello che mi se
 
 Quando mi ci sono messo, quindi, la domanda ovvia era una sola: come faccio ad andare più veloce? È la domanda che non ho fatto.
 
-"Come faccio ad andare più veloce" è una domanda che ti porta sempre nello stesso posto: dentro le query. Le profili, aggiungi un indice, riscrivi una join, e con un po' di lavoro porti ventidue secondi a quindici. Sarebbe stato un risultato. E la pagina sarebbe rimasta inutilizzabile.
+"Come faccio ad andare più veloce" è una domanda che ti porta sempre nello stesso posto: dentro le query. E il tempo stava davvero lì: di quei ventidue secondi, diciassette erano query. È questo che rende la trappola convincente. Le profili, aggiungi un indice, riscrivi una join, e con un po' di lavoro ne togli cinque o sei. Sarebbe stato un risultato. E la pagina sarebbe rimasta inutilizzabile.
 
 A fermarmi è stato un numero che non tornava. Su quel cliente le notifiche configurate erano diciassette. Diciassette righe da disegnare, ventidue secondi per disegnarle. Qualunque cosa costasse tutto quel tempo, non era la quantità di informazioni da mostrare: era la profondità a cui ognuna andava a pescare.
 
