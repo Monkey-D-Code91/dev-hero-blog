@@ -29,12 +29,12 @@ Bonus: lo sguardo **tech / human / AI** emerge in modo naturale.
 | 1 | Elogio dell'idea grezza (manifesto) | 2026-07-04 | ✅ Pubblicato |
 | 2 | Nell'era dell'AI si legge più di quanto si scrive | 2026-07-14 | ✅ Pubblicato |
 | 3 | Imparare a guidare, non a correre | 2026-07-24 | ✅ Pubblicato |
+| 4 | La sottile linea del codice | 2026-08-30 | ✅ Pubblicato |
 
 ## Pipeline
 
 | # | Titolo di lavoro | Data ind. | Origine | Focus | Effort | Angolo & note |
 |---|------------------|-----------|---------|-------|--------|----------------|
-| 4 | **La sottile linea del codice** | 2026-08-03 | Idea Marco | Tech · AI | Medio | Camminare sulla linea tra codice generato controllato e incontrollato. Converte il manifesto in pratica. **In attesa dell'ok del datore di lavoro**: è il vincolo che ha fatto scalare avanti il #3. **Perno: un caso reale** in cui il codice generato è sfuggito di mano, da cui ricavare le euristiche. Rischio: diventare il listicle che critica. |
 | 5 | **Cosa non delego all'AI** | 2026-08-13 | Suggerimento | Tech · Human · AI | Basso-medio | Il confine del giudizio umano, raccontato per decisioni concrete. Pezzo-tesi che tira le fila del filone; il tech/human/AI in forma pura. |
 | 6 | **Case study: 22s → 1.1s** | 2026-08-23 | Idea Marco | Tech (rigore) | **Alto** | Deep refactor di componenti frontend, query backend e API sullo stesso dataset. Il pezzo più credibile e condivisibile. **Prerequisiti: anonimizzare prodotto/dati/architettura + ok del Product Owner (PO); diagrammi e misurazioni.** Da fare quando c'è buffer di tempo. Opzionale: un paragrafo su dove l'AI ha aiutato e dove no. |
 | 7 | **Il costo nascosto del codice che non hai scritto** | 2026-09-02 | Suggerimento | Tech · Human | Medio | Manutenibilità e ownership del codice generato in un contesto B2B secure: chi lo capisce fra sei mesi? Prolunga il case study nelle conseguenze di lungo periodo; è il tuo dominio esatto. |

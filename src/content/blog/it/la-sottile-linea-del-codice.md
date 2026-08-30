@@ -1,14 +1,14 @@
 ---
 title: "La sottile linea del codice"
 description: "Un modulo migrato, tutti i test verdi, e a fine mese le notifiche smettono di rinnovarsi. Dove passa la linea tra codice generato controllato e fuori controllo, e come restarci in equilibrio."
-pubDate: 2026-08-03
+pubDate: 2026-08-30
 translationKey: "the-fine-line-of-code"
 focus: ["tech", "ai"]
 authors: ["marco-mariotti"]
 tags: ["ai", "codice-generato", "ingegneria-del-software", "pensiero-critico"]
 cover: "../../../assets/covers/la-sottile-linea-del-codice.png"
 coverAlt: "Copertina di The First Draft: tre cerchi sovrapposti (tech, human e AI) che si incontrano in un punto luminoso, con il titolo 'La sottile linea del codice' sottolineato a mano come una correzione di bozza."
-draft: true
+draft: false
 ---
 
 Avevamo costruito un modulo nuovo: un sistema di notifiche e azioni automatiche che scattano al raggiungimento di certe soglie. La parte più complessa l'abbiamo generata da zero, partendo dalle specifiche della PO, raffinate in brainstorming, tradotte in documentazione e stories, implementate con l'aiuto dell'AI e coperte da test automatici e QA. Tutto verde.
