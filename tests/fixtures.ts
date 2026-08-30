@@ -125,4 +125,54 @@ export const roadmapFixtures = [
       upcomingTeaser: undefined,
     },
   },
+  {
+    // Secondo capitolo: corre in PARALLELO al primo, con cadenza propria.
+    // Serve a verificare che la data esatta sia calcolata per capitolo:
+    // la sua prossima tappa (2026-08-20) e' piu' lontana di quella del
+    // capitolo I (2026-08-03), ma deve comunque mostrare il giorno.
+    id: "it/arco-2",
+    data: {
+      arcKey: "arco-2",
+      order: 2,
+      numeral: "II",
+      title: "Secondo arco",
+      lead: "Occhiello del secondo capitolo.",
+      period: "Set – Nov 2026",
+      signature: "a firma Fabio",
+      items: [
+        {
+          title: "Prossima del secondo capitolo",
+          date: new Date("2026-08-20"),
+          status: "planned",
+          focus: ["Human"],
+          authorName: "Fabio Ziliani",
+          collaborator: true,
+        },
+        {
+          title: "Futura del secondo capitolo",
+          date: new Date("2026-10-10"),
+          status: "planned",
+          focus: ["Human"],
+          authorName: "Fabio Ziliani",
+          collaborator: true,
+        },
+      ],
+      upcomingTeaser: undefined,
+    },
+  },
+  {
+    // Capitolo annunciato ma ancora senza tappe: non deve rompere nulla.
+    id: "it/arco-3",
+    data: {
+      arcKey: "arco-3",
+      order: 3,
+      numeral: "III",
+      title: "Capitolo vuoto",
+      lead: "Filone deciso, pezzi non ancora definiti.",
+      period: "In definizione",
+      signature: "arco corale",
+      items: [],
+      upcomingTeaser: { label: "In arrivo", text: "Presto." },
+    },
+  },
 ];

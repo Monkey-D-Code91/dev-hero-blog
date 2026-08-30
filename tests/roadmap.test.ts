@@ -43,6 +43,28 @@ describe("getResolvedRoadmap (ereditarietà roadmap→blog)", () => {
     expect(future.dateLabel).toBe("settembre 2026");
   });
 
+  it("ogni capitolo mostra la data esatta della PROPRIA prossima tappa", async () => {
+    const [arcI, arcII] = await getResolvedRoadmap("it");
+    // La prossima del capitolo II (20 agosto) e' piu' lontana della prossima
+    // del capitolo I (3 agosto): con la regola globale sarebbe degradata a
+    // mese. I capitoli corrono in parallelo, quindi deve restare esatta.
+    expect(arcI.items[1].dateLabel).toBe("3 agosto 2026");
+    expect(arcII.items[0].dateLabel).toBe("20 agosto 2026");
+  });
+
+  it("dopo la prossima tappa, le altre del capitolo degradano comunque a mese", async () => {
+    const [, arcII] = await getResolvedRoadmap("it");
+    expect(arcII.items[1].dateLabel).toBe("ottobre 2026");
+  });
+
+  it("un capitolo senza tappe non rompe la risoluzione e ha progresso 0 su 0", async () => {
+    const arcs = await getResolvedRoadmap("it");
+    const empty = arcs.find((a) => a.arcKey === "arco-3");
+    expect(empty?.items).toEqual([]);
+    expect(empty?.progress).toEqual({ done: 0, total: 0 });
+    expect(empty?.upcomingTeaser?.label).toBe("In arrivo");
+  });
+
   it("calcola il progresso dell'arco", async () => {
     const [arc] = await getResolvedRoadmap("it");
     expect(arc.progress).toEqual({ done: 1, total: 3 });
@@ -55,7 +77,8 @@ describe("getRoadmapStats", () => {
     const stats = getRoadmapStats(arcs);
     expect(stats.firstArcDone).toBe(1);
     expect(stats.firstArcTotal).toBe(3);
-    expect(stats.pipelineCount).toBe(2);
+    // Aggregato su TUTTI i capitoli: 2 del primo + 2 del secondo.
+    expect(stats.pipelineCount).toBe(4);
     expect(stats.signatures).toBe(2);
   });
 });
