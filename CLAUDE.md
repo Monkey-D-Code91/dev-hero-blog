@@ -57,15 +57,27 @@ parla dello stesso argomento. Un valore non si duplica mai tra i due: nel dubbio
   git push -u origin feat/<slug>
   gh pr create --fill                 # titolo + descrizione in italiano
   gh pr checks --watch                # aspetta la CI verde
-  gh pr merge --squash --delete-branch
+  gh pr merge --squash --delete-branch --admin
   git switch main && git pull
   ```
 
-- **Merge:** la protezione richiede la PR e la CI verde, **zero approvazioni** (Marco è l'unico
-  maintainer). Quindi `gh pr merge --squash --delete-branch` basta: **non usare `--admin`**
-  (con `enforce_admins: true` non funzionerebbe comunque). Se il merge viene rifiutato le cause
-  sono due: CI rossa, oppure branch non aggiornato rispetto a `main` (`strict: true`). Nel
-  secondo caso: `git switch <branch> && git merge origin/main && git push`.
+- **Merge: serve `--admin`, ed è la procedura normale, non un'eccezione.** Sul repo agisce il
+  ruleset `No_thanks`, che su tutti i branch richiede **1 approvazione**, code owner review e
+  last push approval. Marco è l'unico maintainer e su GitHub nessuno può approvare la propria
+  PR: quindi ogni PR resta `BLOCKED` per sempre e GitHub non mostra nemmeno il pulsante di
+  approvazione. L'unico modo di chiuderla è il bypass concesso al ruolo admin:
+  `gh pr merge --squash --delete-branch --admin`.
+- **Cosa `--admin` NON autorizza.** Il bypass salta *solo* il gate delle approvazioni. Restano
+  vincolanti e non si aggirano mai: la PR obbligatoria (niente push diretti su `main`), la CI
+  verde, il branch aggiornato rispetto a `main` (`strict: true`). **Non si mergia mai con la CI
+  rossa** e non si disattiva la protezione per farci passare qualcosa. Se `--admin` serve per
+  altro che non sia l'approvazione mancante, è il segnale che stai forzando la cosa sbagliata.
+- Se il merge viene rifiutato anche con `--admin`, le cause sono due: CI rossa (si aggiusta il
+  codice, non il merge), oppure branch non aggiornato rispetto a `main`. Nel secondo caso:
+  `git switch <branch> && git merge origin/main && git push`.
+- Il ruleset resta volutamente così: il giorno in cui un collaboratore avrà il permesso di write,
+  il gate sull'approvazione varrà per le sue PR senza dover riconfigurare nulla. Il push diretto
+  su `main` resta comunque respinto per tutti, admin inclusi (`enforce_admins: true`).
 - Contenuti sensibili (dati del datore di lavoro): **prima l'ok del Product Owner, poi il commit**.
   Quello che entra nella storia git non si toglie più davvero.
 - File privati (`personas/`, `feedback/` locali) restano fuori dal repo: non forzarli dentro.
