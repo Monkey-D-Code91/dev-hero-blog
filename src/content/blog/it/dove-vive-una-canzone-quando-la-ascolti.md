@@ -1,7 +1,7 @@
 ---
 title: "Dove vive una canzone, quando la ascolti"
 description: "Un brano nato dall'intelligenza artificiale mi ha commosso: da lì una riflessione su dove viva davvero la musica, e a chi appartenga il suo valore."
-pubDate: 2026-10-02
+pubDate: 2026-10-29
 translationKey: "where-a-song-lives-when-you-listen"
 focus: ["human", "ai"]
 authors: ["fabio-ziliani"]
