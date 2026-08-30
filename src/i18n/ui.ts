@@ -229,7 +229,7 @@ export const ui = {
       eyebrow: "La roadmap in capitoli",
       heading: "Un blog che si legge come un romanzo",
       intro:
-        "Ogni arco è un capitolo. Ti raccontiamo dove sta andando First Draft e perché, un articolo alla volta.",
+        "Ogni capitolo raccoglie un filone e corre per conto suo, in parallelo agli altri. Ti raccontiamo dove sta andando First Draft e perché.",
       stats: { firstArc: "Arco I", pipeline: "In pipeline", signatures: "Firme" },
       status: {
         published: "Pubblicato",
@@ -472,7 +472,7 @@ export const ui = {
       eyebrow: "The roadmap in chapters",
       heading: "A blog that reads like a novel",
       intro:
-        "Each arc is a chapter. We tell you where First Draft is heading and why, one article at a time.",
+        "Each chapter gathers one thread and runs on its own, in parallel with the others. We tell you where First Draft is heading and why.",
       stats: { firstArc: "Arc I", pipeline: "In pipeline", signatures: "Bylines" },
       status: {
         published: "Published",

@@ -3,50 +3,23 @@ arcKey: arco-2
 order: 2
 numeral: "II"
 title: Progettare il loop uomo-AI
-lead: Dalla disciplina personale al sistema. Non più "io e il codice", ma io che progetto il loop dev↔AI, con i temi umani che ci girano attorno.
-period: Ott 2026 →
-signature: arco corale
+lead: 'Dalla disciplina personale al sistema. Non più "io e il codice", ma io che progetto il loop dev↔AI e ne rendo il contesto un asset di prima classe.'
+period: Ott – Nov 2026
+signature: a firma Marco
 items:
   - title: The new loop
     date: 2026-10-19
     status: planned
     focus: [Tech, AI, Human]
     authorName: Marco Mariotti
-  - title: "Dove vive una canzone, quando la ascolti"
+  - title: Context fantastici e dove trovarli
     date: 2026-10-29
     status: planned
-    focus: [Human, AI]
-    authorName: Fabio Ziliani
-    collaborator: true
-  - title: Context fantastici e dove trovarli
+    focus: [Tech, Human]
+    authorName: Marco Mariotti
+  - title: Context → documentazione automatica
     date: 2026-11-08
     status: planned
     focus: [Tech, Human]
     authorName: Marco Mariotti
-  - title: "Musica #2: la profondità"
-    date: 2026-11-18
-    status: planned
-    focus: [Human, AI]
-    authorName: Fabio Ziliani
-    collaborator: true
-  - title: Context → documentazione automatica
-    date: 2026-11-28
-    status: planned
-    focus: [Tech, Human]
-    authorName: Marco Mariotti
-  - title: "Musica #3: l'originalità"
-    date: 2026-12-08
-    status: planned
-    focus: [Human, AI]
-    authorName: Fabio Ziliani
-    collaborator: true
-  - title: "Musica #4: il valore"
-    date: 2026-12-18
-    status: planned
-    focus: [Human, AI]
-    authorName: Fabio Ziliani
-    collaborator: true
-upcomingTeaser:
-  label: In arrivo
-  text: Un filone su AI ed etica, in definizione insieme a un collaboratore. Il numero di pezzi e i temi verranno annunciati qui appena pronti.
 ---
