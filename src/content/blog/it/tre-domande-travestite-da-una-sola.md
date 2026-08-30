@@ -22,3 +22,22 @@ La versione comoda di questa storia finisce qui: ho trovato il pasticcio di qual
 Perché la decisione che stava sotto al pasticcio, carico tutto quello che mi serve e poi disegno, non era assurda. Su un cliente piccolo quella pagina si apriva in un attimo, e non c'era niente da sistemare. Nessuno l'ha rotta: è rimasta identica mentre attorno cambiava l'ordine di grandezza. Non c'è un commit sbagliato da additare, ed è questa la parte scomoda. Certe scelte non nascono sbagliate. Lo diventano da sole, in silenzio, mentre nessuno le sta guardando.
 
 Quando mi ci sono messo, quindi, la domanda ovvia era una sola: come faccio ad andare più veloce? È la domanda che non ho fatto.
+
+"Come faccio ad andare più veloce" è una domanda che ti porta sempre nello stesso posto: dentro le query. Le profili, aggiungi un indice, riscrivi una join, e con un po' di lavoro porti ventidue secondi a quindici. Sarebbe stato un risultato. E la pagina sarebbe rimasta inutilizzabile.
+
+A fermarmi è stato un numero che non tornava. Su quel cliente le notifiche configurate erano diciassette. Diciassette righe da disegnare, ventidue secondi per disegnarle. Qualunque cosa costasse tutto quel tempo, non era la quantità di informazioni da mostrare: era la profondità a cui ognuna andava a pescare.
+
+Così ho lasciato perdere la velocità e sono andato a vedere che cosa succede davvero su quella pagina. Chi la apre non ha una domanda sola: ne ha tre.
+
+La prima è "c'è qualcosa che non va", ed è la domanda con cui si entra: quante utenze sto sorvegliando, quante hanno passato la soglia di preavviso, quante hanno finito quello che avevano a disposizione, quante notifiche non ho ancora gestito. Sono numeri, si leggono in un colpo d'occhio, e non servono a fare niente: servono a decidere se c'è da preoccuparsi.
+
+La seconda è "dove", e sono i pannelli: per ogni notifica configurata, che cosa sorveglia e quante utenze ha in questo momento oltre la soglia. Serve a scegliere da dove cominciare.
+
+La terza è "e adesso cosa faccio", ed è tutto quello che compare dentro una notifica quando la apri: le soglie, i tempi, l'elenco delle utenze in preavviso e di quelle in superamento, le azioni da applicare a ciascuna. È la parte che pesa. Ed è anche l'unica che riguarda una notifica per volta, quella che l'avviso ti ha mandato a guardare.
+
+Tre domande, tre momenti, tre scopi. E una sola catena di query che rispondeva a tutte insieme, come se fossero la stessa cosa, per tutte le notifiche, prima di mostrare qualunque cosa. Il tempo non se ne andava in una query scritta male. Se ne andava a rispondere in anticipo, e per tutti, a domande che nessuno aveva ancora fatto.
+
+Non era un problema di performance, ma di dominio. Quella pagina non era lenta, era indistinta.
+
+È lo stesso sguardo del [pezzo precedente](/blog/la-sottile-linea-del-codice), rovesciato. Là avevo mappato un dominio a metà, mi ero dimenticato che le notifiche non soltanto scattano ma si rinnovano, e il pezzo che mancava mi è tornato indietro a fine mese sotto forma di guasto. Qui il dominio c'era tutto, però stava in un blocco unico: tre cose diverse tenute insieme da una funzione sola. Nel primo caso il conto l'ho pagato con un errore. Nel secondo con ventidue secondi.
+
