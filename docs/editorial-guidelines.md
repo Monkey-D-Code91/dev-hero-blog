@@ -26,6 +26,17 @@ Bonus: lo sguardo **tech / human / AI** emerge in modo naturale.
 - **Ripetizioni: da ridurre in italiano, non in inglese.** In italiano la ripetizione ravvicinata della stessa parola appesantisce: se un termine torna più volte nello stesso paragrafo o in paragrafi contigui, varia con sinonimi, pronomi o riformulando la frase, per far scorrere il testo. In inglese la stessa ripetizione è naturale e spesso preferibile, perché ripetere il termine chiave dà coesione e chiarezza: non forzare sinonimi solo per evitarla. La traduzione idiomatica tiene conto di questa asimmetria (lo stesso concetto può restare ripetuto in EN e comparire con più varianti in IT).
 - **Eccezione: il termine-tesi.** Se una parola è il concetto portante del pezzo (es. "attrito" in un articolo che parla proprio di quello), tenerla dov'è il cuore dell'argomento e alleggerire solo le occorrenze di servizio. La ripetizione voluta come martellamento retorico è legittima; quella involontaria e ravvicinata no.
 
+## Immagini in corpo articolo
+
+Un articolo puo' contenere un'immagine quando questa porta un'informazione che il testo non puo' dare da solo: un diagramma, una misurazione, un confronto. Mai come decorazione o come stacco visivo.
+
+- **Sintassi markdown, non HTML**: `![testo alternativo](../../../assets/diagrams/<slug>.png)`. Solo cosi' Astro ottimizza l'immagine (dimensioni, formati moderni); un `<img>` scritto a mano salta l'ottimizzazione.
+- **Didascalia**: il paragrafo in corsivo **immediatamente successivo** all'immagine. E' una convenzione, non un componente: lo stile in `global.css` la riconosce dalla posizione. Dice cosa si sta guardando, non ripete la frase che precede.
+- **Testo alternativo**: descrive il contenuto informativo per chi non vede l'immagine, quindi riporta anche i valori che contano. Non "diagramma delle performance", ma cosa mostra e con quali numeri.
+- **Simmetria IT/EN**: stesso numero di immagini nelle due lingue, con alt e didascalia tradotti in modo idiomatico. Se l'immagine contiene testo, si genera una variante per lingua a partire dalla **stessa** spec, cosi' l'unica cosa da tenere allineata sono le poche parole al suo interno.
+- **Generazione**: i diagrammi si producono con uno script versionato (`scripts/generate-timeline-diagram.mjs` per i confronti a timeline), non a mano e non con strumenti esterni: lo stile resta di sistema e la figura si rigenera se i dati cambiano.
+- **Leggibilita'**: la colonna di lettura e' stretta e l'immagine viene scalata. I corpi di testo dentro una figura vanno dimensionati di conseguenza, verificando il risultato alla larghezza reale, non a quella del file.
+
 ## Articoli vivi: la storia delle revisioni
 
 Il blog si chiama The First Draft: la prima bozza non è l'ultima. Quando un pezzo cambia in modo sostanziale dopo la pubblicazione (una tesi corretta, un fatto aggiornato, una precisazione nata dalla discussione), la modifica non si fa in silenzio: si registra.
