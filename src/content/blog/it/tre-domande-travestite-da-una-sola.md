@@ -54,3 +54,16 @@ Sul frontend le tre risposte sono diventate tre momenti. Le prime due partono in
 *Le due barre in alto sono sulla stessa scala. Il riquadro ingrandisce il primo secondo: le due chiamate che partono insieme all'apertura, e la terza che parte solo quando apri una notifica.*
 
 Ventidue secondi diventati poco più di uno.
+
+Ed è qui che il numero va guardato meglio, perché scritto così mente per omissione.
+
+Ventidue secondi non sono diventati uno: sono stati spostati. Chi apre una notifica paga altri settecento millisecondi, e li paga di nuovo per ognuna che apre. Il tempo non è sparito, ha cambiato posto, ed è finito dove chi aspetta lo accetta, perché è la conseguenza di una cosa che ha appena chiesto. Ventidue secondi davanti a una pagina vuota sono un'attesa subita. Settecento millisecondi dopo un click sono una risposta. La quantità conta meno di dove cade.
+
+Mi sono chiesto se nel caso peggiore la nuova versione perdesse, cioè se qualcuno le aprisse davvero tutte. Su quel cliente le notifiche sono diciassette: aprirle una per una costa poco meno di dodici secondi, che sommati al caricamento fanno tredici contro i ventidue di prima. Regge anche lì, e non era affatto scontato.
+
+Però qualcosa l'ho perso, e non è tempo. Con il caricamento unico il consumo di un'utenza si leggeva una volta sola e serviva tutte le notifiche che la sorvegliavano. Adesso lo rileggo per ognuna che viene aperta: se la stessa utenza è sorvegliata da tre notifiche e le apro tutte e tre, quel dato lo leggo tre volte. È la stessa scelta delle query mirate, ripetuta un livello più in su: accetto di rifare un lavoro pur di non farlo in anticipo per tutti.
+
+E ho perso una cosa più sottile. Prima, quello che vedevi sullo schermo era fotografato tutto nello stesso istante. Adesso ogni notifica aperta ha la sua età: se ne apro una alle dieci e un'altra alle dieci e sei, sulla stessa schermata convivono due istantanee diverse. Il dato resta valido cinque minuti, che non è un numero scelto a caso ma la frequenza massima con cui quei valori cambiano: la cache non può mostrare più di una generazione di ritardo. E ogni azione manuale viene comunque validata dal backend sullo stato corrente, mai su quello che il frontend ha in pancia. Resta un disallineamento visivo, limitato e dichiarato, non il rischio di agire sul dato sbagliato.
+
+Un'ultima cosa sui numeri, perché un case study che non dice il perimetro dei suoi dati vale poco. Le misure precise vengono da un cliente solo, quello con il volume maggiore: browser per il caricamento della pagina, timestamp dei log per le query, medie su esecuzioni ripetute. Su un cliente dal profilo opposto, quasi cento notifiche ma pochissime utenze ciascuna, la pagina stava già tra i cinque e i sette secondi ed è scesa all'ordine delle centinaia di millisecondi. Quel secondo dato non l'ho misurato con lo stesso rigore, e lo do come ordine di grandezza, non come risultato.
+
