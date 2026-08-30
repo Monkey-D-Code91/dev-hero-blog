@@ -49,5 +49,8 @@ So che cosa costa questa scelta. Tre query specializzate sono tre punti da aggio
 
 Sul frontend le tre risposte sono diventate tre momenti. Le prime due partono insieme quando la pagina si apre: le statistiche generali tornano in 88 millisecondi, i dati aggregati delle notifiche in poco più di un secondo, e la pagina è pronta quando è arrivata la più lenta delle due. La terza non parte affatto, finché non serve. Quando apri una notifica, e solo quella, arrivano i suoi dettagli e le sue utenze, altri settecento millisecondi. Se la richiudi e la riapri, quello che avevi è ancora lì.
 
-Ventidue secondi diventati poco più di uno.
+![Due barre sulla stessa scala temporale: prima ventidue secondi, dopo un secondo e un decimo. Un riquadro ingrandisce il primo secondo e mostra le due chiamate che partono insieme, di 88 e di 1100 millisecondi, e una terza di 700 millisecondi che parte da un click.](../../../assets/diagrams/tre-domande-travestite-da-una-sola.png)
 
+*Le due barre in alto sono sulla stessa scala. Il riquadro ingrandisce il primo secondo: le due chiamate che partono insieme all'apertura, e la terza che parte solo quando apri una notifica.*
+
+Ventidue secondi diventati poco più di uno.
