@@ -120,3 +120,35 @@ Legge `title`, `description`, `pubDate` dal frontmatter. Pensato per la versione
 ### Alternativa pura-node (futura)
 
 Se in futuro si vuole eliminare la dipendenza Python, il PDF di feedback si puo' generare dal sito stesso: una route Astro "print" con CSS di stampa, resa in PDF da un browser headless. Riusa le stesse regole tipografiche del sito, al costo di una dipendenza browser. Per ora weasyprint resta la via piu' semplice.
+
+## generate-timeline-diagram.mjs
+
+Genera un diagramma "prima / dopo" a timeline in stile brand, pensato per le immagini in corpo articolo. Le due barre condividono la stessa scala dei tempi (nessuna scala logaritmica, nessun troncamento: il confronto e' onesto a colpo d'occhio) e un riquadro ingrandisce il primo tratto per mostrare come il tempo residuo si distribuisce tra le chiamate. Stessa toolchain di `generate-cover` (`@resvg/resvg-js`, font statici in `scripts/fonts/`).
+
+Come per cover e carousel, lo script rende lo *stile*: i tempi e i colori stanno nella spec, non nel codice. Le uniche stringhe localizzate sono "prima"/"dopo" e il separatore decimale, cosi' la stessa figura vale in IT e in EN con un solo parametro di differenza.
+
+```
+node scripts/generate-timeline-diagram.mjs --spec src/assets/diagrams/<translationKey>.json --lang it --out src/assets/diagrams/<slug-it>.png
+node scripts/generate-timeline-diagram.mjs --spec src/assets/diagrams/<translationKey>.json --lang en --out src/assets/diagrams/<slug-en>.png
+```
+
+Convenzione: la spec sta in `src/assets/diagrams/<translationKey>.json` (una sola, condivisa dalle due lingue), i PNG accanto, nominati con lo slug della rispettiva lingua come le cover.
+
+### Formato della spec (JSON)
+
+```json
+{
+  "totalScaleSeconds": 22,          // scala della timeline principale
+  "before": { "seconds": 22 },
+  "after":  { "seconds": 1.1, "color": "teal" },
+  "zoomScaleSeconds": 2,            // scala del riquadro di ingrandimento
+  "calls": [                        // barre dentro il riquadro, in ordine
+    { "seconds": 0.088, "color": "sky",    "start": 0 },
+    { "seconds": 1.1,   "color": "teal",   "start": 0 },
+    { "seconds": 0.7,   "color": "indigo", "start": 1.22, "onDemand": true }
+  ]
+}
+```
+
+`color` accetta i token dei pilastri (`sky`, `teal`, `indigo`) piu' `slate`. `start` e' l'istante in cui la barra parte, in secondi. `onDemand: true` disegna il gap tratteggiato e il simbolo del click: la chiamata nasce da un gesto dell'utente, non dal caricamento.
+

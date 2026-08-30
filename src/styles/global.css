@@ -131,6 +131,29 @@
     border-radius: 0.75rem;
   }
 
+  /* Immagini in corpo articolo (diagrammi): stesso bordo e raggio dei blocchi
+     codice. Il paragrafo in corsivo che segue l'immagine fa da didascalia
+     (convenzione editoriale, vedi docs/editorial-guidelines.md). */
+  .prose-dark img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+  }
+
+  .prose-dark p:has(> img:only-child) {
+    margin-bottom: 0.75rem;
+  }
+
+  .prose-dark p:has(> img:only-child) + p {
+    margin-top: 0;
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+
   /* Background + bordo sull'inline code */
   .prose-dark :not(pre) > code {
     background-color: var(--color-surface-2);
