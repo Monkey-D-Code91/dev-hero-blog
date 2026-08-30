@@ -6,6 +6,8 @@ translationKey: "three-questions-disguised-as-one"
 focus: ["tech"]
 authors: ["marco-mariotti"]
 tags: ["case-study", "performance", "dominio-funzionale", "ingegneria-del-software"]
+cover: "../../../assets/covers/tre-domande-travestite-da-una-sola.png"
+coverAlt: "Copertina di The First Draft: tre cerchi sovrapposti (tech, human e AI) che si incontrano in un punto luminoso, con il titolo 'Tre domande travestite da una sola' sottolineato a mano come una correzione di bozza."
 openQuestions:
   - question: "Quante altre leve restano invisibili finché non separi i domini di una cosa che credevi una sola?"
 draft: true
