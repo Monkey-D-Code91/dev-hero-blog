@@ -1,14 +1,14 @@
 ---
 title: "The Fine Line of Code"
 description: "A migrated module, all tests green, and at the end of the month the notifications stop renewing. Where the line runs between generated code under control and out of control, and how to keep your balance on it."
-pubDate: 2026-08-03
+pubDate: 2026-08-30
 translationKey: "the-fine-line-of-code"
 focus: ["tech", "ai"]
 authors: ["marco-mariotti"]
 tags: ["ai", "generated-code", "software-engineering", "critical-thinking"]
 cover: "../../../assets/covers/the-fine-line-of-code.png"
 coverAlt: "The First Draft cover: three overlapping circles (tech, human and AI) meeting at a bright point, with the title 'The Fine Line of Code' underlined by hand like a proofreading mark."
-draft: true
+draft: false
 ---
 
 We had built a new module: a system of notifications and automated actions triggered when certain thresholds are reached. The most complex part we generated from scratch, starting from the Product Owner's specs, refined in brainstorming, turned into documentation and stories, implemented with the help of AI and covered by automated and QA tests. All green.

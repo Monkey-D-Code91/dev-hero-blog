@@ -1,0 +1,48 @@
+{
+  "slides": [
+    {
+      "kind": "cover",
+      "heading": "La sottile linea del codice",
+      "body": "Tutti i test verdi, il codice letto e revisionato. E a fine mese le notifiche smettono di rinnovarsi comunque."
+    },
+    {
+      "kind": "point",
+      "kicker": "01",
+      "heading": "Cosa era successo",
+      "body": "Migrare vecchie notifiche su una nuova tabella sembrava banale: piano chiaro, codice generato, test locali ok. Ma il vecchio modulo faceva anche altro: rinnovava le notifiche alla scadenza, e nessuno l'aveva chiesto all'AI."
+    },
+    {
+      "kind": "point",
+      "kicker": "02",
+      "heading": "Il buco non era nella risposta",
+      "body": "L'AI aveva fatto esattamente quello che le avevo chiesto. Il problema non era il codice generato: era la domanda che gli avevo fatto, incompleta fin dall'inizio."
+    },
+    {
+      "kind": "quote",
+      "body": "Leggere il codice ti dice cosa fa. Non ti dice di cosa è responsabile. La differenza tra le due cose è la linea sottile."
+    },
+    {
+      "kind": "point",
+      "kicker": "03",
+      "heading": "Tre segnali, letti al contrario",
+      "body": "Il piano che confermava solo le mie aspettative. L'assenza di attrito su un'operazione delicata. L'entusiasmo di risparmiare tempo per andare a fare altro. Sul momento sembravano tutti buone notizie."
+    },
+    {
+      "kind": "point",
+      "kicker": "04",
+      "heading": "Perché l'AI rende la linea più facile da attraversare",
+      "body": "Il vecchio copia e incolla aveva un'aria straniera, ti costringeva ad adattarlo. Il codice generato arriva già vestito come il tuo: sembra tuo prima di esserlo."
+    },
+    {
+      "kind": "point",
+      "kicker": "05",
+      "heading": "Dove passa il controllo",
+      "body": "Sai rispondere a \"cosa succede se lo tolgo\" e \"di cosa si occupava davvero ciò che sto sostituendo\"? Se sì, sei sotto controllo. Se accetti perché sembra giusto, il controllo è già evaporato."
+    },
+    {
+      "kind": "cta",
+      "heading": "Leggi l'articolo completo",
+      "body": "Link nel primo commento."
+    }
+  ]
+}

@@ -22,9 +22,9 @@ items:
     status: published
     focus: [Human, AI]
     authorName: Marco Mariotti
-  - title: The fine line of code
-    date: 2026-08-03
-    status: planned
+  - postTranslationKey: the-fine-line-of-code
+    date: 2026-08-30
+    status: published
     focus: [Tech, AI]
     authorName: Marco Mariotti
   - title: What I don't delegate to AI
