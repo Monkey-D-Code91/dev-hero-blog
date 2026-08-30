@@ -67,3 +67,13 @@ E ho perso una cosa più sottile. Prima, quello che vedevi sullo schermo era fot
 
 Un'ultima cosa sui numeri, perché un case study che non dice il perimetro dei suoi dati vale poco. Le misure precise vengono da un cliente solo, quello con il volume maggiore: browser per il caricamento della pagina, timestamp dei log per le query, medie su esecuzioni ripetute. Su un cliente dal profilo opposto, quasi cento notifiche ma pochissime utenze ciascuna, la pagina stava già tra i cinque e i sette secondi ed è scesa all'ordine delle centinaia di millisecondi. Quel secondo dato non l'ho misurato con lo stesso rigore, e lo do come ordine di grandezza, non come risultato.
 
+Manca la parte che in un pezzo come questo di solito sta all'inizio: quanto di tutto questo sia stato generato dall'AI.
+
+Sul lavoro che ha prodotto il risultato, quasi niente. Le query le ho scritte a mano, una per una. Non per diffidenza: perché il valore non stava nello scriverle, stava nel decidere dove tagliare, e per decidere bisognava sapere che cosa serve a chi apre quella pagina, e in che ordine. Il dominio ce l'avevo in testa; una volta chiaro il taglio, gli interventi mirati mi sono costati poco tempo.
+
+C'è anche una ragione più concreta, ed è la stessa del pezzo precedente. Quel codice era vecchio, sparso su decine di classi, senza documentazione, scritto da persone che non ci sono più. Per farmi aiutare avrei dovuto passare all'AI un contesto che non esisteva: avrei dovuto prima ricostruirlo, e ricostruirlo era già la parte grossa del lavoro. Non è che la macchina non sapesse rispondere. È che la domanda giusta si poteva formulare solo dopo aver capito, e chi ha capito, a quel punto, ha quasi finito.
+
+Dove invece è servita, e parecchio, è nel refactor dei componenti frontend, che le ho fatto portare avanti mentre io lavoravo alle query. È lavoro che dipende da decisioni già prese: i confini erano stabiliti, i tre domini decisi, restava da riorganizzarci attorno del codice. Lì l'AI corre, e ho fatto due cose insieme.
+
+E poi è servita alla fine, per una cosa che nel pezzo precedente mi ero ripromesso: la documentazione di quel modulo, che non era mai esistita, gliel'ho fatta scrivere a partire dal mio commit. È arrivata dopo, a rendere trasmissibile qualcosa che avevo già capito. Non è un ordine casuale: è l'unico in cui poteva funzionare.
+
