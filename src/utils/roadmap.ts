@@ -70,8 +70,11 @@ function formatMonth(date: Date, lang: Lang): string {
  * dalla collection `blog`; le tappe di pipeline usano i dati inline.
  *
  * Regola date: la data esatta è mostrata solo per le tappe pubblicate e per la
- * PROSSIMA tappa in uscita (la più imminente non ancora pubblicata su tutti gli
- * archi). Tutte le altre degradano a "mese anno" per ridurre lo staleness.
+ * prossima tappa in uscita DI OGNI arco (la più imminente non ancora pubblicata
+ * al suo interno). Gli archi sono capitoli tematici che corrono in parallelo,
+ * ognuno con la propria cadenza: la prossima uscita è quindi una per capitolo,
+ * non una sola per tutta la roadmap. Tutte le altre tappe degradano a
+ * "mese anno" per ridurre lo staleness.
  */
 export async function getResolvedRoadmap(lang: Lang): Promise<ResolvedArc[]> {
   const arcs = (
@@ -116,17 +119,29 @@ export async function getResolvedRoadmap(lang: Lang): Promise<ResolvedArc[]> {
     return { arc, items };
   });
 
-  // Determina la prossima tappa in uscita: la più imminente NON pubblicata.
-  const upcoming = preArcs
-    .flatMap((a) => a.items)
-    .filter((i) => i.status !== "published")
-    .sort((a, b) => a.date.getTime() - b.date.getTime());
-  const nextIso = upcoming[0]?.isoDate;
+  // Determina la prossima tappa in uscita DI OGNI CAPITOLO: la più imminente
+  // non ancora pubblicata al suo interno. I capitoli corrono in parallelo e
+  // hanno cadenza propria, quindi ognuno ha una "prossima uscita" sua: farne
+  // una sola globale nasconderebbe la data esatta di tutti gli altri.
+  // Il confronto è per riferimento, non per data: due tappe possono cadere
+  // lo stesso giorno in capitoli diversi.
+  const nextByArc = new Set(
+    preArcs
+      .map(({ items }) =>
+        items
+          .filter((i) => i.status !== "published")
+          .reduce<PreItem | undefined>(
+            (min, i) => (!min || i.date.getTime() < min.date.getTime() ? i : min),
+            undefined
+          )
+      )
+      .filter((i): i is PreItem => i !== undefined)
+  );
 
   // Seconda passata: applica la formattazione data (esatta vs mese).
   return preArcs.map(({ arc, items }) => {
     const resolvedItems: ResolvedItem[] = items.map((i) => {
-      const exact = i.status === "published" || i.isoDate === nextIso;
+      const exact = i.status === "published" || nextByArc.has(i);
       const { date, ...rest } = i;
       return {
         ...rest,
