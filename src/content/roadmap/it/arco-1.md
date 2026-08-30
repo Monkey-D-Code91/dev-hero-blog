@@ -4,7 +4,7 @@ order: 1
 numeral: "I"
 title: La disciplina del codice generato
 lead: Dal controllare il codice al leggerlo, fino al confine di ciò che non deleghiamo. Un arco sulla disciplina personale nell'era dell'AI.
-period: Lug – Set 2026
+period: Lug – Ott 2026
 signature: a firma Marco
 items:
   - postTranslationKey: in-praise-of-the-rough-idea
@@ -28,22 +28,22 @@ items:
     focus: [Tech, AI]
     authorName: Marco Mariotti
   - title: Cosa non delego all'AI
-    date: 2026-08-13
+    date: 2026-09-09
     status: planned
     focus: [Tech, Human, AI]
     authorName: Marco Mariotti
   - title: "Case study: 22s → 1.1s"
-    date: 2026-08-23
+    date: 2026-09-19
     status: planned
     focus: [Tech]
     authorName: Marco Mariotti
   - title: Il costo nascosto del codice che non hai scritto
-    date: 2026-09-02
+    date: 2026-09-29
     status: planned
     focus: [Tech, Human]
     authorName: Marco Mariotti
   - title: Criticità e vantaggi di un team distribuito Italia–Albania
-    date: 2026-09-12
+    date: 2026-10-09
     status: planned
     focus: [Human, AI]
     authorName: Marco Mariotti
