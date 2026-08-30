@@ -77,7 +77,7 @@
         {"text": "Dopo l'ok crea un branch con naming conforme (feat|fix|chore|docs|perf)/<slug>"},
         {"text": "Esegue le verifiche di CLAUDE.md §3 (preflight, test, astro check, build)"},
         {"text": "Aggiorna TECH-IMPROVEMENTS.md nella stessa PR"},
-        {"text": "Non usa gh pr merge --admin"}
+        {"text": "Non fa push diretti su main e passa da branch + PR"}
       ]
     }
   ]
