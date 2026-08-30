@@ -77,3 +77,13 @@ Dove invece è servita, e parecchio, è nel refactor dei componenti frontend, ch
 
 E poi è servita alla fine, per una cosa che nel pezzo precedente mi ero ripromesso: la documentazione di quel modulo, che non era mai esistita, gliel'ho fatta scrivere a partire dal mio commit. È arrivata dopo, a rendere trasmissibile qualcosa che avevo già capito. Non è un ordine casuale: è l'unico in cui poteva funzionare.
 
+Potevo far analizzare il codice all'AI, ottimizzare le query e portarmi a casa qualche secondo. Sarebbe stato un miglioramento vero, misurabile, e il problema sarebbe rimasto dov'era: un po' più piccolo, ugualmente ingombrante.
+
+Ho scelto la via scomoda, che era capire qual è il dominio che l'utente incontra davvero, invece di accettare quello che qualcuno aveva definito anni prima. Da lì ho potuto riscrivere il perimetro di quello che quella pagina fa e di quando lo fa. Il collo di bottiglia che ci portavamo dietro da anni non l'ho ridotto: l'ho smontato nei tre pezzi di cui era fatto.
+
+L'AI è più veloce di me e si perde meno dettagli di me. Ma sa leggere soltanto com'è, un dominio, non come dovrebbe essere. E la differenza fra quelle due cose è esattamente quella che passa fra chi aspetta ventidue secondi e chi ne aspetta uno.
+
+---
+
+*Le opinioni e le esperienze condivise in questo articolo sono personali e non rappresentano posizioni ufficiali del mio datore di lavoro. I casi descritti sono volutamente generici e anonimizzati, a scopo divulgativo.*
+
