@@ -8,7 +8,7 @@ authors: ["fabio-ziliani"]
 tags: ["artificial-intelligence", "music", "creativity", "authorship"]
 cover: "../../../assets/covers/where-a-song-lives-when-you-listen.png"
 coverAlt: "The First Draft cover: three overlapping circles (tech, human and AI) meeting at a bright point, with the title 'Where a Song Lives, When You Listen' underlined by hand like a proofreading mark."
-draft: true
+draft: false
 ---
 
 There's something that happens to me often, and maybe it happens to you too.

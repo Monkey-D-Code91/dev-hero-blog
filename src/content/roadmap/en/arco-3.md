@@ -7,9 +7,9 @@ lead: "A circle in four pieces: where a song lives, whether the true must be ser
 period: Sep – Nov 2026
 signature: written by Fabio
 items:
-  - title: "Where a Song Lives, When You Listen"
+  - postTranslationKey: where-a-song-lives-when-you-listen
     date: 2026-09-15
-    status: planned
+    status: published
     focus: [Human, AI]
     authorName: Fabio Ziliani
     collaborator: true

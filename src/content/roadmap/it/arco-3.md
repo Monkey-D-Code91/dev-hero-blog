@@ -7,9 +7,9 @@ lead: "Un cerchio in quattro pezzi: dove vive una canzone, se il vero debba esse
 period: Set – Nov 2026
 signature: a firma Fabio
 items:
-  - title: "Dove vive una canzone, quando la ascolti"
+  - postTranslationKey: where-a-song-lives-when-you-listen
     date: 2026-09-15
-    status: planned
+    status: published
     focus: [Human, AI]
     authorName: Fabio Ziliani
     collaborator: true

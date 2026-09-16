@@ -8,7 +8,7 @@ authors: ["fabio-ziliani"]
 tags: ["intelligenza-artificiale", "musica", "creatività", "autorialità"]
 cover: "../../../assets/covers/dove-vive-una-canzone-quando-la-ascolti.png"
 coverAlt: "Copertina di The First Draft: tre cerchi sovrapposti (tech, human e AI) che si incontrano in un punto luminoso, con il titolo 'Dove vive una canzone, quando la ascolti' sottolineato a mano come una correzione di bozza."
-draft: true
+draft: false
 ---
 
 C'è una cosa che mi capita spesso, e forse capita anche a te.

@@ -56,6 +56,7 @@ Valgono **dentro** ogni capitolo, non piu' sul calendario globale (vedi "Come fu
 | 2 | Nell'era dell'AI si legge più di quanto si scrive | 2026-07-14 | I | ✅ Pubblicato |
 | 3 | Imparare a guidare, non a correre | 2026-07-24 | I | ✅ Pubblicato |
 | 4 | La sottile linea del codice | 2026-08-30 | I | ✅ Pubblicato |
+| 10 | Dove vive una canzone, quando la ascolti | 2026-09-15 | III | ✅ Pubblicato |
 
 ---
 
@@ -109,7 +110,6 @@ Un cerchio in quattro pezzi. Le stesse domande del blog, poste dal lato del suon
 
 | # | Titolo di lavoro | Data ind. | Firma | Focus | Effort | Ruolo & note |
 |---|------------------|-----------|-------|-------|--------|--------------|
-| 10 | **Musica #1 — l'origine** ("Dove vive una canzone, quando la ascolti") | 2026-09-15 | Fabio Ziliani | Human · AI | — | "Conta sapere chi ha scritto una cosa, per poterla amare?" Apre il cerchio. Titolo ufficiale definito, draft pronto in `src/content/blog/{it,en}` (pubDate allineata alla roadmap pubblica: 2026-09-15). |
 | 12 | **Musica #2 — la profondità** | 2026-10-05 | Fabio Ziliani | Human · AI | — | "Una cosa vera deve per forza essere seria, sofferta, importante?" L'ironia come forma legittima di sincerità. Respiro leggero. |
 | 15 | **Musica #3 — l'originalità** | 2026-10-25 | Fabio Ziliani | Human · AI | — | "Quanto di ciò che chiamiamo autentico era già una formula?" Il gemello musicale del filone codice generato. **Tenere adiacente a un eventuale pezzo di Marco sull'originalità del codice** (dittico cross-firma). |
 | 17 | **Musica #4 — il valore** | 2026-11-14 | Fabio Ziliani | Human · AI | — | "Il valore nasce da quanto tempo ci hai messo, o da quanto tempo qualcuno sceglie di dedicarle?" La rosa del Piccolo Principe, chiusura del cerchio. **Chiude il capitolo** sulla nota umana. Rima con "il costo nascosto del codice" (#7). |
